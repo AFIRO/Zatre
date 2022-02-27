@@ -12,6 +12,12 @@ public class SpelerRepository {
     }
 
     public void VoegSpelerToe(Speler speler) {
+        ControleerOfSpelerUniekIs(speler);
+        spelers.add(speler);
+
+        }
+
+    private void ControleerOfSpelerUniekIs(Speler speler) {
         List<String> uniqueKeys = spelers.stream() //verander arraylist in stream
                 .map((element) -> element.getGebruikersnaam() + element.getGeboortejaar()) //map speler naar strings
                 .filter((e) -> e.equals(speler.getGebruikersnaam() + speler.getGeboortejaar())) //filter alle spelers die niet voldoen aan keys
@@ -19,12 +25,9 @@ public class SpelerRepository {
 
         if (!uniqueKeys.isEmpty())
              throw new IllegalArgumentException("Gebruiker bestaat al");
-
-        spelers.add(speler);
-
-        }
-
     }
+
+}
 
 
 
