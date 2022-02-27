@@ -19,7 +19,7 @@ class SpelerTest {
     @Test
     @DisplayName("Correct aanmaken van speler met correcte info")
     public void create_InfoCorrect_ObjectWordtGemaakt() {
-        Assertions.assertDoesNotThrow(() -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
+        assertDoesNotThrow(() -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
     }
 
     @Test
@@ -34,15 +34,15 @@ class SpelerTest {
     @Test
     @DisplayName("Incorrecte naam, exception")
     public void create_NaamIncorrect_Exception() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new Speler(INCORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
-        Assertions.assertEquals(ExceptionTextDatabase.GEBRUIKERSNAAM_TE_KORT, exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(INCORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
+        assertEquals(ExceptionTextDatabase.GEBRUIKERSNAAM_TE_KORT, exception.getMessage());
     }
 
     @Test
     @DisplayName("Incorrecte leeftijd, exception")
     public void create_LeeftijdIncorrect_Exception() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
-        Assertions.assertEquals(ExceptionTextDatabase.GEBRUIKER_TE_JONG, exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
+        assertEquals(ExceptionTextDatabase.GEBRUIKER_TE_JONG, exception.getMessage());
     }
 
 

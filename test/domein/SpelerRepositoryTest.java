@@ -17,15 +17,15 @@ class SpelerRepositoryTest {
     @DisplayName("speler toevoegen, happy flow")
     public void toevoegen_spelerOk_happyflow() {
 
-        Assertions.assertDoesNotThrow(() -> spelerRepository.voegSpelerToe(new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)));
+        assertDoesNotThrow(() -> spelerRepository.voegSpelerToe(new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)));
     }
 
     @Test
     @DisplayName("Registreer proberen van dubbele speler, gooit exception")
     public void toevoegen_SpelerBestaatAl_Exception() {
         spelerRepository.voegSpelerToe(new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> spelerRepository.voegSpelerToe(new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)));
-        Assertions.assertEquals(ExceptionTextDatabase.GEBRUIKER_BESTAAT_AL, exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> spelerRepository.voegSpelerToe(new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)));
+        assertEquals(ExceptionTextDatabase.GEBRUIKER_BESTAAT_AL, exception.getMessage());
     }
 
 
