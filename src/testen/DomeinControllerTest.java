@@ -1,8 +1,10 @@
-package domein;
+package testen;
 
 import exceptions.ExceptionTextDatabase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import domein.DomeinController;
 
 import java.time.LocalDate;
 
