@@ -1,4 +1,4 @@
-package test.domein;
+package testen;
 
 import exceptions.ExceptionTextDatabase;
 import org.junit.jupiter.api.Assertions;
