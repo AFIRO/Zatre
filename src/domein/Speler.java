@@ -2,6 +2,7 @@ package domein;
 
 import exceptions.ExceptionTextDatabase;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Speler {
@@ -28,8 +29,11 @@ public class Speler {
     }
 
     private void controleerGeboortejaar(int geboortejaar) {
-        if ((Calendar.getInstance().get(Calendar.YEAR) - geboortejaar) < 6)
+        if ((LocalDate.now().getYear()  - geboortejaar) < 6)
             throw new IllegalArgumentException(ExceptionTextDatabase.GEBRUIKER_TE_JONG);
+
+        if (geboortejaar > LocalDate.now().getYear()  || geboortejaar <= 0)
+            throw new IllegalArgumentException(ExceptionTextDatabase.ONGELDIG_GEBOORTEJAAR);
     }
 
     public int getSpeelkansen() {
