@@ -1,9 +1,12 @@
-package domein;
+package test.domein;
 
 import exceptions.ExceptionTextDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import domein.Speler;
+import domein.SpelerRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
