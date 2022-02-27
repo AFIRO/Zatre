@@ -1,0 +1,58 @@
+package domein;
+
+import exceptions.ExceptionTextDatabase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
+
+class DomeinControllerTest {
+    private final DomeinController domeinController = new DomeinController();
+    private static final String CORRECTE_GEBRUIKERSNAAM = "Joske123";
+    private static final String INCORRECTE_GEBRUIKERSNAAM = "Jos";
+    private static final int GEBOORTEJAAR_TOEGELATEN_LEEFTIJD = 1990;
+    private static final int GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD = 2020;
+
+
+    @Test
+    @DisplayName("Registreer proberen, correcte speler gemaakt")
+    public void registreer_wanneerCorrecteInfoDoorgegeven_objectGemaakt() {
+
+        Assertions.assertDoesNotThrow(() -> domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
+    }
+
+    @Test
+    @DisplayName("Registreer proberen met niet toegelaten leeftijd, exception wordt gesmeten")
+    public void registreer_wanneerInCorrecteLeeftijdDoorgegeven_Exception() {
+
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
+        Assertions.assertEquals(ExceptionTextDatabase.GEBRUIKER_TE_JONG, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Registreer proberen met te korte naam, exception wordt gesmeten")
+    public void registreer_wanneerIncorrecteNaamDoorgegeven_Exception() {
+
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> domeinController.registreer(INCORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
+        Assertions.assertEquals(ExceptionTextDatabase.GEBRUIKERSNAAM_TE_KORT, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Registreer proberen met edgecase leeftijd, correcte speler gemaakt")
+    public void registreer_wanneerSpelerHuidigeZesZouWorden_objectGemaakt() {
+
+        Assertions.assertDoesNotThrow(() -> domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, LocalDate.now().minusYears(6).plusDays(30).getYear()));
+    }
+
+
+    @Test
+    @DisplayName("Registreer proberen van dubbele speler, gooit exception")
+    public void registreer_spelerAlBestaat_Exception() {
+        domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD);
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
+        Assertions.assertEquals(ExceptionTextDatabase.GEBRUIKER_BESTAAT_AL, exception.getMessage());
+    }
+
+}

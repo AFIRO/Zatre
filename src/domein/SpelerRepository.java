@@ -1,5 +1,7 @@
 package domein;
 
+import exceptions.ExceptionTextDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class SpelerRepository {
                 .collect(Collectors.toList()); //geef lijst terug met objecten
 
         if (!uniqueKeys.isEmpty())
-             throw new IllegalArgumentException("Gebruiker bestaat al");
+            throw new IllegalArgumentException(ExceptionTextDatabase.GEBRUIKER_BESTAAT_AL);
     }
 
 }
