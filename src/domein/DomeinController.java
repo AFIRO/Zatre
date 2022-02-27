@@ -10,7 +10,7 @@ public class DomeinController{
 
 	public void registreer(String gebruikernaam, int geboortejaar) {
 		Speler nieuweSpeler = new Speler(gebruikernaam,geboortejaar);
-		spelerRepository.VoegSpelerToe(nieuweSpeler);
+		spelerRepository.voegSpelerToe(nieuweSpeler);
 
 	}
     //Andreeas commit gelukt
