@@ -12,12 +12,11 @@ public class SpelerRepository {
     }
 
     public void voegSpelerToe(Speler speler) {
-        controleerOfSpelerUniekIs(speler);
+        controleerSpelerUniek(speler);
         spelers.add(speler);
+    }
 
-        }
-
-    private void controleerOfSpelerUniekIs(Speler speler) {
+    private void controleerSpelerUniek(Speler speler) {
         List<String> uniqueKeys = spelers.stream() //verander arraylist in stream
                 .map((element) -> element.getGebruikersnaam() + element.getGeboortejaar()) //map speler naar strings
                 .filter((e) -> e.equals(speler.getGebruikersnaam() + speler.getGeboortejaar())) //filter alle spelers die niet voldoen aan keys
