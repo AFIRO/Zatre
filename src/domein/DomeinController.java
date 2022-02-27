@@ -1,15 +1,17 @@
 package domein;
 
 public class DomeinController{
+	private final SpelerRepository spelerRepository;
 
-	/**
-	 * 
-	 * @param gebruikernaam
-	 * @param geboortejaar
-	 */
+
+	public DomeinController() {
+		this.spelerRepository = new SpelerRepository();
+	}
+
 	public void registreer(String gebruikernaam, int geboortejaar) {
-		// TODO - implement DomeinController.registreer
-		throw new UnsupportedOperationException();
+		Speler nieuweSpeler = new Speler(gebruikernaam,geboortejaar);
+		spelerRepository.VoegSpelerToe(nieuweSpeler);
+
 	}
     //Andreeas commit gelukt
 	//Lorenz commit gelukt
