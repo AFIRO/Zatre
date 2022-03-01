@@ -45,6 +45,20 @@ class SpelerTest {
         assertEquals(ExceptionTextDatabase.GEBRUIKER_TE_JONG, exception.getMessage());
     }
 
+    @Test
+    @DisplayName("Leeftijd onder nul, exception")
+    public void create_LeeftijdNegatief_Exception() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, -1));
+        assertEquals(ExceptionTextDatabase.ONGELDIG_GEBOORTEJAAR, exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Speelkansen negatief setter, exception")
+    public void setSpeelkansen_negatief_Exception() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD).setSpeelkansen(-5));
+        assertEquals(ExceptionTextDatabase.SPEELKANSEN_NEGATIEF, exception.getMessage());
+    }
+
 
 
 }

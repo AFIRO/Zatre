@@ -41,7 +41,10 @@ public class Speler {
     }
 
 
-    private void setSpeelkansen(int speelkansen) {
+    public void setSpeelkansen(int speelkansen) {
+        if (speelkansen < 0)
+            throw new IllegalArgumentException(ExceptionTextDatabase.SPEELKANSEN_NEGATIEF);
+
         this.speelkansen = speelkansen;
     }
 

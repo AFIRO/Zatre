@@ -1,18 +1,18 @@
+package cui;
+
 import domein.DomeinController;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class main {
-    public static void main(String[] args) {
-        DomeinController domeinController = new DomeinController();
+public class UC1 {
+
+    public UC1(DomeinController domeinController) {
         Scanner scanner = new Scanner(System.in);
         geefKeuzeMenu(scanner, domeinController);
-
-
     }
 
-    public static void geefKeuzeMenu(Scanner scanner, DomeinController domeinController) {
+    public void geefKeuzeMenu(Scanner scanner, DomeinController domeinController) {
         boolean loopflag = true;
 
         while (loopflag) {
@@ -39,7 +39,7 @@ public class main {
         }
     }
 
-    private static void registreerSpelerInputMenu(Scanner scanner, DomeinController domeinController) {
+    private void registreerSpelerInputMenu(Scanner scanner, DomeinController domeinController) {
         boolean loopflag = true;
         boolean inputLoopflag = true;
         int geboortejaar = 0;
@@ -61,6 +61,8 @@ public class main {
             try {
                 domeinController.registreer(gebruikersnaam, geboortejaar);
                 System.out.println("Speler werd correct geregistreerd.");
+                System.out.println("Gebruikersnaam: " + gebruikersnaam);
+                System.out.println("Geboortejaar: " + geboortejaar);
                 loopflag = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -70,7 +72,7 @@ public class main {
         }
     }
 
-    public static void printMenu() {
+    public void printMenu() {
         System.out.println("Welkom bij de Zartre applicatie");
         System.out.println("Maak een keuze:");
         System.out.println("1. Registreer speler.");

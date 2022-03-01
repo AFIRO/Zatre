@@ -9,8 +9,7 @@ public class DomeinController {
     }
 
     public void registreer(String gebruikernaam, int geboortejaar) {
-        Speler nieuweSpeler = new Speler(gebruikernaam, geboortejaar);
-        spelerRepository.voegSpelerToe(nieuweSpeler);
+        spelerRepository.voegSpelerToe(gebruikernaam, geboortejaar);
 
     }
 }

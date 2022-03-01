@@ -13,7 +13,8 @@ public class SpelerRepository {
         spelers = new ArrayList<>();
     }
 
-    public void voegSpelerToe(Speler speler) {
+    public void voegSpelerToe(String gebruikernaam, int geboortejaar) {
+        Speler speler = new Speler(gebruikernaam,geboortejaar);
         controleerSpelerUniek(speler);
         spelers.add(speler);
     }
