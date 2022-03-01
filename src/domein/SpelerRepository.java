@@ -1,6 +1,7 @@
 package domein;
 
 import exceptions.ExceptionTextDatabase;
+import persistence.SpelerMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +9,18 @@ import java.util.stream.Collectors;
 
 public class SpelerRepository {
     private final List<Speler> spelers;
+    private final SpelerMapper spelerMapper;
 
     public SpelerRepository() {
         spelers = new ArrayList<>();
+        spelerMapper = new SpelerMapper();
     }
 
     public void voegSpelerToe(String gebruikernaam, int geboortejaar) {
         Speler speler = new Speler(gebruikernaam,geboortejaar);
         controleerSpelerUniek(speler);
         spelers.add(speler);
+        spelerMapper.voegSpelerToe(speler);// stuurt spelerobject door naar Spelermapper
     }
 
     private void controleerSpelerUniek(Speler speler) {
