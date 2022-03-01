@@ -2,6 +2,8 @@ import cui.UC1;
 import domein.DomeinController;
 
 import java.util.InputMismatchException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class StartUp {
