@@ -1,3 +1,5 @@
+package main;
+
 import cui.UC1;
 import domein.DomeinController;
 

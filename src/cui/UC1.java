@@ -63,6 +63,7 @@ public class UC1 {
                 System.out.println("Speler werd correct geregistreerd.");
                 System.out.println("Gebruikersnaam: " + gebruikersnaam);
                 System.out.println("Geboortejaar: " + geboortejaar);
+                System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
