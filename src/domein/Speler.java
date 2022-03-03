@@ -1,9 +1,7 @@
 package domein;
 
-import exceptions.ExceptionTextDatabase;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

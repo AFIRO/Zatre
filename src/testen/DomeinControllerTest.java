@@ -1,18 +1,19 @@
 package testen;
 
-import exceptions.ExceptionTextDatabase;
+import domein.DomeinController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import domein.DomeinController;
-
 import java.time.LocalDate;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class DomeinControllerTest {
     private final DomeinController domeinController = new DomeinController();
+    private final ResourceBundle gelocaliseerdeTaalbundel = ResourceBundle.getBundle("dictionary", Locale.getDefault());
     private static final String CORRECTE_GEBRUIKERSNAAM = "Joske123";
     private static final String INCORRECTE_GEBRUIKERSNAAM = "Jos";
     private static final int GEBOORTEJAAR_TOEGELATEN_LEEFTIJD = 1990;
@@ -31,7 +32,7 @@ class DomeinControllerTest {
     public void registreer_wanneerInCorrecteLeeftijdDoorgegeven_Exception() {
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
-        assertEquals(ExceptionTextDatabase.GEBRUIKER_TE_JONG, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKER_TE_JONG"), exception.getMessage());
     }
 
     @Test
@@ -39,7 +40,7 @@ class DomeinControllerTest {
     public void registreer_wanneerIncorrecteNaamDoorgegeven_Exception() {
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> domeinController.registreer(INCORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
-        assertEquals(ExceptionTextDatabase.GEBRUIKERSNAAM_TE_KORT, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKERSNAAM_TE_KORT"), exception.getMessage());
     }
 
     @Test
@@ -55,7 +56,7 @@ class DomeinControllerTest {
     public void registreer_spelerAlBestaat_Exception() {
         domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> domeinController.registreer(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
-        assertEquals(ExceptionTextDatabase.GEBRUIKER_BESTAAT_AL, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKER_BESTAAT_AL"), exception.getMessage());
     }
 
 }

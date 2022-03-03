@@ -1,6 +1,5 @@
 package domein;
 
-import exceptions.ExceptionTextDatabase;
 import persistence.SpelerMapper;
 
 import java.util.ArrayList;

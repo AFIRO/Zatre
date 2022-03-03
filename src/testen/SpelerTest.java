@@ -1,15 +1,16 @@
 package testen;
 
-import exceptions.ExceptionTextDatabase;
-import org.junit.jupiter.api.Assertions;
+import domein.Speler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import domein.Speler;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpelerTest {
+    private final ResourceBundle gelocaliseerdeTaalbundel = ResourceBundle.getBundle("dictionary", Locale.getDefault());
     private static final String CORRECTE_GEBRUIKERSNAAM = "Joske123";
     private static final String INCORRECTE_GEBRUIKERSNAAM = "Jos";
     private static final int GEBOORTEJAAR_TOEGELATEN_LEEFTIJD = 1990;
@@ -35,28 +36,28 @@ class SpelerTest {
     @DisplayName("Incorrecte naam, exception")
     public void create_NaamIncorrect_Exception() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(INCORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
-        assertEquals(ExceptionTextDatabase.GEBRUIKERSNAAM_TE_KORT, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKERSNAAM_TE_KORT"), exception.getMessage());
     }
 
     @Test
     @DisplayName("Incorrecte leeftijd, exception")
     public void create_LeeftijdIncorrect_Exception() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
-        assertEquals(ExceptionTextDatabase.GEBRUIKER_TE_JONG, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKER_TE_JONG"), exception.getMessage());
     }
 
     @Test
     @DisplayName("Leeftijd onder nul, exception")
     public void create_LeeftijdNegatief_Exception() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, -1));
-        assertEquals(ExceptionTextDatabase.ONGELDIG_GEBOORTEJAAR, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("ONGELDIG_GEBOORTEJAAR"), exception.getMessage());
     }
 
     @Test
     @DisplayName("Speelkansen negatief setter, exception")
     public void setSpeelkansen_negatief_Exception() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD).setSpeelkansen(-5));
-        assertEquals(ExceptionTextDatabase.SPEELKANSEN_NEGATIEF, exception.getMessage());
+        assertEquals(gelocaliseerdeTaalbundel.getString("SPEELKANSEN_NEGATIEF"), exception.getMessage());
     }
 
 
