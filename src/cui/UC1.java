@@ -11,35 +11,7 @@ public class UC1 {
 
     public UC1(DomeinController domeinController) {
         Scanner scanner = new Scanner(System.in);
-        ResourceBundle taal = ResourceBundle.getBundle("dictionary",geefKeuzeMenuTaal(scanner));
-        geefKeuzeMenu(scanner, domeinController, taal);
-    }
-
-    private Locale geefKeuzeMenuTaal(Scanner scanner) {
-        boolean loopflag = true;
-        int taalKeuze;
-        Locale taal = new Locale("nl", "BE");
-        while (loopflag) {
-            System.out.println("Kies uw taal / Choose your language:");
-            System.out.println("1. Nederlands.");
-            System.out.println("2. English.");
-            try {
-                taalKeuze = scanner.nextInt();
-                if (taalKeuze < 1 || taalKeuze > 2){
-                    System.out.println("Probeer opnieuw / Try again.");
-                }
-
-                if (taalKeuze == 2) {
-                    taal = new Locale("en");
-                }
-                loopflag = false;
-
-            } catch (InputMismatchException e) {
-                System.out.println("Probeer opnieuw / Try again.");
-                scanner.next();
-            }
-        }
-        return taal;
+        geefKeuzeMenu(scanner, domeinController, ResourceBundle.getBundle("dictionary",Locale.getDefault()));
     }
 
     public void geefKeuzeMenu(Scanner scanner, DomeinController domeinController, ResourceBundle taal) {
@@ -75,9 +47,9 @@ public class UC1 {
         while (loopflag) {
             while (inputLoopflag)
                 try {
-                    System.out.println("Geef uw gewenste gebruikersnaam in: ");
+                    System.out.println(taal.getString("GEWENSTE_NAAM"));
                     gebruikersnaam = scanner.next();
-                    System.out.println("Geef uw geboortejaar in: ");
+                    System.out.println(taal.getString("GEWENSTE_GEBOORTEDATUM"));
                     geboortejaar = scanner.nextInt();
                     inputLoopflag = false;
                 } catch (InputMismatchException e) {
@@ -86,14 +58,14 @@ public class UC1 {
                 }
             try {
                 domeinController.registreer(gebruikersnaam, geboortejaar);
-                System.out.println("Speler werd correct geregistreerd.");
-                System.out.println("Gebruikersnaam: " + gebruikersnaam);
-                System.out.println("Geboortejaar: " + geboortejaar);
+                System.out.println(taal.getString("CORRECT_GEREGISTREERD"));
+                System.out.println(taal.getString("GEBRUIKERSNAAM") + gebruikersnaam);
+                System.out.println(taal.getString("GEBOORTEJAAR") + geboortejaar);
                 System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Probeer opnieuw.");
+                System.out.println(taal.getString("PROBEER_OPNIEUW"));
                 geefKeuzeMenu(scanner,domeinController, taal);
             }
         }

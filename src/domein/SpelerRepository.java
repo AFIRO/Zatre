@@ -5,6 +5,8 @@ import persistence.SpelerMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class SpelerRepository {
@@ -30,7 +32,7 @@ public class SpelerRepository {
                 .collect(Collectors.toList()); //geef lijst terug met objecten
 
         if (!uniqueKeys.isEmpty())
-            throw new IllegalArgumentException(ExceptionTextDatabase.GEBRUIKER_BESTAAT_AL);
+            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKER_BESTAAT_AL"));
     }
 
 }
