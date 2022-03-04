@@ -2,29 +2,35 @@ package cui;
 
 import domein.DomeinController;
 
+import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class UC1 {
+    private final Scanner scanner;
+    private final ResourceBundle taal;
+    private final DomeinController domeinController;
 
     public UC1(DomeinController domeinController) {
-        Scanner scanner = new Scanner(System.in);
-        geefKeuzeMenu(scanner, domeinController, ResourceBundle.getBundle("dictionary",Locale.getDefault()));
+        scanner = new Scanner(System.in);
+        taal = ResourceBundle.getBundle("dictionary",Locale.getDefault());
+        this.domeinController = domeinController;
+        geefKeuzeMenu();
     }
 
-    public void geefKeuzeMenu(Scanner scanner, DomeinController domeinController, ResourceBundle taal) {
+    public void geefKeuzeMenu() {
         boolean loopflag = true;
 
         while (loopflag) {
             try {
-                printMenu(taal);
+                printMenu();
                 int input = scanner.nextInt();
                 switch (input) {
                     case 1: {
-                        registreerSpelerInputMenu(scanner, domeinController, taal);
-                        geefKeuzeMenu(scanner, domeinController, taal);
+                        registreerSpelerInputMenu();
+                        geefKeuzeMenu();
                     }
                     case 0: {
                         loopflag = false;
@@ -38,7 +44,7 @@ public class UC1 {
         }
     }
 
-    private void registreerSpelerInputMenu(Scanner scanner, DomeinController domeinController, ResourceBundle taal) {
+    private void registreerSpelerInputMenu() {
         boolean loopflag = true;
         boolean inputLoopflag = true;
         int geboortejaar = 0;
@@ -66,11 +72,11 @@ public class UC1 {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 System.out.println(taal.getString("PROBEER_OPNIEUW"));
-                geefKeuzeMenu(scanner,domeinController, taal);
+                geefKeuzeMenu();
             }
         }
     }
-    public void printMenu(ResourceBundle taal) {
+    public void printMenu() {
         System.out.println(taal.getString("STARTMENU_1"));
         System.out.println(taal.getString("STARTMENU_2"));
         System.out.println(taal.getString("STARTMENU_3"));
