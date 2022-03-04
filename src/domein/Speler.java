@@ -3,6 +3,7 @@ package domein;
 
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Speler {
@@ -57,4 +58,16 @@ public class Speler {
         return this.geboortejaar;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Speler)) return false;
+        Speler speler = (Speler) o;
+        return getGeboortejaar() == speler.getGeboortejaar() && getGebruikersnaam().equals(speler.getGebruikersnaam());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getGebruikersnaam(), getGeboortejaar());
+    }
 }
