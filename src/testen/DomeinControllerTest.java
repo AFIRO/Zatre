@@ -4,9 +4,11 @@ import domein.DomeinController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import persistence.SpelerMapper;
 
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DomeinControllerTest {
     private final DomeinController domeinController = new DomeinController();
+    private final SpelerMapper spelerMapper = new SpelerMapper();
     private final ResourceBundle gelocaliseerdeTaalbundel = ResourceBundle.getBundle("dictionary", Locale.getDefault());
     private static final String CORRECTE_GEBRUIKERSNAAM = "Testuser";
     private static final String INCORRECTE_GEBRUIKERSNAAM = "Jos";
@@ -22,7 +25,7 @@ class DomeinControllerTest {
 
     @BeforeEach
     private void reset() {
-        if ()
+        if (Optional.of(spelerMapper.geefSpeler(CORRECTE_GEBRUIKERSNAAM,GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)).isPresent())
     }
 
 

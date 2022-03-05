@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SpelerRepositoryTest {
     SpelerRepository spelerRepository = new SpelerRepository();
+
     private final ResourceBundle gelocaliseerdeTaalbundel = ResourceBundle.getBundle("dictionary", Locale.getDefault());
     private static final String CORRECTE_GEBRUIKERSNAAM = "Joske123";
     private static final int GEBOORTEJAAR_TOEGELATEN_LEEFTIJD = 1990;

@@ -13,8 +13,7 @@ public class DomeinController {
 
     }
 
-    public void haalSpelerOp(String gebruikernaam, int geboortejaar) {
-        spelerRepository.getSpeler(gebruikernaam, geboortejaar);
-
+    public Speler haalSpelerOp(String gebruikernaam, int geboortejaar) {
+       return spelerRepository.getSpeler(gebruikernaam, geboortejaar);
     }
 }

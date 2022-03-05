@@ -1,6 +1,8 @@
 package domein;
 
 
+import com.mysql.cj.util.StringUtils;
+
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
@@ -25,16 +27,19 @@ public class Speler {
     }
 
     private void controleerGebruikersnaam(String gebruikersnaam) {
-        if (gebruikersnaam.length() < 5)
+        if (StringUtils.isNullOrEmpty(gebruikersnaam)
+                || StringUtils.isEmptyOrWhitespaceOnly(gebruikersnaam)
+                || gebruikersnaam.length() < 5)
             throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM_TE_KORT"));
     }
 
     private void controleerGeboortejaar(int geboortejaar) {
+        if (geboortejaar > LocalDate.now().getYear()  || geboortejaar <= 0)
+            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("ONGELDIG_GEBOORTEJAAR"));
+
         if ((LocalDate.now().getYear()  - geboortejaar) < 6)
             throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKER_TE_JONG"));
 
-        if (geboortejaar > LocalDate.now().getYear()  || geboortejaar <= 0)
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("ONGELDIG_GEBOORTEJAAR"));
     }
 
     public int getSpeelkansen() {
