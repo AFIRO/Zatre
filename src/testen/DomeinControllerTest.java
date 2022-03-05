@@ -25,7 +25,7 @@ class DomeinControllerTest {
 
     @BeforeEach
     private void reset() {
-        if (Optional.of(spelerMapper.geefSpeler(CORRECTE_GEBRUIKERSNAAM,GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)).isPresent())
+        if (Optional.of(spelerMapper.geefSpeler(CORRECTE_GEBRUIKERSNAAM,GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)).isPresent());
     }
 
 

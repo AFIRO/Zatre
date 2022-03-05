@@ -34,7 +34,7 @@ public class SpelerRepository {
             throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKER_BESTAAT_AL"));
     }
 
-    public Speler getSpeler(String gebruikersnaam, int geboortejaar) {
+    public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
         return spelerMapper.geefSpeler(gebruikersnaam,geboortejaar);
     }
 
