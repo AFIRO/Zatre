@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.*;
 
 class SpelerTest {
     private final ResourceBundle gelocaliseerdeTaalbundel = ResourceBundle.getBundle("dictionary", Locale.getDefault());
@@ -15,7 +16,9 @@ class SpelerTest {
     private static final String INCORRECTE_GEBRUIKERSNAAM = "Jos";
     private static final int GEBOORTEJAAR_TOEGELATEN_LEEFTIJD = 1990;
     private static final int GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD = 2020;
-
+    private static final int GEBOORTEJAAR_GENS_GEVAL = 2017; 
+    //Moet dit jaarlijks aangepast worden, of kunnen we dit laten berekenen. 
+    //Door bijvoorbeeld te rekenen localDate - geboortejaar = 5
 
     @Test
     @DisplayName("Correct aanmaken van speler met correcte info")
@@ -37,12 +40,19 @@ class SpelerTest {
     public void create_NaamIncorrect_Exception() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(INCORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD));
         assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKERSNAAM_TE_KORT"), exception.getMessage());
-    }
+    } //werken we hier niet beter met een ParameterizedTest om op die manier meerdere zaken te testen. 
 
     @Test
     @DisplayName("Incorrecte leeftijd, exception")
     public void create_LeeftijdIncorrect_Exception() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
+        assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKER_TE_JONG"), exception.getMessage());
+    }
+    
+    @Test
+    @DisplayName("Incorrecte leeftijd grensgeval, exception")
+    public void create_LeeftijdIncorrectGrensGeval_Exception() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_GENS_GEVAL));
         assertEquals(gelocaliseerdeTaalbundel.getString("GEBRUIKER_TE_JONG"), exception.getMessage());
     }
 
