@@ -17,7 +17,7 @@ public class SpelerMapper {
 	public void voegSpelerToe(Speler speler)  {
 
 		try (
-				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL);
+				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
 				PreparedStatement query = connection.prepareStatement(INSERT_SPELER)) {
 
 			query.setString(1, speler.getGebruikersnaam());
@@ -34,7 +34,7 @@ public class SpelerMapper {
         List<Speler> spelers = new ArrayList<>();
 
         try (
-                Connection connection = DriverManager.getConnection(Connectie.JDBC_URL);
+                Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
                 PreparedStatement query = connection.prepareStatement(GET_SPELERS);
                 ResultSet gevondenSpelers = query.executeQuery()) {
 
@@ -58,7 +58,7 @@ public class SpelerMapper {
         Speler speler;
 
         try (
-				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL);
+				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
 				PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
 
 			query.setString(1, gebruikersnaam);
@@ -84,7 +84,7 @@ public class SpelerMapper {
 
 	public void updateSpeler(Speler speler) {
 		try (
-				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL);
+				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
 				PreparedStatement query = connection.prepareStatement(UPDATE_SPELER)) {
 			query.setInt(1, speler.getSpeelkansen());
 			query.setString(2, speler.getGebruikersnaam());
