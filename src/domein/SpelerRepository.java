@@ -17,12 +17,11 @@ public class SpelerRepository {
         spelers = spelerMapper.geefSpelers();
     }
 
-    public boolean voegSpelerToe(String gebruikernaam, int geboortejaar) {
+    public void voegSpelerToe(String gebruikernaam, int geboortejaar) {
         Speler speler = new Speler(gebruikernaam, geboortejaar);
         controleerSpelerUniek(speler);
         spelerMapper.voegSpelerToe(speler);
         spelers.add(spelerMapper.geefSpeler(gebruikernaam,geboortejaar));
-        return true;
     }
 
     private void controleerSpelerUniek(Speler speler) {
