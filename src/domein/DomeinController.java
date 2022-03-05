@@ -18,6 +18,14 @@ public class DomeinController {
     } */
 
     public void meldAan(String gebruikersnaam, int geboortejaar) {
-    	spelerRepository.geefSpeler(gebruikersnaam, geboortejaar);
+    	spelerRepository.vraagSpelerOp(gebruikersnaam, geboortejaar);
+    } 
+    
+    public String geefSpeler(String gebruikersnaam, int geboortejaar) {
+    	String naam = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getGebruikersnaam();
+    	int jaar = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getGeboortejaar();
+    	
+    	return String.format("Gebruikersnaam: %s%nGeboortejaar:%D", naam, jaar);
     }
+    
 }

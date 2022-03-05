@@ -34,9 +34,20 @@ public class SpelerRepository {
             throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKER_BESTAAT_AL"));
     }
 
-    public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
-        return spelerMapper.geefSpeler(gebruikersnaam,geboortejaar);
+    public void vraagSpelerOp(String gebruikersnaam, int geboortejaar) {
+      spelers.add(spelerMapper.geefSpeler(gebruikersnaam,geboortejaar));
     }
+    
+    public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
+    	Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
+    	if (!(spelers.contains(gekozenSpeler))) {
+    		throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_NIET"));
+    	}
+    		else
+    		return spelers.get(spelers.indexOf(gekozenSpeler));
+    		
+    }
+    		
 
     public void updateSpeler(Speler speler){
         if (spelers.contains(speler)) {
