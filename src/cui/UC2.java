@@ -65,7 +65,7 @@ public class UC2
             try {
                 domeinController.meldAan(gebruikersnaam, geboortejaar);
                 System.out.println(taal.getString("CORRECT_AANGEMELD"));
-                System.out.printf("%s", domeinController.geefSpelers());
+                System.out.printf("%s", domeinController.geefSpelers()); //Codereview Andreeas: methode roept niet de juiste data op. Ga even in methode.
                 System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {

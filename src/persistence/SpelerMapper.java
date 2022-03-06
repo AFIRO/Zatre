@@ -13,7 +13,6 @@ public class SpelerMapper {
 	private static final String GET_SPELERS = "SELECT * FROM ID372560_SDProjectG101.Speler";
 	private static final String GET_SPELER = "SELECT * FROM ID372560_SDProjectG101.Speler WHERE gebruikersnaam = ? AND geboortejaar = ?";
 	private static final String UPDATE_SPELER = "UPDATE ID372560_SDProjectG101.Speler SET speelkansen = ? WHERE gebruikersnaam = ? AND geboortejaar = ?";
-    private static final String VERWIJDER_SPELER = "UPDATE ID372560_SDProjectG101.Speler SET speelkansen = ? WHERE gebruikersnaam = ? AND geboortejaar = ?";
 
 	public void voegSpelerToe(Speler speler)  {
 

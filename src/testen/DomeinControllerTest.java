@@ -23,12 +23,7 @@ class DomeinControllerTest {
     private static final int GEBOORTEJAAR_TOEGELATEN_LEEFTIJD = 1990;
     private static final int GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD = 2020;
 
-    @BeforeEach
-    private void reset() {
-        if (Optional.of(spelerMapper.geefSpeler(CORRECTE_GEBRUIKERSNAAM,GEBOORTEJAAR_TOEGELATEN_LEEFTIJD)).isPresent());
-    }
-
-
+    
     @Test
     @DisplayName("Registreer proberen, correcte speler gemaakt")
     public void registreer_wanneerCorrecteInfoDoorgegeven_objectGemaakt() {
