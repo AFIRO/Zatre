@@ -38,6 +38,10 @@ public class SpelerRepository {
       spelers.add(spelerMapper.geefSpeler(gebruikersnaam,geboortejaar));
     }
     
+    public List<Speler> geefSpelers(){
+    	return spelers;
+    }
+    
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
     	Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
     	if (!(spelers.contains(gekozenSpeler))) {
