@@ -29,6 +29,7 @@ public class DomeinController {
 		int kansen = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getSpeelkansen();
 
 		return String.format("Gebruikersnaam: %s%nSpeelkansen: %d%n%n", naam, kansen);
+		//nog aan te passen, dictionary toe te voegen
 	}
 
 	public List<String> geefSpelers() {
@@ -46,6 +47,8 @@ public class DomeinController {
 			index++;
 		}
 		return aangemeldeSpelers;
+		
+		//nog aan te passen, dictionary toe te voegen
 
 	}
 

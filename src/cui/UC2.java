@@ -65,8 +65,7 @@ public class UC2
             try {
                 domeinController.meldAan(gebruikersnaam, geboortejaar);
                 System.out.println(taal.getString("CORRECT_AANGEMELD"));
-                domeinController.geefSpeler(gebruikersnaam, geboortejaar);
-                System.out.printf("%s%n%d", "AANTAL_SPEELKANSEN", domeinController.getSpeelkansen); 
+                System.out.printf("%s", domeinController.geefSpelers());
                 System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {
@@ -74,6 +73,8 @@ public class UC2
                 System.out.println(taal.getString("PROBEER_OPNIEUW"));
                 geefKeuzeMenu();
             }
+            
+            //eerst alle spelers aanmelden en dan pas printen
         }
     }
     public void printMenu() {

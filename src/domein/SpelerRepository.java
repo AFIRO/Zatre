@@ -35,7 +35,19 @@ public class SpelerRepository {
     }
 
     public void vraagSpelerOp(String gebruikersnaam, int geboortejaar) {
-      spelers.add(spelerMapper.geefSpeler(gebruikersnaam,geboortejaar));
+    	int index = 1;
+    	if(index<=4)
+    	{	
+    		if (spelerMapper.geefSpeler(gebruikersnaam, geboortejaar).getSpeelkansen() >0)
+    		{
+    		 spelers.add(spelerMapper.geefSpeler(gebruikersnaam,geboortejaar));
+    		 index++;}
+    		 else
+    			 throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEEN_SPEELKANSEN_MEER")); 
+    	}
+    	else
+    		throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("MAX_AANTAL_SPELERS_BEREIKT"));
+     
     }
     
     public List<Speler> geefSpelers(){
