@@ -2,6 +2,8 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class DomeinController {
 	private final SpelerRepository spelerRepository;
@@ -15,10 +17,6 @@ public class DomeinController {
 
 	}
 
-	/*
-	 * public Speler haalSpelerOp(String gebruikernaam, int geboortejaar) { return
-	 * spelerRepository.getSpeler(gebruikernaam, geboortejaar); }
-	 */
 
 	public void meldAan(String gebruikersnaam, int geboortejaar) {
 		spelerRepository.vraagSpelerOp(gebruikersnaam, geboortejaar);
@@ -28,28 +26,28 @@ public class DomeinController {
 		String naam = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getGebruikersnaam();
 		int kansen = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getSpeelkansen();
 
-		return String.format("Gebruikersnaam: %s%nSpeelkansen: %d%n%n", naam, kansen);
-		//nog aan te passen, dictionary toe te voegen
+		return String.format("%s%s%n%s%d%n", ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM"), naam, 
+				ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPEELKANSEN"), kansen);
 	}
 
-	public List<String> geefSpelers() {
+	public String geefSpelers() {
 		List<Speler> spelers = new ArrayList<>(spelerRepository.geefSpelers());
-		List<String> aangemeldeSpelers = new ArrayList<>();
 
 		int index = 1;
-
+		String output = "";
 		for (Speler speler : spelers) {
 			String naam = speler.getGebruikersnaam();
 			int geboortejaar = speler.getGeboortejaar();
 			int speelkansen = speler.getSpeelkansen();
-			aangemeldeSpelers.add(String.format("Speler%d%nGebruikersnaam: %s%nGeboortejaar: %d%nSpeelkansen: %d%n%n",
-					index, naam, geboortejaar, speelkansen));
+			output += String.format("%s%d%n%s%s%n%s%d%n%s%d%n", ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER"), index, 
+					ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM"), naam, 
+					ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBOORTEJAAR"), geboortejaar, 
+					ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPEELKANSEN"), speelkansen);
 			index++;
+			output += "\n";
 		}
-		return aangemeldeSpelers;
+		return output;
 		
-		//nog aan te passen, dictionary toe te voegen
-
 	}
 
 }
