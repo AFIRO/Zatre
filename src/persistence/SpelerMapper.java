@@ -9,25 +9,32 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class SpelerMapper {
-	private static final String INSERT_SPELER = "INSERT INTO ID372560_SDProjectG101.Speler (gebruikersnaam, geboortejaar, speelkansen) VALUES (?, ?, ?)";
-	private static final String GET_SPELERS = "SELECT * FROM ID372560_SDProjectG101.Speler";
-	private static final String GET_SPELER = "SELECT * FROM ID372560_SDProjectG101.Speler WHERE gebruikersnaam = ? AND geboortejaar = ?";
-	private static final String UPDATE_SPELER = "UPDATE ID372560_SDProjectG101.Speler SET speelkansen = ? WHERE gebruikersnaam = ? AND geboortejaar = ?";
+    private static final String INSERT_SPELER = "INSERT INTO ID372560_SDProjectG101.Speler (gebruikersnaam, geboortejaar, speelkansen) VALUES (?, ?, ?)";
+    private static final String GET_SPELERS = "SELECT * FROM ID372560_SDProjectG101.Speler";
+    private static final String GET_SPELER = "SELECT * FROM ID372560_SDProjectG101.Speler WHERE gebruikersnaam = ? AND geboortejaar = ?";
+    private static final String UPDATE_SPELER = "UPDATE ID372560_SDProjectG101.Speler SET speelkansen = ? WHERE gebruikersnaam = ? AND geboortejaar = ?";
 
-	public void voegSpelerToe(Speler speler)  {
+    public void voegSpelerToe(Speler speler) {
 
-		try (
-				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
-				PreparedStatement query = connection.prepareStatement(INSERT_SPELER)) {
+        if(!checkOfSpelerAlBestaatInDatabase(speler)) {
 
-			query.setString(1, speler.getGebruikersnaam());
-			query.setInt(2, speler.getGeboortejaar());
-            query.setInt(3, speler.getSpeelkansen());
-            query.executeUpdate();
+            try (
+                    Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
+                    PreparedStatement query = connection.prepareStatement(INSERT_SPELER)) {
 
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+                query.setString(1, speler.getGebruikersnaam());
+                query.setInt(2, speler.getGeboortejaar());
+                query.setInt(3, speler.getSpeelkansen());
+                query.executeUpdate();
+
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
         }
+
+        else
+            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_AL"));
     }
 
     public List<Speler> geefSpelers() {
@@ -58,10 +65,10 @@ public class SpelerMapper {
         Speler speler;
 
         try (
-				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
-				PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
+                Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
+                PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
 
-			query.setString(1, gebruikersnaam);
+            query.setString(1, gebruikersnaam);
             query.setInt(2, geboortejaar);
 
             try (ResultSet gevondenSpeler = query.executeQuery()) {
@@ -71,9 +78,8 @@ public class SpelerMapper {
                     int gevondenSpeelkansen = gevondenSpeler.getInt("speelkansen");
 
                     speler = new Speler(gevondenGebruikersnaam, gevondenGeboortejaar, gevondenSpeelkansen);
-                }
-				else
-					throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_NIET"));
+                } else
+                    throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_NIET"));
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -82,17 +88,37 @@ public class SpelerMapper {
         return speler;
     }
 
-	public void updateSpeler(Speler speler) {
-		try (
-				Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
-				PreparedStatement query = connection.prepareStatement(UPDATE_SPELER)) {
-			query.setInt(1, speler.getSpeelkansen());
-			query.setString(2, speler.getGebruikersnaam());
-			query.setInt(3, speler.getGeboortejaar());
-			query.executeUpdate();
+    public void updateSpeler(Speler speler) {
+        try (
+                Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
+                PreparedStatement query = connection.prepareStatement(UPDATE_SPELER)) {
+            query.setInt(1, speler.getSpeelkansen());
+            query.setString(2, speler.getGebruikersnaam());
+            query.setInt(3, speler.getGeboortejaar());
+            query.executeUpdate();
 
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-	}
-	}
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+    public boolean checkOfSpelerAlBestaatInDatabase(Speler speler) {
+
+        try (
+                Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
+                PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
+
+            query.setString(1, speler.getGebruikersnaam());
+            query.setInt(2, speler.getGeboortejaar());
+
+            try (ResultSet gevondenSpeler = query.executeQuery()) {
+                return gevondenSpeler.next();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
+
+}

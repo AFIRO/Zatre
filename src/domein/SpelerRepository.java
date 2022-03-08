@@ -14,25 +14,14 @@ public class SpelerRepository {
 
     public SpelerRepository() {
         spelerMapper = new SpelerMapper();
-        spelers = spelerMapper.geefSpelers();
+        spelers = new ArrayList<>();
     }
 
     public void voegSpelerToe(String gebruikernaam, int geboortejaar) {
         Speler speler = new Speler(gebruikernaam, geboortejaar);
-        controleerSpelerUniek(speler);
         spelerMapper.voegSpelerToe(speler);
-        spelers.add(spelerMapper.geefSpeler(gebruikernaam,geboortejaar));
     }
 
-    private void controleerSpelerUniek(Speler speler) {
-        List<String> uniqueKeys = spelers.stream()
-                .map((element) -> element.getGebruikersnaam() + element.getGeboortejaar())
-                .filter((e) -> e.equals(speler.getGebruikersnaam() + speler.getGeboortejaar()))
-                .collect(Collectors.toList());
-
-        if (!uniqueKeys.isEmpty())
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKER_BESTAAT_AL"));
-    }
 
     public void vraagSpelerOp(String gebruikersnaam, int geboortejaar) {
     	int index = 1;
