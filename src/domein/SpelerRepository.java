@@ -47,12 +47,7 @@ public class SpelerRepository {
     	}
     	else
     		throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("MAX_AANTAL_SPELERS_BEREIKT"));
-
-        //Codereview Andreeas: Twee opmerkingen:
-        //1. Je hebt gebruikt hier de algemene lijst van spelers die gebruikt wordt om te checken of een speler niet dubbel is in de databasis.
-        //Ik zou hiervoor een andere lijst gebruiken OF de methode methode controleerSpelerUniek aanpassen zodat deze rechtstreeks in de databases krijkt via de mapper of een speler al bestaat.
-        //2. Die index gaat hier nooit werken omdat deze verloren gaat na het doorlopen van de methode
-        //ALs je wilt dat je lijst nooit meer dan 4 man bevat, gebruik dan list.size als controle.
+     
     }
     
     public List<Speler> geefSpelers(){

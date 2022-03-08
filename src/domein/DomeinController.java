@@ -1,5 +1,7 @@
 package domein;
 
+import util.Taal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -8,8 +10,10 @@ import java.util.stream.Collectors;
 
 public class DomeinController {
 	private final SpelerRepository spelerRepository;
+	private final Taal taal;
 
-	public DomeinController() {
+	public DomeinController(Taal taal) {
+		this.taal = taal;
 		this.spelerRepository = new SpelerRepository();
 	}
 
@@ -71,6 +75,10 @@ public class DomeinController {
 
 		return output;
 		
+	}
+
+	public String geefVertaling(String key) {
+		return taal.getLocalisatie(key);
 	}
 
 }
