@@ -1,5 +1,6 @@
 package main;
 
+
 import cui.UC1;
 import cui.UC2;
 import domein.DomeinController;
@@ -82,8 +83,6 @@ public class StartUp {
         System.out.println(domeinController.geefVertaling("STARTMENU_5"));
     }
 }
-
-
 
 
 
