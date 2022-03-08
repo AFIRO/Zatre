@@ -33,8 +33,8 @@ public class DomeinController {
 		//Codereview Andreeas: Ik zou aanraden om maar 1 keer geefspeler te gebruiken en de gevonden speler op te slaan.
 		//Je doet hier nu twee calls naar de databasis voor hetzelfde object.
 
-		return String.format("%s%s%n%s%d%n", ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM"), naam, 
-				ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPEELKANSEN"), kansen);
+		return String.format("%s%s%n%s%d%n", geefVertaling("GEBRUIKERSNAAM"), naam,
+				geefVertaling("SPEELKANSEN"), kansen);
 	}
 
 	public String geefSpelers() {
@@ -53,10 +53,10 @@ public class DomeinController {
 			String naam = speler.getGebruikersnaam();
 			int geboortejaar = speler.getGeboortejaar();
 			int speelkansen = speler.getSpeelkansen();
-			output += String.format("%s%d%n%s%s%n%s%d%n%s%d%n", ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER"), index, 
-					ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM"), naam, 
-					ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBOORTEJAAR"), geboortejaar, 
-					ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPEELKANSEN"), speelkansen);
+			output += String.format("%s%d%n%s%s%n%s%d%n%s%d%n", geefVertaling("SPELER"), index,
+					geefVertaling("GEBRUIKERSNAAM"), naam,
+					geefVertaling("GEBOORTEJAAR"), geboortejaar,
+					geefVertaling("SPEELKANSEN"), speelkansen);
 			index++;
 			output += "\n";
 		}
