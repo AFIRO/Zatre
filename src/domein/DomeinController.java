@@ -18,8 +18,7 @@ public class DomeinController {
 	}
 
 	public void registreer(String gebruikernaam, int geboortejaar) {
-		spelerRepository.voegSpelerToe(gebruikernaam, geboortejaar);
-
+			spelerRepository.voegSpelerToe(gebruikernaam, geboortejaar);
 	}
 
 

@@ -30,11 +30,9 @@ public class SpelerMapper {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-
         }
-
         else
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_AL"));
+            throw new IllegalArgumentException("SPELER_BESTAAT_AL");
     }
 
     public List<Speler> geefSpelers() {
@@ -108,7 +106,6 @@ public class SpelerMapper {
         try (
                 Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
                 PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
-
             query.setString(1, speler.getGebruikersnaam());
             query.setInt(2, speler.getGeboortejaar());
 

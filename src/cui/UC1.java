@@ -47,8 +47,9 @@ public class UC1 {
                 System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.println(domeinController.geefVertaling(e.getMessage()));
                 System.out.println(domeinController.geefVertaling("PROBEER_OPNIEUW"));
+                registreerSpelerInputMenu();
             }
         }
     }
