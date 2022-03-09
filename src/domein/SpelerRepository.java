@@ -23,16 +23,18 @@ public class SpelerRepository {
 
 
     public void vraagSpelerOp(String gebruikersnaam, int geboortejaar) {
-        int index = 1;
-        if (index <= 4) {
-            if (spelerMapper.geefSpeler(gebruikersnaam, geboortejaar).getSpeelkansen() > 0) {
-                spelers.add(spelerMapper.geefSpeler(gebruikersnaam, geboortejaar));
-                index++;
-            } else
-                throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEEN_SPEELKANSEN_MEER"));
-        } else
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("MAX_AANTAL_SPELERS_BEREIKT"));
+        Speler opgevraagdeSpeler = spelerMapper.geefSpeler(gebruikersnaam,geboortejaar);
 
+        if (opgevraagdeSpeler.getSpeelkansen() < 0)
+            throw new IllegalArgumentException("GEEN_SPEELKANSEN_MEER");
+
+        if (spelers.contains(opgevraagdeSpeler))
+            throw new IllegalArgumentException("SPELER_AL_AANGEMELD");
+
+        if (spelers.size() >= 4)
+            throw new IllegalArgumentException("MAX_AANTAL_SPELERS_BEREIKT");
+
+        spelers.add(opgevraagdeSpeler);
     }
 
     public List<Speler> geefSpelers() {
@@ -42,7 +44,7 @@ public class SpelerRepository {
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelers.contains(gekozenSpeler))) {
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_NIET"));
+            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");
         } else
             return spelers.get(spelers.indexOf(gekozenSpeler));
 
@@ -54,7 +56,7 @@ public class SpelerRepository {
             spelers.get(spelers.indexOf(speler)).setSpeelkansen(speler.getSpeelkansen());
             spelerMapper.updateSpeler(speler);
         } else
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_NIET"));
+            throw new IllegalArgumentException(("SPELER_BESTAAT_NIET"));
     }
 
 

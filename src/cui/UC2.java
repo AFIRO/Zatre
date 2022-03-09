@@ -3,6 +3,7 @@ package cui;
 import domein.DomeinController;
 
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UC2 {
@@ -41,23 +42,20 @@ public class UC2 {
 						System.out.println(domeinController.geefVertaling("CORRECT_AANGEMELD"));
 						System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
 						System.out.println();
+
+						if (domeinController.geefAantalSpelersInSpel() == 4) {
+							nextUser = false;
+							loopflag = false;
+							break;
+						}
 						System.out.println(domeinController.geefVertaling("NOG_AANMELDEN"));
-						nogAanmelden = scanner.next();
-						nogAanmelden.toLowerCase();
+						nogAanmelden = scanner.next().toLowerCase();
 						if(!(nogAanmelden.charAt(0) == 'y')) {
 							nextUser = false;
 							loopflag = false;
 						}
-						//Codereview Andreeas: Omdat je hiet met HasNext werkt, blijft je antwoord vasthangen in
-						//je scanner. Wanneer je terug aar regel 30 gaat voor gebruikersnaam, dan pakt hij het antwoord
-						//dat hier stond (dus Y of Ja) als input voor de gebruikersnaam variabele bij .next()
-						//Daardoor springt hij direct naar de input voor geboortejaar
-						//probeer het antwoord voor NogAanmelden via next() op te slaan (let op exceptions) en
-						//gebruik dat om een boolean te setten. Scanner is zelf niet in staat om rechtstreeks een
-						//input van je gebruiker om te zetten naar een boolean.
-						
 					} catch (IllegalArgumentException e) {
-						System.out.println(e.getMessage());
+						System.out.println(domeinController.geefVertaling(e.getMessage()));
 						System.out.println(domeinController.geefVertaling("PROBEER_OPNIEUW"));
 					}
 				}

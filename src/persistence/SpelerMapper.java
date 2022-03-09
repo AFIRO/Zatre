@@ -76,7 +76,7 @@ public class SpelerMapper {
 
                     speler = new Speler(gevondenGebruikersnaam, gevondenGeboortejaar, gevondenSpeelkansen);
                 } else
-                    throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPELER_BESTAAT_NIET"));
+                    throw new IllegalArgumentException(("SPELER_BESTAAT_NIET"));
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
