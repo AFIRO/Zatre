@@ -24,8 +24,9 @@ public class DomeinController {
     }
 
     public String geefSpeler(String gebruikersnaam, int geboortejaar) {
-        String naam = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getGebruikersnaam();
-        int kansen = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar).getSpeelkansen();
+    	Speler speler = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar);
+        String naam = speler.getGebruikersnaam();
+        int kansen = speler.getSpeelkansen();
         //Codereview Andreeas: Ik zou aanraden om maar 1 keer geefspeler te gebruiken en de gevonden speler op te slaan.
         //Je doet hier nu twee calls naar de databasis voor hetzelfde object.
 
@@ -33,7 +34,7 @@ public class DomeinController {
                 geefVertaling("SPEELKANSEN"), kansen);
     }
 
-    public String geefSpelers() {
+    public void geefSpelers() {
         List<Speler> spelers = new ArrayList<>(spelerRepository.geefSpelers());
         //Codereview Andreeas: Je vult hier een arraylist met de geefspelers methode uit de repository.
         //Echter, die methode geeft alle spelers terug in de spelers arraylist uit de repo.
@@ -44,8 +45,9 @@ public class DomeinController {
         //via repo.geefSpeler
 
         int index = 1;
-        String output = "";
+        String output;
         for (Speler speler : spelers) {
+        	output = "";
             String naam = speler.getGebruikersnaam();
             int geboortejaar = speler.getGeboortejaar();
             int speelkansen = speler.getSpeelkansen();
@@ -54,7 +56,7 @@ public class DomeinController {
                     geefVertaling("GEBOORTEJAAR"), geboortejaar,
                     geefVertaling("SPEELKANSEN"), speelkansen);
             index++;
-            output += "\n";
+            System.out.print(output);
         }
 
         //Codereview Andreeas:
@@ -66,9 +68,6 @@ public class DomeinController {
 //						ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBOORTEJAAR"), speler.getGeboortejaar(),
 //						ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPEELKANSEN"), speler.getSpeelkansen());})
 //				.collect(Collectors.joining("\n"));
-
-
-        return output;
 
     }
 
