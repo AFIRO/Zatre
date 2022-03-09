@@ -42,6 +42,13 @@ public class UC2 {
 						System.out.println();
 						System.out.println(domeinController.geefVertaling("NOG_AANMELDEN"));
 						nogAanmelden = scanner.hasNext();
+						//Codereview Andreeas: Omdat je hiet met HasNext werkt, blijft je antwoord vasthangen in
+						//je scanner. Wanneer je terug aar regel 30 gaat voor gebruikersnaam, dan pakt hij het antwoord
+						//dat hier stond (dus Y of Ja) als input voor de gebruikersnaam variabele bij .next()
+						//Daardoor springt hij direct naar de input voor geboortejaar
+						//probeer het antwoord voor NogAanmelden via next() op te slaan (let op exceptions) en
+						//gebruik dat om een boolean te setten. Scanner is zelf niet in staat om rechtstreeks een
+						//input van je gebruiker om te zetten naar een boolean.
 						if(!nogAanmelden)loopflag = false;
 					} catch (IllegalArgumentException e) {
 						System.out.println(e.getMessage());

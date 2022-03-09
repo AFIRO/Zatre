@@ -4,6 +4,7 @@ package main;
 import cui.UC1;
 import cui.UC2;
 import domein.DomeinController;
+import domein.Speler;
 import util.Taal;
 
 import java.util.InputMismatchException;
@@ -14,6 +15,8 @@ public class StartUp {
         Scanner scanner = new Scanner(System.in);
         DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal(scanner));
         geefKeuzeMenu(scanner, domeinController);
+
+
 
 
     }
