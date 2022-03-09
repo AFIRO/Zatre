@@ -36,7 +36,7 @@ public class UC2 {
             try {
                 domeinController.meldAan(gebruikersnaam, geboortejaar);
                 System.out.println(domeinController.geefVertaling("CORRECT_AANGEMELD"));
-                System.out.printf("%s", domeinController.geefSpelers());
+                System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
                 System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {
@@ -45,6 +45,7 @@ public class UC2 {
             }
 
             //eerst alle spelers aanmelden en dan pas printen
+            domeinController.geefSpelers();
         }
     }
 
