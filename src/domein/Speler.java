@@ -70,14 +70,6 @@ public class Speler {
     public int hashCode() {
         return Objects.hash(getGebruikersnaam(), getGeboortejaar());
     }
-
-	@Override
-	public String toString() {
-		return String.format("%s%s%n%s%d%n%s%d%n", 
-				geefVertaling("GEBRUIKERSNAAM"), gebruikersnaam,
-				geefVertaling("GEBOORTEJAAR"), geboortejaar,
-				geefVertaling("SPEELKANSEN"), speelkansen);
-	}
     
     
 }
