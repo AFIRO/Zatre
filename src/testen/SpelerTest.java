@@ -27,10 +27,10 @@ class SpelerTest {
     @Test
     @DisplayName("Correct aanmaken van speler met correcte info, check op info")
     public void create_InfoCorrect_ObjectWordtGemaaktMetJuisteVelden() {
-        Speler speler = new Speler(CORRECTE_GEBRUIKERSNAAM,GEBOORTEJAAR_TOEGELATEN_LEEFTIJD);
+        Speler speler = new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD);
         assertEquals(GEBOORTEJAAR_TOEGELATEN_LEEFTIJD, speler.getGeboortejaar());
-        assertEquals(CORRECTE_GEBRUIKERSNAAM,speler.getGebruikersnaam());
-        assertEquals(5,speler.getSpeelkansen());
+        assertEquals(CORRECTE_GEBRUIKERSNAAM, speler.getGebruikersnaam());
+        assertEquals(5, speler.getSpeelkansen());
     }
 
     @Test
@@ -45,7 +45,7 @@ class SpelerTest {
         assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_NIET_TOEGELATEN_LEEFTIJD));
 
     }
-    
+
     @Test
     @DisplayName("Incorrecte leeftijd grensgeval, exception")
     public void create_LeeftijdIncorrectGrensGeval_Exception() {
@@ -66,7 +66,6 @@ class SpelerTest {
         assertThrows(IllegalArgumentException.class, () -> new Speler(CORRECTE_GEBRUIKERSNAAM, GEBOORTEJAAR_TOEGELATEN_LEEFTIJD).setSpeelkansen(-5));
 
     }
-
 
 
 }

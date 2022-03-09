@@ -5,14 +5,14 @@ import java.util.ResourceBundle;
 
 public class Taal {
     public enum Taalkeuze {NEDERLANDS, ENGELS}
-    private  Taalkeuze taalkeuze;
-    private  ResourceBundle dictionary;
 
-    public Taal(Taalkeuze taalkeuze){
+    private final Taalkeuze taalkeuze;
+    private ResourceBundle dictionary;
+
+    public Taal(Taalkeuze taalkeuze) {
         this.taalkeuze = taalkeuze;
         setResourceBundle(taalkeuze);
     }
-
 
 
     private void setResourceBundle(Taalkeuze taalkeuze) {
@@ -23,7 +23,7 @@ public class Taal {
 
     }
 
-    public String getLocalisatie(String key){
+    public String getLocalisatie(String key) {
         return dictionary.getString(key);
     }
 

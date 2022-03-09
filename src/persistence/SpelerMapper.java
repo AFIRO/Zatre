@@ -16,7 +16,7 @@ public class SpelerMapper {
 
     public void voegSpelerToe(Speler speler) {
 
-        if(!checkOfSpelerAlBestaatInDatabase(speler)) {
+        if (!checkOfSpelerAlBestaatInDatabase(speler)) {
 
             try (
                     Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
@@ -30,8 +30,7 @@ public class SpelerMapper {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-        }
-        else
+        } else
             throw new IllegalArgumentException("SPELER_BESTAAT_AL");
     }
 

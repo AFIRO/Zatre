@@ -1,12 +1,8 @@
 package cui;
 
 import domein.DomeinController;
-import util.Taal;
 
-import java.time.LocalDate;
 import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class UC1 {
@@ -18,7 +14,6 @@ public class UC1 {
         this.domeinController = domeinController;
         registreerSpelerInputMenu();
     }
-
 
 
     private void registreerSpelerInputMenu() {

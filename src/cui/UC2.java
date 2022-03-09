@@ -1,15 +1,11 @@
 package cui;
 
+import domein.DomeinController;
+
 import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import domein.DomeinController;
-import util.Taal;
-
-public class UC2 
-{
+public class UC2 {
     private final Scanner scanner;
     private final DomeinController domeinController;
 
@@ -47,7 +43,7 @@ public class UC2
                 System.out.println(e.getMessage());
                 System.out.println(domeinController.geefVertaling("PROBEER_OPNIEUW"));
             }
-            
+
             //eerst alle spelers aanmelden en dan pas printen
         }
     }

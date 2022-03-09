@@ -13,7 +13,7 @@ public class StartUp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal(scanner));
-        geefKeuzeMenu(scanner,domeinController);
+        geefKeuzeMenu(scanner, domeinController);
 
 
     }
@@ -72,7 +72,6 @@ public class StartUp {
 
         }
     }
-
 
 
     public static void printMenu(DomeinController domeinController) {

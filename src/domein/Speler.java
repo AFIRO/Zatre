@@ -1,9 +1,7 @@
 package domein;
 
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class Speler {
 
@@ -27,15 +25,15 @@ public class Speler {
         if (gebruikersnaam == null
                 || gebruikersnaam.isBlank()
                 || gebruikersnaam.length() < 5)
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM_TE_KORT"));
+            throw new IllegalArgumentException("GEBRUIKERSNAAM_TE_KORT");
     }
 
     private void controleerGeboortejaar(int geboortejaar) {
-        if (geboortejaar > LocalDate.now().getYear()  || geboortejaar <= 0)
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("ONGELDIG_GEBOORTEJAAR"));
+        if (geboortejaar > LocalDate.now().getYear() || geboortejaar <= 0)
+            throw new IllegalArgumentException("ONGELDIG_GEBOORTEJAAR");
 
-        if ((LocalDate.now().getYear()  - geboortejaar) < 6)
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKER_TE_JONG"));
+        if ((LocalDate.now().getYear() - geboortejaar) < 6)
+            throw new IllegalArgumentException("GEBRUIKER_TE_JONG");
 
     }
 
@@ -46,7 +44,7 @@ public class Speler {
 
     public void setSpeelkansen(int speelkansen) {
         if (speelkansen < 0)
-            throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("SPEELKANSEN_NEGATIEF"));
+            throw new IllegalArgumentException("SPEELKANSEN_NEGATIEF");
 
         this.speelkansen = speelkansen;
     }
