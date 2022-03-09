@@ -18,13 +18,14 @@ public class UC2 {
 	private void meldAanInputMenu() {
 		boolean loopflag = true;
 		boolean inputLoopflag = true;
-		boolean nogAanmelden = true;
+		boolean nextUser = true;
+		String nogAanmelden = ""; 
 		int geboortejaar = 0;
 		String gebruikersnaam = "";
 
 		while (loopflag) {
 			while (inputLoopflag)
-				while (nogAanmelden) {
+				while (nextUser) {
 					try {
 						System.out.println(domeinController.geefVertaling("GEKENDE_NAAM"));
 						gebruikersnaam = scanner.next();
@@ -41,7 +42,12 @@ public class UC2 {
 						System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
 						System.out.println();
 						System.out.println(domeinController.geefVertaling("NOG_AANMELDEN"));
-						nogAanmelden = scanner.hasNext();
+						nogAanmelden = scanner.next();
+						nogAanmelden.toLowerCase();
+						if(nogAanmelden == "n" || nogAanmelden == "no" ||nogAanmelden == "nee") {
+							nextUser = false;
+							loopflag = false;
+						}
 						//Codereview Andreeas: Omdat je hiet met HasNext werkt, blijft je antwoord vasthangen in
 						//je scanner. Wanneer je terug aar regel 30 gaat voor gebruikersnaam, dan pakt hij het antwoord
 						//dat hier stond (dus Y of Ja) als input voor de gebruikersnaam variabele bij .next()
@@ -49,7 +55,7 @@ public class UC2 {
 						//probeer het antwoord voor NogAanmelden via next() op te slaan (let op exceptions) en
 						//gebruik dat om een boolean te setten. Scanner is zelf niet in staat om rechtstreeks een
 						//input van je gebruiker om te zetten naar een boolean.
-						if(!nogAanmelden)loopflag = false;
+						
 					} catch (IllegalArgumentException e) {
 						System.out.println(e.getMessage());
 						System.out.println(domeinController.geefVertaling("PROBEER_OPNIEUW"));
