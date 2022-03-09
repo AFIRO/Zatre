@@ -1,8 +1,5 @@
 package domein;
 
-
-import com.mysql.cj.util.StringUtils;
-
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
@@ -27,8 +24,8 @@ public class Speler {
     }
 
     private void controleerGebruikersnaam(String gebruikersnaam) {
-        if (StringUtils.isNullOrEmpty(gebruikersnaam)
-                || StringUtils.isEmptyOrWhitespaceOnly(gebruikersnaam)
+        if (gebruikersnaam == null
+                || gebruikersnaam.isBlank()
                 || gebruikersnaam.length() < 5)
             throw new IllegalArgumentException(ResourceBundle.getBundle("dictionary", Locale.getDefault()).getString("GEBRUIKERSNAAM_TE_KORT"));
     }
