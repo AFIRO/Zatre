@@ -51,7 +51,7 @@ public class DomeinController {
             String naam = speler.getGebruikersnaam();
             int geboortejaar = speler.getGeboortejaar();
             int speelkansen = speler.getSpeelkansen();
-            output += String.format("%s%d%n%s%s%n%s%d%n%s%d%n", geefVertaling("SPELER"), index,
+            output += String.format("%s%d%n%s%s%n%s%d%n%s%d%n%n", geefVertaling("SPELER"), index,
                     geefVertaling("GEBRUIKERSNAAM"), naam,
                     geefVertaling("GEBOORTEJAAR"), geboortejaar,
                     geefVertaling("SPEELKANSEN"), speelkansen);
