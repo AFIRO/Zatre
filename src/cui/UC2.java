@@ -44,7 +44,7 @@ public class UC2 {
 						System.out.println(domeinController.geefVertaling("NOG_AANMELDEN"));
 						nogAanmelden = scanner.next();
 						nogAanmelden.toLowerCase();
-						if(nogAanmelden == "n" || nogAanmelden == "no" ||nogAanmelden == "nee") {
+						if(!(nogAanmelden.charAt(0) == 'y')) {
 							nextUser = false;
 							loopflag = false;
 						}

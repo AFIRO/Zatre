@@ -17,8 +17,6 @@ public class StartUp {
         geefKeuzeMenu(scanner, domeinController);
 
 
-
-
     }
 
     private static Taal geefKeuzeMenuTaal(Scanner scanner) {
