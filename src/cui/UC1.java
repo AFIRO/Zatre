@@ -1,6 +1,7 @@
 package cui;
 
 import domein.DomeinController;
+import util.Taal;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,10 +9,12 @@ import java.util.Scanner;
 public class UC1 {
     private final Scanner scanner;
     private final DomeinController domeinController;
+    private Taal taal; //Scarlett overnemen in UC2
 
     public UC1(DomeinController domeinController) {
         scanner = new Scanner(System.in);
         this.domeinController = domeinController;
+        taal = domeinController.getTaal(); //Scarlett overnemen in UC2
         registreerSpelerInputMenu();
     }
 
@@ -25,7 +28,7 @@ public class UC1 {
         while (loopflag) {
             while (inputLoopflag)
                 try {
-                    System.out.println(domeinController.geefVertaling("GEWENSTE_NAAM"));
+                    System.out.println(taal.getLocalisatie("GEWENSTE_NAAM")); //Scarlett dit overnemen in rest van UC1 en UC2
                     gebruikersnaam = scanner.next();
                     System.out.println(domeinController.geefVertaling("GEWENSTE_GEBOORTEDATUM"));
                     geboortejaar = scanner.nextInt();
@@ -49,3 +52,5 @@ public class UC1 {
         }
     }
 }
+
+

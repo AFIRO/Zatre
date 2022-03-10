@@ -84,7 +84,9 @@ public class StartUp {
     }
 }
 
-
+//foutieve taalkeuze, bij iets anders dan 1/2 taalkeuze blijven staan
+//bij registratie met goede leeftijd, blijft speler te jong staan
+//bij iedereen aangemeld en opnieuw aanmelden -> komen vast te zitten
 
 
 
