@@ -15,10 +15,12 @@ public class StartUp {
         Scanner scanner = new Scanner(System.in);
         DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal(scanner));
         geefKeuzeMenu(scanner, domeinController);
-
+     
+        //final Taal taal;
+        //taal = domeinController.getTaal(); 
 
     }
-
+  
     private static Taal geefKeuzeMenuTaal(Scanner scanner) {
         boolean loopflag = true;
         int taalKeuze;
@@ -44,8 +46,10 @@ public class StartUp {
             }
         }
         return taal;
+        
+   
     }
-
+     
 
     private static void geefKeuzeMenu(Scanner scanner, DomeinController domeinController) {
         boolean loopflag = true;
@@ -67,20 +71,22 @@ public class StartUp {
                     }
                 }
             } catch (InputMismatchException e) {
-                System.out.println(domeinController.geefVertaling("CORRECTE_KEUZE"));
+                System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
                 scanner.next();
             }
 
         }
+    
     }
+    
 
 
     public static void printMenu(DomeinController domeinController) {
-        System.out.println(domeinController.geefVertaling("STARTMENU_1"));
-        System.out.println(domeinController.geefVertaling("STARTMENU_2"));
-        System.out.println(domeinController.geefVertaling("STARTMENU_3"));
-        System.out.println(domeinController.geefVertaling("STARTMENU_4"));
-        System.out.println(domeinController.geefVertaling("STARTMENU_5"));
+        System.out.println(taal.getLocalisatie("STARTMENU_1"));
+        System.out.println(taal.getLocalisatie("STARTMENU_2"));
+        System.out.println(taal.getLocalisatie("STARTMENU_3"));
+        System.out.println(taal.getLocalisatie("STARTMENU_4"));
+        System.out.println(taal.getLocalisatie("STARTMENU_5"));
     }
 }
 
