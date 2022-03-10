@@ -9,12 +9,12 @@ import java.util.Scanner;
 public class UC1 {
     private final Scanner scanner;
     private final DomeinController domeinController;
-    private Taal taal; //Scarlett overnemen in UC2
+    private Taal taal; 
 
     public UC1(DomeinController domeinController) {
         scanner = new Scanner(System.in);
         this.domeinController = domeinController;
-        taal = domeinController.getTaal(); //Scarlett overnemen in UC2
+        taal = domeinController.getTaal(); 
         registreerSpelerInputMenu();
     }
 
@@ -28,25 +28,25 @@ public class UC1 {
         while (loopflag) {
             while (inputLoopflag)
                 try {
-                    System.out.println(taal.getLocalisatie("GEWENSTE_NAAM")); //Scarlett dit overnemen in rest van UC1 en UC2
+                    System.out.println(taal.getLocalisatie("GEWENSTE_NAAM")); 
                     gebruikersnaam = scanner.next();
-                    System.out.println(domeinController.geefVertaling("GEWENSTE_GEBOORTEDATUM"));
+                    System.out.println(taal.getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
                     geboortejaar = scanner.nextInt();
                     inputLoopflag = false;
                 } catch (InputMismatchException e) {
-                    System.out.println(domeinController.geefVertaling("CORRECTE_KEUZE"));
+                    System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
                     scanner.next();
                 }
             try {
                 domeinController.registreer(gebruikersnaam, geboortejaar);
-                System.out.println(domeinController.geefVertaling("CORRECT_GEREGISTREERD"));
-                System.out.println(domeinController.geefVertaling("GEBRUIKERSNAAM") + gebruikersnaam);
-                System.out.println(domeinController.geefVertaling("GEBOORTEJAAR") + geboortejaar);
+                System.out.println(taal.getLocalisatie("CORRECT_GEREGISTREERD"));
+                System.out.println(taal.getLocalisatie("GEBRUIKERSNAAM") + gebruikersnaam);
+                System.out.println(taal.getLocalisatie("GEBOORTEJAAR") + geboortejaar);
                 System.out.println();
                 loopflag = false;
             } catch (IllegalArgumentException e) {
-                System.out.println(domeinController.geefVertaling(e.getMessage()));
-                System.out.println(domeinController.geefVertaling("PROBEER_OPNIEUW"));
+                System.out.println(taal.getLocalisatie(e.getMessage()));
+                System.out.println(taal.getLocalisatie("PROBEER_OPNIEUW"));
                 registreerSpelerInputMenu();
             }
         }
