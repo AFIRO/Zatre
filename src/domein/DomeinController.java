@@ -43,7 +43,7 @@ public class DomeinController {
 
 		String output;
 		for (Speler speler : spelers) {
-			output = String.format("%s: %d%n", "SPELER", spelers.indexOf(speler));
+			output = String.format("%s: %d%n", "SPELER", spelers.indexOf(speler)+1);
 			output += speler.toString();
 			players.add(output);
 		}

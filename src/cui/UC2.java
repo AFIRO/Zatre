@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class UC2 {
 	private final Scanner scanner;
 	private final DomeinController domeinController;
-	private Taal taal; 
+	private Taal taal;
 
 	public UC2(DomeinController domeinController) {
 		scanner = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class UC2 {
 		boolean loopflag = true;
 		boolean inputLoopflag = true;
 		boolean nextUser = true;
-		String nogAanmelden = ""; 
+		String nogAanmelden = "";
 		int geboortejaar = 0;
 		String gebruikersnaam = "";
 
@@ -31,18 +31,18 @@ public class UC2 {
 			while (inputLoopflag)
 				while (nextUser) {
 					try {
-						  System.out.println(taal.getLocalisatie("GEKENDE_NAAM"));
+						System.out.println(taal.getLocalisatie("GEKENDE_NAAM"));
 						gebruikersnaam = scanner.next();
-						  System.out.println(taal.getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
+						System.out.println(taal.getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
 						geboortejaar = scanner.nextInt();
 						inputLoopflag = false;
 					} catch (InputMismatchException e) {
-						  System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
+						System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
 						scanner.next();
 					}
 					try {
 						domeinController.meldAan(gebruikersnaam, geboortejaar);
-						  System.out.println(taal.getLocalisatie("CORRECT_AANGEMELD"));
+						System.out.println(taal.getLocalisatie("CORRECT_AANGEMELD"));
 						System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
 						System.out.println();
 
@@ -51,19 +51,21 @@ public class UC2 {
 							loopflag = false;
 							break;
 						}
-						  System.out.println(taal.getLocalisatie("NOG_AANMELDEN"));
+						System.out.println(taal.getLocalisatie("NOG_AANMELDEN"));
 						nogAanmelden = scanner.next().toLowerCase();
-						if(!(nogAanmelden.charAt(0) == 'y')) {
+						if (!(nogAanmelden.charAt(0) == 'y')) {
 							nextUser = false;
 							loopflag = false;
 						}
 					} catch (IllegalArgumentException e) {
-						  System.out.println(taal.getLocalisatie(e.getMessage()));
-						  System.out.println(taal.getLocalisatie("PROBEER_OPNIEUW"));
+						System.out.println(taal.getLocalisatie(e.getMessage()));
+						System.out.println(taal.getLocalisatie("PROBEER_OPNIEUW"));
 					}
 				}
 		}
-		// eerst alle spelers aanmelden en dan pas printen
-		domeinController.geefSpelers();
+		//Vertaling voor output moet nog moet nog aan vettaling passeren
+		for (String speler : domeinController.geefSpelers()) {
+			System.out.print(speler);
+		}
 	}
 }

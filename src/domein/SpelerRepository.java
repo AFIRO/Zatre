@@ -44,7 +44,7 @@ public class SpelerRepository {
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelers.contains(gekozenSpeler))) {
-            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");
+            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");  //exception wordt ook gesmeten wanneer speler geregistreerd word
         } else
             return spelers.get(spelers.indexOf(gekozenSpeler));
 
