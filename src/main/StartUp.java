@@ -15,6 +15,8 @@ public class StartUp {
         Scanner scanner = new Scanner(System.in);
         DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal(scanner));
         geefKeuzeMenu(scanner, domeinController);
+        
+        final Taal taal;
      
         //final Taal taal;
         //taal = domeinController.getTaal(); 
@@ -71,10 +73,11 @@ public class StartUp {
                     }
                 }
             } catch (InputMismatchException e) {
-                System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
+                
+				System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
                 scanner.next();
             }
-
+            	//eclipse raadde taal-variabele aan die geïnitialiseerd moest worden, klopt dit? SD
         }
     
     }
@@ -82,6 +85,7 @@ public class StartUp {
 
 
     public static void printMenu(DomeinController domeinController) {
+    	
         System.out.println(taal.getLocalisatie("STARTMENU_1"));
         System.out.println(taal.getLocalisatie("STARTMENU_2"));
         System.out.println(taal.getLocalisatie("STARTMENU_3"));
