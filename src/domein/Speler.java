@@ -20,6 +20,12 @@ public class Speler {
         this.geboortejaar = geboortejaar;
         setSpeelkansen(speelkansen);
     }
+    
+    /**
+     * UC1: controleren of gebruikersnaam niet leeg is of kleiner is dan 5 karakters
+     * exception gooien indien ze niet voldoende lang is
+     * @param gebruikersnaam
+     */
 
     private void controleerGebruikersnaam(String gebruikersnaam) {
         if (gebruikersnaam == null
@@ -27,6 +33,12 @@ public class Speler {
                 || gebruikersnaam.length() < 5)
             throw new IllegalArgumentException("GEBRUIKERSNAAM_TE_KORT");
     }
+    
+    /**
+     * UC1: controleren of geboortejaar kleiner is dan het huidige jaar, groter dan nul en speler dus minstens 6 jaar is
+     * exception gooien indien dit niet het geval is
+     * @param geboortejaar
+     */
 
     private void controleerGeboortejaar(int geboortejaar) {
         if (geboortejaar > LocalDate.now().getYear() || geboortejaar <= 0)
@@ -40,7 +52,12 @@ public class Speler {
     public int getSpeelkansen() {
         return speelkansen;
     }
-
+    
+    /**
+     * UC1&2: setter voor speelkansen, controleert of speelkansen niet negatief zijn
+     * exception gooien indien de speekansen negatief zijn
+     * @param speelkansen
+     */
 
     public void setSpeelkansen(int speelkansen) {
         if (speelkansen < 0)
@@ -58,6 +75,10 @@ public class Speler {
         return this.geboortejaar;
     }
 
+    /**
+     * NA TE VRAGEN AAN ANDREEAS
+     */
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,17 +87,24 @@ public class Speler {
         return getGeboortejaar() == speler.getGeboortejaar() && getGebruikersnaam().equals(speler.getGebruikersnaam());
     }
 
+    /**
+     * NA TE VRAGEN AAN ANDREEAS
+     */
+    
     @Override
     public int hashCode() {
         return Objects.hash(getGebruikersnaam(), getGeboortejaar());
     }
+    
+    /**
+     * UC2: overschrijft de standaard toString van de klasse Speler
+     */
 
 	@Override
 	public String toString() {
 		return String.format("%s: %s%n%s: %d%n%s: %d%n%n", "GEBRUIKERSNAAM", gebruikersnaam,
                 "GEBOORTEJAAR", geboortejaar,
                 "SPEELKANSEN", speelkansen);
-	}
-    
+	}   
     
 }

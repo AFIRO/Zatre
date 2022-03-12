@@ -52,14 +52,4 @@ public class DomeinController {
 	// aan te passen - List<Strings> door te geven. To String gebruiken in Speler ->
 	// door Lorenz
 
-	// mag weggehaald worden
-	private String geefVertaling(String key) {
-		return taal.getLocalisatie(key);
-	}
-
-	// te verwijderen van zodra geefSpelers list doorgeeft
-	public int geefAantalSpelersInSpel() {
-		return spelerRepository.geefSpelers().size();
-	}
-
 }

@@ -46,7 +46,7 @@ public class UC2 {
 						System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
 						System.out.println();
 
-						if (domeinController.geefAantalSpelersInSpel() == 4) {
+						if (domeinController.geefSpelers().size() == 4) {
 							nextUser = false;
 							loopflag = false;
 							break;
