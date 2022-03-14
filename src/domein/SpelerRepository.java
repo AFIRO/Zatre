@@ -18,26 +18,26 @@ public class SpelerRepository {
     
     /**
      * UC1: een instantie van speler creëren en doorgeven aan de Mapper om zo in de database te plaatsen
-     * @param gebruikernaam
-     * @param geboortejaar
+     * @param gebruikersnaam Gebruikersnaam van de speler
+     * @param geboortejaar Geboortejaar van de speler
      */
 
-    public void voegSpelerToe(String gebruikernaam, int geboortejaar) {
-        Speler speler = new Speler(gebruikernaam, geboortejaar);
+    public void voegSpelerToe(String gebruikersnaam, int geboortejaar) {
+        Speler speler = new Speler(gebruikersnaam, geboortejaar);
         spelerMapper.voegSpelerToe(speler);
     }
     
     /**
      * UC2: vraagt de Speler op via de Mapper-klasse en voegt deze toe aan lijst Spelers
      * controleert hierbij of er nog speelkansen zijn, of deze speler al in de lijst zit en of er nog niet teveel spelers zijn
-     * @param gebruikersnaam
-     * @param geboortejaar
+     * @param gebruikersnaam Gebruikersnaam van de speler
+     * @param geboortejaar Geboortejaar van de speler
      */
 
     public void vraagSpelerOp(String gebruikersnaam, int geboortejaar) {
         Speler opgevraagdeSpeler = spelerMapper.geefSpeler(gebruikersnaam,geboortejaar);
 
-        if (opgevraagdeSpeler.getSpeelkansen() < 0)
+        if (opgevraagdeSpeler.getSpeelkansen() < 1)
             throw new IllegalArgumentException("GEEN_SPEELKANSEN_MEER");
 
         if (spelers.contains(opgevraagdeSpeler))
@@ -51,7 +51,7 @@ public class SpelerRepository {
     
     /**
      * UC2: geeft de lijst van spelers terug
-     * @return
+     * @return de lijst van aangemeldde spelers
      */
 
     public List<Speler> geefSpelers() {
@@ -60,9 +60,9 @@ public class SpelerRepository {
 
     /**
      * UC2: controleert of gekozenSpeler toegevoegd werd aan lijst spelers en geeft speler terug
-     * @param gebruikersnaam
-     * @param geboortejaar
-     * @return
+     * @param gebruikersnaam Gebruikersnaam van de speler
+     * @param geboortejaar Geboortejaar van de speler
+     * @return de opgevraagde speler
      */
     
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
@@ -75,7 +75,7 @@ public class SpelerRepository {
     
     /**
      * UC2: geeft de nieuwe speelkansen door aan de mapper om aan te passen in de database
-     * @param speler
+     * @param speler Speler die moet worden geupdate
      */
 
     public void updateSpeler(Speler speler) {
@@ -86,7 +86,10 @@ public class SpelerRepository {
         } else
             throw new IllegalArgumentException(("SPELER_BESTAAT_NIET"));
     }
+
 }
+
+
 
 
 
