@@ -25,6 +25,7 @@ public class Speler {
      * UC1: controleren of gebruikersnaam niet leeg is of kleiner is dan 5 karakters
      * exception gooien indien ze niet voldoende lang is
      * @param gebruikersnaam Gebruikersnaam van speler
+     * @exception IllegalArgumentException indien gebruikersnaam te kort
      */
 
     private void controleerGebruikersnaam(String gebruikersnaam) {
@@ -38,6 +39,8 @@ public class Speler {
      * UC1: controleren of geboortejaar kleiner is dan het huidige jaar, groter dan nul en speler dus minstens 6 jaar is
      * exception gooien indien dit niet het geval is
      * @param geboortejaar Geboortejaar van speler
+     * @exception IllegalArgumentException indien geboortejaar hoger is an huidig jaar of negatief
+     * @exception IllegalArgumentException indien huidige jaar - geboortejaar lager is dan 6 (dus speler te jong)
      */
 
     private void controleerGeboortejaar(int geboortejaar) {
@@ -57,6 +60,7 @@ public class Speler {
      * UC1&2: setter voor speelkansen, controleert of speelkansen niet negatief zijn
      * exception gooien indien de speekansen negatief zijn
      * @param speelkansen speelkansen van speler
+     * @exception IllegalArgumentException indien negatieve speelkansen wordt geset
      */
 
     public void setSpeelkansen(int speelkansen) {
