@@ -4,12 +4,10 @@ import persistence.SpelerMapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class SpelerRepository {
     private final List<Speler> spelers;
-    private final SpelerMapper spelerMapper;
+    private SpelerMapper spelerMapper;
 
     public SpelerRepository() {
         spelerMapper = new SpelerMapper();
@@ -86,6 +84,8 @@ public class SpelerRepository {
         } else
             throw new IllegalArgumentException(("SPELER_BESTAAT_NIET"));
     }
+
+
 
 }
 

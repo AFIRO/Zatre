@@ -5,8 +5,7 @@ import domein.Speler;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+
 
 public class SpelerMapper {
     private static final String INSERT_SPELER = "INSERT INTO ID372560_SDProjectG101.Speler (gebruikersnaam, geboortejaar, speelkansen) VALUES (?, ?, ?)";
