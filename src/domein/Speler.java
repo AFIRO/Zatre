@@ -24,7 +24,7 @@ public class Speler {
     /**
      * UC1: controleren of gebruikersnaam niet leeg is of kleiner is dan 5 karakters
      * exception gooien indien ze niet voldoende lang is
-     * @param gebruikersnaam
+     * @param gebruikersnaam Gebruikersnaam van speler
      */
 
     private void controleerGebruikersnaam(String gebruikersnaam) {
@@ -37,7 +37,7 @@ public class Speler {
     /**
      * UC1: controleren of geboortejaar kleiner is dan het huidige jaar, groter dan nul en speler dus minstens 6 jaar is
      * exception gooien indien dit niet het geval is
-     * @param geboortejaar
+     * @param geboortejaar Geboortejaar van speler
      */
 
     private void controleerGeboortejaar(int geboortejaar) {
@@ -56,7 +56,7 @@ public class Speler {
     /**
      * UC1&2: setter voor speelkansen, controleert of speelkansen niet negatief zijn
      * exception gooien indien de speekansen negatief zijn
-     * @param speelkansen
+     * @param speelkansen speelkansen van speler
      */
 
     public void setSpeelkansen(int speelkansen) {
@@ -76,7 +76,7 @@ public class Speler {
     }
 
     /**
-     * NA TE VRAGEN AAN ANDREEAS
+     * UC1: overschrijft de equality regels voor spelers. Nieuwe regels checken op Gebruikersnaam en geboortejaar
      */
     
     @Override
@@ -88,7 +88,7 @@ public class Speler {
     }
 
     /**
-     * NA TE VRAGEN AAN ANDREEAS
+     * UC1: overschrijft de hashcode regels voor spelers. Nieuwe regels checken op Gebruikersnaam en geboortejaar
      */
     
     @Override

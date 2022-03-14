@@ -14,6 +14,13 @@ public class SpelerMapper {
     private static final String GET_SPELER = "SELECT * FROM ID372560_SDProjectG101.Speler WHERE gebruikersnaam = ? AND geboortejaar = ?";
     private static final String UPDATE_SPELER = "UPDATE ID372560_SDProjectG101.Speler SET speelkansen = ? WHERE gebruikersnaam = ? AND geboortejaar = ?";
 
+    /**
+     * UC1: voegt speler toe aan databasis.
+     * @param speler Speler om toe te voegen.
+     * @throws IllegalArgumentException indien de speler al bestaat.
+     */
+
+
     public void voegSpelerToe(Speler speler) {
 
         if (!checkOfSpelerAlBestaatInDatabase(speler)) {
@@ -33,6 +40,11 @@ public class SpelerMapper {
         } else
             throw new IllegalArgumentException("SPELER_BESTAAT_AL");
     }
+
+    /**
+     * UC1: haalt lijst van alle spelers op uit databasis
+     * @return Alle spelers uit databasis
+     */
 
     public List<Speler> geefSpelers() {
         List<Speler> spelers = new ArrayList<>();
@@ -56,6 +68,14 @@ public class SpelerMapper {
 
         return spelers;
     }
+
+    /**
+     * UC1: haalt een specifieke speler uit de databasis
+     * @param gebruikersnaam Gebruikersnaam van de speler
+     * @param geboortejaar Geboortejaar van de speler
+     * @return de gevonden speler
+     * @throws IllegalArgumentException indien de speler niet bestaat.
+     */
 
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
 
@@ -85,6 +105,11 @@ public class SpelerMapper {
         return speler;
     }
 
+    /**
+     * UC1: haalt een specifieke speler uit de databasis
+     * @param speler de te updaten speler
+     */
+
     public void updateSpeler(Speler speler) {
         try (
                 Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
@@ -99,6 +124,10 @@ public class SpelerMapper {
         }
     }
 
+    /**
+     * UC1: controleert of speler al bestaat in databasis om dubbele spelers te voorkomen
+     * @param speler Speler die moet nagekeken worden.
+     */
 
     public boolean checkOfSpelerAlBestaatInDatabase(Speler speler) {
 
