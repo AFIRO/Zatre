@@ -6,23 +6,25 @@ import java.util.List;
 
 public class Spel {
     private enum SpelStaat {IN_VOORBEREIDING, GESTART, GEDAAN, GECANCELED}
+
     private SpelStaat spelStaat;
     private final List<Speler> spelers;
+    private final Spelbord spelbord;
 
 
     public Spel() {
         this.spelers = new ArrayList<>();
         this.spelStaat = SpelStaat.IN_VOORBEREIDING;
-        maakBord();
+        this.spelbord = new Spelbord();
     }
 
-    public void voegSpelerToeAanSpel(Speler speler){
+    public void voegSpelerToeAanSpel(Speler speler) {
         if (spelers.contains(speler)) {
             throw new IllegalArgumentException("SPELER_AL_AANGEMELD");
         }
 
         if (speler.getSpeelkansen() < 1) {
-            throw  new IllegalArgumentException("GEEN_SPEELKANSEN_MEER");
+            throw new IllegalArgumentException("GEEN_SPEELKANSEN_MEER");
         }
 
         if (spelers.size() >= 4)
@@ -32,19 +34,19 @@ public class Spel {
     }
 
     public void startSpel() {
-        spelers.forEach((e)-> e.setSpeelkansen(e.getSpeelkansen()-1));
+        spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() - 1));
         bepaalVolgordeSpelers();
         this.spelStaat = SpelStaat.GESTART;
 
-        while (checkOfSpelNogBezig()){
-            for (Speler speler : spelers){
+        while (checkOfSpelNogBezig()) {
+            for (Speler speler : spelers) {
                 speelBeurt(speler);
                 if (this.spelStaat.equals(SpelStaat.GEDAAN) || this.spelStaat.equals(SpelStaat.GECANCELED))
                     break;
             }
-        if (this.spelStaat.equals(SpelStaat.GEDAAN))
-        berekenScore();
-        //registreerWinnaar(spelerMetHoogsteScore);
+            if (this.spelStaat.equals(SpelStaat.GEDAAN))
+                berekenScore();
+            //registreerWinnaar(spelerMetHoogsteScore);
         }
 
     }
@@ -54,16 +56,16 @@ public class Spel {
     }
 
     public Speler registreerWinnaar(Speler speler) {
-        speler.setSpeelkansen(speler.getSpeelkansen()+2);
+        speler.setSpeelkansen(speler.getSpeelkansen() + 2);
         return speler;
     }
 
-    private void cancelSpel(){
+    private void cancelSpel() {
         this.spelStaat = SpelStaat.GECANCELED;
-        spelers.forEach((e)-> e.setSpeelkansen(e.getSpeelkansen()+1));
+        spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
     }
 
-    private void speelBeurt(Speler speler){
+    private void speelBeurt(Speler speler) {
         throw new UnsupportedOperationException(); //todo
     }
 
@@ -71,7 +73,7 @@ public class Spel {
         throw new UnsupportedOperationException(); //todo
     }
 
-    private boolean checkOfSpelNogBezig(){
+    private boolean checkOfSpelNogBezig() {
         //if (gebeurtenis waardoorspel gedaan is){
         //  this.spelStaat = SpelStaat.GEDAAN;
         //  return false;
@@ -81,7 +83,4 @@ public class Spel {
         throw new UnsupportedOperationException(); //todo
     }
 
-    private void maakBord() {
-        throw new UnsupportedOperationException(); //todo
-    }
 }
