@@ -5,11 +5,12 @@ module zatre.g101 {
     exports util;
 
 
-    requires javafx.controls;
+   requires javafx.controls;
     requires java.sql;
-//    requires org.mockito;
-//    requires org.mockito.junit.jupiter;
-   // requires org.junit.jupiter.api;
+	requires javafx.graphics;
+  //requires org.mockito;
+   // requires org.mockito.junit.jupiter;
+  // requires org.junit.jupiter.api;
 
     opens gui;
 }
