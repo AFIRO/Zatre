@@ -32,12 +32,12 @@ public class LoginPaneel extends VBox {
 			
 			final Label naam = new Label(domeinController.getTaal().getLocalisatie("GEKENDE_NAAM"));
 			naamText = new TextField();
-			naamText.setPrefWidth(40);
+			naamText.setMaxWidth(200);
 			
 			
 			final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
 			geboortejaarText = new TextField();
-			geboortejaarText.setMaxWidth(50);
+			geboortejaarText.setMaxWidth(200);
 			
 			
 			Button btnSubmit = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));

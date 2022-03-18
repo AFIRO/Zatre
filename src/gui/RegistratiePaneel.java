@@ -32,11 +32,11 @@ public class RegistratiePaneel extends VBox {
 
 		final Label naam = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_NAAM"));
 		naamText = new TextField();
-		naamText.setPrefWidth(100);
+		naamText.setMaxWidth(200);
 
 		final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
 		geboortejaarText = new TextField();
-		geboortejaarText.setPrefWidth(100);
+		geboortejaarText.setMaxWidth(200);
 
 		Button btnSubmit = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
