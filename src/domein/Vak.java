@@ -10,7 +10,7 @@ public class Vak {
     public Vak(int kolom, int rij) {
         this.kolom = kolom;
         this.rij = rij;
-        this.kleur = Kleur.ZWART;
+        setKleur(Kleur.ZWART);
     }
 
     public int getKolom() {

@@ -15,6 +15,10 @@ public class RegistratiePaneel extends VBox {
 
 	private final MenuPaneel menuPaneel;
 	private final DomeinController domeinController;
+	String gebruikersnaam;
+	int geboortejaar;
+	TextField naamText;
+	TextField geboortejaarText;
 
 	public RegistratiePaneel(MenuPaneel menuPaneel, DomeinController domeinController) {
 		this.menuPaneel = menuPaneel;
@@ -25,21 +29,30 @@ public class RegistratiePaneel extends VBox {
 	private void voegComponentenToe() {
 		final Text header = new Text(domeinController.getTaal().getLocalisatie("REGISTRATIE"));
 		GridPane.setHalignment(header, HPos.LEFT);
+
 		final Label naam = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_NAAM"));
-		TextField naamText = new TextField();
-		
-		final Label geboortejaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_NAAM"));
-		TextField geboortejaarText = new TextField();
+		naamText = new TextField();
+		naamText.setPrefWidth(100);
+
+		final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
+		geboortejaarText = new TextField();
+		geboortejaarText.setPrefWidth(100);
+
 		Button btnSubmit = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
-	//	btnSubmit.setOnAction(this::submit();
+
+		btnSubmit.setOnAction(this::submit);
 		btnQuit.setOnAction(this::quit);
-		this.getChildren().addAll(header,naam,naamText, geboortejaar, geboortejaarText, btnSubmit,btnQuit);
+
+		this.getChildren().addAll(header, naam, naamText, jaar, geboortejaarText, btnSubmit, btnQuit);
 	}
-	
 
+	public void submit(ActionEvent actionEvent) {
+		this.gebruikersnaam = this.naamText.getText();
+		this.geboortejaar = Integer.parseInt(this.geboortejaarText.getText());
 
-	
+		domeinController.registreer(gebruikersnaam, geboortejaar);
+	}
 
 	public void quit(ActionEvent actionEvent) {
 		System.exit(0);
