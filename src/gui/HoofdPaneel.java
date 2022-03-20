@@ -20,7 +20,6 @@ public class HoofdPaneel extends BorderPane
     
     private void voegComponentenToe()
     {
-
         setCenter(taalPaneel);
 
     }

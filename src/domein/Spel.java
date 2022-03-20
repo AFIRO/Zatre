@@ -1,6 +1,5 @@
 package domein;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,28 +9,21 @@ public class Spel {
     private SpelStaat spelStaat;
     private final List<Speler> spelers;
     private final Spelbord spelbord;
+    private final List<Steen> stenen;
 
 
-    public Spel() {
-        this.spelers = new ArrayList<>();
+    public Spel(List<Speler> spelers) {
+        this.spelers = spelers;
         this.spelStaat = SpelStaat.IN_VOORBEREIDING;
         this.spelbord = new Spelbord();
+        this.stenen = genereerStenen();
     }
 
-    public void voegSpelerToeAanSpel(Speler speler) {
-        if (spelers.contains(speler)) {
-            throw new IllegalArgumentException("SPELER_AL_AANGEMELD");
-        }
+    private List<Steen> genereerStenen() {
 
-        if (speler.getSpeelkansen() < 1) {
-            throw new IllegalArgumentException("GEEN_SPEELKANSEN_MEER");
-        }
-
-        if (spelers.size() >= 4)
-            throw new IllegalArgumentException("MAX_AANTAL_SPELERS_BEREIKT");
-
-        spelers.add(speler);
+        return  null;
     }
+
 
     public void startSpel() {
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() - 1));
@@ -51,13 +43,12 @@ public class Spel {
 
     }
 
-    public void bepaalVolgordeSpelers() {
+    private void bepaalVolgordeSpelers() {
         Collections.shuffle(spelers);
     }
 
-    public Speler registreerWinnaar(Speler speler) {
+    private void registreerWinnaar(Speler speler) {
         speler.setSpeelkansen(speler.getSpeelkansen() + 2);
-        return speler;
     }
 
     private void cancelSpel() {

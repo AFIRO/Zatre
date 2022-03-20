@@ -8,6 +8,7 @@ import java.util.List;
 public class DomeinController {
 	private final SpelerRepository spelerRepository;
 	private final Taal taal;
+	private Spel spel;
 
 	// alle methodes die niet op DCD staan moeten private staan
 
@@ -51,5 +52,12 @@ public class DomeinController {
 	}
 	// aan te passen - List<Strings> door te geven. To String gebruiken in Speler ->
 	// door Lorenz
+
+	public void startSpel(List<Speler> spelers) {
+		this.spel = new Spel(spelerRepository.geefSpelers());
+		spel.startSpel();
+
+	}
+
 
 }

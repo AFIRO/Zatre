@@ -14,7 +14,6 @@ public class StartUp extends Application
     }
 
     public static void main(String... args)
-    {
-        Application.launch(StartUp.class, args);
+    { Application.launch(StartUp.class, args);
     }
 }

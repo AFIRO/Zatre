@@ -14,8 +14,8 @@ public class Spelbord {
         Map<String, Vak> vakjes = new HashMap<>();
 
         //genereer vierkant
-        for (int i = 0; i < 14; i++) {
-            for (int j = 0; j < 14; j++) {
+        for (int i = 0; i < 13; i++) {
+            for (int j = 0; j < 13; j++) {
                 vakjes.put(String.format("%d.%d", i+2, j+2), new Vak(i+2, j+2));
             }
 
@@ -26,6 +26,8 @@ public class Spelbord {
             if (vak.getKolom() == vak.getRij())
                 vak.setKleur(Vak.Kleur.WIT);
 
+            if (16-vak.getRij() == vak.getKolom())
+                vak.setKleur(Vak.Kleur.WIT);
         }
 
         //voeg buitenste vakjes toe

@@ -5,7 +5,7 @@ public class Vak {
     private final int kolom;
     private final int rij;
     private Kleur kleur;
-    private int score;
+    private Steen steen;
 
     public Vak(int kolom, int rij) {
         this.kolom = kolom;
@@ -25,15 +25,15 @@ public class Vak {
         return kleur;
     }
 
-    public int getScore() {
-        return score;
+    public Steen getSteen() {
+        return steen;
     }
 
     public void setKleur(Kleur kleur) {
         this.kleur = kleur;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setSteen(Steen steen) {
+        this.steen = steen;
     }
 }

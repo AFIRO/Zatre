@@ -2,8 +2,8 @@ package gui;
 
 import domein.DomeinController;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +19,7 @@ public class RegistratiePaneel extends VBox {
 	int geboortejaar;
 	TextField naamText;
 	TextField geboortejaarText;
+	Label LblFeedback;
 
 	public RegistratiePaneel(MenuPaneel menuPaneel, DomeinController domeinController) {
 		this.menuPaneel = menuPaneel;
@@ -44,14 +45,25 @@ public class RegistratiePaneel extends VBox {
 		btnSubmit.setOnAction(this::submit);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, naam, naamText, jaar, geboortejaarText, btnSubmit, btnQuit);
+		LblFeedback = new Label();
+		LblFeedback.setVisible(false);
+
+		this.getChildren().addAll(header, naam, naamText, jaar, geboortejaarText, btnSubmit, btnQuit, LblFeedback);
 	}
 
 	public void submit(ActionEvent actionEvent) {
 		this.gebruikersnaam = this.naamText.getText();
 		this.geboortejaar = Integer.parseInt(this.geboortejaarText.getText());
 
-		domeinController.registreer(gebruikersnaam, geboortejaar);
+	 try {
+		 domeinController.registreer(gebruikersnaam, geboortejaar);
+	 } catch (IllegalArgumentException e){
+		 LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+		 Alert alert = new Alert(Alert.AlertType.WARNING);
+		 alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+		 alert.showAndWait();
+		 LblFeedback.setVisible(true);
+	 }
 	}
 
 	public void quit(ActionEvent actionEvent) {

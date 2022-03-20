@@ -22,7 +22,6 @@ public class TaalPaneel extends VBox {
         GridPane.setHalignment(header, HPos.LEFT);
         Button BtnNederlands = new Button("Nederlands");
         Button BtnEngels = new Button("Engels");
-        BtnNederlands.setDefaultButton(true);
         BtnNederlands.setOnAction(this::setTaalNederlands);
         BtnEngels.setOnAction(this::setTaalEngels);
         this.getChildren().addAll(header,BtnNederlands,BtnEngels);
