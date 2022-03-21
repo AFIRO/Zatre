@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 
 public class RegistratiePaneel extends VBox {
 
+	private final HoofdPaneel hoofdPaneel;
 	private final MenuPaneel menuPaneel;
 	private final DomeinController domeinController;
 	String gebruikersnaam;
@@ -21,7 +22,8 @@ public class RegistratiePaneel extends VBox {
 	TextField geboortejaarText;
 	Label LblFeedback;
 
-	public RegistratiePaneel(MenuPaneel menuPaneel, DomeinController domeinController) {
+	public RegistratiePaneel(HoofdPaneel hoofdPaneel,MenuPaneel menuPaneel, DomeinController domeinController) {
+		this.hoofdPaneel = hoofdPaneel;
 		this.menuPaneel = menuPaneel;
 		this.domeinController = domeinController;
 		voegComponentenToe();
@@ -57,6 +59,11 @@ public class RegistratiePaneel extends VBox {
 
 	 try {
 		 domeinController.registreer(gebruikersnaam, geboortejaar);
+		 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		 alert.setContentText(domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"));
+		 alert.showAndWait();
+		 hoofdPaneel.setCenter(menuPaneel);
+		 
 	 } catch (IllegalArgumentException e){
 		 LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
 		 Alert alert = new Alert(Alert.AlertType.WARNING);

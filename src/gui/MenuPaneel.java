@@ -40,12 +40,12 @@ public class MenuPaneel extends VBox {
 	}
 
 	public void registreer(ActionEvent actionEvent) {
-		this.registratiePaneel = new RegistratiePaneel(this, domeinController);
+		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel,this, domeinController);
 		hoofdPaneel.setCenter(registratiePaneel);
 	}
 
 	public void login(ActionEvent actionEvent) {
-		this.loginPaneel = new LoginPaneel(this, domeinController);
+		this.loginPaneel = new LoginPaneel(hoofdPaneel,this, domeinController);
 		hoofdPaneel.setCenter(loginPaneel);
 
 	}

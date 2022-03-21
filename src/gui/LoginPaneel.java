@@ -1,9 +1,13 @@
 package gui;
 
+import java.util.Optional;
+
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -11,15 +15,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class LoginPaneel extends VBox {
+	
+	private final HoofdPaneel hoofdPaneel;
 	    private final MenuPaneel menuPaneel;
 	    private final DomeinController domeinController;
 	    String gebruikersnaam;
 	    int geboortejaar;
 	    TextField naamText;
 	    TextField geboortejaarText;
+	    Label LblFeedback;
 
-	    public LoginPaneel(MenuPaneel menuPaneel, DomeinController domeinController) {
-	        this.menuPaneel = menuPaneel;
+	    public LoginPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
+	       this.hoofdPaneel = hoofdPaneel;
+	    	this.menuPaneel = menuPaneel;
 	        this.domeinController = domeinController;
 	        voegComponentenToe();
 	    }
@@ -46,6 +54,9 @@ public class LoginPaneel extends VBox {
 			btnSubmit.setOnAction(this::submit);
 			btnQuit.setOnAction(this::quit);
 			
+			LblFeedback = new Label();
+			LblFeedback.setVisible(false);
+			
 			this.getChildren().addAll(header, naam, naamText, jaar, geboortejaarText, btnSubmit, btnQuit);
 		}
 	    
@@ -54,7 +65,36 @@ public class LoginPaneel extends VBox {
 	    	this.gebruikersnaam = this.naamText.getText();
 	    	this.geboortejaar = Integer.parseInt(this.geboortejaarText.getText());
 	    	
-			 domeinController.meldAan(gebruikersnaam, geboortejaar);
+			try { 
+				domeinController.meldAan(gebruikersnaam, geboortejaar);
+				 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+				 alert.setHeaderText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
+				 alert.setContentText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
+				
+				 Optional<ButtonType>result = alert.showAndWait();
+				 
+		
+				 if(result.get() == ButtonType.OK)
+					 hoofdPaneel.setCenter(this);
+				 
+				else if(result.get() == ButtonType.NO)
+					hoofdPaneel.setCenter(menuPaneel);
+				
+				
+				
+				 
+		
+				 
+			//	 hoofdPaneel.setCenter(menuPaneel);
+			
+			
+			}catch(IllegalArgumentException e) {
+				 LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+				 Alert alert = new Alert(Alert.AlertType.WARNING);
+				 alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+				 alert.showAndWait();
+				 LblFeedback.setVisible(true);
+			}
 		}
 
 	    
