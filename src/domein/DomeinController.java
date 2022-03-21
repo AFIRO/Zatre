@@ -44,14 +44,14 @@ public class DomeinController {
 
 		String output;
 		for (Speler speler : spelers) {
-			output = String.format("%s: %d%n", "SPELER", spelers.indexOf(speler)+1);
-			output += speler.toString();
+			output = String.format("%s %d%n", taal.getLocalisatie("SPELER"), spelers.indexOf(speler)+1);
+			output += String.format("%n%s %s%n%s %d%n%s %d%n%n", taal.getLocalisatie("GEBRUIKERSNAAM"), speler.getGebruikersnaam(),
+					taal.getLocalisatie("GEBOORTEJAAR"),speler.getGeboortejaar(),
+					taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
 			players.add(output);
 		}
 		return players;
 	}
-	// aan te passen - List<Strings> door te geven. To String gebruiken in Speler ->
-	// door Lorenz
 
 	public void startSpel(List<Speler> spelers) {
 		this.spel = new Spel(spelerRepository.geefSpelers());
