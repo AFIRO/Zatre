@@ -77,16 +77,8 @@ public class LoginPaneel extends VBox {
 				 if(result.get() == ButtonType.OK)
 					 hoofdPaneel.setCenter(this);
 				 
-				else if(result.get() == ButtonType.NO)
+				else if(result.get() == ButtonType.CANCEL)
 					hoofdPaneel.setCenter(menuPaneel);
-				
-				
-				
-				 
-		
-				 
-			//	 hoofdPaneel.setCenter(menuPaneel);
-			
 			
 			}catch(IllegalArgumentException e) {
 				 LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
