@@ -12,19 +12,20 @@ import util.Taal;
 
 public class TaalPaneel extends VBox {
     private final HoofdPaneel hoofdPaneel;
+
     public TaalPaneel(HoofdPaneel hoofdPaneel) {
         this.hoofdPaneel = hoofdPaneel;
         voegComponentenToe();
     }
 
     private void voegComponentenToe() {
-        Text header = new Text("Kies uw taal / Choose your language:");
-        GridPane.setHalignment(header, HPos.LEFT);
-        Button BtnNederlands = new Button("Nederlands");
-        Button BtnEngels = new Button("Engels");
-        BtnNederlands.setOnAction(this::setTaalNederlands);
-        BtnEngels.setOnAction(this::setTaalEngels);
-        this.getChildren().addAll(header,BtnNederlands,BtnEngels);
+        Text txtHeader = new Text("Kies uw taal / Choose your language:");
+        GridPane.setHalignment(txtHeader, HPos.LEFT);
+        Button btnNederlands = new Button("Nederlands");
+        Button btnEngels = new Button("Engels");
+        btnNederlands.setOnAction(this::setTaalNederlands);
+        btnEngels.setOnAction(this::setTaalEngels);
+        this.getChildren().addAll(txtHeader,btnNederlands,btnEngels);
     }
 
 

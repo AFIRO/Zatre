@@ -16,7 +16,6 @@ module zatre.g101 {
     requires org.junit.jupiter.engine;
     requires org.junit.platform.launcher;
 
-
     opens gui;
     opens testen;
 }

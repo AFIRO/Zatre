@@ -16,11 +16,11 @@ public class RegistratiePaneel extends VBox {
     private final HoofdPaneel hoofdPaneel;
     private final MenuPaneel menuPaneel;
     private final DomeinController domeinController;
-    String gebruikersnaam;
+    private String gebruikersnaam;
     int geboortejaar;
-    TextField naamText;
-    TextField geboortejaarText;
-    Label LblFeedback;
+    private TextField txtNaam;
+    private TextField txtGeboortejaar;
+    private Label lblFeedback;
 
     public RegistratiePaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.hoofdPaneel = hoofdPaneel;
@@ -34,12 +34,12 @@ public class RegistratiePaneel extends VBox {
         GridPane.setHalignment(header, HPos.LEFT);
 
         final Label naam = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_NAAM"));
-        naamText = new TextField();
-        naamText.setMaxWidth(200);
+        txtNaam = new TextField();
+        txtNaam.setMaxWidth(200);
 
         final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
-        geboortejaarText = new TextField();
-        geboortejaarText.setMaxWidth(200);
+        txtGeboortejaar = new TextField();
+        txtGeboortejaar.setMaxWidth(200);
 
         Button btnSubmit = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
         Button btnBack = new Button(domeinController.getTaal().getLocalisatie("TERUG"));
@@ -49,29 +49,29 @@ public class RegistratiePaneel extends VBox {
         btnBack.setOnAction(this::back);
         btnQuit.setOnAction(this::quit);
 
-        LblFeedback = new Label();
-        LblFeedback.setVisible(false);
+        lblFeedback = new Label();
+        lblFeedback.setVisible(false);
 
-        this.getChildren().addAll(header, naam, naamText, jaar, geboortejaarText, btnSubmit,btnBack, btnQuit, LblFeedback);
+        this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar, btnSubmit,btnBack, btnQuit, lblFeedback);
     }
 
     private void submit(ActionEvent actionEvent) {
-        this.gebruikersnaam = this.naamText.getText();
-        this.geboortejaar = Integer.parseInt(this.geboortejaarText.getText());
+        this.gebruikersnaam = this.txtNaam.getText();
+        this.geboortejaar = Integer.parseInt(this.txtGeboortejaar.getText());
 
         try {
             domeinController.registreer(gebruikersnaam, geboortejaar);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText(domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"));
+            alert.setContentText(String.format("%s%n%s",domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(gebruikersnaam,geboortejaar)));
             alert.showAndWait();
             hoofdPaneel.setCenter(menuPaneel);
 
         } catch (IllegalArgumentException e) {
-            LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+            lblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
             alert.showAndWait();
-            LblFeedback.setVisible(true);
+            lblFeedback.setVisible(true);
         }
     }
 

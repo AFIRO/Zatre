@@ -14,11 +14,10 @@ public class MenuPaneel extends VBox {
 	private RegistratiePaneel registratiePaneel;
 	private LoginPaneel loginPaneel;
 	private final DomeinController domeinController;
-	private Label LblLoggedOn;
+	private Label lblLoggedOn;
 
-	public MenuPaneel(HoofdPaneel hoofdPaneel, RegistratiePaneel registratiePaneel, LoginPaneel loginPaneel, DomeinController domeinController) {
+	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController) {
 		this.hoofdPaneel = hoofdPaneel;
-		this.registratiePaneel = registratiePaneel;
 		this.domeinController = domeinController;
 
 		voegComponentenToe();
@@ -33,13 +32,13 @@ public class MenuPaneel extends VBox {
 		Button BtnRegistreer = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3"));
 		Button BtnAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
-		LblLoggedOn = new Label();
+		lblLoggedOn = new Label();
 		BtnRegistreer.setOnAction(this::registreer);
 		BtnAanmelden.setOnAction(this::login);
-		LblLoggedOn.setVisible(false);
+		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, subheader, BtnRegistreer, BtnAanmelden, btnQuit, LblLoggedOn);
+		this.getChildren().addAll(header, subheader, BtnRegistreer, BtnAanmelden, btnQuit, lblLoggedOn);
 
 	}
 
@@ -56,8 +55,8 @@ public class MenuPaneel extends VBox {
 
 	public void updateLoggedOnPlayerLabel(){
 		if (!domeinController.geefSpelers().isEmpty()) {
-			this.LblLoggedOn.setVisible(true);
-			this.LblLoggedOn.setText(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_6")
+			this.lblLoggedOn.setVisible(true);
+			this.lblLoggedOn.setText(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_6")
 					+ String.format("%n%n")
 					+ String.join("", domeinController.geefSpelers()));
 		}

@@ -25,9 +25,8 @@ public class HoofdPaneel extends BorderPane
     }
 
     public void taalGekozen(){
-        this.menuPaneel = new MenuPaneel(this,registratiePaneel, loginPaneel ,domeinController);
+        this.menuPaneel = new MenuPaneel(this,domeinController);
         setCenter(menuPaneel);
-
     }
 
     public void setDomeincontroller(DomeinController domeinController) {
