@@ -10,15 +10,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class MenuPaneel extends VBox {
-	private final HoofdPaneel hoofdPaneel;
-	private RegistratiePaneel registratiePaneel;
-	private LoginPaneel loginPaneel;
 	private final DomeinController domeinController;
+	private final HoofdPaneel hoofdPaneel;
+	private final RegistratiePaneel registratiePaneel;
+	private final LoginPaneel loginPaneel;
 	private Label lblLoggedOn;
 
 	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController) {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
+		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel,this, domeinController);
+		this.loginPaneel = new LoginPaneel(hoofdPaneel,this, domeinController);
 
 		voegComponentenToe();
 	}
@@ -43,12 +45,10 @@ public class MenuPaneel extends VBox {
 	}
 
 	private void registreer(ActionEvent actionEvent) {
-		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel,this, domeinController);
 		hoofdPaneel.setCenter(registratiePaneel);
 	}
 
 	private void login(ActionEvent actionEvent) {
-		this.loginPaneel = new LoginPaneel(hoofdPaneel,this, domeinController);
 		hoofdPaneel.setCenter(loginPaneel);
 
 	}

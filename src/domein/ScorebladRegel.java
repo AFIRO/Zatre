@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.List;
+
 //Andreeas: afwijking DCD te bespreken na feedback. Voorstel voor code.
 public class ScorebladRegel {
     private final boolean dubbeleScore;
@@ -14,6 +16,11 @@ public class ScorebladRegel {
         this.tienPunten = tienPunten;
         this.elfPunten = elfPunten;
         this.twaalfPunten = twaalfPunten;
+
+        if (!List.of(3,4,5,6).contains(bonusPunten)) {
+            throw new IllegalArgumentException("ONGELDIGE_BONUSPUNTEN");
+        }
+
         this.bonusPunten = bonusPunten;
         this.scoreVoorRegel = berekenScore();
     }
@@ -38,6 +45,8 @@ public class ScorebladRegel {
 
         return score;
     }
+
+
 
     public int getScoreVoorRegel() {
         return scoreVoorRegel;

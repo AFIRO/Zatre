@@ -13,11 +13,9 @@ import javafx.scene.text.Text;
 
 public class RegistratiePaneel extends VBox {
 
+    private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
     private final MenuPaneel menuPaneel;
-    private final DomeinController domeinController;
-    private String gebruikersnaam;
-    int geboortejaar;
     private TextField txtNaam;
     private TextField txtGeboortejaar;
     private Label lblFeedback;
@@ -56,13 +54,13 @@ public class RegistratiePaneel extends VBox {
     }
 
     private void submit(ActionEvent actionEvent) {
-        this.gebruikersnaam = this.txtNaam.getText();
-        this.geboortejaar = Integer.parseInt(this.txtGeboortejaar.getText());
+        String gebruikersnaam = this.txtNaam.getText();
+        int geboortejaar = Integer.parseInt(this.txtGeboortejaar.getText());
 
         try {
             domeinController.registreer(gebruikersnaam, geboortejaar);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText(String.format("%s%n%s",domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(gebruikersnaam,geboortejaar)));
+            alert.setContentText(String.format("%s%n%s",domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(gebruikersnaam, geboortejaar)));
             alert.showAndWait();
             hoofdPaneel.setCenter(menuPaneel);
 
