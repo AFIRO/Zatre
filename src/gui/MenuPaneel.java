@@ -3,6 +3,7 @@ package gui;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -44,12 +45,20 @@ public class MenuPaneel extends VBox {
 		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnQuit, lblLoggedOn);
+		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten, btnQuit, lblLoggedOn);
 
 	}
 
 	private void starten(ActionEvent actionEvent) {
-		hoofdPaneel.setCenter(spelPaneel);
+		try {
+			domeinController.startSpel();
+			hoofdPaneel.setCenter(spelPaneel);
+		} catch (IllegalArgumentException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+			alert.showAndWait();
+		}
+
 	}
 
 	private void registreer(ActionEvent actionEvent) {
