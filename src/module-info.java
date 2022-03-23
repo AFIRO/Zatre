@@ -13,6 +13,10 @@ module zatre.g101 {
     requires org.junit.platform.commons;
     requires org.opentest4j;
     requires org.apiguardian.api;
+    requires org.junit.jupiter.engine;
+    requires org.junit.platform.launcher;
+
 
     opens gui;
+    opens testen;
 }

@@ -1,5 +1,6 @@
 package domein;
 
+import persistence.SpelerMapper;
 import util.Taal;
 
 import java.util.ArrayList;
@@ -10,33 +11,63 @@ public class DomeinController {
 	private final Taal taal;
 	private Spel spel;
 
-	// alle methodes die niet op DCD staan moeten private staan
-
 	public DomeinController(Taal taal) {
 		this.taal = taal;
-		this.spelerRepository = new SpelerRepository();
+		this.spelerRepository = new SpelerRepository(new SpelerMapper()); //Andreeas: Dependency injection nodig voor Mockito
 
 	}
+
+	/**
+	 * Alle UC's: getter voor localisatie
+	 */
 
 	public Taal getTaal() {
 		return taal;
 	}
 
-	public void registreer(String gebruikernaam, int geboortejaar) {
-		spelerRepository.voegSpelerToe(gebruikernaam, geboortejaar);
+	/**
+	 * UC1: speler registreren
+	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
+	 * @param gebruikersnaam Gebruikersnaam van speler
+	 * @param geboortejaar Geboortejaar van speler
+	 */
+
+	public void registreer(String gebruikersnaam, int geboortejaar) {
+		spelerRepository.voegSpelerToe(gebruikersnaam, geboortejaar);
 	}
+
+	/**
+	 * UC2: speler aanmelden
+	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
+	 * @param gebruikersnaam Gebruikersnaam van speler
+	 * @param geboortejaar Geboortejaar van speler
+	 */
 
 	public void meldAan(String gebruikersnaam, int geboortejaar) {
 		spelerRepository.vraagSpelerOp(gebruikersnaam, geboortejaar);
 	}
 
+	/**
+	 * UC1  en UC3: String representatie van een specifieke speler
+	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
+	 * @param gebruikersnaam Gebruikersnaam van speler
+	 * @param geboortejaar Geboortejaar van speler
+	 * @exception IllegalArgumentException indien gebruikersnaam te kort
+	 */
+
 	public String geefSpeler(String gebruikersnaam, int geboortejaar) { // opmaak string in UC
 		Speler speler = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar);
 
-		return String.format("%s: %s%n%s: %d%n", "GEBRUIKERSNAAM", speler.getGebruikersnaam(), "SPEELKANSEN",
-				speler.getSpeelkansen());
+		return String.format("%n%s %s%n%s %d%n%s %d%n%n", taal.getLocalisatie("GEBRUIKERSNAAM"), speler.getGebruikersnaam(),
+				taal.getLocalisatie("GEBOORTEJAAR"),speler.getGeboortejaar(),
+				taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
 	}
 
+	/**
+	 * UC2 en UC3: String representatie van alle aangemelde spelers een specifieke speler
+	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
+	 * @exception IllegalArgumentException indien gebruikersnaam te kort
+	 */
 	public List<String> geefSpelers() { // opmaak string in UC
 		List<Speler> spelers = spelerRepository.geefSpelers();
 
@@ -53,7 +84,12 @@ public class DomeinController {
 		return players;
 	}
 
-	public void startSpel(List<Speler> spelers) {
+
+	/**
+	 * UC3: Spel starten.
+	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
+	 */
+	public void startSpel() {
 		this.spel = new Spel(spelerRepository.geefSpelers());
 		spel.startSpel();
 

@@ -9,13 +9,13 @@ public class SpelerRepository {
     private final List<Speler> spelers;
     private SpelerMapper spelerMapper;
 
-    public SpelerRepository() {
-        spelerMapper = new SpelerMapper();
+    public SpelerRepository(SpelerMapper spelerMapper) { //Andreeas: Dependency injection nodig voor Mockito
+        this.spelerMapper = spelerMapper;
         spelers = new ArrayList<>();
     }
     
     /**
-     * UC1: een instantie van speler creëren en doorgeven aan de Mapper om zo in de database te plaatsen
+     * UC1: een instantie van speler creï¿½ren en doorgeven aan de Mapper om zo in de database te plaatsen
      * @param gebruikersnaam Gebruikersnaam van de speler
      * @param geboortejaar Geboortejaar van de speler
      */
