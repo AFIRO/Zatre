@@ -10,19 +10,14 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StartUp {
+	private final static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal(scanner));
-		final Taal taal = domeinController.getTaal();
-		geefKeuzeMenu(scanner, domeinController, taal);
-
-		// final Taal taal;
-		// taal = domeinController.getTaal();
-
+		DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal());
+		geefKeuzeMenu(domeinController);
 	}
 
-	private static Taal geefKeuzeMenuTaal(Scanner scanner) {
+	private static Taal geefKeuzeMenuTaal() {
 		boolean loopflag = true;
 		int taalKeuze = 0;
 		Taal taal = new Taal(Taal.Taalkeuze.NEDERLANDS);
@@ -34,7 +29,7 @@ public class StartUp {
 				try {
 					taalKeuze = scanner.nextInt();
 					if (taalKeuze < 1 || taalKeuze > 2) {
-						System.out.println("Probeer opnieuw / Try again.");
+						throw new IllegalArgumentException("Probeer opnieuw / Try again.");
 					}
 
 					if (taalKeuze == 2) {
@@ -46,6 +41,8 @@ public class StartUp {
 				} catch (InputMismatchException e) {
 					System.out.println("Probeer opnieuw / Try again.");
 					scanner.next();
+				} catch (IllegalArgumentException e){
+					System.out.println(e.getMessage());
 				}
 			}
 		}
@@ -53,49 +50,40 @@ public class StartUp {
 
 	}
 
-	private static void geefKeuzeMenu(Scanner scanner, DomeinController domeinController, Taal taal) {
+	private static void geefKeuzeMenu(DomeinController domeinController) {
 
 		boolean loopflag = true;
 		while (loopflag) {
 			try {
-				printMenu(domeinController, taal);
+				printMenu(domeinController);
 				int input = scanner.nextInt();
 				switch (input) {
-				case 1: {
-					new UC1(domeinController);
-					geefKeuzeMenu(scanner, domeinController, taal);
-				}
-				case 2: {
-					new UC2(domeinController);
-					geefKeuzeMenu(scanner, domeinController, taal);
-				}
-				case 0: {
-					loopflag = false;
-				}
+					case 1: {
+						new UC1(domeinController);
+						geefKeuzeMenu(domeinController);
+					}
+					case 2: {
+						new UC2(domeinController);
+						geefKeuzeMenu(domeinController);
+					}
+					case 0: {
+						loopflag = false;
+					}
 				}
 			} catch (InputMismatchException e) {
 
-				System.out.println(taal.getLocalisatie("CORRECTE_KEUZE"));
+				System.out.println(domeinController.getTaal().getLocalisatie("CORRECTE_KEUZE"));
 				scanner.next();
 			}
-			// eclipse raadde taal-variabele aan die ge�nitialiseerd moest worden, klopt
-			// dit? SD
-			// ik heb dit wat aangepast zodat de taal over de hele Startup klasse gekend is,
-			// zie parameters in methode en declaratie taal in main. LDB
 		}
 
 	}
+	public static void printMenu(DomeinController domeinController) {
 
-	public static void printMenu(DomeinController domeinController, Taal taal) {
-
-		System.out.println(taal.getLocalisatie("STARTMENU_1"));
-		System.out.println(taal.getLocalisatie("STARTMENU_2"));
-		System.out.println(taal.getLocalisatie("STARTMENU_3"));
-		System.out.println(taal.getLocalisatie("STARTMENU_4"));
-		System.out.println(taal.getLocalisatie("STARTMENU_5"));
+		System.out.println(domeinController.getTaal().getLocalisatie("STARTMENU_1"));
+		System.out.println(domeinController.getTaal().getLocalisatie("STARTMENU_2"));
+		System.out.println(domeinController.getTaal().getLocalisatie("STARTMENU_3"));
+		System.out.println(domeinController.getTaal().getLocalisatie("STARTMENU_4"));
+		System.out.println(domeinController.getTaal().getLocalisatie("STARTMENU_5"));
 	}
 }
-
-//foutieve taalkeuze, bij iets anders dan 1/2 taalkeuze blijven staan
-//bij registratie met goede leeftijd, blijft speler te jong staan
-//bij iedereen aangemeld en opnieuw aanmelden -> komen vast te zitten
