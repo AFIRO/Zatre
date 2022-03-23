@@ -51,7 +51,7 @@ public class Spel {
 
         while (checkOfSpelNogBezig()) {
             for (Speler speler : spelers) {
-                speelBeurt(speler);
+                //speelBeurt(speler);
                 checkOfSpelNogBezig();
                 if (this.spelStaat.equals(SpelStaat.GEDAAN) || this.spelStaat.equals(SpelStaat.GECANCELED))
                     break;
@@ -75,8 +75,9 @@ public class Spel {
         //navragen: het lijkt onlogisch om alle spelers te straffen voor een cancel.
     }
 
-    private void speelBeurt(Speler speler) {
-        throw new UnsupportedOperationException(); //todo
+
+    public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
+        //todo
     }
 
     private Speler bepaalWinnaar() {

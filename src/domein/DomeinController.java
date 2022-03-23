@@ -95,5 +95,9 @@ public class DomeinController {
 
 	}
 
+	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
+		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);
+	}
+
 
 }

@@ -14,6 +14,7 @@ public class MenuPaneel extends VBox {
 	private final HoofdPaneel hoofdPaneel;
 	private final RegistratiePaneel registratiePaneel;
 	private final LoginPaneel loginPaneel;
+	private final SpelPaneel spelPaneel;
 	private Label lblLoggedOn;
 
 	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController) {
@@ -21,6 +22,7 @@ public class MenuPaneel extends VBox {
 		this.domeinController = domeinController;
 		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel,this, domeinController);
 		this.loginPaneel = new LoginPaneel(hoofdPaneel,this, domeinController);
+		this.spelPaneel = new SpelPaneel(hoofdPaneel,this,domeinController);
 
 		voegComponentenToe();
 	}
@@ -31,17 +33,23 @@ public class MenuPaneel extends VBox {
 		GridPane.setHalignment(header, HPos.LEFT);
 		Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
 		GridPane.setHalignment(subheader, HPos.RIGHT);
-		Button BtnRegistreer = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3"));
-		Button BtnAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
+		Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3"));
+		Button btnAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
+		Button btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
 		lblLoggedOn = new Label();
-		BtnRegistreer.setOnAction(this::registreer);
-		BtnAanmelden.setOnAction(this::login);
+		btnRegistreer.setOnAction(this::registreer);
+		btnAanmelden.setOnAction(this::login);
+		btnSpelStarten.setOnAction(this::starten);
 		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, subheader, BtnRegistreer, BtnAanmelden, btnQuit, lblLoggedOn);
+		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnQuit, lblLoggedOn);
 
+	}
+
+	private void starten(ActionEvent actionEvent) {
+		hoofdPaneel.setCenter(spelPaneel);
 	}
 
 	private void registreer(ActionEvent actionEvent) {

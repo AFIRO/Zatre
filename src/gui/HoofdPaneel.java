@@ -9,8 +9,6 @@ public class HoofdPaneel extends BorderPane
     private DomeinController domeinController;
     private final TaalPaneel taalPaneel = new TaalPaneel(this);
     private MenuPaneel menuPaneel;
-    private RegistratiePaneel registratiePaneel;
-    private LoginPaneel loginPaneel;
 
 
     public HoofdPaneel()
