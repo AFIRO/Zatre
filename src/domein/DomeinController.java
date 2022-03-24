@@ -87,14 +87,20 @@ public class DomeinController {
 
 	/**
 	 * UC3: Spel starten.
-	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
+	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc) TESS: toch graag extra toelichting
 	 */
 	public void startSpel() {
 		this.spel = new Spel(spelerRepository.geefSpelers());
 		spel.startSpel();
 
 	}
-
+	/**
+	 * UC4: nog nader te bepalen na ontwerp UC3
+	 * @param gebruikersnaam
+	 * @param geboortejaar
+	 * @param vak
+	 * @param steen
+	 */
 	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
 		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);
 	}

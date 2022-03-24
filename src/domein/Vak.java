@@ -7,6 +7,11 @@ public class Vak {
     private Kleur kleur;
     private Steen steen;
 
+    /**
+     * UC3 constructor voor vak, kleur wordt standaard op zwart ingesteld
+     * @param kolom
+     * @param rij
+     */
     public Vak(int kolom, int rij) {
         this.kolom = kolom;
         this.rij = rij;
