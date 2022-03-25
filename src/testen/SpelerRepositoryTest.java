@@ -70,12 +70,12 @@ public class SpelerRepositoryTest {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler("Lorenz", 1988)).thenReturn(new Speler("Lorenz", 1988));
-        when(spelerMapper.geefSpeler("Sofie", 1984)).thenReturn(new Speler("Sofie", 1984));
+        when(spelerMapper.geefSpeler("Sofie", 1982)).thenReturn(new Speler("Sofie", 1982));
         when(spelerMapper.geefSpeler("TessT", 1992)).thenReturn(new Speler("TessT", 1992));
         when(spelerMapper.geefSpeler("Andreeas", 1990)).thenReturn(new Speler("Andreeas", 1990));
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
         spelerRepository.vraagSpelerOp("Lorenz", 1988);
-        spelerRepository.vraagSpelerOp("Sofie", 1984);
+        spelerRepository.vraagSpelerOp("Sofie", 1982);
         spelerRepository.vraagSpelerOp("TessT", 1992);
         spelerRepository.vraagSpelerOp("Andreeas", 1990);
 
@@ -128,11 +128,5 @@ public class SpelerRepositoryTest {
 
         assertThrows(IllegalArgumentException.class,()->spelerRepository.updateSpeler(testSpeler));
     }
-
-
-
-
-
-
 
 }
