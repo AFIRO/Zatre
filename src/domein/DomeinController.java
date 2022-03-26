@@ -94,6 +94,17 @@ public class DomeinController {
 		spel.startSpel();
 
 	}
+	
+	//uit te werken:
+	//public List<String> geefScorebladen() {
+	//	}
+	
+	//na te kijken
+	public String toonWinnaar() {
+		return String.format("%s%n%s", taal.getLocalisatie("WINNAAR"),
+				spel.toonWinnaar());
+	}
+	
 	/**
 	 * UC4: nog nader te bepalen na ontwerp UC3
 	 * @param gebruikersnaam
@@ -104,6 +115,8 @@ public class DomeinController {
 	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
 		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);
 	}
+	
+	
 
 
 }

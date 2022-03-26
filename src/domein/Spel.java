@@ -76,16 +76,16 @@ public class Spel {
         bepaalVolgordeSpelers();
         this.spelStaat = SpelStaat.GESTART;
 
-        while (checkOfSpelNogBezig()) { //Tess: ik zou graag methode naam aanpassen naar CheckNogStenen (puur omdat een gecanceld spel ook niet meer bezig is...)
+        while (checkStenenOver()) { 
             for (Speler speler : spelers) {
                 //speelBeurt(speler);
-                checkOfSpelNogBezig();
+            	checkStenenOver();
                 if (this.spelStaat.equals(SpelStaat.GEDAAN) || this.spelStaat.equals(SpelStaat.GECANCELED))
                     break;
             } //Tess: klopt dit? met breakstatement word tot nu toe enkel de speelbeurtloop gestopt en vervolgens wordt er in geval van gedaan de winnaar opgeroepen.
             //Wat als het spel gecanceld wordt? Moet hiervoor nog een optie toegevoegd worden? 
             if (this.spelStaat.equals(SpelStaat.GEDAAN))
-                registreerWinnaar(bepaalWinnaar());
+            	pasSpeelkansenWinnaarAan(bepaalWinnaar());
         }
     }
     /**
@@ -98,7 +98,7 @@ public class Spel {
      * UC3: speelkansen van winnende speler worden +2 toegevoegd
      * @param speler
      */
-    private void registreerWinnaar(Speler speler) {
+    private void pasSpeelkansenWinnaarAan(Speler speler) {
         speler.setSpeelkansen(speler.getSpeelkansen() + 2);
     }
     
@@ -144,7 +144,7 @@ public class Spel {
      * boolean wordt teruggegeven
      * @return
      */
-    private boolean checkOfSpelNogBezig() {
+    private boolean checkStenenOver() {
         if (stenen.isEmpty()) {
             this.spelStaat = SpelStaat.GEDAAN;
             return false;
