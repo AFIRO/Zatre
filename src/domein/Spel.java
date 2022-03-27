@@ -184,8 +184,8 @@ public class Spel {
      * UC3: methode om de winnaar weer te geven op einde van Spel. 
      * @return
      */
-    public Speler toonWinnaar(){
-        return bepaalWinnaar();
+    public String toonWinnaar(){
+        return bepaalWinnaar().getGebruikersnaam();
     }
 
 }
