@@ -9,7 +9,6 @@ public class Spel {
     private final List<Speler> spelers;
     private final Spelbord spelbord;
     private final List<Steen> stenen;
-    private final List<Scoreblad> scorebladen; //Tess: in constructor wordt een nieuw arralist gecreëerd hiervoor?
 
     /**
      * UC3: constructor van Spel
@@ -19,14 +18,13 @@ public class Spel {
      * een nieuw spelbord wordt gegenereerd
      * de stenen worden gegenereerd door middel van methode in deze klasse.
      * er wordt een arraylist ingesteld voor de scorebladen. 
-     * @param spelers
+     * @param spelers de lijst spelers die het spel gaan spelen.
      */
     public Spel(List<Speler> spelers) {
         this.spelers = spelers;
         this.spelStaat = SpelStaat.IN_VOORBEREIDING;
         this.spelbord = new Spelbord();
         this.stenen = genereerStenen();
-        this.scorebladen = new ArrayList<>();
     }
     
     /**
@@ -35,7 +33,7 @@ public class Spel {
      * Dit maakt een lijst van 121 stenen. 
      * Vervolgens worden deze door elkaar gegooid. 
      * De methode geeft de geshuffelde lijst stenen terug. 
-     * @return
+     * @return de lijst gegenereerde stenen
      */
     private List<Steen> genereerStenen() {
         ArrayList<Steen> stenen = new ArrayList<>();
@@ -69,9 +67,7 @@ public class Spel {
         if (spelers.size() < 2)
             throw new IllegalArgumentException("TE_WEINIG_SPELERS");
 
-        spelers.forEach((e) -> {
-            e.setSpeelkansen(e.getSpeelkansen() - 1);
-            scorebladen.add(new Scoreblad(e));});
+        spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() - 1));
 
         bepaalVolgordeSpelers();
         this.spelStaat = SpelStaat.GESTART;
@@ -96,7 +92,7 @@ public class Spel {
     }
     /**
      * UC3: speelkansen van winnende speler worden +2 toegevoegd
-     * @param speler
+     * @param speler de winnaar van het spel
      */
     private void pasSpeelkansenWinnaarAan(Speler speler) {
         speler.setSpeelkansen(speler.getSpeelkansen() + 2);
@@ -115,10 +111,10 @@ public class Spel {
 
     /**
      * UC4
-     * @param gebruikersnaam
-     * @param geboortejaar
-     * @param vak
-     * @param steen
+     * @param gebruikersnaam gebruikernaam van speler die beurt speelt
+     * @param geboortejaar geboortejaar van speler die beurt speelt
+     * @param vak vak waarop speler een tegel zet
+     * @param steen steen die speler op vak zet
      */
     public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
         //todo
@@ -127,13 +123,12 @@ public class Spel {
     /**
      * UC3: de lijst van scorebladen wordt overlopen met een stream
      * TESS: graag rest van de methode toelichten
-     * @return
+     * @return de winnaar van het spel
      */
     private Speler bepaalWinnaar() {
-        return scorebladen.stream()
-                .sorted(Comparator.comparing(Scoreblad::berekenScoreVanScoreblad))
-                .map(Scoreblad::getSpeler)
-                .findFirst()
+        return spelers.stream()
+                .sorted(Comparator.comparingInt((e)->e.getScoreblad().berekenScoreVanScoreblad()))
+                .reduce((first,second) -> second)
                 .get();
         //isPresent check irrelevant. Spel gaat nooit starten met minder dan twee spelers.
     }
@@ -142,7 +137,7 @@ public class Spel {
      * UC3: Controleert of er nog stenen zijn
      * indien niet wordt SpelStaat op gedaan gezet
      * boolean wordt teruggegeven
-     * @return
+     * @return boolean die voorstelt of er nog stenen speelbaar zijn
      */
     private boolean checkStenenOver() {
         if (stenen.isEmpty()) {
@@ -155,26 +150,18 @@ public class Spel {
     
     /**
      * UC3: geeft de scorebladen per speler
-     * TESS aan Andreeas: dit bevat heel veel zaken die we nog niet kennen, is er een eenvoudigere manier? Of kan je dit ons zeker goed toelichten?
-     * @param speler
-     * @return
+     * @param speler speler wiens scoreblad terug wordt gegeven
+     * @return gevraagde scoreblad
      */
     public Scoreblad geefScoreblad(Speler speler){
-        Optional<Scoreblad> mogelijkGevondenScoreblad = scorebladen.stream()
-                .filter((scoreblad)->scoreblad.getSpeler().equals(speler))
-                .findFirst();
-
-        if (mogelijkGevondenScoreblad.isPresent())
-            return mogelijkGevondenScoreblad.get();
-        else
-            throw new IllegalArgumentException("GEEN_SCOREBLAD");
+        return speler.getScoreblad();
     }
 
     /**
      * UC3: toont de score per Speler
      * TESS: opnieuw graag toelichting in kader van bovenstaande methode
-     * @param speler
-     * @return
+     * @param speler speler wiens score moet teruggeven worden
+     * @return score van speler
      */
     public int toonScore(Speler speler){
         return geefScoreblad(speler).berekenScoreVanScoreblad();
@@ -182,7 +169,7 @@ public class Spel {
     
     /**
      * UC3: methode om de winnaar weer te geven op einde van Spel. 
-     * @return
+     * @return de naam van de winnaar als string
      */
     public String toonWinnaar(){
         return bepaalWinnaar().getGebruikersnaam();

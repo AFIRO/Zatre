@@ -5,24 +5,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Scoreblad {
-    private final Speler speler;
-    private final List<ScorebladRegel> regels; //Andreeas: afwijking DCD te bespreken na feedback. Voorstel voor code.
+    private final List<ScorebladRegel> regels;
 
     /**
      * UC3: constructor van Scoreblad
-     * @param speler
      */
-    public Scoreblad(Speler speler) {
-        this.speler = speler;
+    public Scoreblad() {
         this.regels = new ArrayList<>();
     }
-    /**
-     * UC3: vraag speler op (via getter?) 
-     * Vraag Tess: waarom hier getter als methode? 
-     */
-    public Speler getSpeler() {
-        return speler;
-    }
+
     /**
      * UC3: getter: geeft de lijst van ScorebladRegel terug. 
      * (wat in principe gelijk is aan het volledige scoreblad per speler?) 
@@ -34,9 +25,8 @@ public class Scoreblad {
     }
     /**
      * UC3: Voegt een ScorebladRegel object toe aan de lijst regels. 
-     * @param scorebladRegel
+     * @param scorebladRegel de toe te voegen regel
      */
-    //Andreeas: afwijking DCD te bespreken na feedback. Voorstel voor code.
     public void voegRegelToeAanScoreblad(ScorebladRegel scorebladRegel) {
         if (Objects.nonNull(scorebladRegel))
             regels.add(scorebladRegel);
@@ -47,7 +37,6 @@ public class Scoreblad {
      * Hierdoor wordt de uiteindelijke som berekend. 
      * @return int score
      */
-    //Andreeas: afwijking DCD te bespreken na feedback. Voorstel voor code.
     public int berekenScoreVanScoreblad(){
         return regels.stream()
                 .map(ScorebladRegel::getScoreVoorRegel)

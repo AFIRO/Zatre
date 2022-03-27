@@ -8,6 +8,7 @@ public class Speler {
     private final String gebruikersnaam;
     private final int geboortejaar;
     private int speelkansen;
+    private final Scoreblad scoreblad;
 
     public Speler(String gebruikersnaam, int geboortejaar) {
         this(gebruikersnaam, geboortejaar, 5);
@@ -19,6 +20,7 @@ public class Speler {
         controleerGeboortejaar(geboortejaar);
         this.geboortejaar = geboortejaar;
         setSpeelkansen(speelkansen);
+        this.scoreblad = new Scoreblad();
     }
     
     /**
@@ -70,6 +72,9 @@ public class Speler {
         this.speelkansen = speelkansen;
     }
 
+    public Scoreblad getScoreblad() {
+        return scoreblad;
+    }
 
     public String getGebruikersnaam() {
         return this.gebruikersnaam;
