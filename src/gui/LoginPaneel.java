@@ -52,9 +52,11 @@ public class LoginPaneel extends VBox {
 			domeinController.meldAan(this.TxtNaam.getText(), Integer.parseInt(this.TxtGeboortejaar.getText()));
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
+			
 			if (domeinController.geefSpelers().size() >= 4) {
 				hoofdPaneel.setCenter(menuPaneel);
-			} else {
+			} 
+			else {
 				alert.setContentText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
 				Optional<ButtonType> result = alert.showAndWait();
 
