@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import java.util.Optional;
 
 public class LoginPaneel extends VBox {
-	
+
 	private final HoofdPaneel hoofdPaneel;
 	private final MenuPaneel menuPaneel;
 	private final DomeinController domeinController;
@@ -47,23 +47,28 @@ public class LoginPaneel extends VBox {
 	}
 
 	private void submit(ActionEvent actionEvent) {
+	
 		try {
 			domeinController.meldAan(this.TxtNaam.getText(), Integer.parseInt(this.TxtGeboortejaar.getText()));
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setHeaderText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
-			alert.setContentText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
-			Optional<ButtonType>result = alert.showAndWait();
-
-			if(result.get() == ButtonType.OK) {
-				menuPaneel.updateLoggedOnPlayerLabel();
-				TxtNaam.setText("");
-				TxtGeboortejaar.setText("");
-			}
-			else if(result.get() == ButtonType.CANCEL) {
-				menuPaneel.updateLoggedOnPlayerLabel();
+			if (domeinController.geefSpelers().size() >= 4) {
 				hoofdPaneel.setCenter(menuPaneel);
+			} else {
+				alert.setContentText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
+				Optional<ButtonType> result = alert.showAndWait();
+
+				if (result.get() == ButtonType.OK) {
+					menuPaneel.updateLoggedOnPlayerLabel();
+					TxtNaam.setText("");
+					TxtGeboortejaar.setText("");
+				} else if (result.get() == ButtonType.CANCEL) {
+					menuPaneel.updateLoggedOnPlayerLabel();
+					hoofdPaneel.setCenter(menuPaneel);
+				}
 			}
-		}catch(IllegalArgumentException e) {
+
+		} catch (IllegalArgumentException e) {
 			LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
