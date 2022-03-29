@@ -43,7 +43,7 @@ public class LoginPaneel extends VBox {
 		btnQuit.setOnAction(this::quit);
 		LblFeedback = new Label();
 		LblFeedback.setVisible(false);
-		this.getChildren().addAll(header, naam, TxtNaam, jaar, TxtGeboortejaar, btnSubmit, btnBack, btnQuit);
+		this.getChildren().addAll(header, naam, TxtNaam, jaar, TxtGeboortejaar, btnSubmit, btnBack, btnQuit,LblFeedback);
 	}
 
 	private void submit(ActionEvent actionEvent) {
@@ -54,6 +54,7 @@ public class LoginPaneel extends VBox {
 			LblFeedback.setVisible(true);
 
 			if (domeinController.geefSpelers().size() >= 4) {
+				menuPaneel.updateLoggedOnPlayerLabel();
 				hoofdPaneel.setCenter(menuPaneel);
 			} 
 			else {
