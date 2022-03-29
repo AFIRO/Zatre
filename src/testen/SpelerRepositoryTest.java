@@ -83,12 +83,27 @@ public class SpelerRepositoryTest {
     }
 
     @Test
+    @DisplayName("Geef aangemelde speler, happy flow")
+    public void geefAangemeldeSpeler_HappyFlow(){
+        Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
+
+        when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
+        spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
+
+        Speler teruggekeerdeSpeler = spelerRepository.geefAangemeldeSpeler(NAAM_TOEGELATEN,GEBOORTEJAAR_TOEGELATEN);
+
+        assertEquals(testSpeler.getGebruikersnaam(),teruggekeerdeSpeler.getGebruikersnaam());
+        assertEquals(testSpeler.getGeboortejaar(),teruggekeerdeSpeler.getGeboortejaar());
+        assertEquals(testSpeler.getSpeelkansen(),teruggekeerdeSpeler.getSpeelkansen());
+    }
+
+    @Test
     @DisplayName("Geef speler, happy flow")
     public void geefSpeler_HappyFlow(){
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
-        spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
+        when(spelerMapper.checkOfSpelerAlBestaatInDatabase(testSpeler)).thenReturn(true);
 
         Speler teruggekeerdeSpeler = spelerRepository.geefSpeler(NAAM_TOEGELATEN,GEBOORTEJAAR_TOEGELATEN);
 
@@ -98,9 +113,15 @@ public class SpelerRepositoryTest {
     }
 
     @Test
-    @DisplayName("Geef speler, niet aangemeld, exception")
-    public void geefSpeler_spelerNietAangemeld_exception(){
+    @DisplayName("Geef speler, bestaat niet, exception")
+    public void geefSpeler_BestaatNiet_exception(){
         assertThrows(IllegalArgumentException.class,()->spelerRepository.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+    }
+
+    @Test
+    @DisplayName("Geef speler, Niet Aangemeld, exception")
+    public void geefSpeler_NietAangemeld_exception(){
+        assertThrows(IllegalArgumentException.class,()->spelerRepository.geefAangemeldeSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
