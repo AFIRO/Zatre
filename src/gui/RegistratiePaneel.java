@@ -59,16 +59,15 @@ public class RegistratiePaneel extends VBox {
 
         try {
             domeinController.registreer(gebruikersnaam, geboortejaar);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText(String.format("%s%n%s",domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(gebruikersnaam, geboortejaar)));
-            alert.showAndWait();
-            hoofdPaneel.setCenter(menuPaneel);
+            txtNaam.setText("");
+            txtGeboortejaar.setText("");
+            lblFeedback.setText((String.format("%s%n%s",domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(gebruikersnaam, geboortejaar))));
+            lblFeedback.setVisible(true);
 
         } catch (IllegalArgumentException e) {
             lblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
-            alert.showAndWait();
+            txtNaam.setText("");
+            txtGeboortejaar.setText("");
             lblFeedback.setVisible(true);
         }
     }
