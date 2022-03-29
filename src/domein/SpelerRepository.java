@@ -65,11 +65,20 @@ public class SpelerRepository {
     
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
+        if (!(spelerMapper.checkOfSpelerAlBestaatInDatabase(gekozenSpeler))) {
+            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");  //exception wordt ook gesmeten wanneer speler geregistreerd wordt
+        } else
+            return spelerMapper.geefSpeler(gebruikersnaam,geboortejaar);
+    }
+
+    public Speler geefAangemeldeSpeler(String gebruikersnaam, int geboortejaar) {
+        Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelers.contains(gekozenSpeler))) {
             throw new IllegalArgumentException("SPELER_BESTAAT_NIET");  //exception wordt ook gesmeten wanneer speler geregistreerd wordt
         } else
             return spelers.get(spelers.indexOf(gekozenSpeler));
     }
+
     
     /**
      * UC2: geeft de nieuwe speelkansen door aan de mapper om aan te passen in de database

@@ -63,6 +63,14 @@ public class DomeinController {
 				taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
 	}
 
+	public String geefAangemeldeSpeler(String gebruikersnaam, int geboortejaar) { // opmaak string in UC
+		Speler speler = spelerRepository.geefAangemeldeSpeler(gebruikersnaam, geboortejaar);
+
+		return String.format("%n%s %s%n%s %d%n%s %d%n%n", taal.getLocalisatie("GEBRUIKERSNAAM"), speler.getGebruikersnaam(),
+				taal.getLocalisatie("GEBOORTEJAAR"),speler.getGeboortejaar(),
+				taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
+	}
+
 	/**
 	 * UC2 en UC3: String representatie van alle aangemelde spelers een specifieke speler
 	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
@@ -107,10 +115,10 @@ public class DomeinController {
 	
 	/**
 	 * UC4: nog nader te bepalen na ontwerp UC3
-	 * @param gebruikersnaam
-	 * @param geboortejaar
-	 * @param vak
-	 * @param steen
+	 * @param gebruikersnaam gebruikersnaam van de gebruiker
+	 * @param geboortejaar geboortejaar van de gebruiker
+	 * @param vak vak waarop gebruiker een steen op gaat leggen
+	 * @param steen steen die gebruiker gaat leggen
 	 */
 	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
 		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);

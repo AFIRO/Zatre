@@ -7,11 +7,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UC1 {
-	private final Scanner scanner;
+	private final Scanner scanner = new Scanner(System.in);
 	private final DomeinController domeinController;
 
 	public UC1(DomeinController domeinController) {
-		scanner = new Scanner(System.in);
 		this.domeinController = domeinController;
 		registreerSpelerInputMenu();
 	}
