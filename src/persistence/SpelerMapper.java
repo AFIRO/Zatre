@@ -14,7 +14,7 @@ public class SpelerMapper {
     private static final String UPDATE_SPELER = "UPDATE ID372560_SDProjectG101.Speler SET speelkansen = ? WHERE gebruikersnaam = ? AND geboortejaar = ?";
 
     /**
-     * UC1: voegt speler toe aan databasis.
+     * UC1: voegt speler toe aan databasis
      * @param speler Speler om toe te voegen.
      * @throws IllegalArgumentException indien de speler al bestaat.
      */
@@ -42,7 +42,7 @@ public class SpelerMapper {
 
     /**
      * UC1: haalt lijst van alle spelers op uit databasis
-     * @return Alle spelers uit databasis
+     * @return Alle spelers uit database
      */
 
     public List<Speler> geefSpelers() {

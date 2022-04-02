@@ -30,7 +30,7 @@ public class Speler {
      * @exception IllegalArgumentException indien gebruikersnaam te kort
      */
 
-    private void controleerGebruikersnaam(String gebruikersnaam) {
+    public void controleerGebruikersnaam(String gebruikersnaam) {
         if (gebruikersnaam == null
                 || gebruikersnaam.isBlank()
                 || gebruikersnaam.length() < 5)
@@ -45,7 +45,7 @@ public class Speler {
      * @exception IllegalArgumentException indien huidige jaar - geboortejaar lager is dan 6 (dus speler te jong)
      */
 
-    private void controleerGeboortejaar(int geboortejaar) {
+    public void controleerGeboortejaar(int geboortejaar) {
         if (geboortejaar > LocalDate.now().getYear() || geboortejaar <= 0)
             throw new IllegalArgumentException("ONGELDIG_GEBOORTEJAAR");
 

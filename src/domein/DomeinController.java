@@ -25,6 +25,12 @@ public class DomeinController {
 		return taal;
 	}
 
+	public Taal setTaal()
+	{
+		this.taal=taal;
+	} //Sofie: dit werd aangeraden in de feedback maar ik weet niet goed wat in de code moet
+	
+	
 	/**
 	 * UC1: speler registreren
 	 * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
@@ -92,6 +98,16 @@ public class DomeinController {
 		return players;
 	}
 
+	/**
+	 * UC2: tonen hoeveel spelers er in het spel zitten
+	 * @return aantalSpelersInSpel
+	 */
+	public int geefAantalSpelersInSpel()
+	{
+		int aantalSpelersInSpel = 0;
+		
+		return aantalSpelersInSpel;
+	} //Sofie: hier zit ik even vast, hoe je het aantal Spelers in een spel kan achterhalen
 
 	/**
 	 * UC3: Spel starten.
@@ -123,8 +139,5 @@ public class DomeinController {
 	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
 		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);
 	}
-	
-	
-
 
 }

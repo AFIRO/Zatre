@@ -48,6 +48,18 @@ public class SpelerRepository {
     }
     
     /**
+     * UC2: hierbij controleren we of de nieuwe speler uniek is
+     * @param speler
+     */
+    
+    public void controleerSpelerUniek(Speler speler)
+    {
+    	Speler speler1 = new Speler();
+    	if(speler1 == speler)
+    		throw new IllegalArgumentException("SPELER_BESTAAT_AL");
+    } //Sofie: poging gedaan, graag feedback :-)
+    
+    /**
      * UC2: geeft de lijst van spelers terug
      * @return de lijst van aangemeldde spelers
      */
@@ -71,6 +83,7 @@ public class SpelerRepository {
             return spelerMapper.geefSpeler(gebruikersnaam,geboortejaar);
     }
 
+    //Sofie: onderstaande methode staat niet in DCD? Hoort deze bij UC3?
     public Speler geefAangemeldeSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelers.contains(gekozenSpeler))) {

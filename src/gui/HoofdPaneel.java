@@ -7,14 +7,17 @@ import javafx.scene.layout.BorderPane;
 public class HoofdPaneel extends BorderPane
 {
     private DomeinController domeinController;
-    private final TaalPaneel taalPaneel = new TaalPaneel(this);
+    private final TaalPaneel taalPaneel;
     private MenuPaneel menuPaneel;
 
 
-    public HoofdPaneel()
+    public HoofdPaneel(DomeinController dc)
     {
+    	domeinController = dc;
+    	taalPaneel = new TaalPaneel(domeinController, this);
+    	
         voegComponentenToe();
-    }
+    } //Sofie: aangepast volgens feedback maar er komt rode lijn onder
     
     private void voegComponentenToe()
     {
