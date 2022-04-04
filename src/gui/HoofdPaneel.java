@@ -17,7 +17,7 @@ public class HoofdPaneel extends BorderPane
     	taalPaneel = new TaalPaneel(domeinController, this);
     	
         voegComponentenToe();
-    } //Sofie: aangepast volgens feedback maar er komt rode lijn onder
+    }
     
     private void voegComponentenToe()
     {

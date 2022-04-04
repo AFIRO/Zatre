@@ -8,11 +8,10 @@ import java.util.List;
 
 public class DomeinController {
 	private final SpelerRepository spelerRepository;
-	private final Taal taal;
+	private  Taal taal;
 	private Spel spel;
 
-	public DomeinController(Taal taal) {
-		this.taal = taal;
+	public DomeinController() {
 		this.spelerRepository = new SpelerRepository(new SpelerMapper()); //Andreeas: Dependency injection nodig voor Mockito
 
 	}
@@ -25,10 +24,10 @@ public class DomeinController {
 		return taal;
 	}
 
-	public Taal setTaal()
+	public void setTaal(Taal taal)
 	{
 		this.taal=taal;
-	} //Sofie: dit werd aangeraden in de feedback maar ik weet niet goed wat in de code moet
+	}
 	
 	
 	/**
@@ -104,10 +103,8 @@ public class DomeinController {
 	 */
 	public int geefAantalSpelersInSpel()
 	{
-		int aantalSpelersInSpel = 0;
-		
-		return aantalSpelersInSpel;
-	} //Sofie: hier zit ik even vast, hoe je het aantal Spelers in een spel kan achterhalen
+		return spelerRepository.geefSpelers().size();
+	}
 
 	/**
 	 * UC3: Spel starten.

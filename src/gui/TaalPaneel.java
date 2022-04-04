@@ -14,7 +14,7 @@ public class TaalPaneel extends VBox {
     private final HoofdPaneel hoofdPaneel;
     private DomeinController domeinController;
 
-    public TaalPaneel(DomeinController dc, HoofdPaneel hoofdPaneel) {
+    public TaalPaneel(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
         this.hoofdPaneel = hoofdPaneel;
         voegComponentenToe();
     }
@@ -31,13 +31,12 @@ public class TaalPaneel extends VBox {
 
 
     private void setTaalNederlands(ActionEvent actionEven) {
-        //hoofdPaneel.setDomeincontroller(new DomeinController(new Taal(Taal.Taalkeuze.NEDERLANDS)));
         domeinController.setTaal(new Taal(Taal.Taalkeuze.NEDERLANDS));
     	hoofdPaneel.taalGekozen();
 
     }
 
     private void setTaalEngels(ActionEvent actionEven) {
-        hoofdPaneel.setDomeincontroller(new DomeinController(new Taal(Taal.Taalkeuze.ENGELS)));
+        domeinController.setTaal(new Taal(Taal.Taalkeuze.ENGELS));
         hoofdPaneel.taalGekozen();    }
 }
