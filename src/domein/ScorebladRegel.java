@@ -2,7 +2,6 @@ package domein;
 
 import java.util.List;
 
-//Andreeas: afwijking DCD te bespreken na feedback. Voorstel voor code.
 public class ScorebladRegel {
     private final boolean dubbeleScore;
     private final boolean tienPunten;
@@ -13,35 +12,38 @@ public class ScorebladRegel {
 
     /**
      * UC3: constructor ScorebladRegel, om aan te geven welke punten er gehaald zijn gebruiken we een boolean per puntencategorie, 
-     * deze wordt doorgegeven als parameter.
-     * Tess: vraagje: het zal uiteindelijk spel zelf zijn die de punten als boolean doorgeeft? via scoreblad aan scorebladRegel? 
-     * ik veronderstel niet dat we kunnen spreken van overerving tussen Scoreblad en ScorebladRegel, 
-     * Moet er dan op het DCD nog een verbinding worden gemaakt tussen ScorebladRegel en Spel of tussen Scoreblad en Speler? 
-     * Graag hier extra aandacht voor want heb het zelf moeilijk om dit te begrijpen. 
-     * @param dubbeleScore
-     * @param tienPunten
-     * @param elfPunten
-     * @param twaalfPunten
-     * @param bonusPunten
+     * deze worden doorgegeven als parameter samen met de bonuspunten. Bij creatie wordt score berekend.
+     * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet verdubbeld worden omdat de steen op een wit vak stond.
+     * @param tienPunten boolean die bijhoudt of in die beurt de score 10 werd bereikt
+     * @param elfPunten boolean die bijhoudt of in die beurt de score 11 werd bereikt
+     * @param twaalfPunten boolean die bijhoudt of in die beurt de score 12 werd bereikt
+     * @param bonusPunten de bonuspunten voor die beurt.
      */
     public ScorebladRegel(boolean dubbeleScore, boolean tienPunten, boolean elfPunten, boolean twaalfPunten, int bonusPunten) {
         this.dubbeleScore = dubbeleScore;
         this.tienPunten = tienPunten;
         this.elfPunten = elfPunten;
         this.twaalfPunten = twaalfPunten;
-        //Tess: kan onderstaande uitgelegd worden, en helpt het eventueel om dit in een aparte methode te steken? zoals we gedaan hebben bij Speler? 
-        if (!List.of(3,4,5,6).contains(bonusPunten)) {
-            throw new IllegalArgumentException("ONGELDIGE_BONUSPUNTEN");
-        }
+
+        controleerOfBonusPuntenEenToegelatenWaardeHebben(bonusPunten);
 
         this.bonusPunten = bonusPunten;
         this.scoreVoorRegel = berekenScore();
     }
-    
+
+    /**
+     * UC3: methode die controleert of de bonuspunten een toegelaten waarde hebben van 3, 4, 5 of 6.
+     * @throws IllegalArgumentException indien de waarde niet toegelaten is.
+     */
+
+    private void controleerOfBonusPuntenEenToegelatenWaardeHebben(int bonusPunten) {
+        if (!List.of(3, 4, 5, 6).contains(bonusPunten))
+            throw new IllegalArgumentException("ONGELDIGE_BONUSPUNTEN");
+    }
+
     /**
      * UC3: methode berekent de Score op basis van de booleans
-     *  
-     * @return
+     * @return de berekende score op basis van interne gegevens van de regel.
      */
     private int berekenScore() {
         int score = 0;
@@ -66,8 +68,8 @@ public class ScorebladRegel {
 
 
     /**
-     * getter om score per regel op te vragen. 
-     * @return
+     * UC3: Getter om score per regel op te vragen.
+     * @return score per regel
      */
     public int getScoreVoorRegel() {
         return scoreVoorRegel;
