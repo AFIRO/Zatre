@@ -58,7 +58,7 @@ public class LoginPaneel extends VBox {
 				hoofdPaneel.setCenter(menuPaneel);
 			} 
 			else {
-				LblFeedback.setText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
+				LblFeedback.setText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN2"));
 				menuPaneel.updateLoggedOnPlayerLabel();
 				TxtNaam.setText("");
 				TxtGeboortejaar.setText("");
