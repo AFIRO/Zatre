@@ -41,7 +41,7 @@ public class SpelerRepository {
         if (spelers.contains(opgevraagdeSpeler))
             throw new IllegalArgumentException("SPELER_AL_AANGEMELD");
 
-        if (spelers.size() > 4)
+        if (spelers.size() > 3)
             throw new IllegalArgumentException("MAX_AANTAL_SPELERS_BEREIKT");
 
         spelers.add(opgevraagdeSpeler);
