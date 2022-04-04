@@ -49,7 +49,7 @@ public class MenuPaneel extends VBox {
 		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten, btnQuit, lblLoggedOn);
+		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten,btnKiesTaal, btnQuit, lblLoggedOn);
 
 	}
 
