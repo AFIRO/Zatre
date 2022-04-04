@@ -13,7 +13,8 @@ public class StartUp {
 	private final static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		DomeinController domeinController = new DomeinController(geefKeuzeMenuTaal());
+		DomeinController domeinController = new DomeinController();
+		domeinController.setTaal(geefKeuzeMenuTaal());
 		geefKeuzeMenu(domeinController);
 	}
 
