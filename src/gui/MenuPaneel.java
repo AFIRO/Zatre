@@ -16,11 +16,13 @@ public class MenuPaneel extends VBox {
 	private final RegistratiePaneel registratiePaneel;
 	private final LoginPaneel loginPaneel;
 	private final SpelPaneel spelPaneel;
+	private final TaalPaneel taalPaneel;
 	private Label lblLoggedOn;
 
-	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController) {
+	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController, TaalPaneel taalPaneel) {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
+		this.taalPaneel = taalPaneel;
 		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel,this, domeinController);
 		this.loginPaneel = new LoginPaneel(hoofdPaneel,this, domeinController);
 		this.spelPaneel = new SpelPaneel(hoofdPaneel,this,domeinController);
@@ -37,17 +39,20 @@ public class MenuPaneel extends VBox {
 		Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3"));
 		Button btnAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
 		Button btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
+		Button btnKiesTaal = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_8"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
 		lblLoggedOn = new Label();
 		btnRegistreer.setOnAction(this::registreer);
 		btnAanmelden.setOnAction(this::login);
 		btnSpelStarten.setOnAction(this::starten);
+		btnKiesTaal.setOnAction(this::kiesTaal);
 		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
 		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten, btnQuit, lblLoggedOn);
 
 	}
+
 
 	private void starten(ActionEvent actionEvent) {
 		try {
@@ -68,6 +73,10 @@ public class MenuPaneel extends VBox {
 	private void login(ActionEvent actionEvent) {
 		hoofdPaneel.setCenter(loginPaneel);
 
+	}
+
+	private void kiesTaal(ActionEvent actionEvent) {
+		hoofdPaneel.setCenter(taalPaneel);
 	}
 
 	public void updateLoggedOnPlayerLabel(){

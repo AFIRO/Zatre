@@ -11,9 +11,9 @@ public class HoofdPaneel extends BorderPane
     private MenuPaneel menuPaneel;
 
 
-    public HoofdPaneel(DomeinController dc)
+    public HoofdPaneel(DomeinController domeinController)
     {
-    	domeinController = dc;
+    	this.domeinController = domeinController;
     	taalPaneel = new TaalPaneel(domeinController, this);
     	
         voegComponentenToe();
@@ -26,7 +26,7 @@ public class HoofdPaneel extends BorderPane
     }
 
     public void taalGekozen(){
-        this.menuPaneel = new MenuPaneel(this,domeinController);
+        this.menuPaneel = new MenuPaneel(this,domeinController, new TaalPaneel(domeinController,this));
         setCenter(menuPaneel);
     }
 

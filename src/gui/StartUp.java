@@ -10,8 +10,8 @@ public class StartUp extends Application
     @Override
     public void start(Stage stage) 
     {
-    	DomeinController dc = new DomeinController();
-        Scene scene = new Scene(new HoofdPaneel(dc), 600, 400);
+        DomeinController domeinController = new DomeinController();
+        Scene scene = new Scene(new HoofdPaneel(domeinController), 600, 400);
         stage.setScene(scene);
         stage.show();
     }
