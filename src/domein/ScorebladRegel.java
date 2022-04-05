@@ -69,10 +69,10 @@ public class ScorebladRegel {
     @Override
     public String toString() {
 
-        String dubbeleScore = this.dubbeleScore ? "X" : " ";
-        String tienPunten = this.tienPunten ? "X" : " ";
-        String elfPunten = this.elfPunten ? "X" : " ";
-        String twaalfPunten = this.twaalfPunten ? "X" : " ";
+        String dubbeleScore = this.dubbeleScore ? "X" : "O";
+        String tienPunten = this.tienPunten ? "X" : "O";
+        String elfPunten = this.elfPunten ? "X" : "O";
+        String twaalfPunten = this.twaalfPunten ? "X" : "O";
 
         return dubbeleScore + " "
                 + tienPunten + " "

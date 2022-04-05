@@ -36,16 +36,16 @@ public class Scoreblad {
     public void voegRegelToeAanScoreblad(boolean dubbeleScore, boolean tienPunten, boolean elfPunten, boolean twaalfPunten) {
         int BonusPunten = 0;
 
-        if (this.regels.size()<= 4)
+        if (this.regels.size() < 4)
             BonusPunten = 3;
 
-        if (this.regels.size() > 4 &&this.regels.size()<= 8)
+        if (this.regels.size() >= 4 &&this.regels.size() < 8)
             BonusPunten = 4;
 
-        if (this.regels.size() > 8 &&this.regels.size()<= 12)
+        if (this.regels.size() >= 8 &&this.regels.size() < 12)
             BonusPunten = 5;
 
-        if (this.regels.size()> 12)
+        if (this.regels.size() >= 12)
             BonusPunten = 6;
 
         regels.add(new ScorebladRegel(dubbeleScore,tienPunten,elfPunten,twaalfPunten,BonusPunten));
