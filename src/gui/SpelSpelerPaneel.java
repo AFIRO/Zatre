@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class SpelSpelerPaneel extends VBox {
@@ -17,7 +18,20 @@ public class SpelSpelerPaneel extends VBox {
 	}
 
 	private void voegComponentenToe() {
-		// TODO Auto-generated method stub
+		Button btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
+		Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
+		
+		btnVraagSteentjes.setOnAction(this::vraagSteentjes);
+		btnCancelSpel.setOnAction(this::cancelSpel);
+		
+		this.getChildren().addAll(btnVraagSteentjes, btnCancelSpel);
+	}
+	
+	
+	private void vraagSteentjes() {
+		
+	}
+	private void cancelSpel() {
 		
 	}
 }

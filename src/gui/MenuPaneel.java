@@ -23,9 +23,12 @@ public class MenuPaneel extends VBox {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
 		this.taalPaneel = taalPaneel;
-		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel,this, domeinController);
-		this.loginPaneel = new LoginPaneel(hoofdPaneel,this, domeinController);
-		this.spelPaneel = new SpelPaneel(hoofdPaneel,this,domeinController);
+		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel, this, domeinController);
+		this.loginPaneel = new LoginPaneel(hoofdPaneel, this, domeinController);
+		this.spelPaneel = new SpelPaneel(hoofdPaneel, this, domeinController,
+				new SpelLogoPaneel(spelPaneel, domeinController), new SpelScorebladPaneel(spelPaneel, domeinController),
+				new SpelBordPaneel(spelPaneel, domeinController),
+				new SpelSpelerPaneel(spelPaneel, this, domeinController));
 
 		voegComponentenToe();
 	}
@@ -49,10 +52,10 @@ public class MenuPaneel extends VBox {
 		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten,btnKiesTaal, btnQuit, lblLoggedOn);
+		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten, btnKiesTaal, btnQuit,
+				lblLoggedOn);
 
 	}
-
 
 	private void starten(ActionEvent actionEvent) {
 		try {
@@ -79,12 +82,11 @@ public class MenuPaneel extends VBox {
 		hoofdPaneel.setCenter(taalPaneel);
 	}
 
-	public void updateLoggedOnPlayerLabel(){
+	public void updateLoggedOnPlayerLabel() {
 		if (!domeinController.geefSpelers().isEmpty()) {
 			this.lblLoggedOn.setVisible(true);
 			this.lblLoggedOn.setText(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_6")
-					+ String.format("%n%n")
-					+ String.join("", domeinController.geefSpelers()));
+					+ String.format("%n%n") + String.join("", domeinController.geefSpelers()));
 		}
 	}
 
