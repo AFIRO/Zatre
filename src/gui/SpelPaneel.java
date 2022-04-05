@@ -14,4 +14,6 @@ public class SpelPaneel extends GridPane {
         this.hoofdPaneel = hoofdPaneel;
         this.menuPaneel = menuPaneel;
     }
+    
+    
 }
