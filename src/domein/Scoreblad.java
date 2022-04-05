@@ -3,6 +3,7 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Scoreblad {
     private final List<ScorebladRegel> regels;
@@ -15,13 +16,14 @@ public class Scoreblad {
     }
 
     /**
-     * UC3: getter: geeft de lijst van ScorebladRegel terug. 
-     * (wat in principe gelijk is aan het volledige scoreblad per speler?) 
-     * Tess: kunnen we dan de naam niet anders vermelden? 
+     * UC3: geeft een lijst van String weergaves van de individuele regels terug voor gebruik in GUI.
+     * @return de lijst aan string weergaves.
      */
     
-    public List<ScorebladRegel> getRegels() {
-        return regels;
+    public List<String> getRegels() {
+        return regels.stream()
+                .map(ScorebladRegel::toString)
+                .collect(Collectors.toList());
     }
     /**
      * UC3: Voegt een ScorebladRegel object toe aan de lijst regels.

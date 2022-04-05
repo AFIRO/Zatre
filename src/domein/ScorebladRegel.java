@@ -66,6 +66,21 @@ public class ScorebladRegel {
         return score;
     }
 
+    @Override
+    public String toString() {
+
+        String dubbeleScore = this.dubbeleScore ? "X" : " ";
+        String tienPunten = this.tienPunten ? "X" : " ";
+        String elfPunten = this.elfPunten ? "X" : " ";
+        String twaalfPunten = this.twaalfPunten ? "X" : " ";
+
+        return dubbeleScore + " "
+                + tienPunten + " "
+                + elfPunten + " "
+                + twaalfPunten + " "
+                + bonusPunten + " "
+                + scoreVoorRegel;
+    }
 
     /**
      * UC3: Getter om score per regel op te vragen.
