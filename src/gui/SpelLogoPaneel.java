@@ -10,6 +10,12 @@ public class SpelLogoPaneel extends HBox {
 
 	public SpelLogoPaneel(SpelPaneel spelPaneel, DomeinController domeinController) {
 		this.domeinController = domeinController;
-		this.spelPaneel = spelPaneel;
+		this.spelPaneel = spelPaneel;  
+		voegComponentenToe();
+	}
+
+	private void voegComponentenToe() {
+		// TODO Auto-generated method stub
+		
 	}
 }

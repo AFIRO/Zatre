@@ -10,6 +10,12 @@ public class SpelBordPaneel extends GridPane{
 	public SpelBordPaneel(SpelPaneel spelPaneel, DomeinController domeinController) {
 		this.domeinController = domeinController;
 		this.spelPaneel = spelPaneel;
+		  voegComponentenToe();
+		
+	}
+
+	private void voegComponentenToe() {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -11,5 +11,11 @@ public class SpelScorebladPaneel extends VBox {
 	public SpelScorebladPaneel(SpelPaneel spelPaneel, DomeinController domeinController) {
 		this.domeinController = domeinController;
 		this.spelPaneel = spelPaneel;
+		  voegComponentenToe();
+	}
+
+	private void voegComponentenToe() {
+		// TODO Auto-generated method stub
+		
 	}
 }
