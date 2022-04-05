@@ -24,12 +24,29 @@ public class Scoreblad {
         return regels;
     }
     /**
-     * UC3: Voegt een ScorebladRegel object toe aan de lijst regels. 
-     * @param scorebladRegel de toe te voegen regel
+     * UC3: Voegt een ScorebladRegel object toe aan de lijst regels.
+     * Genereert bonuspunten op basis van aantal regel op scoreblad.
+     * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet verdubbeld worden omdat de steen op een wit vak stond.
+     * @param tienPunten boolean die bijhoudt of in die beurt de score 10 werd bereikt
+     * @param elfPunten boolean die bijhoudt of in die beurt de score 11 werd bereikt
+     * @param twaalfPunten boolean die bijhoudt of in die beurt de score 12 werd bereikt
      */
-    public void voegRegelToeAanScoreblad(ScorebladRegel scorebladRegel) {
-        if (Objects.nonNull(scorebladRegel))
-            regels.add(scorebladRegel);
+    public void voegRegelToeAanScoreblad(boolean dubbeleScore, boolean tienPunten, boolean elfPunten, boolean twaalfPunten) {
+        int BonusPunten = 0;
+
+        if (this.regels.size()<= 4)
+            BonusPunten = 3;
+
+        if (this.regels.size() > 4 &&this.regels.size()<= 8)
+            BonusPunten = 4;
+
+        if (this.regels.size() > 8 &&this.regels.size()<= 12)
+            BonusPunten = 5;
+
+        if (this.regels.size()> 12)
+            BonusPunten = 6;
+
+        regels.add(new ScorebladRegel(dubbeleScore,tienPunten,elfPunten,twaalfPunten,BonusPunten));
     }
     
     /**
