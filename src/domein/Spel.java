@@ -56,34 +56,27 @@ public class Spel {
      * UC3: startSpel methode
      * in de domeincontroller wordt eerst een constructor van Spel aangeroepen en vervolgens volgende methode toegepast. 
      * we gaan kijken of de lijst minimum 2 spelers bevat (het maximum wordt reeds getest in de repository)
-     * we gaan de speelkansen verminderen met -1 en er wordt een Scoreblad aangemaakt per Speler. 
-     * Gezien Speler scoreblad kent kan ook Spel dit nu aanmaken (NA TE VRAGEN OF DIT STATEMENT CORRECT IS)
+     * we gaan de speelkansen verminderen met -1
+     * Gezien Speler scoreblad kent kan ook Spel daar nu ook aan.
      * Vervolgens gaan we met bepaalVolgordeSpelers shuffelen en de SpelStaat op GESTART zetten
-     * checkOfSpelNogBezig (om te zetten van naam) controleert of er nog stenen zijn en nadien kijken we of de staat op gedaan of gecanceled staat. 
-     * indien ja, wordt het spel afgebroken. 
-     * Vervolgens wordt ingeval van einde spel de winnaar geregistreerd, bepaal winnaar wordt als parameter meegegeven omdat die de winnende speler bepaalt met returntype Speler.
      */
     public void startSpel() {
-        if (spelers.size() < 2)
-            throw new IllegalArgumentException("TE_WEINIG_SPELERS");
-
+        checkOfVoldoendeSpelersOmSpelTeStarten();
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() - 1));
-
         bepaalVolgordeSpelers();
         this.spelStaat = SpelStaat.GESTART;
-
-        while (checkStenenOver()) { 
-            for (Speler speler : spelers) {
-                //speelBeurt(speler);
-            	checkStenenOver();
-                if (this.spelStaat.equals(SpelStaat.GEDAAN) || this.spelStaat.equals(SpelStaat.GECANCELED))
-                    break;
-            } //Tess: klopt dit? met breakstatement word tot nu toe enkel de speelbeurtloop gestopt en vervolgens wordt er in geval van gedaan de winnaar opgeroepen.
-            //Wat als het spel gecanceld wordt? Moet hiervoor nog een optie toegevoegd worden? 
-            if (this.spelStaat.equals(SpelStaat.GEDAAN))
-            	pasSpeelkansenWinnaarAan(bepaalWinnaar());
-        }
     }
+
+    /**
+     * UC3: Checked of er voldoende spelers in spel zitten
+     * @throws IllegalArgumentException indien onvoldoende spelers
+     */
+
+    private void checkOfVoldoendeSpelersOmSpelTeStarten() {
+        if (spelers.size() < 2)
+            throw new IllegalArgumentException("TE_WEINIG_SPELERS");
+    }
+
     /**
      * UC3: methode om volgorde spelers willekeurig te zetten
      */
@@ -97,17 +90,7 @@ public class Spel {
     private void pasSpeelkansenWinnaarAan(Speler speler) {
         speler.setSpeelkansen(speler.getSpeelkansen() + 2);
     }
-    
-    /**
-     * UC3/4: wordt aangeroepen wanneer speler spel wil stoppen
-     * SpelStaat word ingesteld op gecanceled
-     * we kiezen ervoor om de spelers in dit geval hun speelkansen terug te geven. 
-     */
-    private void cancelSpel() {
-        this.spelStaat = SpelStaat.GECANCELED;
-        spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
-        //navragen: het lijkt onlogisch om alle spelers te straffen voor een cancel.
-    }
+
 
     /**
      * UC4
@@ -115,11 +98,97 @@ public class Spel {
      * @param geboortejaar geboortejaar van speler die beurt speelt
      * @param vak vak waarop speler een tegel zet
      * @param steen steen die speler op vak zet
+     * @return een lijst aan Strings die het scoreblad na het spelen van de beurt moeten voorstellen
      */
-    public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
-        //todo
+    public List<String> speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
+        checkOfSpelerInHetSpelZit(gebruikersnaam, geboortejaar);
+        Speler actieveSpeler = spelers.get(spelers.indexOf(new Speler(gebruikersnaam,Integer.parseInt(geboortejaar))));
+        Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(vak);
+        CheckOfVakjeLeegIs(vakWaaropSteenWerdGelegd);
+        vakWaaropSteenWerdGelegd.setSteen(new Steen(steen));
+        berekenScoreVoorGelegdeSteen(actieveSpeler, vakWaaropSteenWerdGelegd);
+        return actieveSpeler.getScoreblad().getRegels();
     }
-    
+
+    /**
+     * UC4: vraagt de naburige stenen van het vak, controleert of daar een steen op ligt en indien wel,
+     * berekent de totale score van de twee vakken. Indien 10, 11 of 12, wordt dit bijgehouden.
+     * Dit wordt dan doorgegeven aan het scoreblad voor berekening en opslag
+     * @param actieveSpeler speler die de beurt speelt
+     * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
+     */
+
+    private void berekenScoreVoorGelegdeSteen(Speler actieveSpeler, Vak vakWaaropSteenWerdGelegd) {
+        Map<String,String> naburigeStenen = vakWaaropSteenWerdGelegd.geefVakjesNaastVak();
+        boolean tienPunten = false;
+        boolean elfPunten = false;
+        boolean twaalfPunten = false;
+        for (String steenCoordinaat: naburigeStenen.values()) {
+            if (!steenCoordinaat.equals("bestaat niet")) {
+                Vak teCheckenVak = spelbord.getVakjes().get(steenCoordinaat);
+                if (Objects.nonNull(teCheckenVak.getSteen())) {
+                    int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde() + teCheckenVak.getSteen().getWaarde();
+                    switch (score) {
+                        case 10: tienPunten = true;
+                        case 11: elfPunten = true;
+                        case 12: twaalfPunten = true;
+                    }
+                }
+            }
+        }
+
+        actieveSpeler.getScoreblad().voegRegelToeAanScoreblad(
+                vakWaaropSteenWerdGelegd.getKleur().equals(Vak.Kleur.WIT),
+                tienPunten,
+                elfPunten,
+                twaalfPunten);
+
+    }
+
+    /**
+     * UC4: Checked of het speler in het spel zit of niet.
+     * @throws IllegalArgumentException indien speler niet in spel.
+     */
+
+    private void checkOfSpelerInHetSpelZit(String gebruikersnaam, String geboortejaar) {
+        if (!spelers.contains(new Speler(gebruikersnaam,Integer.parseInt(geboortejaar)))) {
+            throw new IllegalArgumentException("SPELER_ZIT_NIET_IN_SPEL");
+        }
+    }
+
+    /**
+     * UC4: Checked of het vakje leeg is opdat er een steen op kan gelegd worden
+     * @throws IllegalArgumentException indien vakje al een steen bevat.
+     */
+
+    private void CheckOfVakjeLeegIs(Vak vakWaaropSteenWerdGelegd) {
+        if (Objects.nonNull(vakWaaropSteenWerdGelegd.getSteen()))
+            throw new IllegalArgumentException("VAKJE_IS_NIET_LEEG");
+    }
+
+    /**
+     * UC4: sorteert de stenen in de zak, haalt er twee uit, verwijdert deze uit het zakje en geeft hun waarden terug.
+     * @return  int[] met daarin de waarden van de twee stenen op index 0 en 1.
+     */
+    public int[] haalSteenUitSteenzakjeEnGeefAanSpeler() {
+        if (checkOfErNogStenenInHetZakjeZijn()) {
+
+            Collections.shuffle(stenen);
+            Steen eersteSteen = stenen.get(0);
+            Steen tweedeSteen = stenen.get(1);
+            stenen.remove(1);
+            stenen.remove(0);
+
+            return new int[]{eersteSteen.getWaarde(), tweedeSteen.getWaarde()};
+        }
+
+        else {
+            pasSpeelkansenWinnaarAan(bepaalWinnaar());
+            return new int[]{0,0};
+        }
+
+    }
+
     /**
      * UC3: de lijst van scorebladen wordt overlopen met een stream
      * TESS: graag rest van de methode toelichten
@@ -139,7 +208,7 @@ public class Spel {
      * boolean wordt teruggegeven
      * @return boolean die voorstelt of er nog stenen speelbaar zijn
      */
-    private boolean checkStenenOver() {
+    private boolean checkOfErNogStenenInHetZakjeZijn() {
         if (stenen.isEmpty()) {
             this.spelStaat = SpelStaat.GEDAAN;
             return false;
@@ -169,10 +238,20 @@ public class Spel {
     
     /**
      * UC3: methode om de winnaar weer te geven op einde van Spel. 
-     * @return de naam van de winnaar als string
+     * @return de winnende speler
      */
-    public String toonWinnaar(){
-        return bepaalWinnaar().getGebruikersnaam();
+    public Speler toonWinnaar(){
+        return bepaalWinnaar();
     }
 
+    /**
+     * UC3/4: wordt aangeroepen wanneer speler spel wil stoppen
+     * SpelStaat word ingesteld op gecanceled
+     * we kiezen ervoor om de spelers in dit geval hun speelkansen terug te geven.
+     */
+
+    public void cancelSpel() {
+        this.spelStaat = SpelStaat.GECANCELED;
+        spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
+    }
 }

@@ -115,13 +115,8 @@ public class DomeinController {
 		spel.startSpel();
 
 	}
-	
-	//uit te werken:
-	//public List<String> geefScorebladen() {
-	//	}
-	
-	//na te kijken
-	public String toonWinnaar() {
+
+	private String toonWinnaar() {
 		return String.format("%s%n%s", taal.getLocalisatie("WINNAAR"),
 				spel.toonWinnaar());
 	}
@@ -135,6 +130,58 @@ public class DomeinController {
 	 */
 	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
 		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);
+	}
+
+
+	/**
+	 * UC4: vraagt aan spel voor twee willekeurige stenen uit het stenenzakje
+	 * @return  int[] met daarin de waarden van de twee stenen op index 0 en 1.
+	 */
+	public int[] haalSteenUitSteenzakjeEnGeefAanSpeler() {
+		return spel.haalSteenUitSteenzakjeEnGeefAanSpeler();
+	}
+
+	/**
+	 * UC4: genereert het laatste scoreblad waarop naam van de winnaar en diens scores staat.
+	 * Vervolgens worden de spelers weggeschreven naar de databasis en wordt de repository gewiped voor volgend spel.
+	 * Deze methode wordt enkel aangeroepen indien de GUI de steentjes array [0,0] krijgt. Het spel is dan gedaan.
+	 * @return  laatste scoreblad
+	 */
+	public List<String> EindigSpel() {
+		List<String> laatsteScorebladOmTeTonen = new ArrayList<>();
+		laatsteScorebladOmTeTonen.add(toonWinnaar());
+		laatsteScorebladOmTeTonen.addAll(spel.toonWinnaar().getScoreblad().getRegels());
+		updateSpelersInDatabaseNaSpel();
+		resetRepositoryVoorNieuwSpel();
+		return laatsteScorebladOmTeTonen;
+	}
+
+	/**
+	 * UC3: laat een speler toe om het spel te cancelen. Alle spelers krijgen hun gebruikte speelkans terug.
+	 * Vervolgens worden de spelers geupdate in de database en wordt de repository gewiped als voorbereiding op een nieuw spel.
+	 */
+	public void cancelSpel() {
+		spel.cancelSpel();
+		updateSpelersInDatabaseNaSpel();
+		resetRepositoryVoorNieuwSpel();
+	}
+
+
+	/**
+	 * UC3: schrijft de staat van de spelers na spel terug naar de databasis
+	 * wordt de repository gewiped als voorbereiding op een nieuw spel.
+	 */
+	private void updateSpelersInDatabaseNaSpel() {
+		for (Speler speler: spelerRepository.geefSpelers())
+			spelerRepository.updateSpeler(speler);
+	}
+
+	/**
+	 * UC3: wiped de repository gewiped als voorbereiding op een nieuw spel.
+	 */
+
+	private void resetRepositoryVoorNieuwSpel() {
+		spelerRepository.geefSpelers().removeAll(spelerRepository.geefSpelers());
 	}
 
 }

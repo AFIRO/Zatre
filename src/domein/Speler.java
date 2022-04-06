@@ -84,6 +84,8 @@ public class Speler {
         return this.geboortejaar;
     }
 
+
+
     /**
      * UC1: overschrijft de equality regels voor spelers. Nieuwe regels checken op Gebruikersnaam en geboortejaar
      */
