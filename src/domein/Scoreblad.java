@@ -62,4 +62,53 @@ public class Scoreblad {
                 .reduce(0, Integer::sum);
     }
 
+    /**
+     * UC4: Genereer een regel met de scores voor deze ronde.
+     * @param puntenArraysVoorAlleZetten array list die de scores bevat van de ronde
+     */
+
+    public void voegRegelsToeAanScoreblad(ArrayList<Boolean[]> puntenArraysVoorAlleZetten) {
+        int dubbleScoreCounter = 0;
+        //controleer of de laatse lijn in de regel een dubbele score regel is genereert vanuit een vorige dubbele score regel.
+        // Deze wordt dan gebruikt voor deze ronde
+        if(!regels.isEmpty() && regels.get(regels.size()-1).isDubbeleScore() && regels.get(regels.size()-1).getScoreVoorRegel()==0) {
+            ScorebladRegel vorigeRegelMetDubbeleBonus = regels.get(regels.size() - 1);
+            //ga door alle scores genereert in de ronde en pas die regel aan
+            for (Boolean[] zet : puntenArraysVoorAlleZetten) {
+                VoegExtraKruisjesToeAanRegel(vorigeRegelMetDubbeleBonus, zet);
+            }
+        } else {
+            //controleer in de huidige zetten of we een dubbele score ronde hebben
+            boolean isDubbeleScoreRegel = false;
+            //controleer of er meerdere dubbele scores zijn verdiend.
+            for (Boolean[] zet : puntenArraysVoorAlleZetten) {
+                if (zet[0]) {
+                    isDubbeleScoreRegel = true;
+                    dubbleScoreCounter++;
+                }
+            }
+            //maak de nieuwe regel aan met correcte dubbele score boost
+            voegRegelToeAanScoreblad(isDubbeleScoreRegel, false, false, false);
+            ScorebladRegel actieveRegel = regels.get(regels.size() - 1);
+            //pas deze nieuwe regel aan met de gevonden scores
+            for (Boolean[] zet : puntenArraysVoorAlleZetten) {
+                VoegExtraKruisjesToeAanRegel(actieveRegel, zet);
+            }
+        }
+        //genereer een extra dubbele score regel als bonus
+        if (dubbleScoreCounter>1)
+            voegRegelToeAanScoreblad(true,false,false,false);
+
+    }
+
+    /**
+     * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
+     * @param aanTePassenRegel de aan te passen regel
+     * @param zet Array die de resultaten van de zet bevat
+     */
+
+    private void VoegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, Boolean[] zet) {
+        aanTePassenRegel.pasRegelAanMetVerdereZetten(zet[1],zet[2],zet[3]);
+
+    }
 }

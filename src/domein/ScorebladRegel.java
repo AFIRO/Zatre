@@ -1,12 +1,13 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScorebladRegel {
     private final boolean dubbeleScore;
-    private final boolean tienPunten;
-    private final boolean elfPunten;
-    private final boolean twaalfPunten;
+    private final ArrayList<Boolean> tienPunten = new ArrayList<>();
+    private final ArrayList<Boolean> elfPunten = new ArrayList<>();
+    private final ArrayList<Boolean> twaalfPunten = new ArrayList<>();
     private final int bonusPunten;
     private final int scoreVoorRegel;
 
@@ -14,16 +15,16 @@ public class ScorebladRegel {
      * UC3: constructor ScorebladRegel, om aan te geven welke punten er gehaald zijn gebruiken we een boolean per puntencategorie, 
      * deze worden doorgegeven als parameter samen met de bonuspunten. Bij creatie wordt score berekend.
      * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet verdubbeld worden omdat de steen op een wit vak stond.
-     * @param tienPunten boolean die bijhoudt of in die beurt de score 10 werd bereikt
-     * @param elfPunten boolean die bijhoudt of in die beurt de score 11 werd bereikt
-     * @param twaalfPunten boolean die bijhoudt of in die beurt de score 12 werd bereikt
+     * @param tienPunten boolean die bijhoudt of in die zet de score 10 werd bereikt
+     * @param elfPunten boolean die bijhoudt of in die zet de score 11 werd bereikt
+     * @param twaalfPunten boolean die bijhoudt of in die zet de score 12 werd bereikt
      * @param bonusPunten de bonuspunten voor die beurt.
      */
     public ScorebladRegel(boolean dubbeleScore, boolean tienPunten, boolean elfPunten, boolean twaalfPunten, int bonusPunten) {
         this.dubbeleScore = dubbeleScore;
-        this.tienPunten = tienPunten;
-        this.elfPunten = elfPunten;
-        this.twaalfPunten = twaalfPunten;
+        this.tienPunten.add(tienPunten);
+        this.elfPunten.add(elfPunten);
+        this.twaalfPunten.add(twaalfPunten);
 
         controleerOfBonusPuntenEenToegelatenWaardeHebben(bonusPunten);
 
@@ -48,16 +49,22 @@ public class ScorebladRegel {
     private int berekenScore() {
         int score = 0;
 
-        if (tienPunten)
-            score+= 1;
+        for (Boolean tienpunten: this.tienPunten)
+            if (tienpunten){
+                score+= 1;
+            }
 
-        if (elfPunten)
-            score+= 2;
+        for (Boolean elfpunten: this.elfPunten)
+            if (elfpunten){
+                score+= 2;
+            }
 
-        if (twaalfPunten)
-            score+= 4;
+        for (Boolean twaalfpunten: this.elfPunten)
+            if (twaalfpunten){
+                score+= 4;
+            }
 
-        if (tienPunten && elfPunten && twaalfPunten)
+        if (tienPunten.contains(Boolean.TRUE) && elfPunten.contains(Boolean.TRUE) && twaalfPunten.contains(Boolean.TRUE))
             score+= bonusPunten;
 
         if (dubbeleScore)
@@ -66,18 +73,39 @@ public class ScorebladRegel {
         return score;
     }
 
+    /**
+     * UC3: genereert een passende toString op basis van de inhoud van de regel
+     * @return string weergave van de regel
+     */
+
     @Override
     public String toString() {
 
         String dubbeleScore = this.dubbeleScore ? "X" : "O";
-        String tienPunten = this.tienPunten ? "X" : "O";
-        String elfPunten = this.elfPunten ? "X" : "O";
-        String twaalfPunten = this.twaalfPunten ? "X" : "O";
+        String tienPuntenString = "";
+        String elfPuntenString = "";
+        String twaalfPuntenString = "";
+
+        for (Boolean tienpunten: this.tienPunten)
+            if (tienpunten){
+                tienPuntenString = tienPuntenString.concat("X");
+            }
+
+        for (Boolean elfpunten: this.elfPunten)
+            if (elfpunten){
+                elfPuntenString = elfPuntenString.concat("X");
+            }
+
+        for (Boolean twaalfpunten: this.elfPunten)
+            if (twaalfpunten){
+                twaalfPuntenString = twaalfPuntenString.concat("X");
+            }
+
 
         return dubbeleScore + " "
-                + tienPunten + " "
-                + elfPunten + " "
-                + twaalfPunten + " "
+                + tienPuntenString + " "
+                + elfPuntenString + " "
+                + twaalfPuntenString + " "
                 + bonusPunten + " "
                 + scoreVoorRegel;
     }
@@ -88,5 +116,26 @@ public class ScorebladRegel {
      */
     public int getScoreVoorRegel() {
         return scoreVoorRegel;
+    }
+
+
+    /**
+     * UC4: Getter om te checken of dit een bonus regel is of niet.
+     * @return of dit een bonusregel is
+     */
+    public boolean isDubbeleScore() {
+        return dubbeleScore;
+    }
+
+    /**
+     * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
+     * @param tienPunten boolean die bijhoudt of in die zet de score 10 werd bereikt
+     * @param elfPunten boolean die bijhoudt of in die zet de score 11 werd bereikt
+     * @param twaalfPunten boolean die bijhoudt of in die zet de score 12 werd bereikt
+     */
+    public void pasRegelAanMetVerdereZetten(boolean tienPunten, boolean elfPunten, boolean twaalfPunten){
+        this.tienPunten.add(tienPunten);
+        this.elfPunten.add(elfPunten);
+        this.twaalfPunten.add(twaalfPunten);
     }
 }

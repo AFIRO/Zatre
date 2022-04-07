@@ -125,11 +125,10 @@ public class DomeinController {
 	 * UC4: nog nader te bepalen na ontwerp UC3
 	 * @param gebruikersnaam gebruikersnaam van de gebruiker
 	 * @param geboortejaar geboortejaar van de gebruiker
-	 * @param vak vak waarop gebruiker een steen op gaat leggen
-	 * @param steen steen die gebruiker gaat leggen
+	 * @param zetten de uit te voeren zetten.
 	 */
-	public void speelBeurt(String gebruikersnaam, String geboortejaar, String vak, int steen) {
-		spel.speelBeurt(gebruikersnaam, geboortejaar,vak, steen);
+	public void speelBeurt(String gebruikersnaam, String geboortejaar, String[] zetten) {
+		spel.speelBeurt(gebruikersnaam, geboortejaar,zetten);
 	}
 
 
@@ -138,7 +137,23 @@ public class DomeinController {
 	 * @return  int[] met daarin de waarden van de twee stenen op index 0 en 1.
 	 */
 	public int[] haalSteenUitSteenzakjeEnGeefAanSpeler() {
-		return spel.haalSteenUitSteenzakjeEnGeefAanSpeler();
+		return spel.haalTweeStenenUitSteenzakjeEnGeefAanSpeler();
+	}
+
+	/**
+	 * UC4: vraagt aan spel voor drie willekeurige stenen uit het stenenzakje
+	 * @return  int[] met daarin de waarden van de twee stenen op index 0 en 1.
+	 */
+	public int[] haalDrieStenenUitSteenzakjeEnGeefAanSpelerBijEersteBeurt() {
+		return spel.haalDrieStenenUitSteenzakjeEnGeefAanSpelerBijEersteBeurt();
+	}
+
+	/**
+	 * UC4: steekt een steen die niet geplaatst kan worden terug in de zak
+	 * @param waardeVanSteen waarde van de steen die terug in zak moet.
+	 */
+	public void steekSteentjeTerugInZak(int waardeVanSteen) {
+		spel.steekSteentjeTerugInZak(waardeVanSteen);
 	}
 
 	/**
