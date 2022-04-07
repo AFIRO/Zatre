@@ -23,7 +23,7 @@ public class ScorebladTest {
     void create_alsScorebladRegelBestaat_CorrecteString(){
         Scoreblad testBlad = new Scoreblad();
         testBlad.voegRegelToeAanScoreblad(ENKELE_PUNTEN,TIEN_PUNTEN_GEHAALD,ELF_PUNTEN_GEHAALD,TWAALF_PUNTEN_NIET_GEHAALD); //3
-        assertEquals("O X X O 3 3", testBlad.getRegels().get(0));
+        assertEquals("  X X   3 3", testBlad.getRegels().get(0));
     }
 
     @Test
@@ -45,19 +45,19 @@ public class ScorebladTest {
         testBlad.voegRegelToeAanScoreblad(ENKELE_PUNTEN,TIEN_PUNTEN_GEHAALD,ELF_PUNTEN_GEHAALD,TWAALF_PUNTEN_GEHAALD); //13
 
         List<String> verwachteStrings = List.of(
-                "O O O O 3 0",
-                "O X X O 3 3",
+                "        3 0",
+                "  X X   3 3",
                 "X X X X 3 20",
-                "O O O O 3 0",
-                "O X X X 4 11",
-                "O X X X 4 11",
-                "O X X X 4 11",
-                "O X X X 4 11",
-                "O X X X 5 12",
-                "O X X X 5 12",
-                "O X X X 5 12",
-                "O X X X 5 12",
-                "O X X X 6 13");
+                "        3 0",
+                "  X X X 4 11",
+                "  X X X 4 11",
+                "  X X X 4 11",
+                "  X X X 4 11",
+                "  X X X 5 12",
+                "  X X X 5 12",
+                "  X X X 5 12",
+                "  X X X 5 12",
+                "  X X X 6 13");
 
         assertIterableEquals(verwachteStrings, testBlad.getRegels());
     }

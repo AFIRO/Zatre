@@ -9,7 +9,7 @@ public class ScorebladRegel {
     private final ArrayList<Boolean> elfPunten = new ArrayList<>();
     private final ArrayList<Boolean> twaalfPunten = new ArrayList<>();
     private final int bonusPunten;
-    private final int scoreVoorRegel;
+    private int scoreVoorRegel;
 
     /**
      * UC3: constructor ScorebladRegel, om aan te geven welke punten er gehaald zijn gebruiken we een boolean per puntencategorie, 
@@ -59,7 +59,7 @@ public class ScorebladRegel {
                 score+= 2;
             }
 
-        for (Boolean twaalfpunten: this.elfPunten)
+        for (Boolean twaalfpunten: this.twaalfPunten)
             if (twaalfpunten){
                 score+= 4;
             }
@@ -81,24 +81,24 @@ public class ScorebladRegel {
     @Override
     public String toString() {
 
-        String dubbeleScore = this.dubbeleScore ? "X" : "O";
-        String tienPuntenString = "";
-        String elfPuntenString = "";
-        String twaalfPuntenString = "";
+        String dubbeleScore = this.dubbeleScore ? "X" : " ";
+        String tienPuntenString = " ";
+        String elfPuntenString = " ";
+        String twaalfPuntenString = " ";
 
         for (Boolean tienpunten: this.tienPunten)
             if (tienpunten){
-                tienPuntenString = tienPuntenString.concat("X");
+                tienPuntenString = tienPuntenString.trim().concat("X");
             }
 
         for (Boolean elfpunten: this.elfPunten)
             if (elfpunten){
-                elfPuntenString = elfPuntenString.concat("X");
+                elfPuntenString = elfPuntenString.trim().concat("X");
             }
 
-        for (Boolean twaalfpunten: this.elfPunten)
+        for (Boolean twaalfpunten: this.twaalfPunten)
             if (twaalfpunten){
-                twaalfPuntenString = twaalfPuntenString.concat("X");
+                twaalfPuntenString = twaalfPuntenString.trim().concat("X");
             }
 
 
@@ -137,5 +137,6 @@ public class ScorebladRegel {
         this.tienPunten.add(tienPunten);
         this.elfPunten.add(elfPunten);
         this.twaalfPunten.add(twaalfPunten);
+        this.scoreVoorRegel = berekenScore();
     }
 }
