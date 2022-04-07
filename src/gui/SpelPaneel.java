@@ -8,21 +8,24 @@ public class SpelPaneel extends GridPane {
     private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
     private final MenuPaneel menuPaneel;
-    private final SpelLogoPaneel spelLogoPaneel;
-    private final SpelScorebladPaneel spelScorebladPaneel;
-    private final SpelBordPaneel spelBordPaneel;
-    private final SpelSpelerPaneel spelSpelerPaneel;
+    private SpelLogoPaneel spelLogoPaneel;
+    private SpelScorebladPaneel spelScorebladPaneel;
+    private SpelBordPaneel spelBordPaneel;
+    private SpelSpelerPaneel spelSpelerPaneel;
 
-    public SpelPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController,SpelLogoPaneel spelLogoPaneel, SpelScorebladPaneel spelScorebladPaneel, SpelBordPaneel spelBordPaneel, SpelSpelerPaneel spelSpelerPaneel) {
+    public SpelPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.hoofdPaneel = hoofdPaneel;
         this.menuPaneel = menuPaneel;
-        this.spelLogoPaneel = new SpelLogoPaneel(this, domeinController);
-        this.spelScorebladPaneel = new SpelScorebladPaneel(this, domeinController);
-        this.spelBordPaneel = new SpelBordPaneel(this, domeinController);
-        this.spelSpelerPaneel = new SpelSpelerPaneel(this, menuPaneel, domeinController);
-        voegComponentenToe();
-        
+        setSpelSchermen();
+        voegComponentenToe();  
+    }
+    
+    private void setSpelSchermen() {
+    	this.spelLogoPaneel = new SpelLogoPaneel(domeinController);
+        this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
+        this.spelBordPaneel = new SpelBordPaneel(domeinController);
+        this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
     }
     
     private void voegComponentenToe() {

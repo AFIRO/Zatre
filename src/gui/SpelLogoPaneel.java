@@ -6,11 +6,9 @@ import javafx.scene.layout.HBox;
 public class SpelLogoPaneel extends HBox {
 
 	private final DomeinController domeinController;
-	private final SpelPaneel spelPaneel;
 
-	public SpelLogoPaneel(SpelPaneel spelPaneel, DomeinController domeinController) {
+	public SpelLogoPaneel(DomeinController domeinController) {
 		this.domeinController = domeinController;
-		this.spelPaneel = spelPaneel;  
 		voegComponentenToe();
 	}
 

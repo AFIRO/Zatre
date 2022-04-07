@@ -31,12 +31,12 @@ public class TaalPaneel extends VBox {
     }
 
 
-    private void setTaalNederlands(ActionEvent actionEven) {
+    private void setTaalNederlands(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.NEDERLANDS));
     	hoofdPaneel.taalGekozen();
     }
 
-    private void setTaalEngels(ActionEvent actionEven) {
+    private void setTaalEngels(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.ENGELS));
         hoofdPaneel.taalGekozen();    }
 }

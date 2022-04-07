@@ -25,10 +25,7 @@ public class MenuPaneel extends VBox {
 		this.taalPaneel = taalPaneel;
 		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel, this, domeinController);
 		this.loginPaneel = new LoginPaneel(hoofdPaneel, this, domeinController);
-		this.spelPaneel = new SpelPaneel(hoofdPaneel, this, domeinController,
-				new SpelLogoPaneel(spelPaneel, domeinController), new SpelScorebladPaneel(spelPaneel, domeinController),
-				new SpelBordPaneel(spelPaneel, domeinController),
-				new SpelSpelerPaneel(spelPaneel, this, domeinController));
+		this.spelPaneel = new SpelPaneel(hoofdPaneel, this, domeinController);
 
 		voegComponentenToe();
 	}
