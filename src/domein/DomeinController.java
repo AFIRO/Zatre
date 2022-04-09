@@ -162,7 +162,7 @@ public class DomeinController {
 	 * Deze methode wordt enkel aangeroepen indien de GUI de steentjes array [0,0] krijgt. Het spel is dan gedaan.
 	 * @return  laatste scoreblad
 	 */
-	public List<String> EindigSpel() {
+	public List<String> eindigSpel() {
 		List<String> laatsteScorebladOmTeTonen = new ArrayList<>();
 		laatsteScorebladOmTeTonen.add(toonWinnaar());
 		laatsteScorebladOmTeTonen.addAll(spel.toonWinnaar().getScoreblad().getRegels());
