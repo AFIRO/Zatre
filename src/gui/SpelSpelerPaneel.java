@@ -15,23 +15,23 @@ public class SpelSpelerPaneel extends VBox {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
 		this.menuPaneel = menuPaneel;
-		  voegComponentenToe();
+		voegComponentenToe();
 	}
 
 	private void voegComponentenToe() {
 		Button btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
 		Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
-		
+
 		btnVraagSteentjes.setOnAction(this::vraagSteentjes);
 		btnCancelSpel.setOnAction(this::cancelSpel);
-		
+
 		this.getChildren().addAll(btnVraagSteentjes, btnCancelSpel);
 	}
-	
-	
+
 	private void vraagSteentjes(ActionEvent actionEvent) {
 
 	}
+
 	private void cancelSpel(ActionEvent actionEvent) {
 		hoofdPaneel.setCenter(menuPaneel);
 	}
