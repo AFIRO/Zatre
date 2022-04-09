@@ -15,9 +15,9 @@ public class LoginPaneel extends VBox {
 	private final HoofdPaneel hoofdPaneel;
 	private final MenuPaneel menuPaneel;
 	private final DomeinController domeinController;
-	private TextField TxtNaam;
-	private TextField TxtGeboortejaar;
-	private Label LblFeedback;
+	private TextField txtNaam;
+	private TextField txtGeboortejaar;
+	private Label lblFeedback;
 
 	public LoginPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
 		this.hoofdPaneel = hoofdPaneel;
@@ -30,43 +30,43 @@ public class LoginPaneel extends VBox {
 		final Text header = new Text(domeinController.getTaal().getLocalisatie("LOGIN"));
 		GridPane.setHalignment(header, HPos.LEFT);
 		final Label naam = new Label(domeinController.getTaal().getLocalisatie("GEKENDE_NAAM"));
-		TxtNaam = new TextField();
-		TxtNaam.setMaxWidth(200);
+		txtNaam = new TextField();
+		txtNaam.setMaxWidth(200);
 		final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
-		TxtGeboortejaar = new TextField();
-		TxtGeboortejaar.setMaxWidth(200);
+		txtGeboortejaar = new TextField();
+		txtGeboortejaar.setMaxWidth(200);
 		Button btnSubmit = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
 		Button btnBack = new Button(domeinController.getTaal().getLocalisatie("TERUG"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
 		btnSubmit.setOnAction(this::submit);
 		btnBack.setOnAction(this::back);
 		btnQuit.setOnAction(this::quit);
-		LblFeedback = new Label();
-		LblFeedback.setVisible(false);
-		this.getChildren().addAll(header, naam, TxtNaam, jaar, TxtGeboortejaar, btnSubmit, btnBack, btnQuit,LblFeedback);
+		lblFeedback = new Label();
+		lblFeedback.setVisible(false);
+		this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar, btnSubmit, btnBack, btnQuit,lblFeedback);
 	}
 
 	private void submit(ActionEvent actionEvent) {
 	
 		try {
-			domeinController.meldAan(this.TxtNaam.getText(), Integer.parseInt(this.TxtGeboortejaar.getText()));
-			LblFeedback.setText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
-			LblFeedback.setVisible(true);
+			domeinController.meldAan(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText()));
+			lblFeedback.setText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
+			lblFeedback.setVisible(true);
 
 			if (domeinController.geefSpelers().size() >= 4) {
 				menuPaneel.updateLoggedOnPlayerLabel();
 				hoofdPaneel.setCenter(menuPaneel);
 			} 
 			else {
-				LblFeedback.setText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN2"));
+				lblFeedback.setText(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN2"));
 				menuPaneel.updateLoggedOnPlayerLabel();
-				TxtNaam.setText("");
-				TxtGeboortejaar.setText("");
+				txtNaam.setText("");
+				txtGeboortejaar.setText("");
 			}
 
 		} catch (IllegalArgumentException e) {
-			LblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
-			LblFeedback.setVisible(true);
+			lblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
+			lblFeedback.setVisible(true);
 		}
 	}
 
