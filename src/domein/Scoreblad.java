@@ -68,7 +68,7 @@ public class Scoreblad {
      */
 
     public void voegRegelsToeAanScoreblad(ArrayList<Boolean[]> puntenArraysVoorAlleZetten) {
-        int dubbleScoreCounter = 0;
+        int dubbleScoreCounter = 0; //Sofie: waarom staat Boolean hier met hoofdletter?
         //controleer of de laatse lijn in de regel een dubbele score regel is genereert vanuit een vorige dubbele score regel.
         // Deze wordt dan gebruikt voor deze ronde
         if(!regels.isEmpty() && regels.get(regels.size()-1).isDubbeleScore() && regels.get(regels.size()-1).getScoreVoorRegel()==0) {

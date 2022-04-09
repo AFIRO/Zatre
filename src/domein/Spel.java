@@ -205,7 +205,7 @@ public class Spel {
      * @throws IllegalArgumentException indien vakje al een steen bevat.
      */
 
-    private void CheckOfVakjeLeegIs(Vak vakWaaropSteenWerdGelegd) {
+    private void CheckOfVakjeLeegIs(Vak vakWaaropSteenWerdGelegd) { //Sofie: methode met kleine letter? 
         if (Objects.nonNull(vakWaaropSteenWerdGelegd.getSteen()))
             throw new IllegalArgumentException("VAKJE_IS_NIET_LEEG");
     }

@@ -12,7 +12,7 @@ public class Speler {
 
     public Speler(String gebruikersnaam, int geboortejaar) {
         this(gebruikersnaam, geboortejaar, 5);
-    }
+    } //Sofie: moet er hier geen 3de parameter speelkansen meegegeven worden? Omdat er bij this 3 staan? 
 
     public Speler(String gebruikersnaam, int geboortejaar, int speelkansen) {
         controleerGebruikersnaam(gebruikersnaam);
