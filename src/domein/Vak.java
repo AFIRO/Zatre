@@ -128,19 +128,19 @@ public class Vak {
         }
 
         if (!omringendeVakjes.containsKey("boven")) {
-            omringendeVakjes.put("boven", String.format("%d.%d",kolom-1,rij));
+            omringendeVakjes.put("boven", String.format("%d.%d",kolom,rij-1));
         }
 
         if (!omringendeVakjes.containsKey("onder")) {
-            omringendeVakjes.put("onder", String.format("%d.%d",kolom+1,rij));
+            omringendeVakjes.put("onder", String.format("%d.%d",kolom,rij+1));
         }
 
         if (!omringendeVakjes.containsKey("links")) {
-            omringendeVakjes.put("links", String.format("%d.%d",kolom,rij-1));
+            omringendeVakjes.put("links", String.format("%d.%d",kolom-1,rij));
         }
 
         if (!omringendeVakjes.containsKey("rechts")) {
-            omringendeVakjes.put("rechts", String.format("%d.%d",kolom,rij+1));
+            omringendeVakjes.put("rechts", String.format("%d.%d",kolom+1,rij));
         }
 
         return omringendeVakjes;

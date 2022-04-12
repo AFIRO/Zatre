@@ -112,8 +112,8 @@ public class Spel {
         //itereer door alle doorgegeven zetten
         for (String zet: zetten) {
             //haal het correct vakje uit het spelbord op basis van eerste 3 tekens in string zijde kolomVak.rijVak.
-            Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(0, 2));
-            CheckOfVakjeLeegIs(vakWaaropSteenWerdGelegd);
+            Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(0, 3));
+            checkOfVakjeLeegIs(vakWaaropSteenWerdGelegd);
             //leg het correct steentje op het doorgegeven vak op basis van 5de teken. 4de teken is een spatie.
             vakWaaropSteenWerdGelegd.setSteen(new Steen(Integer.parseInt(zet.substring(4))));
             //update punten array met de berekening van de zet. Dit zal twee of drie keer updaten afhankelijk van aantal zetten.
@@ -207,17 +207,18 @@ public class Spel {
         Map<String,String> naburigeVakken = vakWaaropSteenWerdGelegd.geefVakjesNaastVak();
         int scoreOmTerugTeGeven = 0;
         //zolang als in die richting een steen bestaat
-        while (!naburigeVakken.get(richting).equals("bestaat niet")){
-            //haal die steen op uit het bord
-            Vak teCheckenVak = spelbord.getVakjes().get(naburigeVakken.get(richting));
-            //indien er een steentje op staat, voeg deze toe aan de score.
-            if (Objects.nonNull(teCheckenVak.getSteen())){
-                scoreOmTerugTeGeven += teCheckenVak.getSteen().getWaarde();
+            while (!naburigeVakken.get(richting).equals("bestaat niet")) {
+                //haal die steen op uit het bord
+                Vak teCheckenVak = spelbord.getVakjes().get(naburigeVakken.get(richting));
+                //indien er een steentje op staat, voeg deze toe aan de score.
+                if (Objects.nonNull(teCheckenVak.getSteen())) {
+                    scoreOmTerugTeGeven += teCheckenVak.getSteen().getWaarde();
+                    naburigeVakken = teCheckenVak.geefVakjesNaastVak();
+                }
+                //indien geen steentje erop staat, breek uit de loop.
+                else
+                    break;
             }
-            //indien geen steentje erop staat, breek uit de loop.
-            else
-                break;
-        }
         return scoreOmTerugTeGeven;
     }
 
@@ -237,7 +238,7 @@ public class Spel {
      * @throws IllegalArgumentException indien vakje al een steen bevat.
      */
 
-    private void CheckOfVakjeLeegIs(Vak vakWaaropSteenWerdGelegd) { //Sofie: methode met kleine letter? 
+    private void checkOfVakjeLeegIs(Vak vakWaaropSteenWerdGelegd) {
         if (Objects.nonNull(vakWaaropSteenWerdGelegd.getSteen()))
             throw new IllegalArgumentException("VAKJE_IS_NIET_LEEG");
     }
@@ -361,4 +362,5 @@ public class Spel {
         this.spelStaat = SpelStaat.GECANCELED;
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
     }
+
 }
