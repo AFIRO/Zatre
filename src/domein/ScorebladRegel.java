@@ -5,31 +5,29 @@ import java.util.List;
 
 public class ScorebladRegel {
     private final boolean dubbeleScore;
-    private final ArrayList<Boolean> tienPunten = new ArrayList<>();
-    private final ArrayList<Boolean> elfPunten = new ArrayList<>();
-    private final ArrayList<Boolean> twaalfPunten = new ArrayList<>();
+    private final ArrayList<Boolean> tienPunten;
+    private final ArrayList<Boolean> elfPunten;
+    private final ArrayList<Boolean> twaalfPunten;
     private final int bonusPunten;
     private int scoreVoorRegel;
 
     /**
      * UC3: constructor ScorebladRegel, om aan te geven welke punten er gehaald zijn gebruiken we een boolean per puntencategorie, 
-     * deze worden doorgegeven als parameter samen met de bonuspunten. Bij creatie wordt score berekend.
+     * Bij creatie wordt score berekend.
      * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet verdubbeld worden omdat de steen op een wit vak stond.
-     * @param tienPunten boolean die bijhoudt of in die zet de score 10 werd bereikt
-     * @param elfPunten boolean die bijhoudt of in die zet de score 11 werd bereikt
-     * @param twaalfPunten boolean die bijhoudt of in die zet de score 12 werd bereikt
      * @param bonusPunten de bonuspunten voor die beurt.
      */
-    public ScorebladRegel(boolean dubbeleScore, boolean tienPunten, boolean elfPunten, boolean twaalfPunten, int bonusPunten) {
+    public ScorebladRegel(boolean dubbeleScore, int bonusPunten) {
         this.dubbeleScore = dubbeleScore;
-        this.tienPunten.add(tienPunten);
-        this.elfPunten.add(elfPunten);
-        this.twaalfPunten.add(twaalfPunten);
+
+        tienPunten = new ArrayList<>();
+        elfPunten = new ArrayList<>();
+        twaalfPunten = new ArrayList<>();
 
         controleerOfBonusPuntenEenToegelatenWaardeHebben(bonusPunten);
 
         this.bonusPunten = bonusPunten;
-        this.scoreVoorRegel = berekenScore();
+        this.scoreVoorRegel = 0;
     }
 
     /**
@@ -129,14 +127,16 @@ public class ScorebladRegel {
 
     /**
      * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
-     * @param tienPunten boolean die bijhoudt of in die zet de score 10 werd bereikt
-     * @param elfPunten boolean die bijhoudt of in die zet de score 11 werd bereikt
-     * @param twaalfPunten boolean die bijhoudt of in die zet de score 12 werd bereikt
+     * De score wordt op het einde herberekend.
+     * @param score de toe te voegen score
      */
-    public void pasRegelAanMetVerdereZetten(boolean tienPunten, boolean elfPunten, boolean twaalfPunten){
-        this.tienPunten.add(tienPunten);
-        this.elfPunten.add(elfPunten);
-        this.twaalfPunten.add(twaalfPunten);
+    public void pasRegelAanMetVerdereScores(int score){
+        switch (score) {
+            case 10 -> this.tienPunten.add(true);
+            case 11 -> this.elfPunten.add(true);
+            case 12 -> this.twaalfPunten.add(true);
+        }
         this.scoreVoorRegel = berekenScore();
+
     }
 }

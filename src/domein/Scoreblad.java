@@ -29,11 +29,8 @@ public class Scoreblad {
      * UC3: Voegt een ScorebladRegel object toe aan de lijst regels.
      * Genereert bonuspunten op basis van aantal regel op scoreblad.
      * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet verdubbeld worden omdat de steen op een wit vak stond.
-     * @param tienPunten boolean die bijhoudt of in die beurt de score 10 werd bereikt
-     * @param elfPunten boolean die bijhoudt of in die beurt de score 11 werd bereikt
-     * @param twaalfPunten boolean die bijhoudt of in die beurt de score 12 werd bereikt
      */
-    public void voegRegelToeAanScoreblad(boolean dubbeleScore, boolean tienPunten, boolean elfPunten, boolean twaalfPunten) {
+    private void voegLegeRegelToeAanScoreblad(boolean dubbeleScore) {
         int BonusPunten = 0;
 
         if (this.regels.size() < 4)
@@ -48,7 +45,7 @@ public class Scoreblad {
         if (this.regels.size() >= 12)
             BonusPunten = 6;
 
-        regels.add(new ScorebladRegel(dubbeleScore,tienPunten,elfPunten,twaalfPunten,BonusPunten));
+        regels.add(new ScorebladRegel(dubbeleScore,BonusPunten));
     }
     
     /**
@@ -67,48 +64,56 @@ public class Scoreblad {
      * @param puntenArraysVoorAlleZetten array list die de scores bevat van de ronde
      */
 
-    public void voegRegelsToeAanScoreblad(ArrayList<Boolean[]> puntenArraysVoorAlleZetten) {
-        int dubbleScoreCounter = 0; //Sofie: waarom staat Boolean hier met hoofdletter?
-        //controleer of de laatse lijn in de regel een dubbele score regel is genereert vanuit een vorige dubbele score regel.
-        // Deze wordt dan gebruikt voor deze ronde
+    public void voegRegelsToeAanScoreblad(ArrayList<String> puntenArraysVoorAlleZetten) {
+        int dubbleScoreCounter = 0;
+        //controleer of de laatse regel in de scoreblad een dubbele score regel die werd genereerd vanuit een vorige dubbele score regel.
         if(!regels.isEmpty() && regels.get(regels.size()-1).isDubbeleScore() && regels.get(regels.size()-1).getScoreVoorRegel()==0) {
+            // Deze wordt dan gebruikt voor deze ronde
             ScorebladRegel vorigeRegelMetDubbeleBonus = regels.get(regels.size() - 1);
-            //ga door alle scores genereert in de ronde en pas die regel aan
-            for (Boolean[] zet : puntenArraysVoorAlleZetten) {
+            //ga door alle scores uit deze ronde en pas die regel aan
+            for (String zet : puntenArraysVoorAlleZetten) {
                 VoegExtraKruisjesToeAanRegel(vorigeRegelMetDubbeleBonus, zet);
             }
         } else {
             //controleer in de huidige zetten of we een dubbele score ronde hebben
             boolean isDubbeleScoreRegel = false;
             //controleer of er meerdere dubbele scores zijn verdiend.
-            for (Boolean[] zet : puntenArraysVoorAlleZetten) {
-                if (zet[0]) {
+            for (String zet : puntenArraysVoorAlleZetten) {
+                if (zet.charAt(0)=='1') {
                     isDubbeleScoreRegel = true;
                     dubbleScoreCounter++;
                 }
             }
             //maak de nieuwe regel aan met correcte dubbele score boost
-            voegRegelToeAanScoreblad(isDubbeleScoreRegel, false, false, false);
+            voegLegeRegelToeAanScoreblad(isDubbeleScoreRegel);
             ScorebladRegel actieveRegel = regels.get(regels.size() - 1);
             //pas deze nieuwe regel aan met de gevonden scores
-            for (Boolean[] zet : puntenArraysVoorAlleZetten) {
+            for (String zet : puntenArraysVoorAlleZetten) {
                 VoegExtraKruisjesToeAanRegel(actieveRegel, zet);
             }
         }
         //genereer een extra dubbele score regel als bonus
         if (dubbleScoreCounter>1)
-            voegRegelToeAanScoreblad(true,false,false,false);
+            voegLegeRegelToeAanScoreblad(true);
 
     }
 
     /**
      * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
      * @param aanTePassenRegel de aan te passen regel
-     * @param zet Array die de resultaten van de zet bevat
+     * @param zet string die de resultaten van de zet bevat
      */
 
-    private void VoegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, Boolean[] zet) {
-        aanTePassenRegel.pasRegelAanMetVerdereZetten(zet[1],zet[2],zet[3]);
+    private void VoegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, String zet) {
+        //eerste twee tekens die de dubbele score boolean symboliseren worden eruit gehaald
+        String zetMetEnkelScores = zet.substring(2);
+        //scores worden omgezet tot array
+        String[] scores = zetMetEnkelScores.split(",");
+
+        //elke score wordt doorgegeven aan de regel voor aanpassing
+        for (String score: scores) {
+            aanTePassenRegel.pasRegelAanMetVerdereScores(Integer.parseInt(score));
+        }
 
     }
 }

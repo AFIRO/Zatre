@@ -96,6 +96,10 @@ public class Spel {
      * UC4: regelt de logica van een beurt. De string[] zetten bevat 2 of 3 strings met de zet
      * in de vorm "kolomVak.rijVak waardeSteen". Deze worden geïnterpreteerd en omzet naar de correcte info voor punt
      * berekening. We gaan ervan uit dat de info correct moet zijn dankzij validatie in de GUI qua zetten
+     * Methode genereert een arraylist aan strings. Deze strings bevatten de scores per zet. Op index 0, 1 en 2 komen
+     * respectievelijk de scores van beurt 1, 2 en 3. Deze strings bevatten de volgende structuur: 0/1 (dubbele score
+     * of niet voor die zet) gevolgd door de horizontale en verticale score van de tegel in een komma seperated formaat (.csv)
+     * voor snelle parsing.
      * @param gebruikersnaam gebruikersnaam van speler die beurt speelt
      * @param geboortejaar geboortejaar van speler die beurt speelt
      * @param zetten bevat 2 of 3 strings met de zet in de vorm "kolomVak.rijVak waardeSteen"
@@ -104,7 +108,7 @@ public class Spel {
     public List<String> speelBeurt(String gebruikersnaam, String geboortejaar, String[] zetten) {
         checkOfSpelerInHetSpelZit(gebruikersnaam, geboortejaar);
         Speler actieveSpeler = spelers.get(spelers.indexOf(new Speler(gebruikersnaam,Integer.parseInt(geboortejaar))));
-        ArrayList<Boolean[]> puntenArraysVoorAlleZetten = new ArrayList<>();
+        ArrayList<String> puntenArraysVoorAlleZetten = new ArrayList<>();
         //itereer door alle doorgegeven zetten
         for (String zet: zetten) {
             //haal het correct vakje uit het spelbord op basis van eerste 3 tekens in string zijde kolomVak.rijVak.
@@ -113,9 +117,9 @@ public class Spel {
             //leg het correct steentje op het doorgegeven vak op basis van 5de teken. 4de teken is een spatie.
             vakWaaropSteenWerdGelegd.setSteen(new Steen(Integer.parseInt(zet.substring(4))));
             //update punten array met de berekening van de zet. Dit zal twee of drie keer updaten afhankelijk van aantal zetten.
-            puntenArraysVoorAlleZetten.addAll(berekenScoreVoorGelegdeSteen(vakWaaropSteenWerdGelegd));
+            puntenArraysVoorAlleZetten.add(berekenScoreVoorGelegdeSteen(vakWaaropSteenWerdGelegd));
         }
-        //genereer scorebladRegels op basis van vier booleans in de boolean arrays per zet.
+        //genereer scorebladRegels op basis van de string per zet.
         actieveSpeler.getScoreblad().voegRegelsToeAanScoreblad(puntenArraysVoorAlleZetten);
 
         //geef een String representatie van de geupdatet scoreblad voor de GUI.
@@ -123,70 +127,98 @@ public class Spel {
     }
 
     /**
-     * UC4: vraagt de naburige stenen van het vak, controleert of daar een steen op ligt en indien wel,
-     * berekent de totale score van de twee vakken. Indien 10, 11 of 12, wordt dit bijgehouden.
-     * Dit wordt dan doorgegeven aan het scoreblad voor berekening en opslag.
+     * UC4: roept hulpfuncties op om een string representatie te maken van de score van de zet
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
-     * @return punten Boolean array waarbij index 0 staat voor dubbele punten, index 1 voor tien punten,
-     * index 2 voor elf punten en index 3 voor twaalf punten
+     * @return punten string representatie van score eerste getal 0/1 is afhankelijk van of het een dubbele score is,
+     * gevolgd door de horizontale en verticale score.
      */
 
-    private ArrayList<Boolean[]> berekenScoreVoorGelegdeSteen(Vak vakWaaropSteenWerdGelegd) {
-        ArrayList<Boolean[]> puntenLijst = new ArrayList<>();
-        Boolean[] punten;
-        //genereer locaties van de vier nabije omringende stenen op basis van de doorgegeven steen
-        Map<String,String> naburigeVakken = vakWaaropSteenWerdGelegd.geefVakjesNaastVak();
+    private String berekenScoreVoorGelegdeSteen(Vak vakWaaropSteenWerdGelegd) {
+        String punten = "";
+        //bereken horizontale punten
+        punten = berekenScoreHorizontaal(vakWaaropSteenWerdGelegd, punten);
+        //bereken verticale punten
+        punten = berekenScoreVerticaal(vakWaaropSteenWerdGelegd, punten);
 
-        //kijk in alle vier de richtingen startend van de oorspronkelijke steen
-        for (String richtingVanMogelijkVak: naburigeVakken.keySet()) {
-            punten = new Boolean[] {false,false,false,false};
-            //indien er geen vak is in die richting (vb zijkant van bord), skip algoritme voor die richting
-            if (!naburigeVakken.get(richtingVanMogelijkVak).equals("bestaat niet")) {
-                //initialiseer score op basis van het gespeelde steentje op het vak.
-                int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
-                //haal het vakje in die richting uit het spelbord op basis van de gegenereerde coordinaat
-                Vak teCheckenVak = spelbord.getVakjes().get(naburigeVakken.get(richtingVanMogelijkVak));
-                //indien er een steen op dat vakje is
-                if (Objects.nonNull(teCheckenVak.getSteen())) {
-                    //voeg waarde van dit vakje toe aan score
-                    score += teCheckenVak.getSteen().getWaarde();
-                    //zolang als de score niet 10, 11 of 12 is, kijken we naar het volgend vakje in die richting op de lijn.
-                    while (score < 10) {
-                        //als er geen vakje meer is,breek uit de loop
-                        if (teCheckenVak.geefVakjesNaastVak().get(richtingVanMogelijkVak).equals("bestaat niet")) {
-                            break;
-                        }
-                        //haal het volgend vakje op uit de richting
-                        teCheckenVak = spelbord.getVakjes().get(teCheckenVak.geefVakjesNaastVak().get(richtingVanMogelijkVak));
-                        //als er geen steen op dit vakje is,breek uit de loop
-                        if (Objects.isNull(teCheckenVak.getSteen())) {
-                            break;
-                        }
-                        //voeg de waarde van het aanwezig steentje toe aan score
-                        score += teCheckenVak.getSteen().getWaarde();
-                        //herhaal loop voor volgende vakken in die richting tot score > 10 of break statement.
-                    }
-                }
-                //controleer de gevonden score. Indien hoger dan 10 en op wit vakje gestart, dubbele punten
-                if (score >=10 && vakWaaropSteenWerdGelegd.getKleur().equals(Vak.Kleur.WIT)) {
-                    punten[0] = true;
-                }
-                //controleer de gevonden score. Zet de correcte boolean op true voor 10, 11 of 12 punten.
-                if (score >= 10) {
-                    switch (score) {
-                        case 10:
-                            punten[1] = true;
-                        case 11:
-                            punten[2] = true;
-                        case 12:
-                            punten[3] = true;
-                    }
-                }
+        return punten;
+    }
+
+    /**
+     * UC4: roept hulpfuncties om links en rechts te kijken op het bord voor de horizontale score te berekenen.
+     * het past de doorgegeven String aan met de dubbele punten modifier en het gevonden horizontaal punt.
+     * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
+     * @param punten de aan te passen string representatie
+     * @return punten string representatie van score eerste getal 0/1 is afhankelijk van of het een dubbele score is,
+     * gevolgd door de horizontale.
+     */
+
+
+    private String berekenScoreHorizontaal(Vak vakWaaropSteenWerdGelegd, String punten) {
+        int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
+        //kijk links
+        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "links");
+        //kijk rechts
+        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "rechts");
+        //indien 10+ en startvakje wit, zet dubbele score boolean als 1
+        if (score >=10 && vakWaaropSteenWerdGelegd.getKleur().equals(Vak.Kleur.WIT)){
+            punten = punten.concat("1,");
+        } else {
+            punten = punten.concat("0,");
+        }
+
+        return punten.concat(score +",");
+    }
+
+    /**
+     * UC4: roept hulpfuncties om boven en onder te kijken op het bord voor de verticale score te berekenen.
+     * het past de doorgegeven String aan met de dubbele punten modifier en het gevonden verticale punt.
+     * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
+     * @param punten de aan te passen string representatie
+     * @return punten string representatie van score eerste getal 0/1 is afhankelijk van of het een dubbele score is,
+     * gevolgd door de horizontale en verticale score
+     */
+
+    private String berekenScoreVerticaal(Vak vakWaaropSteenWerdGelegd, String punten) {
+        int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
+        //kijk boven
+        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "boven");
+        //kijk onder
+        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "onder");
+        //indien 10+ en startvakje wit en dubbele score boolean nog niet 1, zet dubbele score boolean als 1
+        if (score >=10
+                && vakWaaropSteenWerdGelegd.getKleur().equals(Vak.Kleur.WIT )
+                && punten.charAt(0) == '0') {
+            punten = punten.replace('0', '1');
+        }
+        return punten.concat(String.valueOf(score));
+    }
+
+    /**
+     * UC4: genereert een map met de coordinaten van de naburige vakken en loopt deze af in een specifieke richting
+     * als een linked list. Deze telt alle gevonden stenen op tot het oftewel botst tegen rand van het spelbord of een
+     * vak ontdekt zonder steen erop.
+     * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
+     * @param richting waarin het algoritme moet zoeken.
+     * @return de berekende score voor die richting.
+     */
+
+    private int tellSteentjesInSpecifiekeRichtingOp(Vak vakWaaropSteenWerdGelegd, String richting) {
+        //genereer map
+        Map<String,String> naburigeVakken = vakWaaropSteenWerdGelegd.geefVakjesNaastVak();
+        int scoreOmTerugTeGeven = 0;
+        //zolang als in die richting een steen bestaat
+        while (!naburigeVakken.get(richting).equals("bestaat niet")){
+            //haal die steen op uit het bord
+            Vak teCheckenVak = spelbord.getVakjes().get(naburigeVakken.get(richting));
+            //indien er een steentje op staat, voeg deze toe aan de score.
+            if (Objects.nonNull(teCheckenVak.getSteen())){
+                scoreOmTerugTeGeven += teCheckenVak.getSteen().getWaarde();
             }
-            //sla de gevonden punten op in de arraylist
-            puntenLijst.add(punten);
-        } //herhaal dit algoritme voor alle vier de richtingen (boven, links, rechts, onder) om zo het punten array correct te zetten.
-        return puntenLijst;
+            //indien geen steentje erop staat, breek uit de loop.
+            else
+                break;
+        }
+        return scoreOmTerugTeGeven;
     }
 
     /**
