@@ -45,7 +45,7 @@ public class Vak {
         }
 
         //case vakje uit onderste rij bestaat niet
-        if (rij == 14 && controleLijst.contains(kolom)) {
+        if (rij == 15 && controleLijst.contains(kolom)) {
             throw new IllegalArgumentException("VAKJE_KAN_NIET_BESTAAN");
         }
 
@@ -55,7 +55,7 @@ public class Vak {
         }
 
         //case vakje uit rechter rij bestaat niet
-        if (kolom == 14 && controleLijst.contains(rij)){
+        if (kolom == 15 && controleLijst.contains(rij)){
             throw new IllegalArgumentException("VAKJE_KAN_NIET_BESTAAN");
         }
     }
