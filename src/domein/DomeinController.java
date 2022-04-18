@@ -203,18 +203,16 @@ public class DomeinController {
 	 * UC3: deze methode geeft een lijst van de scorebladen terug van de spelers
 	 * @return
 	 */
-	public List<Scoreblad> geefScorebladen(Speler spel)
-	{
+	public List<Scoreblad> geefScorebladen(Speler spel) //Sofie: het lukt me niet om deze verder af te werken, 
+	{												   //wil degene die ze aanpast mijn code in commentaar zetten, zodat ik kan vergelijken? thx!
 		List<Scoreblad>alleScorebladen = new ArrayList<>();
-		alleScorebladen.add(geefScoreblad());
-		alleScorebladen.addAll(spel.geefScoreblad().getScoreblad().getRegels());
+		alleScorebladen.addAll(spel.getScoreblad().getRegels());
 		return alleScorebladen;
 	}
 	
 	/**
 	 * UC3: bepaalt wanneer het spel beëindigd is of wordt
-	 */
-	
+	 */	
 	public boolean isEindeSpel()
 	{
 		return spel.isEindeSpel();

@@ -370,8 +370,9 @@ public class Spel {
     {
     	
     	if(checkOfErNogStenenInHetZakjeZijn() ==true)
+    		return false;
+    	else 
     		return true;
-    	else return false;
     	
     }
 }
