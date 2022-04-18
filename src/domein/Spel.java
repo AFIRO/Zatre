@@ -348,7 +348,7 @@ public class Spel {
      * UC3: methode om de winnaar weer te geven op einde van Spel. 
      * @return de winnende speler
      */
-    public Speler toonWinnaar(){
+    public Speler geefWinnaar(){
         return bepaalWinnaar();
     }
 
@@ -363,4 +363,8 @@ public class Spel {
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
     }
 
+    public void isEindeSpel() //Sofie: ik twijfelde hier over void of boolean, maar een knowing methode is altijd void zeker? 
+    {
+    	this.spelStaat = SpelStaat.GEDAAN;
+    }
 }

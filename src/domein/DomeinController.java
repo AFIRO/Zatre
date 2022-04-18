@@ -116,9 +116,9 @@ public class DomeinController {
 
 	}
 
-	private String toonWinnaar() {
+	private String geefWinnaar() {
 		return String.format("%s%n%s", taal.getLocalisatie("WINNAAR"),
-				spel.toonWinnaar());
+				spel.geefWinnaar());
 	}
 	
 	/**
@@ -164,8 +164,8 @@ public class DomeinController {
 	 */
 	public List<String> eindigSpel() {
 		List<String> laatsteScorebladOmTeTonen = new ArrayList<>();
-		laatsteScorebladOmTeTonen.add(toonWinnaar());
-		laatsteScorebladOmTeTonen.addAll(spel.toonWinnaar().getScoreblad().getRegels());
+		laatsteScorebladOmTeTonen.add(geefWinnaar());
+		laatsteScorebladOmTeTonen.addAll(spel.geefWinnaar().getScoreblad().getRegels());
 		updateSpelersInDatabaseNaSpel();
 		resetRepositoryVoorNieuwSpel();
 		return laatsteScorebladOmTeTonen;
@@ -197,6 +197,11 @@ public class DomeinController {
 
 	private void resetRepositoryVoorNieuwSpel() {
 		spelerRepository.geefSpelers().removeAll(spelerRepository.geefSpelers());
+	}
+	
+	public void isEindeSpel()
+	{
+		spel.isEindeSpel();
 	}
 
 }
