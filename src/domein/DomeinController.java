@@ -200,12 +200,24 @@ public class DomeinController {
 	}
 	
 	/**
+	 * UC3: deze methode geeft een lijst van de scorebladen terug van de spelers
+	 * @return
+	 */
+	public List<Scoreblad> geefScorebladen(Speler spel)
+	{
+		List<Scoreblad>alleScorebladen = new ArrayList<>();
+		alleScorebladen.add(geefScoreblad());
+		alleScorebladen.addAll(spel.geefScoreblad().getScoreblad().getRegels());
+		return alleScorebladen;
+	}
+	
+	/**
 	 * UC3: bepaalt wanneer het spel beëindigd is of wordt
 	 */
 	
 	public boolean isEindeSpel()
 	{
-		spel.isEindeSpel();
+		return spel.isEindeSpel();
 	}
 
 }

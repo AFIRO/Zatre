@@ -366,11 +366,12 @@ public class Spel {
      * UC3: bepaalt wanneer het spel beëindigd is of wordt
      */
     
-    public boolean isEindeSpel() //Sofie: ik twijfelde hier over void of boolean
+    public boolean isEindeSpel()
     {
     	
-    	if(spelStaat == SpelStaat.GEDAAN)
+    	if(checkOfErNogStenenInHetZakjeZijn() ==true)
     		return true;
+    	else return false;
     	
     }
 }
