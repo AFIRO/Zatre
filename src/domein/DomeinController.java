@@ -199,7 +199,11 @@ public class DomeinController {
 		spelerRepository.geefSpelers().removeAll(spelerRepository.geefSpelers());
 	}
 	
-	public void isEindeSpel()
+	/**
+	 * UC3: bepaalt wanneer het spel beëindigd is of wordt
+	 */
+	
+	public boolean isEindeSpel()
 	{
 		spel.isEindeSpel();
 	}

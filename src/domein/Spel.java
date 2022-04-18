@@ -322,7 +322,6 @@ public class Spel {
             return false;
         }
         return true;
-
     }
     
     /**
@@ -362,9 +361,16 @@ public class Spel {
         this.spelStaat = SpelStaat.GECANCELED;
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
     }
-
-    public void isEindeSpel() //Sofie: ik twijfelde hier over void of boolean, maar een knowing methode is altijd void zeker? 
+    
+    /**
+     * UC3: bepaalt wanneer het spel beëindigd is of wordt
+     */
+    
+    public boolean isEindeSpel() //Sofie: ik twijfelde hier over void of boolean
     {
-    	this.spelStaat = SpelStaat.GEDAAN;
+    	
+    	if(spelStaat == SpelStaat.GEDAAN)
+    		return true;
+    	
     }
 }
