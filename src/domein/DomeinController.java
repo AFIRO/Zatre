@@ -201,20 +201,22 @@ public class DomeinController {
 	
 	/**
 	 * UC3: deze methode geeft een lijst van de scorebladen terug van de spelers
-	 * @return
+	 * @return een lijst aan strings met de string representatie van de scorebladen van elke speler.
 	 */
-	public List<Scoreblad> geefScorebladen(Speler spel) //Sofie: het lukt me niet om deze verder af te werken, 
-	{												   //wil degene die ze aanpast mijn code in commentaar zetten, zodat ik kan vergelijken? thx!
-		List<Scoreblad>alleScorebladen = new ArrayList<>();
-		alleScorebladen.addAll(spel.getScoreblad().getRegels());
+	public List<String> geefScorebladen(){
+		List<String>alleScorebladen = new ArrayList<>();
+
+		for (Speler speler: spelerRepository.geefSpelers()) {
+			String scoreblad = speler.getGebruikersnaam() + speler.getScoreblad().toString();
+			alleScorebladen.add(scoreblad);
+		}
 		return alleScorebladen;
 	}
 	
 	/**
 	 * UC3: bepaalt wanneer het spel beëindigd is of wordt
 	 */	
-	public boolean isEindeSpel()
-	{
+	public boolean isEindeSpel() {
 		return spel.isEindeSpel();
 	}
 

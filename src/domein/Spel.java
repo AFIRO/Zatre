@@ -366,13 +366,8 @@ public class Spel {
      * UC3: bepaalt wanneer het spel beëindigd is of wordt
      */
     
-    public boolean isEindeSpel()
-    {
-    	
-    	if(checkOfErNogStenenInHetZakjeZijn() ==true)
-    		return false;
-    	else 
-    		return true;
+    public boolean isEindeSpel() {
+        return !checkOfErNogStenenInHetZakjeZijn();
     	
     }
 }

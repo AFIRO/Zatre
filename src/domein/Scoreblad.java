@@ -116,4 +116,11 @@ public class Scoreblad {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return regels.stream()
+                .map(ScorebladRegel::toString)
+                .collect(Collectors.joining("/n"));
+    }
 }
