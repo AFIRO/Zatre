@@ -3,12 +3,14 @@ package gui;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class MenuPaneel extends VBox {
 	private final DomeinController domeinController;
@@ -57,6 +59,10 @@ public class MenuPaneel extends VBox {
 	private void starten(ActionEvent actionEvent) {
 		try {
 			domeinController.startSpel();
+			Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
+			stage.setWidth(1800);
+			stage.setHeight(1200);
+			this.spelPaneel.getSpelScorebladPaneel().updateInfo(0);
 			hoofdPaneel.setCenter(spelPaneel);
 		} catch (IllegalArgumentException e) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);

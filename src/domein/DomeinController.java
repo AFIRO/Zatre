@@ -88,7 +88,7 @@ public class DomeinController {
 
 		String output;
 		for (Speler speler : spelers) {
-			output = String.format("%s %d%n", taal.getLocalisatie("SPELER"), spelers.indexOf(speler)+1);
+			output = String.format("%s %d: %s%n", taal.getLocalisatie("SPELER"), spelers.indexOf(speler)+1, speler.getGebruikersnaam());
 			output += String.format("%n%s %s%n%s %d%n%s %d%n%n", taal.getLocalisatie("GEBRUIKERSNAAM"), speler.getGebruikersnaam(),
 					taal.getLocalisatie("GEBOORTEJAAR"),speler.getGeboortejaar(),
 					taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
@@ -202,14 +202,14 @@ public class DomeinController {
 		List<String>alleScorebladen = new ArrayList<>();
 
 		for (Speler speler: spelerRepository.geefSpelers()) {
-			String scoreblad = speler.getGebruikersnaam() + speler.getScoreblad().toString();
+			String scoreblad = String.format("%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal") + speler.getScoreblad().toString();
 			alleScorebladen.add(scoreblad);
 		}
 		return alleScorebladen;
 	}
 	
 	/**
-	 * UC3: bepaalt wanneer het spel beëindigd is of wordt
+	 * UC3: bepaalt wanneer het spel beï¿½indigd is of wordt
 	 */	
 	public boolean isEindeSpel() {
 		return spel.isEindeSpel();

@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -30,7 +31,23 @@ public class SpelPaneel extends BorderPane {
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
         this.setRight(spelScorebladPaneel);
+        setAlignment(spelScorebladPaneel, Pos.BASELINE_LEFT);
+        setAlignment(spelBordPaneel,Pos.CENTER);
     }
 
-    
+    public SpelScorebladPaneel getSpelScorebladPaneel() {
+        return spelScorebladPaneel;
+    }
+
+    public SpelLogoPaneel getSpelLogoPaneel() {
+        return spelLogoPaneel;
+    }
+
+    public SpelBordPaneel getSpelBordPaneel() {
+        return spelBordPaneel;
+    }
+
+    public SpelSpelerPaneel getSpelSpelerPaneel() {
+        return spelSpelerPaneel;
+    }
 }
