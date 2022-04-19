@@ -12,9 +12,9 @@ import java.util.Optional;
 
 public class LoginPaneel extends VBox {
 
+	private final DomeinController domeinController;
 	private final HoofdPaneel hoofdPaneel;
 	private final MenuPaneel menuPaneel;
-	private final DomeinController domeinController;
 	private TextField txtNaam;
 	private TextField txtGeboortejaar;
 	private Label lblFeedback;

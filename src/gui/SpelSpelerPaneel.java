@@ -33,6 +33,7 @@ public class SpelSpelerPaneel extends VBox {
 	}
 
 	private void cancelSpel(ActionEvent actionEvent) {
+		domeinController.cancelSpel();
 		hoofdPaneel.setCenter(menuPaneel);
 	}
 }

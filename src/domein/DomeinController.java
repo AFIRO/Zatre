@@ -131,21 +131,16 @@ public class DomeinController {
 		spel.speelBeurt(gebruikersnaam, geboortejaar,zetten);
 	}
 
-
 	/**
-	 * UC4: vraagt aan spel voor twee willekeurige stenen uit het stenenzakje
+	 * UC4: vraagt aan spel voor twee of drie willekeurige stenen uit het stenenzakje
+	 * @param eersteBeurt boolean die aangeeft of het gaat om de eerste beurt of niet.
 	 * @return  int[] met daarin de waarden van de twee stenen op index 0 en 1.
 	 */
-	public int[] haalSteenUitSteenzakjeEnGeefAanSpeler() {
-		return spel.haalTweeStenenUitSteenzakjeEnGeefAanSpeler();
-	}
-
-	/**
-	 * UC4: vraagt aan spel voor drie willekeurige stenen uit het stenenzakje
-	 * @return  int[] met daarin de waarden van de twee stenen op index 0 en 1.
-	 */
-	public int[] haalDrieStenenUitSteenzakjeEnGeefAanSpelerBijEersteBeurt() {
-		return spel.haalDrieStenenUitSteenzakjeEnGeefAanSpelerBijEersteBeurt();
+	public int[] vraagSteentjes(boolean eersteBeurt) {
+		if (eersteBeurt)
+			return spel.haalDrieStenenUitSteenzakjeEnGeefAanSpelerBijEersteBeurt();
+		else
+			return spel.haalTweeStenenUitSteenzakjeEnGeefAanSpeler();
 	}
 
 	/**

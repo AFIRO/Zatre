@@ -2,9 +2,10 @@ package gui;
 
 import domein.DomeinController;
 import javafx.scene.Group;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class SpelPaneel extends GridPane {
+public class SpelPaneel extends BorderPane {
     private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
     private final MenuPaneel menuPaneel;
@@ -18,20 +19,18 @@ public class SpelPaneel extends GridPane {
         this.hoofdPaneel = hoofdPaneel;
         this.menuPaneel = menuPaneel;
         setSpelSchermen();
-        voegComponentenToe();  
     }
     
     private void setSpelSchermen() {
-    	this.spelLogoPaneel = new SpelLogoPaneel(domeinController);
+        this.spelLogoPaneel = new SpelLogoPaneel(domeinController);
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
         this.spelBordPaneel = new SpelBordPaneel(domeinController);
         this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
+        this.setTop(spelLogoPaneel);
+        this.setCenter(spelBordPaneel);
+        this.setLeft(spelSpelerPaneel);
+        this.setRight(spelScorebladPaneel);
     }
-    
-    private void voegComponentenToe() {
-		// TODO Auto-generated method stub
-		
-	}
-    
+
     
 }
