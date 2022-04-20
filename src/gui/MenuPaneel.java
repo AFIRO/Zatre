@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -14,6 +15,7 @@ public class MenuPaneel extends VBox {
 	private final DomeinController domeinController;
 	private final HoofdPaneel hoofdPaneel;
 	private final RegistratiePaneel registratiePaneel;
+	private final RegistratieEnLoginPaneel registratieEnLoginPaneel;
 	private final LoginPaneel loginPaneel;
 	private final SpelPaneel spelPaneel;
 	private final TaalPaneel taalPaneel;
@@ -23,6 +25,7 @@ public class MenuPaneel extends VBox {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
 		this.taalPaneel = taalPaneel;
+		this.registratieEnLoginPaneel = new RegistratieEnLoginPaneel(hoofdPaneel,this,domeinController);
 		this.registratiePaneel = new RegistratiePaneel(hoofdPaneel, this, domeinController);
 		this.loginPaneel = new LoginPaneel(hoofdPaneel, this, domeinController);
 		this.spelPaneel = new SpelPaneel(hoofdPaneel, this, domeinController);
@@ -33,23 +36,26 @@ public class MenuPaneel extends VBox {
 	private void voegComponentenToe() {
 
 		Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
-		GridPane.setHalignment(header, HPos.LEFT);
 		Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
-		GridPane.setHalignment(subheader, HPos.RIGHT);
-		Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3"));
-		Button btnAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
+		HBox alignmentBoxEersteRij = new HBox();
+		HBox alignmentBoxTweedeRij = new HBox();
+		Button btnRegistreerAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3") + "/" + domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
+//		Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3"));
+//		Button btnAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
 		Button btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
 		Button btnKiesTaal = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_8"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
+		alignmentBoxEersteRij.getChildren().addAll(btnRegistreerAanmelden,btnSpelStarten);
+		alignmentBoxTweedeRij.getChildren().addAll(btnKiesTaal,btnQuit);
 		lblLoggedOn = new Label();
-		btnRegistreer.setOnAction(this::registreer);
-		btnAanmelden.setOnAction(this::login);
+//		btnRegistreer.setOnAction(this::registreer);
+//		btnAanmelden.setOnAction(this::login);
 		btnSpelStarten.setOnAction(this::starten);
 		btnKiesTaal.setOnAction(this::kiesTaal);
 		lblLoggedOn.setVisible(false);
 		btnQuit.setOnAction(this::quit);
 
-		this.getChildren().addAll(header, subheader, btnRegistreer, btnAanmelden, btnSpelStarten, btnKiesTaal, btnQuit,
+		this.getChildren().addAll(header, subheader, alignmentBoxEersteRij, alignmentBoxTweedeRij,
 				lblLoggedOn);
 
 	}
@@ -73,6 +79,10 @@ public class MenuPaneel extends VBox {
 	private void login(ActionEvent actionEvent) {
 		hoofdPaneel.setCenter(loginPaneel);
 
+	}
+
+	private void registreerAanmelden(ActionEvent actionEvent) {
+		hoofdPaneel.setCenter(registratieEnLoginPaneel);
 	}
 
 	private void kiesTaal(ActionEvent actionEvent) {

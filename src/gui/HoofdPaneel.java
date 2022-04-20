@@ -13,9 +13,8 @@ public class HoofdPaneel extends BorderPane
 
     public HoofdPaneel(DomeinController domeinController)
     {
-    	this.domeinController = domeinController;
-    	taalPaneel = new TaalPaneel(domeinController, this);
-    	
+        this.domeinController = domeinController;
+        taalPaneel = new TaalPaneel(domeinController, this);
         voegComponentenToe();
     }
     
