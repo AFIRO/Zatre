@@ -1,13 +1,16 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
-public class SpelLogoPaneel extends HBox {
+public class SpelLogoPaneel extends StackPane {
 	private final DomeinController domeinController;
-	private static final String LOGO_LOCATIE = "assets/logo/logo.jpg";
+	private static final String LOGO_LOCATIE = "file:src/assets/logo/logo.jpg";
 	private final ImageView imLogo = new ImageView();
 
 	public SpelLogoPaneel(DomeinController domeinController) {
@@ -18,7 +21,11 @@ public class SpelLogoPaneel extends HBox {
 	private void voegComponentenToe() {
 		Image logo = new Image(LOGO_LOCATIE);
 		imLogo.setImage(logo);
+		imLogo.setFitWidth(400);
+		imLogo.setFitHeight(100);
+		StackPane.setAlignment(imLogo,Pos.CENTER);
 		this.getChildren().add(imLogo);
+
 		
 	}
 }
