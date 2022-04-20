@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -32,11 +33,14 @@ public class RegistratieEnLoginPaneel extends VBox {
         final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
         txtGeboortejaar = new TextField();
         txtGeboortejaar.setMaxWidth(200);
-
+        HBox alignmentBoxEersteRij = new HBox();
+        HBox alignmentBoxTweedeRij = new HBox();
         Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("REGISTREER_KNOP"));
         Button btnLogin = new Button(domeinController.getTaal().getLocalisatie("LOGIN_KNOP"));
         Button btnBack = new Button(domeinController.getTaal().getLocalisatie("TERUG"));
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
+        alignmentBoxEersteRij.getChildren().addAll(btnRegistreer,btnLogin);
+        alignmentBoxTweedeRij.getChildren().addAll(btnBack,btnQuit);
 
         btnRegistreer.setOnAction(this::registreer);
         btnLogin.setOnAction(this::login);
@@ -46,7 +50,7 @@ public class RegistratieEnLoginPaneel extends VBox {
         lblFeedback = new Label();
         lblFeedback.setVisible(false);
 
-        this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar, btnRegistreer, btnLogin, btnBack, btnQuit, lblFeedback);
+        this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar,alignmentBoxEersteRij,alignmentBoxTweedeRij, lblFeedback);
     }
 
     private void registreer(ActionEvent actionEvent) {

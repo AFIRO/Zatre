@@ -1,10 +1,10 @@
 package gui;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class SteenGUI {
+public class SteenGUI extends ImageView {
     private final int waarde;
-    private final Image image;
 
     /**
      * UC3 constructor voor steen. Juiste foto wordt automatisch gekoppeld op basis van de waarde
@@ -14,7 +14,8 @@ public class SteenGUI {
 
     public SteenGUI(int waarde) {
         this.waarde = waarde;
-        this.image = koppelJuisteFotoAanWaarde(waarde);
+        Image image = koppelJuisteFotoAanWaarde(waarde);
+        super.setImage(image);
     }
 
 
@@ -28,7 +29,7 @@ public class SteenGUI {
         if (waarde == 0)
             return null;
         else {
-            String pad = "assets/stenen/";
+            String pad = "file:src/assets/stenen/";
             String filename = this.getWaarde() + ".png";
             return new Image(pad + filename);
         }
@@ -38,7 +39,4 @@ public class SteenGUI {
         return waarde;
     }
 
-    public Image getImage() {
-        return image;
-    }
 }
