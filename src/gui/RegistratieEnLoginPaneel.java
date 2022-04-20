@@ -1,5 +1,7 @@
 package gui;
 
+import java.nio.charset.IllegalCharsetNameException;
+
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -54,14 +56,17 @@ public class RegistratieEnLoginPaneel extends VBox {
     }
 
     private void registreer(ActionEvent actionEvent) {
-        String gebruikersnaam = this.txtNaam.getText();
-        int geboortejaar = Integer.parseInt(this.txtGeboortejaar.getText());
+    	
+    	
 
         try {
-            domeinController.registreer(gebruikersnaam, geboortejaar);
+        	controleerOfInputNietBlancoIs(this.txtNaam.getText());
+        	controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
+        	      
+            domeinController.registreer(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText()));
             txtNaam.setText("");
             txtGeboortejaar.setText("");
-            lblFeedback.setText((String.format("%s%n%s", domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(gebruikersnaam, geboortejaar))));
+            lblFeedback.setText((String.format("%s%n%s", domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText())))));
             lblFeedback.setVisible(true);
 
         } catch (IllegalArgumentException e) {
@@ -73,8 +78,13 @@ public class RegistratieEnLoginPaneel extends VBox {
     }
 
     private void login(ActionEvent actionEvent) {
+    	
+    	
 
         try {
+        	controleerOfInputNietBlancoIs(this.txtNaam.getText());
+        	controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
+        	
             domeinController.meldAan(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText()));
             lblFeedback.setText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
             lblFeedback.setVisible(true);
@@ -103,6 +113,13 @@ public class RegistratieEnLoginPaneel extends VBox {
     private void quit(ActionEvent actionEvent) {
         System.exit(0);
 
+    }
+    
+    private void controleerOfInputNietBlancoIs(String input) {
+    	
+    if(input.isBlank() || input.isEmpty() || input.equals(null)) {
+    	throw new IllegalArgumentException("BLANCO_INPUT");
+    }
     }
 }
 

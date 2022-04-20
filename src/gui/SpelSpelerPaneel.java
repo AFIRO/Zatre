@@ -44,6 +44,8 @@ public class SpelSpelerPaneel extends VBox {
 		this.getChildren().removeIf(node -> node instanceof SteenGUI);
 	}
 
+	
+	//kunnen we deze methode niet definieren in de HoofdPaneel en de methode aanspreken met methode reference? Lorenz
 	private void cancelSpel(ActionEvent actionEvent) {
 		domeinController.cancelSpel();
 		hoofdPaneel.setCenter(menuPaneel);
