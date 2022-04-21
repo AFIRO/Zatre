@@ -16,6 +16,8 @@ public class SteenGUI extends ImageView {
         this.waarde = waarde;
         Image image = koppelJuisteFotoAanWaarde(waarde);
         super.setImage(image);
+        super.setFitHeight(image.getHeight()*0.5);
+        super.setFitWidth(image.getWidth()*0.5);
     }
 
 

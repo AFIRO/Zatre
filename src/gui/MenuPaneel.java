@@ -19,7 +19,7 @@ public class MenuPaneel extends VBox {
 	private final RegistratieEnLoginPaneel registratieEnLoginPaneel;
 	private final SpelPaneel spelPaneel;
 	private final TaalPaneel taalPaneel;
-	private Label lblLoggedOn;
+	public Label lblLoggedOn;
 
 	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController, TaalPaneel taalPaneel) {
 		this.hoofdPaneel = hoofdPaneel;
@@ -55,7 +55,7 @@ public class MenuPaneel extends VBox {
 
 	}
 
-	private void starten(ActionEvent actionEvent) {
+	public void starten(ActionEvent actionEvent) {
 		try {
 			domeinController.startSpel();
 			Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();

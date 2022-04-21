@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class SpelPaneel extends BorderPane {
     private final DomeinController domeinController;
@@ -27,6 +29,8 @@ public class SpelPaneel extends BorderPane {
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
         this.spelBordPaneel = new SpelBordPaneel(domeinController);
         this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
+       // this.setPrefHeight(getMaxHeight());
+       // this.setPrefWidth(getMaxWidth());
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);

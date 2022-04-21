@@ -18,6 +18,7 @@ public class RegistratieEnLoginPaneel extends VBox {
     private TextField txtNaam;
     private TextField txtGeboortejaar;
     private Label lblFeedback;
+    private Button btnSpelStarten;
 
     public RegistratieEnLoginPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.hoofdPaneel = hoofdPaneel;
@@ -40,25 +41,27 @@ public class RegistratieEnLoginPaneel extends VBox {
         Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("REGISTREER_KNOP"));
         Button btnLogin = new Button(domeinController.getTaal().getLocalisatie("LOGIN_KNOP"));
         Button btnBack = new Button(domeinController.getTaal().getLocalisatie("TERUG"));
+        btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
         alignmentBoxEersteRij.getChildren().addAll(btnRegistreer,btnLogin);
-        alignmentBoxTweedeRij.getChildren().addAll(btnBack,btnQuit);
+        alignmentBoxTweedeRij.getChildren().addAll(btnBack, btnSpelStarten, btnQuit);
 
         btnRegistreer.setOnAction(this::registreer);
         btnLogin.setOnAction(this::login);
+        btnSpelStarten.setOnAction(this::starten);
         btnBack.setOnAction(this::back);
         btnQuit.setOnAction(this::quit);
 
         lblFeedback = new Label();
         lblFeedback.setVisible(false);
+       
 
         this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar,alignmentBoxEersteRij,alignmentBoxTweedeRij, lblFeedback);
+        btnSpelStarten.setVisible(false);
     }
 
     private void registreer(ActionEvent actionEvent) {
     	
-    	
-
         try {
         	controleerOfInputNietBlancoIs(this.txtNaam.getText());
         	controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
@@ -79,8 +82,6 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     private void login(ActionEvent actionEvent) {
     	
-    	
-
         try {
         	controleerOfInputNietBlancoIs(this.txtNaam.getText());
         	controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
@@ -88,6 +89,10 @@ public class RegistratieEnLoginPaneel extends VBox {
             domeinController.meldAan(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText()));
             lblFeedback.setText(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
             lblFeedback.setVisible(true);
+           
+            if(domeinController.geefSpelers().size()>=2) {
+            	btnSpelStarten.setVisible(true);
+            }
 
             if (domeinController.geefSpelers().size() >= 4) {
                 menuPaneel.updateLoggedOnPlayerLabel();
@@ -112,7 +117,10 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     private void quit(ActionEvent actionEvent) {
         System.exit(0);
-
+    }
+    
+    private void starten(ActionEvent actionEvent) {
+    	menuPaneel.starten(actionEvent);
     }
     
     private void controleerOfInputNietBlancoIs(String input) {
