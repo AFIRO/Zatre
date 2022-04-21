@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -48,6 +49,9 @@ public class SpelSpelerPaneel extends VBox {
 	private void cancelSpel(ActionEvent actionEvent) {
 		domeinController.cancelSpel();
 		menuPaneel.lblLoggedOn.setVisible(false);
+		Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
+		stage.setWidth(500);
+		stage.setHeight(500);
 		hoofdPaneel.setCenter(menuPaneel);
 	}
 }

@@ -11,7 +11,7 @@ public class StartUp extends Application
     public void start(Stage stage) 
     {
         DomeinController domeinController = new DomeinController();
-        Scene scene = new Scene(new HoofdPaneel(domeinController), 1000, 1000); //breedte x hoogte
+        Scene scene = new Scene(new HoofdPaneel(domeinController), 500, 500); //breedte x hoogte
         stage.setScene(scene);
         stage.setTitle("Zatre Application");
         stage.show();

@@ -29,8 +29,8 @@ public class SpelPaneel extends BorderPane {
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
         this.spelBordPaneel = new SpelBordPaneel(domeinController);
         this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
-       // this.setPrefHeight(getMaxHeight());
-       // this.setPrefWidth(getMaxWidth());
+        this.setMaxHeight(1200);
+        this.setMaxWidth(1200);
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
