@@ -6,12 +6,13 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import util.Taal;
 
 
-public class TaalPaneel extends HBox {
+public class TaalPaneel extends VBox {
     private final HoofdPaneel hoofdPaneel;
     private DomeinController domeinController;
 
@@ -22,11 +23,12 @@ public class TaalPaneel extends HBox {
     }
 
     private void voegComponentenToe() {
-    	
-    
+    	 
+    	this.setStyle("#566454"); //verder uit te zoeken, ik wil de achtergrond in dit kleurtje
     	
     	Text txtHeader = new Text("Kies uw taal / Choose your language:");
-        GridPane.setHalignment(txtHeader, HPos.LEFT);   
+        GridPane.setHalignment(txtHeader, HPos.LEFT);  
+        txtHeader.setStyle("-fx-font-size: 2em;");
         
        
         Button btnNederlands = new Button("Nederlands");
@@ -35,19 +37,30 @@ public class TaalPaneel extends HBox {
         btnNederlands.setOnAction(this::setTaalNederlands);
         btnNederlands.setPadding(new Insets(10, 10, 10, 10));
         btnNederlands.setLineSpacing(100);
+        btnNederlands.setMaxWidth(200);
+        btnNederlands.setStyle("-fx-background-color: #8DFC79;"
+        		+ "-fx-border-color: #000000;"
+        		+ "-fx-border-width: 2px;"
+        		+ "-fx-font-size: 2em;");
+        
         
         btnEngels.setOnAction(this::setTaalEngels);
         btnEngels.setPadding(new Insets(10, 10, 10, 10));
         btnEngels.setLineSpacing(100);
+        btnEngels.setMaxWidth(200);
+        btnEngels.setStyle("-fx-background-color: #8DFC79;"
+        		+ "-fx-border-color: #000000;"
+        		+ "-fx-border-width: 2px;"
+        		+ "-fx-font-size: 2em");
         
-        this.setSpacing(20.0);           
+        this.setSpacing(20.0);    
         
         this.getChildren().addAll(txtHeader, btnNederlands,btnEngels);
         
     }
 
 
-    private void setTaalNederlands(ActionEvent actionEvent) {
+   private void setTaalNederlands(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.NEDERLANDS));
     	hoofdPaneel.taalGekozen();
     }
