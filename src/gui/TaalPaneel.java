@@ -3,14 +3,15 @@ package gui;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import util.Taal;
 
 
-public class TaalPaneel extends VBox {
+public class TaalPaneel extends HBox {
     private final HoofdPaneel hoofdPaneel;
     private DomeinController domeinController;
 
@@ -21,13 +22,28 @@ public class TaalPaneel extends VBox {
     }
 
     private void voegComponentenToe() {
-        Text txtHeader = new Text("Kies uw taal / Choose your language:");
-        GridPane.setHalignment(txtHeader, HPos.LEFT);
+    	
+    
+    	
+    	Text txtHeader = new Text("Kies uw taal / Choose your language:");
+        GridPane.setHalignment(txtHeader, HPos.LEFT);   
+        
+       
         Button btnNederlands = new Button("Nederlands");
-        Button btnEngels = new Button("Engels");
+        Button btnEngels = new Button("English");
+        
         btnNederlands.setOnAction(this::setTaalNederlands);
+        btnNederlands.setPadding(new Insets(10, 10, 10, 10));
+        btnNederlands.setLineSpacing(100);
+        
         btnEngels.setOnAction(this::setTaalEngels);
-        this.getChildren().addAll(txtHeader,btnNederlands,btnEngels);
+        btnEngels.setPadding(new Insets(10, 10, 10, 10));
+        btnEngels.setLineSpacing(100);
+        
+        this.setSpacing(20.0);           
+        
+        this.getChildren().addAll(txtHeader, btnNederlands,btnEngels);
+        
     }
 
 
