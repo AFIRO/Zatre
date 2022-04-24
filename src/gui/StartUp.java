@@ -13,8 +13,9 @@ public class StartUp extends Application
         DomeinController domeinController = new DomeinController();
         Scene scene = new Scene(new HoofdPaneel(domeinController), 500, 500); //breedte x hoogte
         stage.setScene(scene);
-        stage.setTitle("Zatre Application");
+        stage.setTitle("Zatre");
         stage.show();
+        
     }
 
     public static void main(String... args)

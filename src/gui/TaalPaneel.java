@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import util.Taal;
 
@@ -25,7 +24,7 @@ public class TaalPaneel extends VBox {
 
     private void voegComponentenToe() {
     	 
-    	this.setStyle("-fx-background-color: #566454"); //verder uit te zoeken, ik wil de achtergrond in dit kleurtje
+    	this.setStyle("-fx-background-color: #566454"); 
     	Text txtHeader = new Text("Kies uw taal / Choose your language:");
         GridPane.setHalignment(txtHeader, HPos.CENTER);  
         this.setAlignment(Pos.TOP_CENTER);
