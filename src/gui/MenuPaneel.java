@@ -38,10 +38,10 @@ public class MenuPaneel extends VBox {
 		this.setAlignment(Pos.TOP_CENTER);
 		
 		Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
-		  header.setStyle("-fx-font-size: 2em;");
+		  header.setStyle("-fx-font-size: 3em;");
 		  
 		Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
-		  subheader.setStyle("-fx-font-size: 1.8em");
+		  subheader.setStyle("-fx-font-size: 2em");
 		  
 		VBox alignmentBoxButtons = new VBox();
 		
