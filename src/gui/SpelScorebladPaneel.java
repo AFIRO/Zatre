@@ -17,12 +17,19 @@ public class SpelScorebladPaneel extends VBox {
 		this.domeinController = domeinController;
 		this.txfScoreblad.setEditable(false);
 		this.setPrefHeight(1000);
-		this.setPrefWidth(300);
+		this.setPrefWidth(350);
 		this.setAlignment(Pos.BASELINE_LEFT);
 		voegComponentenToe();
 	}
 
 	private void voegComponentenToe() {
+		lblTitel.setStyle("-fx-font-size: 2em");
+		lblActieveSpeler.setStyle("-fx-font-size: 1.5em");
+		
+		txfScoreblad.setAlignment(Pos.CENTER);
+		txfScoreblad.setMaxWidth(300);
+		
+		
 		this.getChildren().addAll(lblTitel,lblActieveSpeler,txfScoreblad);
 
 	}

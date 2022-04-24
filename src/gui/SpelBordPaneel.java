@@ -26,7 +26,7 @@ public class SpelBordPaneel extends GridPane{
 		StackPane centeringPane = new StackPane();
 		Image spelbord = new Image(SPELBORD_LOCATIE);
 		imgSpelbord.setImage(spelbord);
-		imgSpelbord.setFitWidth(1300);
+		imgSpelbord.setFitWidth(1000);
 		imgSpelbord.setFitHeight(1000);
 		centeringPane.getChildren().add(imgSpelbord);
 		StackPane.setAlignment(imgSpelbord, Pos.CENTER);

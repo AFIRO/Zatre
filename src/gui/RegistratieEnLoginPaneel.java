@@ -42,7 +42,7 @@ public class RegistratieEnLoginPaneel extends VBox {
         txtNaam = new TextField();
         txtNaam.setMaxWidth(250);
         txtNaam.setMaxHeight(100);
-        txtNaam.setStyle("-fx-font-size: 1.5em;");
+        txtNaam.setStyle("-fx-font-size: 1.5em; -fx-alignment: center");
         
 
         final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
@@ -50,7 +50,7 @@ public class RegistratieEnLoginPaneel extends VBox {
         txtGeboortejaar = new TextField();
         txtGeboortejaar.setMaxWidth(250);
         txtGeboortejaar.setMaxHeight(100);
-        txtGeboortejaar.setStyle("-fx-font-size: 1.5em;");
+        txtGeboortejaar.setStyle("-fx-font-size: 1.5em; -fx-alignment: center");
         HBox alignmentBoxEersteRij = new HBox();
         HBox alignmentBoxTweedeRij = new HBox();
         Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("REGISTREER_KNOP"));

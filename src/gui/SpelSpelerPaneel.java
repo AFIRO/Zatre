@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,6 +22,7 @@ public class SpelSpelerPaneel extends VBox {
 	private final MenuPaneel menuPaneel;
 	private final HoofdPaneel hoofdPaneel;
 	private boolean eersteBeurt = true;
+	VBox steentjesBox;
 
 	public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
 		this.hoofdPaneel = hoofdPaneel;
@@ -33,12 +35,22 @@ public class SpelSpelerPaneel extends VBox {
 
 		this.setAlignment(Pos.TOP_CENTER);
 		this.setMinWidth(300);
+		this.setMinHeight(1000);
 		VBox knoppenBox = new VBox();
+		steentjesBox = new VBox();
 		Button btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
 		Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
 
 		knoppenBox.getChildren().addAll(btnVraagSteentjes, btnCancelSpel);
-		this.setSpacing(20);
+		this.setSpacing(150);
+		knoppenBox.setSpacing(20);
+		steentjesBox.setSpacing(20);
+		knoppenBox.setAlignment(Pos.TOP_CENTER);
+		steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
+		
+		
+			steentjesBox.setOnMouseClicked(this::klikOpSteen);
+		
 
 		btnVraagSteentjes.setOnAction(this::vraagSteentjes);
 		btnVraagSteentjes.setPadding(new Insets(5, 5, 5, 5));
@@ -56,7 +68,12 @@ public class SpelSpelerPaneel extends VBox {
 		btnCancelSpel.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;"
 				+ "-fx-border-width: 2px;" + "-fx-font-size: 1em");
 
-		this.getChildren().addAll(btnVraagSteentjes, btnCancelSpel);
+		this.getChildren().addAll(knoppenBox, steentjesBox);
+	}
+	
+	
+	private void klikOpSteen(MouseEvent event) {
+		//wat moet er gebeuren wanneer de de steentjes aanklikken
 	}
 
 	private void vraagSteentjes(ActionEvent actionEvent) {
@@ -65,7 +82,7 @@ public class SpelSpelerPaneel extends VBox {
 		if (eersteBeurt)
 			eersteBeurt = false;
 		for (int waarde : stenen) {
-			this.getChildren().addAll(new SteenGUI(waarde));
+			steentjesBox.getChildren().addAll(new SteenGUI(waarde));
 		}
 	}
 
