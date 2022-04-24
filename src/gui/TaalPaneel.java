@@ -4,6 +4,7 @@ import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -24,10 +25,11 @@ public class TaalPaneel extends VBox {
 
     private void voegComponentenToe() {
     	 
-    	this.setStyle("#566454"); //verder uit te zoeken, ik wil de achtergrond in dit kleurtje
-    	
+    	this.setStyle("-fx-background-color: #566454"); //verder uit te zoeken, ik wil de achtergrond in dit kleurtje
     	Text txtHeader = new Text("Kies uw taal / Choose your language:");
-        GridPane.setHalignment(txtHeader, HPos.LEFT);  
+        GridPane.setHalignment(txtHeader, HPos.CENTER);  
+        this.setAlignment(Pos.TOP_CENTER);
+      
         txtHeader.setStyle("-fx-font-size: 2em;");
         
        
@@ -38,6 +40,7 @@ public class TaalPaneel extends VBox {
         btnNederlands.setPadding(new Insets(10, 10, 10, 10));
         btnNederlands.setLineSpacing(100);
         btnNederlands.setMaxWidth(200);
+        btnNederlands.setAlignment(Pos.CENTER);
         btnNederlands.setStyle("-fx-background-color: #8DFC79;"
         		+ "-fx-border-color: #000000;"
         		+ "-fx-border-width: 2px;"
@@ -48,6 +51,7 @@ public class TaalPaneel extends VBox {
         btnEngels.setPadding(new Insets(10, 10, 10, 10));
         btnEngels.setLineSpacing(100);
         btnEngels.setMaxWidth(200);
+        btnEngels.setAlignment(Pos.CENTER);
         btnEngels.setStyle("-fx-background-color: #8DFC79;"
         		+ "-fx-border-color: #000000;"
         		+ "-fx-border-width: 2px;"

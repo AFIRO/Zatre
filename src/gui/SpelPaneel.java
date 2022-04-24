@@ -29,14 +29,13 @@ public class SpelPaneel extends BorderPane {
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
         this.spelBordPaneel = new SpelBordPaneel(domeinController);
         this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
-        this.setMaxHeight(1200);
-        this.setMaxWidth(1200);
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
         this.setRight(spelScorebladPaneel);
         setAlignment(spelScorebladPaneel, Pos.BASELINE_LEFT);
         setAlignment(spelBordPaneel,Pos.CENTER);
+        this.setStyle("-fx-background-color: #566454");
     }
 
     public SpelScorebladPaneel getSpelScorebladPaneel() {

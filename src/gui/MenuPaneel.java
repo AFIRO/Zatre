@@ -3,6 +3,8 @@ package gui;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -33,24 +35,71 @@ public class MenuPaneel extends VBox {
 
 	private void voegComponentenToe() {
 
+		this.setStyle("-fx-background-color: #566454");
+		this.setAlignment(Pos.TOP_CENTER);
+		
 		Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
+		  header.setStyle("-fx-font-size: 2em;");
+		  
 		Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
-		HBox alignmentBoxEersteRij = new HBox();
-		HBox alignmentBoxTweedeRij = new HBox();
+		  subheader.setStyle("-fx-font-size: 1.8em");
+		  
+		VBox alignmentBoxButtons = new VBox();
+		
 		Button btnRegistreerAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3") + "/" + domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
 		Button btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
 		Button btnKiesTaal = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_8"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
-		alignmentBoxEersteRij.getChildren().addAll(btnRegistreerAanmelden,btnSpelStarten);
-		alignmentBoxTweedeRij.getChildren().addAll(btnKiesTaal,btnQuit);
+		alignmentBoxButtons.getChildren().addAll(btnRegistreerAanmelden,btnSpelStarten,btnKiesTaal,btnQuit);
+	
+		alignmentBoxButtons.setAlignment(Pos.CENTER);
+		alignmentBoxButtons.setSpacing(20.0);		
+		
 		lblLoggedOn = new Label();
 		btnRegistreerAanmelden.setOnAction(this::registreerAanmelden);
+		btnRegistreerAanmelden.setPadding(new Insets(10, 10, 10, 10));
+		btnRegistreerAanmelden.setLineSpacing(100);
+		btnRegistreerAanmelden.setMaxWidth(250);
+		btnRegistreerAanmelden.setAlignment(Pos.CENTER);
+		btnRegistreerAanmelden.setStyle("-fx-background-color: #8DFC79;"
+	        		+ "-fx-border-color: #000000;"
+	        		+ "-fx-border-width: 2px;"
+	        		+ "-fx-font-size: 2em;");
+		
 		btnSpelStarten.setOnAction(this::starten);
+		btnSpelStarten.setPadding(new Insets(10, 10, 10, 10));
+		btnSpelStarten.setLineSpacing(100);
+		btnSpelStarten.setMaxWidth(250);
+		btnSpelStarten.setAlignment(Pos.CENTER);
+		btnSpelStarten.setStyle("-fx-background-color: #8DFC79;"
+	        		+ "-fx-border-color: #000000;"
+	        		+ "-fx-border-width: 2px;"
+	        		+ "-fx-font-size: 2em;");
+		
 		btnKiesTaal.setOnAction(this::kiesTaal);
-		lblLoggedOn.setVisible(false);
+		btnKiesTaal.setPadding(new Insets(10, 10, 10, 10));
+		btnKiesTaal.setLineSpacing(100);
+		btnKiesTaal.setMaxWidth(250);
+		btnKiesTaal.setAlignment(Pos.CENTER);
+		btnKiesTaal.setStyle("-fx-background-color: #8DFC79;"
+	        		+ "-fx-border-color: #000000;"
+	        		+ "-fx-border-width: 2px;"
+	        		+ "-fx-font-size: 2em;");
+		
+	
 		btnQuit.setOnAction(this::quit);
+		btnQuit.setPadding(new Insets(10, 10, 10, 10));
+		btnQuit.setLineSpacing(100);
+		btnQuit.setMaxWidth(250);
+		btnQuit.setAlignment(Pos.CENTER);
+		btnQuit.setStyle("-fx-background-color: #8DFC79;"
+	        		+ "-fx-border-color: #000000;"
+	        		+ "-fx-border-width: 2px;"
+	        		+ "-fx-font-size: 2em;");
+	        
+	    	lblLoggedOn.setVisible(false);
 
-		this.getChildren().addAll(header, subheader, alignmentBoxEersteRij, alignmentBoxTweedeRij,
+		this.getChildren().addAll(header, subheader, alignmentBoxButtons,
 				lblLoggedOn);
 
 	}
