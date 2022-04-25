@@ -16,6 +16,7 @@ public class SpelPaneel extends BorderPane {
     private SpelScorebladPaneel spelScorebladPaneel;
     private SpelBordPaneel spelBordPaneel;
     private SpelSpelerPaneel spelSpelerPaneel;
+    
 
     public SpelPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.domeinController = domeinController;

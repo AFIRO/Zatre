@@ -107,8 +107,10 @@ public class MenuPaneel extends VBox {
 		try {
 			domeinController.startSpel();
 			Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
+			stage.setMaximized(true);
 			stage.setWidth(1750);
 			stage.setHeight(1070);
+			
 			this.spelPaneel.getSpelScorebladPaneel().updateInfo(0);
 			hoofdPaneel.setCenter(spelPaneel);
 		} catch (IllegalArgumentException e) {
