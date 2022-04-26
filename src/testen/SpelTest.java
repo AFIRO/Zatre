@@ -2,8 +2,6 @@ package testen;
 
 import domein.Spel;
 import domein.Speler;
-import domein.Steen;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

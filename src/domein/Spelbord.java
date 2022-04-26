@@ -19,7 +19,7 @@ public class Spelbord {
      * vervolgens stellen we de kleur van de diagonalen in op wit 
      * dan voegen we de buitenste vakjes toe
      * en hiervan stellen we ook de correcte vakjes in op wit
-     * @return
+     * @return het spelbord
      */
     private Map<String, Vak> genereerSpelbord() {
         Map<String, Vak> vakjes = new HashMap<>();
@@ -85,7 +85,7 @@ public class Spelbord {
     
     /**
      * UC3: vraagt de vakjes op en return de Map hiervan
-     * @return
+     * @return de vakjes in het spelbord
      */
     public Map<String, Vak> getVakjes() {
         return vakjes;

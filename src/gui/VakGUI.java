@@ -1,13 +1,13 @@
 package gui;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class VakGUI extends Button {
+public class VakGUI extends Rectangle {
     private SteenGUI steen;
     private final int rij;
     private final int kolom;
@@ -15,17 +15,17 @@ public class VakGUI extends Button {
     /**
      * UC3 constructor voor vak, kleur wordt standaard op zwart ingesteld
      * Vakje heeft bij initialisatie een steen met waarde nul zonder foto.
+     * @param zijkant: de zijkant van vierkant
      * @param kolom: kolom van vakje
      * @param rij: rij van vakje
      */
 
-    public VakGUI(int rij, int kolom) {
-        super();
+    public VakGUI(int zijkant, int rij, int kolom) {
         this.rij = rij;
         this.kolom = kolom;
-        this.steen = new SteenGUI(0);
-
-        this.setStyle("-fx-background-color: #000000");
+        setHeight(zijkant);
+        setWidth(zijkant);
+        relocate(rij * zijkant,kolom * zijkant);
     }
 
     /**
@@ -33,7 +33,7 @@ public class VakGUI extends Button {
      */
 
     public void veranderKleurNaarWit(){
-        this.setStyle("-fx-background-color: #ffffff");
+        this.setFill(Color.WHITE);
     }
 
     /**

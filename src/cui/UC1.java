@@ -1,7 +1,6 @@
 package cui;
 
 import domein.DomeinController;
-import util.Taal;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

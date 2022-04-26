@@ -2,11 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 public class SpelPaneel extends BorderPane {
     private final DomeinController domeinController;
@@ -24,12 +20,16 @@ public class SpelPaneel extends BorderPane {
         this.menuPaneel = menuPaneel;
         setSpelSchermen();
     }
+
+    /**
+     * UC4: creert de nodige elementen die deel zullen uitmaken van het spelpaneel en zet ze op de juiste plaatsen.
+     */
     
     private void setSpelSchermen() {
         this.spelLogoPaneel = new SpelLogoPaneel(domeinController);
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
-        this.spelBordPaneel = new SpelBordPaneel(domeinController);
-        this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
+        this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel,domeinController);
+        this.spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
@@ -43,15 +43,4 @@ public class SpelPaneel extends BorderPane {
         return spelScorebladPaneel;
     }
 
-    public SpelLogoPaneel getSpelLogoPaneel() {
-        return spelLogoPaneel;
-    }
-
-    public SpelBordPaneel getSpelBordPaneel() {
-        return spelBordPaneel;
-    }
-
-    public SpelSpelerPaneel getSpelSpelerPaneel() {
-        return spelSpelerPaneel;
-    }
 }

@@ -1,7 +1,5 @@
 package gui;
 
-import java.nio.charset.IllegalCharsetNameException;
-
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
