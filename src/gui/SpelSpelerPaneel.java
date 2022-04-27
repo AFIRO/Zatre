@@ -111,7 +111,7 @@ public class SpelSpelerPaneel extends VBox {
 		if (result.get() == ButtonType.OK) {
 
 			domeinController.cancelSpel();
-			menuPaneel.lblLoggedOn.setVisible(false);
+			menuPaneel.getLblLoggedOn().setVisible(false);
 			Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
 			stage.setWidth(500);
 			stage.setHeight(500);

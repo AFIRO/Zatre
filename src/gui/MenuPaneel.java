@@ -17,7 +17,7 @@ public class MenuPaneel extends VBox {
 	private final RegistratieEnLoginPaneel registratieEnLoginPaneel;
 	private final SpelPaneel spelPaneel;
 	private final TaalPaneel taalPaneel;
-	public Label lblLoggedOn;
+	private Label lblLoggedOn;
 
 	public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController, TaalPaneel taalPaneel) {
 		this.hoofdPaneel = hoofdPaneel;
@@ -136,6 +136,10 @@ public class MenuPaneel extends VBox {
 
 	private void quit(ActionEvent actionEvent) {
 		System.exit(0);
-
 	}
+
+	public Label getLblLoggedOn() {
+		return lblLoggedOn;
+	}
+
 }

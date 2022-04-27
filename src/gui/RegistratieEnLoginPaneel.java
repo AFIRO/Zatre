@@ -11,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.Objects;
+
 public class RegistratieEnLoginPaneel extends VBox {
     private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
@@ -185,10 +187,9 @@ public class RegistratieEnLoginPaneel extends VBox {
     }
     
     private void controleerOfInputNietBlancoIs(String input) {
-    	
-    if(input.isBlank() || input.isEmpty() || input.equals(null)) {
-    	throw new IllegalArgumentException("BLANCO_INPUT");
-    }
+        if(Objects.nonNull(input) || input.isBlank()) {
+            throw new IllegalArgumentException("BLANCO_INPUT");
+        }
     }
 }
 
