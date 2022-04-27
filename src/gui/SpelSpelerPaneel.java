@@ -9,7 +9,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -23,10 +26,10 @@ public class SpelSpelerPaneel extends VBox {
     private VBox steentjesBox;
     private Button btnVraagSteentjes;
     private SteenGUI geklikteSteen;
-    private VakGUI gekliktVak;
-    private final Label lblGeselecteerdVak = new Label("Ik besta vak");
-    private final Label lblGeselecteerdeSteen = new Label("Ik besta steen");
-    private final Label lblFeedbackVoorSpelers = new Label("Ik besta feedback");
+    private StackPane gekliktVak;
+    private final Label lblGeselecteerdVak = new Label();
+    private final Label lblGeselecteerdeSteen = new Label();
+    private final Label lblFeedbackVoorSpelers = new Label();
 
 
     public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
@@ -45,8 +48,8 @@ public class SpelSpelerPaneel extends VBox {
         steentjesBox = new VBox();
         btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
         Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
-
-        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnCancelSpel);
+        Button btnZetSteenOpVakje = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
+        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnCancelSpel);
         this.setSpacing(150);
         knoppenBox.setSpacing(20);
         steentjesBox.setSpacing(20);
@@ -54,24 +57,29 @@ public class SpelSpelerPaneel extends VBox {
         steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
 
         btnVraagSteentjes.setOnAction(this::vraagSteentjes);
-        btnVraagSteentjes.setPadding(new Insets(5, 5, 5, 5));
-        btnVraagSteentjes.setLineSpacing(100);
-        btnVraagSteentjes.setMaxWidth(150);
-        btnVraagSteentjes.setAlignment(Pos.CENTER);
-        btnVraagSteentjes.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;" + "-fx-font-size: 1em");
-
         btnCancelSpel.setOnAction(this::cancelSpel);
-        btnCancelSpel.setPadding(new Insets(5, 5, 5, 5));
-        btnCancelSpel.setLineSpacing(100);
-        btnCancelSpel.setMaxWidth(150);
-        btnCancelSpel.setAlignment(Pos.CENTER);
-        btnCancelSpel.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;" + "-fx-font-size: 1em");
+        btnZetSteenOpVakje.setOnAction(this::zetSteenOpVakje);
+        zetCSSVanKnopGoed(btnVraagSteentjes);
+        zetCSSVanKnopGoed(btnCancelSpel);
+        zetCSSVanKnopGoed(btnZetSteenOpVakje);
 
         knoppenBox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
 
         this.getChildren().addAll(knoppenBox, steentjesBox);
+    }
+
+    /**
+     * UC3: zet de CSS van de doorgegeven knop goed.
+     *
+     * @param knop de knop
+     */
+    private void zetCSSVanKnopGoed(Button knop) {
+        knop.setPadding(new Insets(5, 5, 5, 5));
+        knop.setLineSpacing(100);
+        knop.setMaxWidth(150);
+        knop.setAlignment(Pos.CENTER);
+        knop.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;"
+                + "-fx-border-width: 2px;" + "-fx-font-size: 1em");
     }
 
     /**
@@ -115,6 +123,7 @@ public class SpelSpelerPaneel extends VBox {
             Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
             stage.setWidth(500);
             stage.setHeight(500);
+            this.menuPaneel.setSpelPaneel(new SpelPaneel(this.hoofdPaneel, this.menuPaneel, this.domeinController));
             hoofdPaneel.setCenter(menuPaneel);
         }
 
@@ -138,7 +147,7 @@ public class SpelSpelerPaneel extends VBox {
      * @param gekliktVak de betrokken vak
      */
 
-    public void setGekliktVak(VakGUI gekliktVak) {
+    public void setGekliktVak(StackPane gekliktVak) {
         this.gekliktVak = gekliktVak;
         updateFeedbackLabel();
     }
@@ -152,14 +161,25 @@ public class SpelSpelerPaneel extends VBox {
         String steenTekst = "";
 
         if (Objects.nonNull(geklikteSteen)) {
-            steenTekst = "Geselecteerde Steen: " + geklikteSteen.getWaarde();
+            steenTekst = domeinController.getTaal().getLocalisatie("GESELECTEERDE_STEEN") + geklikteSteen.getWaarde();
         }
 
         if (Objects.nonNull(gekliktVak)) {
-            vakTekst = "Geselecteerd Vak: " + gekliktVak.getKolom() + "." + gekliktVak.getRij();
+            vakTekst = domeinController.getTaal().getLocalisatie("GESELECTEERD_VAKJE") + ((VakGUI) gekliktVak.getChildren().get(0)).getKolom() + "." + ((VakGUI) gekliktVak.getChildren().get(0)).getRij();
         }
         lblGeselecteerdVak.setText(vakTekst);
         lblGeselecteerdeSteen.setText(steenTekst);
         lblFeedbackVoorSpelers.setVisible(true);
+    }
+
+    private void zetSteenOpVakje(ActionEvent actionEvent) {
+        if (Objects.isNull(gekliktVak) || Objects.isNull(geklikteSteen)) {
+            lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("SELECTEER_STEEN_EN_VAK"));
+            lblFeedbackVoorSpelers.setVisible(true);
+        } else {
+            ((Text) gekliktVak.getChildren().get(1)).setText(String.valueOf(geklikteSteen.getWaarde()));
+            ((ImageView) gekliktVak.getChildren().get(2)).setImage(geklikteSteen.getImage());
+            ;
+        }
     }
 }

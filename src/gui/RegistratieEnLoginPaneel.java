@@ -183,6 +183,7 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     private void starten(ActionEvent actionEvent) {
         menuPaneel.starten(actionEvent);
+        btnSpelStarten.setVisible(false);
     }
 
     private void controleerOfInputNietBlancoIs(String input) {

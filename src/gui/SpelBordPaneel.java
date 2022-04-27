@@ -2,8 +2,11 @@ package gui;
 
 import domein.DomeinController;
 import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.util.List;
 
@@ -75,13 +78,20 @@ public class SpelBordPaneel extends GridPane {
                 //maak startvakje 8.8 rood
                 if (rij == 8 && kolom == 8)
                     vak.setFill(Color.RED);
+                //voeg eventhandler toe voor extractie van coordinaten
+                //maak stackpane voor vak en tekst erop
+                StackPane vakStack = new StackPane();
+                vakStack.setOnMousePressed(event -> clickVak(vakStack));
+                Text ietsDatOpHetVakGeschrevenZalWorden = new Text("");
+                ImageView fotoVoorOpVakje = new ImageView();
+                fotoVoorOpVakje.setFitHeight(40);
+                fotoVoorOpVakje.setFitWidth(40);
+                vakStack.getChildren().addAll(vak,ietsDatOpHetVakGeschrevenZalWorden,fotoVoorOpVakje);
                 //plaats vakje op correcte plaats in gridpane
-                setRowIndex(vak, rij);
-                setColumnIndex(vak, kolom);
-                //voeg eventhandler toe voor extra van coordinaten
-                vak.setOnMousePressed(event -> clickVak(vak));
+                setRowIndex(vakStack, rij);
+                setColumnIndex(vakStack, kolom);
                 //voeg vakje toe aan gridpane
-                this.getChildren().add(vak);
+                this.getChildren().add(vakStack);
             }
         }
 
@@ -91,7 +101,7 @@ public class SpelBordPaneel extends GridPane {
      * UC3: eventhandler die indentiteit van vak doorstuurd naar correct paneel.
      */
 
-    private void clickVak(VakGUI vak) {
+    private void clickVak(StackPane vak) {
         this.spelSpelerPaneel.setGekliktVak(vak);
     }
 
