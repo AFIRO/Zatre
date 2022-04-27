@@ -398,6 +398,7 @@ public class Spel {
 
     /**
      * UC4: tussentijdse evaluatie op legaliteit van zet
+     *
      * @param vak het vakje waar steen op komt
      * @return of de zet op eerste zicht zou mogen
      */
@@ -411,6 +412,7 @@ public class Spel {
 
     /**
      * UC4: eind evaluatie op legaliteit van zet op basis van een simulatie. Na methode wordt bord staat gereset.
+     *
      * @param zetten de geplande zetten in String formaat
      * @return of de zet legaal is
      */
@@ -453,6 +455,7 @@ public class Spel {
 
     /**
      * UC4: controleer of de zet of dit legaal is qua score en ligging
+     *
      * @param vak het vak dat onderzocht gaat worden
      * @return of de zet legaal is
      */
@@ -489,7 +492,8 @@ public class Spel {
 
     /**
      * UC4: controleer of de zet op een witte steen mag liggen op basis van gevormde score
-     * @param vak het vak dat onderzocht gaat worden
+     *
+     * @param vak  het vak dat onderzocht gaat worden
      * @param punt de score
      * @return of de zet legaal is
      */
@@ -501,6 +505,7 @@ public class Spel {
 
     /**
      * UC4: controleer of voor de eerste zet de drie zetten aangrenzen
+     *
      * @param vakkenPerZet de vakken die worden onderzocht
      * @return of de zet legaal is
      */
@@ -513,9 +518,10 @@ public class Spel {
 
     /**
      * UC4: parsed de zetten om zo bruikbare objecten te maken voor onderzoek
+     *
      * @param vakkenPerZet de lijst die de vakken zal bevatten na parsing
      * @param stenenPerZet de lijst die de stenen zal bevatten na parsing
-     * @param zet de te parsen zet
+     * @param zet          de te parsen zet
      */
 
     private void haalVakkenEnStenenUitDeZet(List<Vak> vakkenPerZet, List<Steen> stenenPerZet, String zet) {
@@ -526,6 +532,7 @@ public class Spel {
 
     /**
      * UC4: kijkt of het gespeelde vak minstens een andere steen raakt
+     *
      * @param vak de lijst die de vakken zal bevatten na parsing
      * @return of deze een steen raakt
      */
@@ -541,6 +548,7 @@ public class Spel {
 
     /**
      * UC4: reset methode voor staat na validatie
+     *
      * @param vakkenPerZet de vakken die gereset moeten worden
      */
 

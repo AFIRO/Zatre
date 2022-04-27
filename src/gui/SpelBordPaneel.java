@@ -86,7 +86,7 @@ public class SpelBordPaneel extends GridPane {
                 ImageView fotoVoorOpVakje = new ImageView();
                 fotoVoorOpVakje.setFitHeight(40);
                 fotoVoorOpVakje.setFitWidth(40);
-                vakStack.getChildren().addAll(vak,ietsDatOpHetVakGeschrevenZalWorden,fotoVoorOpVakje);
+                vakStack.getChildren().addAll(vak, ietsDatOpHetVakGeschrevenZalWorden, fotoVoorOpVakje);
                 //plaats vakje op correcte plaats in gridpane
                 setRowIndex(vakStack, rij);
                 setColumnIndex(vakStack, kolom);
