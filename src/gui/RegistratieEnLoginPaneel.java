@@ -186,7 +186,7 @@ public class RegistratieEnLoginPaneel extends VBox {
     }
 
     private void controleerOfInputNietBlancoIs(String input) {
-        if (Objects.nonNull(input) || input.isBlank()) {
+        if (Objects.isNull(input) || input.isBlank()) {
             throw new IllegalArgumentException("BLANCO_INPUT");
         }
     }
