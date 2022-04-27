@@ -223,7 +223,13 @@ public class DomeinController {
         return spel.isEindeSpel();
     }
 
-    
-    
+    public boolean checkOfZetLegaalIsTussenTijdseValidatie(String vak) {
+        return spel.checkOfZetLegaalIsTussenTijdseValidatie(vak);
+    }
+
+    public boolean checkOfZettenLegaalZijnEindValidatie(String[] zetten) {
+        return spel.checkOfZettenLegaalZijnEindValidatie(zetten);
+    }
+
 
 }

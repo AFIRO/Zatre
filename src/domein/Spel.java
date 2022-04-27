@@ -87,10 +87,10 @@ public class Spel {
     private void bepaalVolgordeSpelers() {
         Collections.shuffle(spelers);
     }
-    
+
     public void volgendeSpeler() {
-    	Collections.rotate(spelers, 1);   
-    	}
+        Collections.rotate(spelers, 1);
+    }
 
     /**
      * UC3: speelkansen van winnende speler worden +2 toegevoegd
@@ -136,7 +136,7 @@ public class Spel {
         volgendeSpeler();
         //geef een String representatie van de geupdatet scoreblad voor de GUI.
         return actieveSpeler.getScoreblad().getRegels();
-        
+
     }
 
     /**
@@ -394,6 +394,161 @@ public class Spel {
 
     public boolean isEindeSpel() {
         return !checkOfErNogStenenInHetZakjeZijn();
+    }
 
+    /**
+     * UC4: tussentijdse evaluatie op legaliteit van zet
+     * @param vak het vakje waar steen op komt
+     * @return of de zet op eerste zicht zou mogen
+     */
+
+    public boolean checkOfZetLegaalIsTussenTijdseValidatie(String vak) {
+        if (vak.equals("8.8") && !spelbord.getVakjes().get("8.8").bevatSteen()) {
+            return true;
+        }
+        return !spelbord.getVakjes().get(vak).bevatSteen();
+    }
+
+    /**
+     * UC4: eind evaluatie op legaliteit van zet op basis van een simulatie. Na methode wordt bord staat gereset.
+     * @param zetten de geplande zetten in String formaat
+     * @return of de zet legaal is
+     */
+
+    public boolean checkOfZettenLegaalZijnEindValidatie(String[] zetten) {
+        List<Vak> vakkenPerZet = new ArrayList<>();
+        List<Steen> stenenPerZet = new ArrayList<>();
+        for (String zet : zetten) {
+            haalVakkenEnStenenUitDeZet(vakkenPerZet, stenenPerZet, zet);
+        }
+        //eerste beurt
+        if (zetten.length == 3) {
+            //case aangrenzende stenen binnen eerste beurt
+            if (CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(vakkenPerZet))
+                return true;
+        }
+        //alle andere beurten
+        else {
+            //alle stenen op vakken voor simulatie
+            int steenCounter = 0;
+            for (Vak vak : vakkenPerZet) {
+                //een steen raakt altijd een andere steen
+                vak.setSteen(stenenPerZet.get(steenCounter));
+                if (!raaktVakMinstensEenAndereSteen(vak)) {
+                    verwijderStenenVanVakkenNaValidatie(vakkenPerZet);
+                    return false;
+                }
+                //legaliteit rond score
+                if (checkOfDeGevormdePuntenStrokenMetDeLiggingVanHetSteentje(vak)) {
+                    verwijderStenenVanVakkenNaValidatie(vakkenPerZet);
+                    return false;
+                }
+                vak.setSteen(null);
+                steenCounter++;
+            }
+        }
+        verwijderStenenVanVakkenNaValidatie(vakkenPerZet);
+        return true;
+    }
+
+    /**
+     * UC4: controleer of de zet of dit legaal is qua score en ligging
+     * @param vak het vak dat onderzocht gaat worden
+     * @return of de zet legaal is
+     */
+
+    private boolean checkOfDeGevormdePuntenStrokenMetDeLiggingVanHetSteentje(Vak vak) {
+        List<Integer> puntenHorizontaal = Arrays.stream(berekenScoreHorizontaal(vak, "").split(","))
+                .map(Integer::parseInt)
+                .toList();
+        List<Integer> puntenVertikaal = Arrays.stream(berekenScoreVerticaal(vak, berekenScoreHorizontaal(vak, "")).split(","))
+                .map(Integer::parseInt)
+                .toList();
+        for (Integer punt : puntenHorizontaal) {
+            //gevormde score is hoger dan 12
+            if (punt > 12) {
+                return true;
+            }
+            //case vakje wit maar gevormde score < 10;
+            if (checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(vak, punt)) {
+                return true;
+            }
+        }
+        for (Integer punt : puntenVertikaal) {
+            //gevormde score is hoger dan 12
+            if (punt > 12) {
+                return true;
+            }
+            //case vakje wit maar gevormde score < 10;
+            if (checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(vak, punt)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * UC4: controleer of de zet op een witte steen mag liggen op basis van gevormde score
+     * @param vak het vak dat onderzocht gaat worden
+     * @param punt de score
+     * @return of de zet legaal is
+     */
+
+    private boolean checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(Vak vak, Integer punt) {
+        //de 1 is de dubbele score multiplier
+        return vak.getKleur().equals(Vak.Kleur.WIT) && punt > 1 && punt < 10;
+    }
+
+    /**
+     * UC4: controleer of voor de eerste zet de drie zetten aangrenzen
+     * @param vakkenPerZet de vakken die worden onderzocht
+     * @return of de zet legaal is
+     */
+
+    private boolean CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(List<Vak> vakkenPerZet) {
+        boolean steenEenEnTweeAangrenzend = vakkenPerZet.get(0).geefVakjesNaastVak().containsKey(vakkenPerZet.get(1).getCoordinatenVanVak());
+        boolean steenTweeEnDrieAangrenzend = vakkenPerZet.get(1).geefVakjesNaastVak().containsKey(vakkenPerZet.get(2).getCoordinatenVanVak());
+        return steenEenEnTweeAangrenzend && steenTweeEnDrieAangrenzend;
+    }
+
+    /**
+     * UC4: parsed de zetten om zo bruikbare objecten te maken voor onderzoek
+     * @param vakkenPerZet de lijst die de vakken zal bevatten na parsing
+     * @param stenenPerZet de lijst die de stenen zal bevatten na parsing
+     * @param zet de te parsen zet
+     */
+
+    private void haalVakkenEnStenenUitDeZet(List<Vak> vakkenPerZet, List<Steen> stenenPerZet, String zet) {
+        Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(0, 3));
+        stenenPerZet.add(new Steen(Integer.parseInt(zet.substring(4))));
+        vakkenPerZet.add(vakWaaropSteenWerdGelegd);
+    }
+
+    /**
+     * UC4: kijkt of het gespeelde vak minstens een andere steen raakt
+     * @param vak de lijst die de vakken zal bevatten na parsing
+     * @return of deze een steen raakt
+     */
+
+    private boolean raaktVakMinstensEenAndereSteen(Vak vak) {
+        return vak.geefVakjesNaastVak().values().stream()
+                .filter(coordinaat -> coordinaat.equals("bestaat niet"))
+                .map((coordinaat) -> spelbord.getVakjes().get(coordinaat))
+                .map(Vak::bevatSteen)
+                .toList()
+                .contains(true);
+    }
+
+    /**
+     * UC4: reset methode voor staat na validatie
+     * @param vakkenPerZet de vakken die gereset moeten worden
+     */
+
+    private void verwijderStenenVanVakkenNaValidatie(List<Vak> vakkenPerZet) {
+        for (Vak vak : vakkenPerZet) {
+            vak.setSteen(null);
+        }
     }
 }
+
+

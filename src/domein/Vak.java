@@ -3,6 +3,7 @@ package domein;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Vak {
     public enum Kleur {WIT, ZWART}
@@ -148,5 +149,13 @@ public class Vak {
         }
 
         return omringendeVakjes;
+    }
+
+    public boolean bevatSteen() {
+        return Objects.nonNull(steen);
+    }
+
+    public String getCoordinatenVanVak() {
+        return String.format("%d.%d", kolom, rij);
     }
 }
