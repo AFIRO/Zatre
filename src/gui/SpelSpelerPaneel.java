@@ -179,6 +179,7 @@ public class SpelSpelerPaneel extends VBox {
         } else {
             ((Text) gekliktVak.getChildren().get(1)).setText(String.valueOf(geklikteSteen.getWaarde()));
             ((ImageView) gekliktVak.getChildren().get(2)).setImage(geklikteSteen.getImage());
+            steentjesBox.getChildren().remove(geklikteSteen);
             ;
         }
     }
