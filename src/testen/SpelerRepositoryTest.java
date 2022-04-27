@@ -26,14 +26,14 @@ public class SpelerRepositoryTest {
 
     @Test
     @DisplayName("Voeg speler toe happy flow")
-    public void setSpelerRepository_VoegSpelerToe_HappyFlow(){
+    public void setSpelerRepository_VoegSpelerToe_HappyFlow() {
         spelerRepository.voegSpelerToe(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
-        verify(spelerMapper,times(1)).voegSpelerToe(new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+        verify(spelerMapper, times(1)).voegSpelerToe(new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
     @DisplayName("Vraag speler op, speler is correct in spelerlijst gestoken")
-    public void vraagSpelerOp_HappyFlow(){
+    public void vraagSpelerOp_HappyFlow() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
@@ -44,29 +44,29 @@ public class SpelerRepositoryTest {
 
     @Test
     @DisplayName("Vraag speler op, speler geeft onvoldoende speelkansen, gooit exception")
-    public void vraagSpelerOp_OnvoldoendeSpeelkansen_Exception(){
+    public void vraagSpelerOp_OnvoldoendeSpeelkansen_Exception() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
         testSpeler.setSpeelkansen(0);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
 
-        assertThrows(IllegalArgumentException.class,()->spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+        assertThrows(IllegalArgumentException.class, () -> spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
     @DisplayName("Vraag speler op, speler is al aangemeld, gooit exception")
-    public void vraagSpelerOp_SpelerIsAlAangemeld_Exception(){
+    public void vraagSpelerOp_SpelerIsAlAangemeld_Exception() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
         spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
-        assertThrows(IllegalArgumentException.class,()->spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+        assertThrows(IllegalArgumentException.class, () -> spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
     @DisplayName("Vraag speler op, vijfde speler, gooit exception")
-    public void vraagSpelerOp_VijfdeSpeler_Exception(){
+    public void vraagSpelerOp_VijfdeSpeler_Exception() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler("Lorenz", 1988)).thenReturn(new Speler("Lorenz", 1988));
@@ -79,54 +79,54 @@ public class SpelerRepositoryTest {
         spelerRepository.vraagSpelerOp("TessT", 1992);
         spelerRepository.vraagSpelerOp("Andreeas", 1990);
 
-        assertThrows(IllegalArgumentException.class,()->spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+        assertThrows(IllegalArgumentException.class, () -> spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
     @DisplayName("Geef aangemelde speler, happy flow")
-    public void geefAangemeldeSpeler_HappyFlow(){
+    public void geefAangemeldeSpeler_HappyFlow() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
         spelerRepository.vraagSpelerOp(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
-        Speler teruggekeerdeSpeler = spelerRepository.geefAangemeldeSpeler(NAAM_TOEGELATEN,GEBOORTEJAAR_TOEGELATEN);
+        Speler teruggekeerdeSpeler = spelerRepository.geefAangemeldeSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
-        assertEquals(testSpeler.getGebruikersnaam(),teruggekeerdeSpeler.getGebruikersnaam());
-        assertEquals(testSpeler.getGeboortejaar(),teruggekeerdeSpeler.getGeboortejaar());
-        assertEquals(testSpeler.getSpeelkansen(),teruggekeerdeSpeler.getSpeelkansen());
+        assertEquals(testSpeler.getGebruikersnaam(), teruggekeerdeSpeler.getGebruikersnaam());
+        assertEquals(testSpeler.getGeboortejaar(), teruggekeerdeSpeler.getGeboortejaar());
+        assertEquals(testSpeler.getSpeelkansen(), teruggekeerdeSpeler.getSpeelkansen());
     }
 
     @Test
     @DisplayName("Geef speler, happy flow")
-    public void geefSpeler_HappyFlow(){
+    public void geefSpeler_HappyFlow() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
         when(spelerMapper.checkOfSpelerAlBestaatInDatabase(testSpeler)).thenReturn(true);
 
-        Speler teruggekeerdeSpeler = spelerRepository.geefSpeler(NAAM_TOEGELATEN,GEBOORTEJAAR_TOEGELATEN);
+        Speler teruggekeerdeSpeler = spelerRepository.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
-        assertEquals(testSpeler.getGebruikersnaam(),teruggekeerdeSpeler.getGebruikersnaam());
-        assertEquals(testSpeler.getGeboortejaar(),teruggekeerdeSpeler.getGeboortejaar());
-        assertEquals(testSpeler.getSpeelkansen(),teruggekeerdeSpeler.getSpeelkansen());
+        assertEquals(testSpeler.getGebruikersnaam(), teruggekeerdeSpeler.getGebruikersnaam());
+        assertEquals(testSpeler.getGeboortejaar(), teruggekeerdeSpeler.getGeboortejaar());
+        assertEquals(testSpeler.getSpeelkansen(), teruggekeerdeSpeler.getSpeelkansen());
     }
 
     @Test
     @DisplayName("Geef speler, bestaat niet, exception")
-    public void geefSpeler_BestaatNiet_exception(){
-        assertThrows(IllegalArgumentException.class,()->spelerRepository.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+    public void geefSpeler_BestaatNiet_exception() {
+        assertThrows(IllegalArgumentException.class, () -> spelerRepository.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
     @DisplayName("Geef speler, Niet Aangemeld, exception")
-    public void geefSpeler_NietAangemeld_exception(){
-        assertThrows(IllegalArgumentException.class,()->spelerRepository.geefAangemeldeSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
+    public void geefSpeler_NietAangemeld_exception() {
+        assertThrows(IllegalArgumentException.class, () -> spelerRepository.geefAangemeldeSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN));
     }
 
     @Test
     @DisplayName("update speler, happy flow")
-    public void updateSpeler_happyflow(){
+    public void updateSpeler_happyflow() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
         when(spelerMapper.geefSpeler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN)).thenReturn(testSpeler);
@@ -135,19 +135,19 @@ public class SpelerRepositoryTest {
         spelerRepository.updateSpeler(testSpeler);
         Speler teruggekeerdeSpeler = spelerRepository.geefSpelers().get(0);
 
-        assertEquals(testSpeler.getGebruikersnaam(),teruggekeerdeSpeler.getGebruikersnaam());
-        assertEquals(testSpeler.getGeboortejaar(),teruggekeerdeSpeler.getGeboortejaar());
-        assertEquals(testSpeler.getSpeelkansen(),teruggekeerdeSpeler.getSpeelkansen());
-        verify(spelerMapper,times(1)).updateSpeler(testSpeler);
+        assertEquals(testSpeler.getGebruikersnaam(), teruggekeerdeSpeler.getGebruikersnaam());
+        assertEquals(testSpeler.getGeboortejaar(), teruggekeerdeSpeler.getGeboortejaar());
+        assertEquals(testSpeler.getSpeelkansen(), teruggekeerdeSpeler.getSpeelkansen());
+        verify(spelerMapper, times(1)).updateSpeler(testSpeler);
 
     }
 
     @Test
     @DisplayName("update speler, niet aangemeld, exception")
-    public void updateSpeler_NietAangemeld_Exception(){
+    public void updateSpeler_NietAangemeld_Exception() {
         Speler testSpeler = new Speler(NAAM_TOEGELATEN, GEBOORTEJAAR_TOEGELATEN);
 
-        assertThrows(IllegalArgumentException.class,()->spelerRepository.updateSpeler(testSpeler));
+        assertThrows(IllegalArgumentException.class, () -> spelerRepository.updateSpeler(testSpeler));
     }
 
 }

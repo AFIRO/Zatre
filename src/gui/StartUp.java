@@ -5,21 +5,18 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class StartUp extends Application
-{
+public class StartUp extends Application {
     @Override
-    public void start(Stage stage) 
-    {
+    public void start(Stage stage) {
         DomeinController domeinController = new DomeinController();
         Scene scene = new Scene(new HoofdPaneel(domeinController), 500, 500); //breedte x hoogte
         stage.setScene(scene);
         stage.setTitle("Zatre");
         stage.show();
-        
+
     }
 
-    public static void main(String... args)
-    {
-    	Application.launch(StartUp.class, args);
+    public static void main(String... args) {
+        Application.launch(StartUp.class, args);
     }
 }

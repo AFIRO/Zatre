@@ -4,9 +4,10 @@ import java.util.Objects;
 
 public class Steen {
     private final int waarde;
-    
+
     /**
      * UC3: constructor van steen, kent waarde aan steen toe
+     *
      * @param waarde de waarde van de steen
      */
     public Steen(int waarde) {
@@ -15,9 +16,10 @@ public class Steen {
         }
         this.waarde = waarde;
     }
-    
+
     /**
-     * UC3: methode om waarde steen op te vragen. 
+     * UC3: methode om waarde steen op te vragen.
+     *
      * @return waarde van seten
      */
     public int getWaarde() {

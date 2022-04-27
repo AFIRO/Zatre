@@ -15,6 +15,7 @@ public class SpelerMapper {
 
     /**
      * UC1: voegt speler toe aan databasis
+     *
      * @param speler Speler om toe te voegen.
      * @throws IllegalArgumentException indien de speler al bestaat.
      */
@@ -42,6 +43,7 @@ public class SpelerMapper {
 
     /**
      * UC1: haalt lijst van alle spelers op uit databasis
+     *
      * @return Alle spelers uit database
      */
 
@@ -70,8 +72,9 @@ public class SpelerMapper {
 
     /**
      * UC1: haalt een specifieke speler uit de databasis
+     *
      * @param gebruikersnaam Gebruikersnaam van de speler
-     * @param geboortejaar Geboortejaar van de speler
+     * @param geboortejaar   Geboortejaar van de speler
      * @return de gevonden speler
      * @throws IllegalArgumentException indien de speler niet bestaat.
      */
@@ -106,6 +109,7 @@ public class SpelerMapper {
 
     /**
      * UC1: haalt een specifieke speler uit de databasis
+     *
      * @param speler de te updaten speler
      */
 
@@ -125,6 +129,7 @@ public class SpelerMapper {
 
     /**
      * UC1: controleert of speler al bestaat in databasis om dubbele spelers te voorkomen
+     *
      * @param speler Speler die moet nagekeken worden.
      */
 

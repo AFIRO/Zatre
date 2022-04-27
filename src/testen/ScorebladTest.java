@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ScorebladTest {
     @Test
     @DisplayName("Maak blad, voeg 1 steentje toe, genereer een passende string")
-    void create_alsScorebladRegelBestaat_CorrecteString(){
+    void create_alsScorebladRegelBestaat_CorrecteString() {
         Scoreblad testBlad = new Scoreblad();
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11")));//3
         assertEquals("  X X   3 3", testBlad.getRegels().get(0));
@@ -20,7 +20,7 @@ public class ScorebladTest {
 
     @Test
     @DisplayName("Maak blad, simuleer volledig spel, genereer een passende string list")
-    void create_alsScorebladRegelsBestaan_CorrecteStringList(){
+    void create_alsScorebladRegelsBestaan_CorrecteStringList() {
         Scoreblad testBlad = new Scoreblad();
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,7,9"))); //0
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11"))); //3
@@ -29,12 +29,12 @@ public class ScorebladTest {
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,3,5"))); //0
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12"))); //11
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12"))); //11
-        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12","0,10,11,12"))); //18
+        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12", "0,10,11,12"))); //18
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12"))); //12
-        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,10","1,10,10"))); //8
+        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,10", "1,10,10"))); //8
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12"))); //12
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11,12"))); //12
-        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,12,12","1,12,12"))); //13
+        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,12,12", "1,12,12"))); //13
 
         List<String> verwachteStrings = List.of(
                 "        3 0",
@@ -56,7 +56,7 @@ public class ScorebladTest {
 
     @Test
     @DisplayName("Maak blad, voeg geen regels toe, genereer lege lijst")
-    void create_alsScorebladRegelNietBestaat_LegeLijst(){
+    void create_alsScorebladRegelNietBestaat_LegeLijst() {
         Scoreblad testBlad = new Scoreblad();
         assertTrue(testBlad.getRegels().isEmpty());
     }
@@ -64,17 +64,17 @@ public class ScorebladTest {
 
     @Test
     @DisplayName("Maak blad, voeg 2 zetten (volledige ronde) toe, bereken correcte score voor blad")
-    void create_alsScorebladRegelsBestaan_CorrecteScore(){
+    void create_alsScorebladRegelsBestaan_CorrecteScore() {
         Scoreblad testBlad = new Scoreblad();
-        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11","0,10,11,12"))); //3+10
-        assertEquals(13,testBlad.berekenScoreVanScoreblad());
+        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11", "0,10,11,12"))); //3+10
+        assertEquals(13, testBlad.berekenScoreVanScoreblad());
     }
 
     @Test
     @DisplayName("Maak blad, voeg 2 zetten (volledige ronde) toe, geef correcte string")
-    void create_alsScorebladRegelsBestaan_correcteString(){
+    void create_alsScorebladRegelsBestaan_correcteString() {
         Scoreblad testBlad = new Scoreblad();
-        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11","1,10,11,12"))); //3+10
-        assertEquals("X XX XX X 3 26",testBlad.getRegels().get(0));
+        testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11", "1,10,11,12"))); //3+10
+        assertEquals("X XX XX X 3 26", testBlad.getRegels().get(0));
     }
 }

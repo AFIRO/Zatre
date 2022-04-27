@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Vak {
-    public enum Kleur {WIT,ZWART}
+    public enum Kleur {WIT, ZWART}
+
     private final int kolom;
     private final int rij;
     private Kleur kleur;
@@ -13,8 +14,9 @@ public class Vak {
 
     /**
      * UC3 constructor voor vak, kleur wordt standaard op zwart ingesteld
+     *
      * @param kolom: kolom van vakje
-     * @param rij: rij van vakje
+     * @param rij:   rij van vakje
      */
     public Vak(int kolom, int rij) {
         controleerOfVakjeKanBestaan(kolom, rij);
@@ -26,8 +28,9 @@ public class Vak {
 
     /**
      * UC3 controleert of het vakje wel degelijk kan bestaan.
+     *
      * @param kolom kolom van vakje
-     * @param rij rij van vakje
+     * @param rij   rij van vakje
      * @throws IllegalArgumentException indien vakje onmogelijk kan bestaan op bord.
      */
 
@@ -35,7 +38,7 @@ public class Vak {
         List<Integer> controleLijst = List.of(2, 3, 4, 8, 12, 13, 14);
 
         //case vakje buiten bord
-        if (kolom > 15 || kolom < 0 || rij < 0 || rij > 15){
+        if (kolom > 15 || kolom < 0 || rij < 0 || rij > 15) {
             throw new IllegalArgumentException("VAKJE_KAN_NIET_BESTAAN");
         }
 
@@ -50,12 +53,12 @@ public class Vak {
         }
 
         //case vakje uit linker rij bestaat niet
-        if (kolom == 1 && controleLijst.contains(rij)){
+        if (kolom == 1 && controleLijst.contains(rij)) {
             throw new IllegalArgumentException("VAKJE_KAN_NIET_BESTAAN");
         }
 
         //case vakje uit rechter rij bestaat niet
-        if (kolom == 15 && controleLijst.contains(rij)){
+        if (kolom == 15 && controleLijst.contains(rij)) {
             throw new IllegalArgumentException("VAKJE_KAN_NIET_BESTAAN");
         }
     }
@@ -88,12 +91,13 @@ public class Vak {
      * UC4 geeft de vakjes rond het vakje terug als een map. De map heeft volgende structuur:
      * key: boven, onder, links, rechts => de positie tegenover het vakje waarop deze methode is aangeroepen
      * value: de coordinaten van dit vakje in kolom.rij vorm. Indien vakje niet bestaat, bevat het de value "bestaat niet"
+     *
      * @return Map met daarin de omringende steentjes en hun coordinaten.
      */
 
-    public Map<String,String> geefVakjesNaastVak() {
+    public Map<String, String> geefVakjesNaastVak() {
         List<Integer> controleLijst = List.of(2, 3, 4, 8, 12, 13, 14);
-        Map<String,String> omringendeVakjes = new HashMap<>();
+        Map<String, String> omringendeVakjes = new HashMap<>();
 
         if (rij == 0) {
             omringendeVakjes.put("boven", "bestaat niet");
@@ -128,19 +132,19 @@ public class Vak {
         }
 
         if (!omringendeVakjes.containsKey("boven")) {
-            omringendeVakjes.put("boven", String.format("%d.%d",kolom,rij-1));
+            omringendeVakjes.put("boven", String.format("%d.%d", kolom, rij - 1));
         }
 
         if (!omringendeVakjes.containsKey("onder")) {
-            omringendeVakjes.put("onder", String.format("%d.%d",kolom,rij+1));
+            omringendeVakjes.put("onder", String.format("%d.%d", kolom, rij + 1));
         }
 
         if (!omringendeVakjes.containsKey("links")) {
-            omringendeVakjes.put("links", String.format("%d.%d",kolom-1,rij));
+            omringendeVakjes.put("links", String.format("%d.%d", kolom - 1, rij));
         }
 
         if (!omringendeVakjes.containsKey("rechts")) {
-            omringendeVakjes.put("rechts", String.format("%d.%d",kolom+1,rij));
+            omringendeVakjes.put("rechts", String.format("%d.%d", kolom + 1, rij));
         }
 
         return omringendeVakjes;

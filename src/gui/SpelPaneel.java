@@ -8,11 +8,8 @@ public class SpelPaneel extends BorderPane {
     private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
     private final MenuPaneel menuPaneel;
-    private SpelLogoPaneel spelLogoPaneel;
     private SpelScorebladPaneel spelScorebladPaneel;
-    private SpelBordPaneel spelBordPaneel;
-    private SpelSpelerPaneel spelSpelerPaneel;
-    
+
 
     public SpelPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.domeinController = domeinController;
@@ -24,18 +21,18 @@ public class SpelPaneel extends BorderPane {
     /**
      * UC4: creert de nodige elementen die deel zullen uitmaken van het spelpaneel en zet ze op de juiste plaatsen.
      */
-    
+
     private void setSpelSchermen() {
-        this.spelLogoPaneel = new SpelLogoPaneel(domeinController);
+        SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel(domeinController);
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
-        this.spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel,domeinController);
-        this.spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
+        SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
+        SpelBordPaneel spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
         this.setRight(spelScorebladPaneel);
         setAlignment(spelScorebladPaneel, Pos.BASELINE_LEFT);
-        setAlignment(spelBordPaneel,Pos.CENTER);
+        setAlignment(spelBordPaneel, Pos.CENTER);
         this.setStyle("-fx-background-color: #566454");
     }
 

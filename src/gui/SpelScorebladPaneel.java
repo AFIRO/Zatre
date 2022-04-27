@@ -8,35 +8,35 @@ import javafx.scene.layout.VBox;
 
 public class SpelScorebladPaneel extends VBox {
 
-	private final DomeinController domeinController;
-	private final Label lblTitel = new Label("Huidige actieve speler: ");
-	private final Label lblActieveSpeler = new Label();
-	private final TextField txfScoreblad = new TextField();
+    private final DomeinController domeinController;
+    private final Label lblTitel = new Label("Huidige actieve speler: ");
+    private final Label lblActieveSpeler = new Label();
+    private final TextField txfScoreblad = new TextField();
 
-	public SpelScorebladPaneel(DomeinController domeinController) {
-		this.domeinController = domeinController;
-		this.txfScoreblad.setEditable(false);
-		this.setPrefHeight(1000);
-		this.setPrefWidth(350);
-		this.setAlignment(Pos.BASELINE_LEFT);
-		voegComponentenToe();
-	}
+    public SpelScorebladPaneel(DomeinController domeinController) {
+        this.domeinController = domeinController;
+        this.txfScoreblad.setEditable(false);
+        this.setPrefHeight(1000);
+        this.setPrefWidth(350);
+        this.setAlignment(Pos.BASELINE_LEFT);
+        voegComponentenToe();
+    }
 
-	private void voegComponentenToe() {
-		lblTitel.setStyle("-fx-font-size: 2em");
-		lblActieveSpeler.setStyle("-fx-font-size: 1.5em");
-		
-		txfScoreblad.setAlignment(Pos.CENTER);
-		txfScoreblad.setMaxWidth(300);
-		
-		
-		this.getChildren().addAll(lblTitel,lblActieveSpeler,txfScoreblad);
+    private void voegComponentenToe() {
+        lblTitel.setStyle("-fx-font-size: 2em");
+        lblActieveSpeler.setStyle("-fx-font-size: 1.5em");
 
-	}
+        txfScoreblad.setAlignment(Pos.CENTER);
+        txfScoreblad.setMaxWidth(300);
 
-	public void updateInfo(int spelerAanBeurt){
-		this.lblActieveSpeler.setText(domeinController.geefSpelers().get(spelerAanBeurt));
-		this.txfScoreblad.setText(domeinController.geefScorebladen().get(spelerAanBeurt));
 
-	}
+        this.getChildren().addAll(lblTitel, lblActieveSpeler, txfScoreblad);
+
+    }
+
+    public void updateInfo(int spelerAanBeurt) {
+        this.lblActieveSpeler.setText(domeinController.geefSpelers().get(spelerAanBeurt));
+        this.txfScoreblad.setText(domeinController.geefScorebladen().get(spelerAanBeurt));
+
+    }
 }
