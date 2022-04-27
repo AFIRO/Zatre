@@ -223,5 +223,7 @@ public class DomeinController {
         return spel.isEindeSpel();
     }
 
+    
+    
 
 }

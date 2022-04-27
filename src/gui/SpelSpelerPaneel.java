@@ -25,6 +25,7 @@ public class SpelSpelerPaneel extends VBox {
 	private boolean eersteBeurt = true;
 	private VBox steentjesBox;
 	private Button btnVraagSteentjes;
+	private Button btnZetSteenOpVakje;
 	private SteenGUI geklikteSteen;
 	private StackPane gekliktVak;
 	private final Label lblGeselecteerdVak = new Label();
@@ -47,13 +48,15 @@ public class SpelSpelerPaneel extends VBox {
 		steentjesBox = new VBox();
 		btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
 		Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
-		Button btnZetSteenOpVakje = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
+		btnZetSteenOpVakje = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
 		knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnCancelSpel);
 		this.setSpacing(150);
 		knoppenBox.setSpacing(20);
 		steentjesBox.setSpacing(20);
 		knoppenBox.setAlignment(Pos.TOP_CENTER);
 		steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
+		
+		//btnZetSteenOpVakje.setDisable(true);
 
 		btnVraagSteentjes.setOnAction(this::vraagSteentjes);
 		btnCancelSpel.setOnAction(this::cancelSpel);
@@ -185,6 +188,7 @@ public class SpelSpelerPaneel extends VBox {
 			steentjesBox.getChildren().remove(geklikteSteen);
 
 			if (steentjesBox.getChildren().isEmpty()) {
+				
 				volgendeSpeler();
 			}
 			;
@@ -192,6 +196,7 @@ public class SpelSpelerPaneel extends VBox {
 	}
 
 	private void volgendeSpeler() {
+		
 
 		this.btnVraagSteentjes.setDisable(false);
 		

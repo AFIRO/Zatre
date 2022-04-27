@@ -2,6 +2,7 @@ package domein;
 
 import java.util.*;
 
+
 public class Spel {
     private enum SpelStaat {IN_VOORBEREIDING, GESTART, GEDAAN, GECANCELED}
 
@@ -86,6 +87,10 @@ public class Spel {
     private void bepaalVolgordeSpelers() {
         Collections.shuffle(spelers);
     }
+    
+    public void volgendeSpeler() {
+    	Collections.rotate(spelers, 1);   
+    	}
 
     /**
      * UC3: speelkansen van winnende speler worden +2 toegevoegd
@@ -99,7 +104,7 @@ public class Spel {
 
     /**
      * UC4: regelt de logica van een beurt. De string[] zetten bevat 2 of 3 strings met de zet
-     * in de vorm "kolomVak.rijVak waardeSteen". Deze worden geïnterpreteerd en omzet naar de correcte info voor punt
+     * in de vorm "kolomVak.rijVak waardeSteen". Deze worden geï¿½nterpreteerd en omzet naar de correcte info voor punt
      * berekening. We gaan ervan uit dat de info correct moet zijn dankzij validatie in de GUI qua zetten
      * Methode genereert een arraylist aan strings. Deze strings bevatten de scores per zet. Op index 0, 1 en 2 komen
      * respectievelijk de scores van beurt 1, 2 en 3. Deze strings bevatten de volgende structuur: 0/1 (dubbele score
@@ -128,8 +133,10 @@ public class Spel {
         //genereer scorebladRegels op basis van de string per zet.
         actieveSpeler.getScoreblad().voegRegelsToeAanScoreblad(puntenArraysVoorAlleZetten);
 
+        volgendeSpeler();
         //geef een String representatie van de geupdatet scoreblad voor de GUI.
         return actieveSpeler.getScoreblad().getRegels();
+        
     }
 
     /**
@@ -382,7 +389,7 @@ public class Spel {
     }
 
     /**
-     * UC3: bepaalt wanneer het spel beëindigd is of wordt
+     * UC3: bepaalt wanneer het spel beï¿½indigd is of wordt
      */
 
     public boolean isEindeSpel() {
