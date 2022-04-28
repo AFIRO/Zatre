@@ -230,6 +230,10 @@ public class DomeinController {
     public boolean checkOfZettenLegaalZijnEindValidatie(String[] zetten) {
         return spel.checkOfZettenLegaalZijnEindValidatie(zetten);
     }
+    
+    public void volgendeSpeler() {
+    	spel.volgendeSpeler();
+    }
 
 
 }

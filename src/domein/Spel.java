@@ -133,7 +133,6 @@ public class Spel {
         //genereer scorebladRegels op basis van de string per zet.
         actieveSpeler.getScoreblad().voegRegelsToeAanScoreblad(puntenArraysVoorAlleZetten);
 
-        volgendeSpeler();
         //geef een String representatie van de geupdatet scoreblad voor de GUI.
         return actieveSpeler.getScoreblad().getRegels();
 
