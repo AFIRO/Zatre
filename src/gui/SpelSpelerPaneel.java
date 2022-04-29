@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import static org.mockito.ArgumentMatchers.nullable;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -24,6 +23,7 @@ public class SpelSpelerPaneel extends VBox {
 	private final DomeinController domeinController;
 	private final MenuPaneel menuPaneel;
 	private final HoofdPaneel hoofdPaneel;
+	private final SpelScorebladPaneel spelScorebladPaneel;
 	private boolean eersteBeurt = true;
 	private VBox steentjesBox;
 	private Button btnVraagSteentjes;
@@ -34,10 +34,11 @@ public class SpelSpelerPaneel extends VBox {
 	private final Label lblGeselecteerdeSteen = new Label();
 	private final Label lblFeedbackVoorSpelers = new Label();
 
-	public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
+	public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel,SpelScorebladPaneel spelScorebladPaneel, DomeinController domeinController) {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
 		this.menuPaneel = menuPaneel;
+		this.spelScorebladPaneel = spelScorebladPaneel;
 		voegComponentenToe();
 	}
 
@@ -206,6 +207,7 @@ public class SpelSpelerPaneel extends VBox {
 	private void volgendeSpeler() {
 
 		domeinController.volgendeSpeler();
+		spelScorebladPaneel.updateInfo(0);
 		this.btnVraagSteentjes.setDisable(false);
 
 	}

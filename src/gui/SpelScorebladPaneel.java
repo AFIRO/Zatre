@@ -35,7 +35,7 @@ public class SpelScorebladPaneel extends VBox {
     }
 
     public void updateInfo(int spelerAanBeurt) {
-        this.lblActieveSpeler.setText(domeinController.geefSpelers().get(spelerAanBeurt));
+        this.lblActieveSpeler.setText("Speler: " + domeinController.geefSpelers().get(spelerAanBeurt).substring(10));
         this.txfScoreblad.setText(domeinController.geefScorebladen().get(spelerAanBeurt));
 
     }

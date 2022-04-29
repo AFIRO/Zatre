@@ -25,7 +25,7 @@ public class SpelPaneel extends BorderPane {
     private void setSpelSchermen() {
         SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel(domeinController);
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
-        SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, domeinController);
+        SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, spelScorebladPaneel, domeinController);
         SpelBordPaneel spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
