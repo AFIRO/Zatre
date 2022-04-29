@@ -130,9 +130,9 @@ public class RegistratieEnLoginPaneel extends VBox {
             controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
 
             domeinController.registreer(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText()));
+            lblFeedback.setText((String.format("%s%n%s", domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText())))));
             txtNaam.setText("");
             txtGeboortejaar.setText("");
-            lblFeedback.setText((String.format("%s%n%s", domeinController.getTaal().getLocalisatie("CORRECT_GEREGISTREERD"), domeinController.geefSpeler(this.txtNaam.getText(), Integer.parseInt(this.txtGeboortejaar.getText())))));
             lblFeedback.setVisible(true);
 
         } catch (IllegalArgumentException e) {
