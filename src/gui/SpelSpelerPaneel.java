@@ -34,6 +34,13 @@ public class SpelSpelerPaneel extends VBox {
 	private final Label lblGeselecteerdeSteen = new Label();
 	private final Label lblFeedbackVoorSpelers = new Label();
 
+	/**
+	 * 
+	 * @param hoofdPaneel
+	 * @param menuPaneel
+	 * @param spelScorebladPaneel
+	 * @param domeinController
+	 */
 	public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel,SpelScorebladPaneel spelScorebladPaneel, DomeinController domeinController) {
 		this.hoofdPaneel = hoofdPaneel;
 		this.domeinController = domeinController;
@@ -42,6 +49,9 @@ public class SpelSpelerPaneel extends VBox {
 		voegComponentenToe();
 	}
 
+	/**
+	 * 
+	 */
 	private void voegComponentenToe() {
 
 		this.setAlignment(Pos.TOP_CENTER);
@@ -58,9 +68,9 @@ public class SpelSpelerPaneel extends VBox {
 		steentjesBox.setSpacing(20);
 		knoppenBox.setAlignment(Pos.TOP_CENTER);
 		steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
-
+		
 		btnZetSteenOpVakje.setDisable(true);
-
+		
 		btnVraagSteentjes.setOnAction(this::vraagSteentjes);
 		btnCancelSpel.setOnAction(this::cancelSpel);
 		btnZetSteenOpVakje.setOnAction(this::zetSteenOpVakje);
@@ -185,7 +195,14 @@ public class SpelSpelerPaneel extends VBox {
 		lblFeedbackVoorSpelers.setVisible(true);
 	}
 
+	/**
+	 * 
+	 * @param actionEvent
+	 */
 	private void zetSteenOpVakje(ActionEvent actionEvent) {
+		
+		//domeinController.checkOfZetLegaalIsTussenTijdseValidatie(gekliktVak.getChildren().get(1));
+		
 		if (Objects.isNull(gekliktVak) || Objects.isNull(geklikteSteen)) {
 			lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("SELECTEER_STEEN_EN_VAK"));
 			lblFeedbackVoorSpelers.setVisible(true);
@@ -203,7 +220,13 @@ public class SpelSpelerPaneel extends VBox {
 			;
 		}
 	}
-
+	
+	
+/**
+ * Gui: 
+ * 
+ *
+ */
 	private void volgendeSpeler() {
 
 		domeinController.volgendeSpeler();
