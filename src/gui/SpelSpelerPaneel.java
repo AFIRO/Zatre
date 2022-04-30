@@ -102,11 +102,13 @@ public class SpelSpelerPaneel extends VBox {
 		steentjesBox.setSpacing(20);
 		steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
 
-		// insert in GUI
-		labelbox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
-		this.getChildren().addAll(knoppenBox, steentjesBox);
-		knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
-	}
+        //insert in GUI
+        labelbox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
+        this.getChildren().addAll(knoppenBox, labelbox, steentjesBox);
+        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
+    }
+
+
 
 	/**
 	 * UC3: zet de CSS van de doorgegeven knop goed.
