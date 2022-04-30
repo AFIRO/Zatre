@@ -54,6 +54,7 @@ public class SpelSpelerPaneel extends VBox {
 	public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, SpelScorebladPaneel spelScorebladPaneel,
 			DomeinController domeinController, SpelPaneel spelPaneel) {
 		this.hoofdPaneel = hoofdPaneel;
+		
 		this.domeinController = domeinController;
 		this.menuPaneel = menuPaneel;
 		this.spelScorebladPaneel = spelScorebladPaneel;
