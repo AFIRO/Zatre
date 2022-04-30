@@ -297,10 +297,10 @@ public class SpelSpelerPaneel extends VBox {
 
     private void resetSpelBordNaOngeldigeZet(List<String> zetten) {
         for (String zet : zetten) {
-            SteenGUI gespeeldeSteen = new SteenGUI(Integer.parseInt(zet.substring(4)));
+            SteenGUI gespeeldeSteen = new SteenGUI(Integer.parseInt(zet.substring(0,1)));
             gespeeldeSteen.setOnMousePressed(event -> steenClicked(gespeeldeSteen));
             StackPane gespeeldeVak = (StackPane) spelPaneel.getSpelBordPaneel().getChildren().stream()
-                    .filter(((vak) -> ((VakGUI) ((StackPane) vak).getChildren().get(0)).getCoordinaten().equals(zet.substring(0, 3))))
+                    .filter(((vak) -> ((VakGUI) ((StackPane) vak).getChildren().get(0)).getCoordinaten().equals(zet.substring(2))))
                     .findFirst().get(); //optional check onnodig. We weten dat vak moet bestaan als spelbord bestaat.
             steentjesBox.getChildren().add(gespeeldeSteen);
             ((ImageView) gespeeldeVak.getChildren().get(2)).setImage(null);
