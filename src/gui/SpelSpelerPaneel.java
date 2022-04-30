@@ -92,13 +92,13 @@ public class SpelSpelerPaneel extends VBox {
         this.setAlignment(Pos.TOP_CENTER);
         this.setMinWidth(300);
         this.setMinHeight(1000);
-        this.setSpacing(150);
+        this.setSpacing(50);
         btnZetSteenOpVakje.setDisable(true);
         btnGeefSteentjeTerug.setDisable(true);
         knoppenBox.setSpacing(20);
         knoppenBox.setAlignment(Pos.TOP_CENTER);
         steentjesBox.setSpacing(20);
-        steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
+        steentjesBox.setAlignment(Pos.CENTER);
 
         //insert in GUI
         knoppenBox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
