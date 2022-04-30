@@ -3,8 +3,6 @@ package gui;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.Objects;
-
 public class SteenGUI extends ImageView {
     private final int waarde;
 
