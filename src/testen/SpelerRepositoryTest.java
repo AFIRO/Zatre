@@ -15,14 +15,12 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class SpelerRepositoryTest {
+    private final static String NAAM_TOEGELATEN = "Joske123";
+    private final static int GEBOORTEJAAR_TOEGELATEN = 1990;
     @Mock
     private SpelerMapper spelerMapper;
     @InjectMocks
     private SpelerRepository spelerRepository;
-
-    private final static String NAAM_TOEGELATEN = "Joske123";
-    private final static int GEBOORTEJAAR_TOEGELATEN = 1990;
-
 
     @Test
     @DisplayName("Voeg speler toe happy flow")

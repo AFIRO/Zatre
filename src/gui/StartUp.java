@@ -7,26 +7,26 @@ import javafx.stage.Stage;
 
 public class StartUp extends Application {
 
-	/**
-	 * UC3: startup voor GUI
-	 *
-	 * @param stage stage voor app
-	 */
+    /**
+     * UC3: main entrypoint
+     */
 
-	@Override
-	public void start(Stage stage) {
-		DomeinController domeinController = new DomeinController();
-		Scene scene = new Scene(new HoofdPaneel(domeinController), 500, 500); // breedte x hoogte
-		stage.setScene(scene);
-		stage.setTitle("Zatre");
-		stage.show();
-	}
+    public static void main(String... args) {
+        Application.launch(StartUp.class, args);
+    }
 
-	/**
-	 * UC3: main entrypoint
-	 */
+    /**
+     * UC3: startup voor GUI
+     *
+     * @param stage stage voor app
+     */
 
-	public static void main(String... args) {
-		Application.launch(StartUp.class, args);
-	}
+    @Override
+    public void start(Stage stage) {
+        DomeinController domeinController = new DomeinController();
+        Scene scene = new Scene(new HoofdPaneel(domeinController), 500, 500); // breedte x hoogte
+        stage.setScene(scene);
+        stage.setTitle("Zatre");
+        stage.show();
+    }
 }

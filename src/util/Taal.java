@@ -4,12 +4,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Taal {
-    public enum Taalkeuze {NEDERLANDS, ENGELS}
     private final Taalkeuze taalkeuze;
     private ResourceBundle dictionary;
-
     /**
-     *UC1: constructor.
+     * UC1: constructor.
      *
      * @param taalkeuze de taalkeuze van de speler
      */
@@ -20,7 +18,7 @@ public class Taal {
     }
 
     /**
-     *UC1: setter voor resourcebundel. Laat ons toe om nadien de taal aan te passen
+     * UC1: setter voor resourcebundel. Laat ons toe om nadien de taal aan te passen
      *
      * @param taalkeuze de taalkeuze van de speler
      */
@@ -34,7 +32,7 @@ public class Taal {
     }
 
     /**
-     *UC1: getter die ons toegang geeft tot de vertaling.
+     * UC1: getter die ons toegang geeft tot de vertaling.
      *
      * @param key key voor phrase in vertaling library
      */
@@ -42,5 +40,7 @@ public class Taal {
     public String getLocalisatie(String key) {
         return dictionary.getString(key);
     }
+
+    public enum Taalkeuze {NEDERLANDS, ENGELS}
 
 }

@@ -6,73 +6,72 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UC2 {
-	private final Scanner scanner;
-	private final DomeinController domeinController;
+    private final Scanner scanner;
+    private final DomeinController domeinController;
 
-	/**
-	 * UC2: constructor voor eerste UC CLI
-	 *
-	 * @param domeinController voor bevraging domein
-	 */
+    /**
+     * UC2: constructor voor eerste UC CLI
+     *
+     * @param domeinController voor bevraging domein
+     */
 
-	public UC2(DomeinController domeinController) {
-		scanner = new Scanner(System.in);
-		this.domeinController = domeinController;
-		meldAanInputMenu();
-	}
+    public UC2(DomeinController domeinController) {
+        scanner = new Scanner(System.in);
+        this.domeinController = domeinController;
+        meldAanInputMenu();
+    }
 
-	/**
-	 * UC2: input menu voor speler aanmelding
-	 *
-	 */
+    /**
+     * UC2: input menu voor speler aanmelding
+     */
 
-	private void meldAanInputMenu() {
-		boolean loopflag = true;
-		boolean inputLoopflag = true;
-		boolean nextUser = true;
-		String nogAanmelden = "";
-		int geboortejaar = 0;
-		String gebruikersnaam = "";
+    private void meldAanInputMenu() {
+        boolean loopflag = true;
+        boolean inputLoopflag = true;
+        boolean nextUser = true;
+        String nogAanmelden = "";
+        int geboortejaar = 0;
+        String gebruikersnaam = "";
 
-		while (loopflag) {
-			while (inputLoopflag)
-				while (nextUser) {
-					try {
-						System.out.println(domeinController.getTaal().getLocalisatie("GEKENDE_NAAM"));
-						gebruikersnaam = scanner.next();
-						System.out.println(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
-						geboortejaar = scanner.nextInt();
-						inputLoopflag = false;
-					} catch (InputMismatchException e) {
-						System.out.println(domeinController.getTaal().getLocalisatie("CORRECTE_KEUZE"));
-						scanner.next();
-					}
-					try {
-						domeinController.meldAan(gebruikersnaam, geboortejaar);
-						System.out.println(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
-						System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
-						System.out.println();
+        while (loopflag) {
+            while (inputLoopflag)
+                while (nextUser) {
+                    try {
+                        System.out.println(domeinController.getTaal().getLocalisatie("GEKENDE_NAAM"));
+                        gebruikersnaam = scanner.next();
+                        System.out.println(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
+                        geboortejaar = scanner.nextInt();
+                        inputLoopflag = false;
+                    } catch (InputMismatchException e) {
+                        System.out.println(domeinController.getTaal().getLocalisatie("CORRECTE_KEUZE"));
+                        scanner.next();
+                    }
+                    try {
+                        domeinController.meldAan(gebruikersnaam, geboortejaar);
+                        System.out.println(domeinController.getTaal().getLocalisatie("CORRECT_AANGEMELD"));
+                        System.out.printf("%s", domeinController.geefSpeler(gebruikersnaam, geboortejaar));
+                        System.out.println();
 
-						if (domeinController.geefSpelers().size() == 4) {
-							nextUser = false;
-							loopflag = false;
-							break;
-						}
-						System.out.println(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
-						nogAanmelden = scanner.next().toLowerCase();
-						if (!(nogAanmelden.charAt(0) == 'y')) {
-							nextUser = false;
-							loopflag = false;
-						}
-					} catch (IllegalArgumentException e) {
-						System.out.println(domeinController.getTaal().getLocalisatie(e.getMessage()));
-						System.out.println(domeinController.getTaal().getLocalisatie("PROBEER_OPNIEUW"));
-					}
-				}
-		}
+                        if (domeinController.geefSpelers().size() == 4) {
+                            nextUser = false;
+                            loopflag = false;
+                            break;
+                        }
+                        System.out.println(domeinController.getTaal().getLocalisatie("NOG_AANMELDEN"));
+                        nogAanmelden = scanner.next().toLowerCase();
+                        if (!(nogAanmelden.charAt(0) == 'y')) {
+                            nextUser = false;
+                            loopflag = false;
+                        }
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(domeinController.getTaal().getLocalisatie(e.getMessage()));
+                        System.out.println(domeinController.getTaal().getLocalisatie("PROBEER_OPNIEUW"));
+                    }
+                }
+        }
 
-		for (String speler : domeinController.geefSpelers()) {
-			System.out.print(speler);
-		}
-	}
+        for (String speler : domeinController.geefSpelers()) {
+            System.out.print(speler);
+        }
+    }
 }
