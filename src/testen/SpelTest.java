@@ -46,7 +46,7 @@ public class SpelTest {
     void speelBeurt_correcteString() {
         ArrayList<Speler> spelers = new ArrayList<>(List.of(SPELER_1, SPELER_2, SPELER_3, SPELER_4));
         Spel testSpel = new Spel(spelers);
-        String[] zetten = {"8.8 6", "9.8 6"};
+        List<String> zetten = new ArrayList<>(List.of("8.8 6", "9.8 6"));
         List<String> scoreBlad = testSpel.speelBeurt("Andreeas", "1990", zetten);
         assertEquals("      X 3 4", scoreBlad.get(0));
 

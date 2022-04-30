@@ -116,7 +116,7 @@ public class Spel {
      * @param zetten         bevat 2 of 3 strings met de zet in de vorm "kolomVak.rijVak waardeSteen"
      * @return een lijst aan Strings die het scoreblad na het spelen van de beurt moeten voorstellen
      */
-    public List<String> speelBeurt(String gebruikersnaam, String geboortejaar, String[] zetten) {
+    public List<String> speelBeurt(String gebruikersnaam, String geboortejaar, List<String> zetten) {
         checkOfSpelerInHetSpelZit(gebruikersnaam, geboortejaar);
         Speler actieveSpeler = spelers.get(spelers.indexOf(new Speler(gebruikersnaam, Integer.parseInt(geboortejaar))));
         ArrayList<String> puntenArraysVoorAlleZetten = new ArrayList<>();
@@ -124,7 +124,6 @@ public class Spel {
         for (String zet : zetten) {
             //haal het correct vakje uit het spelbord op basis van eerste 3 tekens in string zijde kolomVak.rijVak.
             Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(0, 3));
-            checkOfVakjeLeegIs(vakWaaropSteenWerdGelegd);
             //leg het correct steentje op het doorgegeven vak op basis van 5de teken. 4de teken is een spatie.
             vakWaaropSteenWerdGelegd.setSteen(new Steen(Integer.parseInt(zet.substring(4))));
             //update punten array met de berekening van de zet. Dit zal twee of drie keer updaten afhankelijk van aantal zetten.
@@ -248,17 +247,6 @@ public class Spel {
         if (!spelers.contains(new Speler(gebruikersnaam, Integer.parseInt(geboortejaar)))) {
             throw new IllegalArgumentException("SPELER_ZIT_NIET_IN_SPEL");
         }
-    }
-
-    /**
-     * UC4: Checked of het vakje leeg is opdat er een steen op kan gelegd worden
-     *
-     * @throws IllegalArgumentException indien vakje al een steen bevat.
-     */
-
-    private void checkOfVakjeLeegIs(Vak vakWaaropSteenWerdGelegd) {
-        if (Objects.nonNull(vakWaaropSteenWerdGelegd.getSteen()))
-            throw new IllegalArgumentException("VAKJE_IS_NIET_LEEG");
     }
 
     /**
@@ -402,11 +390,16 @@ public class Spel {
      * @return of de zet op eerste zicht zou mogen
      */
 
-    public boolean checkOfZetLegaalIsTussenTijdseValidatie(String vak) {
-        if (vak.equals("8.8") && !spelbord.getVakjes().get("8.8").bevatSteen()) {
+    public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteBeurt,String vak, String steen) {
+        if (eersteBeurt && vak.equals("8.8")){
+            zetSteenOpVak(vak,steen);
             return true;
         }
-        return !spelbord.getVakjes().get(vak).bevatSteen();
+        if (!eersteBeurt && !spelbord.getVakjes().get(vak).bevatSteen()) {
+            zetSteenOpVak(vak,steen);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -416,17 +409,16 @@ public class Spel {
      * @return of de zet legaal is
      */
 
-    public boolean checkOfZettenLegaalZijnEindValidatie(String[] zetten) {
+    public boolean checkOfZettenLegaalZijnEindValidatie(List<String> zetten) {
         List<Vak> vakkenPerZet = new ArrayList<>();
         List<Steen> stenenPerZet = new ArrayList<>();
         for (String zet : zetten) {
             haalVakkenEnStenenUitDeZet(vakkenPerZet, stenenPerZet, zet);
         }
         //eerste beurt
-        if (zetten.length == 3) {
+        if (zetten.size() == 3) {
             //case aangrenzende stenen binnen eerste beurt
-            if (CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(vakkenPerZet))
-                return true;
+            return CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(vakkenPerZet);
         }
         //alle andere beurten
         else {
@@ -460,23 +452,10 @@ public class Spel {
      */
 
     private boolean checkOfDeGevormdePuntenStrokenMetDeLiggingVanHetSteentje(Vak vak) {
-        List<Integer> puntenHorizontaal = Arrays.stream(berekenScoreHorizontaal(vak, "").split(","))
+        List<Integer> puntenLijst = Arrays.stream(berekenScoreVerticaal(vak, berekenScoreHorizontaal(vak, "")).split(","))
                 .map(Integer::parseInt)
                 .toList();
-        List<Integer> puntenVertikaal = Arrays.stream(berekenScoreVerticaal(vak, berekenScoreHorizontaal(vak, "")).split(","))
-                .map(Integer::parseInt)
-                .toList();
-        for (Integer punt : puntenHorizontaal) {
-            //gevormde score is hoger dan 12
-            if (punt > 12) {
-                return true;
-            }
-            //case vakje wit maar gevormde score < 10;
-            if (checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(vak, punt)) {
-                return true;
-            }
-        }
-        for (Integer punt : puntenVertikaal) {
+        for (Integer punt : puntenLijst) {
             //gevormde score is hoger dan 12
             if (punt > 12) {
                 return true;
@@ -510,8 +489,8 @@ public class Spel {
      */
 
     private boolean CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(List<Vak> vakkenPerZet) {
-        boolean steenEenEnTweeAangrenzend = vakkenPerZet.get(0).geefVakjesNaastVak().containsKey(vakkenPerZet.get(1).getCoordinatenVanVak());
-        boolean steenTweeEnDrieAangrenzend = vakkenPerZet.get(1).geefVakjesNaastVak().containsKey(vakkenPerZet.get(2).getCoordinatenVanVak());
+        boolean steenEenEnTweeAangrenzend = vakkenPerZet.get(0).geefVakjesNaastVak().containsValue(vakkenPerZet.get(1).getCoordinatenVanVak()) || vakkenPerZet.get(0).geefVakjesNaastVak().containsValue(vakkenPerZet.get(1).getCoordinatenVanVak());
+        boolean steenTweeEnDrieAangrenzend = vakkenPerZet.get(1).geefVakjesNaastVak().containsValue(vakkenPerZet.get(2).getCoordinatenVanVak()) ||  vakkenPerZet.get(1).geefVakjesNaastVak().containsValue(vakkenPerZet.get(0).getCoordinatenVanVak());
         return steenEenEnTweeAangrenzend && steenTweeEnDrieAangrenzend;
     }
 
@@ -538,7 +517,7 @@ public class Spel {
 
     private boolean raaktVakMinstensEenAndereSteen(Vak vak) {
         return vak.geefVakjesNaastVak().values().stream()
-                .filter(coordinaat -> coordinaat.equals("bestaat niet"))
+                .filter(coordinaat -> !coordinaat.equals("bestaat niet"))
                 .map((coordinaat) -> spelbord.getVakjes().get(coordinaat))
                 .map(Vak::bevatSteen)
                 .toList()
@@ -555,6 +534,14 @@ public class Spel {
         for (Vak vak : vakkenPerZet) {
             vak.setSteen(null);
         }
+    }
+
+    private void zetSteenOpVak(String vak, String steen) {
+        spelbord.getVakjes().get(vak).setSteen(new Steen(Integer.parseInt(steen)));
+    }
+
+    public List<Speler> getSpelers() {
+        return spelers;
     }
 }
 

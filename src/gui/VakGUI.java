@@ -133,5 +133,8 @@ public class VakGUI extends Rectangle {
         return kolom;
     }
 
+    public String getCoordinaten() {
+        return String.format("%d.%d", getKolom(), getRij());
+    }
 
 }

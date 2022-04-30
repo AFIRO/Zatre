@@ -131,7 +131,7 @@ public class DomeinController {
      * @param geboortejaar   geboortejaar van de gebruiker
      * @param zetten         de uit te voeren zetten.
      */
-    public void speelBeurt(String gebruikersnaam, String geboortejaar, String[] zetten) {
+    public void speelBeurt(String gebruikersnaam, String geboortejaar, List<String> zetten) {
         spel.speelBeurt(gebruikersnaam, geboortejaar, zetten);
     }
 
@@ -223,17 +223,23 @@ public class DomeinController {
         return spel.isEindeSpel();
     }
 
-    public boolean checkOfZetLegaalIsTussenTijdseValidatie(String vak) {
-        return spel.checkOfZetLegaalIsTussenTijdseValidatie(vak);
+    public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteSteen, String vak, String steen) {
+        return spel.checkOfZetLegaalIsTussenTijdseValidatie(eersteSteen,vak, steen);
     }
 
-    public boolean checkOfZettenLegaalZijnEindValidatie(String[] zetten) {
+    public boolean checkOfZettenLegaalZijnEindValidatie(List<String> zetten) {
         return spel.checkOfZettenLegaalZijnEindValidatie(zetten);
     }
-    
+
     public void volgendeSpeler() {
-    	spel.volgendeSpeler();
+        spel.volgendeSpeler();
     }
 
+    public List<String> geefActieveSpeler() {
+        List<String> actieveSpelerGegevens = new ArrayList<>();
+        actieveSpelerGegevens.add(spel.getSpelers().get(0).getGebruikersnaam());
+        actieveSpelerGegevens.add(String.valueOf(spel.getSpelers().get(0).getGeboortejaar()));
+        return actieveSpelerGegevens;
 
+    }
 }

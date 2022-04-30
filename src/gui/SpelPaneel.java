@@ -8,6 +8,7 @@ public class SpelPaneel extends BorderPane {
     private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
     private final MenuPaneel menuPaneel;
+    private SpelBordPaneel spelBordPaneel;
     private SpelScorebladPaneel spelScorebladPaneel;
 
 
@@ -25,8 +26,8 @@ public class SpelPaneel extends BorderPane {
     private void setSpelSchermen() {
         SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel(domeinController);
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
-        SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, spelScorebladPaneel, domeinController);
-        SpelBordPaneel spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
+        SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, spelScorebladPaneel, domeinController, this);
+        spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
         this.setTop(spelLogoPaneel);
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
@@ -40,4 +41,7 @@ public class SpelPaneel extends BorderPane {
         return spelScorebladPaneel;
     }
 
+    public SpelBordPaneel getSpelBordPaneel() {
+        return spelBordPaneel;
+    }
 }
