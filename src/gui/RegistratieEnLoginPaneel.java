@@ -59,7 +59,7 @@ public class RegistratieEnLoginPaneel extends VBox {
 		btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
 		Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
 
-		// eventhandlers
+		//eventlisteners
 		btnRegistreer.setOnAction(this::registreer);
 		btnLogin.setOnAction(this::login);
 		btnSpelStarten.setOnAction(this::starten);

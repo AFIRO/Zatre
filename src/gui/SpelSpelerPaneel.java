@@ -65,6 +65,7 @@ public class SpelSpelerPaneel extends VBox {
     private void voegComponentenToe() {
         //instantie elementen
         VBox knoppenBox = new VBox();
+        VBox labelbox = new VBox();
         steentjesBox = new VBox();
         btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
         Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
@@ -83,10 +84,10 @@ public class SpelSpelerPaneel extends VBox {
         zetCSSVanKnopGoed(btnZetSteenOpVakje);
         zetCSSVanKnopGoed(btnGeefSteentjeTerug);
         btnCancelSpel.setStyle("-fx-background-color: #E80C58;"
-        		+ "-fx-border-color: #000000;" 
-        		+ "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em;" 
-        		+ " -fx-border-radius: 30px;"
+                + "-fx-border-color: #000000;"
+                + "-fx-border-width: 2px;"
+                + "-fx-font-size: 1em;"
+                + "-fx-border-radius: 30px;"
                 + "-fx-background-radius: 30px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
         this.setAlignment(Pos.TOP_CENTER);
@@ -97,11 +98,12 @@ public class SpelSpelerPaneel extends VBox {
         btnGeefSteentjeTerug.setDisable(true);
         knoppenBox.setSpacing(20);
         knoppenBox.setAlignment(Pos.TOP_CENTER);
+        labelbox.setAlignment(Pos.CENTER);
         steentjesBox.setSpacing(20);
-        steentjesBox.setAlignment(Pos.CENTER);
+        steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
 
         //insert in GUI
-        knoppenBox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
+        labelbox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
         this.getChildren().addAll(knoppenBox, steentjesBox);
         knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
     }
@@ -248,7 +250,7 @@ public class SpelSpelerPaneel extends VBox {
                 ((Text) gekliktVak.getChildren().get(1)).setText(String.valueOf(geklikteSteen.getWaarde()));
                 ((ImageView) gekliktVak.getChildren().get(2)).setImage(geklikteSteen.getImage());
                 steentjesBox.getChildren().remove(geklikteSteen);
-                zetten.add(((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten() + " " + geklikteSteen.getWaarde());
+                zetten.add(geklikteSteen.getWaarde() + " " + ((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten());
                 btnZetSteenOpVakje.setDisable(true);
                 btnGeefSteentjeTerug.setDisable(true);
                 eersteSteen = false;
@@ -345,6 +347,6 @@ public class SpelSpelerPaneel extends VBox {
         zetten = new ArrayList<>();
         this.btnVraagSteentjes.setDisable(false);
         domeinController.volgendeSpeler();
-        spelScorebladPaneel.updateInfo(0);
+        spelScorebladPaneel.updateInfo();
     }
 }
