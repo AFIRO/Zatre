@@ -36,6 +36,7 @@ public class SpelSpelerPaneel extends VBox {
 	private Button btnGeefSteentjeTerug;
 	private SteenGUI geklikteSteen;
 	private StackPane gekliktVak;
+	private BorderPane randSteen;
 	private final Label lblGeselecteerdVak = new Label();
 	private final Label lblGeselecteerdeSteen = new Label();
 	private final Label lblFeedbackVoorSpelers = new Label();
@@ -135,7 +136,7 @@ public class SpelSpelerPaneel extends VBox {
 		var stenen = domeinController.vraagSteentjes(eersteBeurt);
 		for (int waarde : stenen) {
 			SteenGUI steen = new SteenGUI(waarde);
-			BorderPane randSteen = new BorderPane(steen);
+			randSteen = new BorderPane(steen);
 			randSteen.setPrefHeight(steen.getImage().getHeight() * 0.5);
 			randSteen.setPrefWidth(randSteen.getHeight());
 			randSteen.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;" + "-fx-border-radius: 50px;");
@@ -197,7 +198,10 @@ public class SpelSpelerPaneel extends VBox {
 	 */
 
 	private void steenClicked(SteenGUI steen) {
+		if(this.geklikteSteen != null)
+			zetCSSSteenNormaal();
 		this.geklikteSteen = steen;
+		zetCSSGeklikteSteen();
 		if (!eersteBeurt) {
 			btnGeefSteentjeTerug.setDisable(false);
 		}
@@ -215,10 +219,16 @@ public class SpelSpelerPaneel extends VBox {
 		this.gekliktVak.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;");
 
 	}
+	private void zetCSSSteenNormaal() {
+		randSteen.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;" + "-fx-border-radius: 50px;");
+	}
 
 	private void zetCSSGekliktVak() {
 		this.gekliktVak.setStyle("-fx-border-color: #E80C58;" + "-fx-border-width: 2px;");
 
+	}
+	private void zetCSSGeklikteSteen() {
+		randSteen.setStyle("-fx-border-color:  #E80C58;" + "-fx-border-width: 2px;" + "-fx-border-radius: 50px;");
 	}
 
 	public void setGekliktVak(StackPane gekliktVak) {
