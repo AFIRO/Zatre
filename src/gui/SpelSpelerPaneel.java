@@ -82,6 +82,13 @@ public class SpelSpelerPaneel extends VBox {
         zetCSSVanKnopGoed(btnCancelSpel);
         zetCSSVanKnopGoed(btnZetSteenOpVakje);
         zetCSSVanKnopGoed(btnGeefSteentjeTerug);
+        btnCancelSpel.setStyle("-fx-background-color: #E80C58;"
+        		+ "-fx-border-color: #000000;" 
+        		+ "-fx-border-width: 2px;"
+                + "-fx-font-size: 1em;" 
+        		+ " -fx-border-radius: 30px;"
+                + "-fx-background-radius: 30px;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
         this.setAlignment(Pos.TOP_CENTER);
         this.setMinWidth(300);
         this.setMinHeight(1000);
@@ -107,10 +114,15 @@ public class SpelSpelerPaneel extends VBox {
     private void zetCSSVanKnopGoed(Button knop) {
         knop.setPadding(new Insets(5, 5, 5, 5));
         knop.setLineSpacing(100);
-        knop.setMaxWidth(150);
+        knop.setMaxWidth(175);
         knop.setAlignment(Pos.CENTER);
-        knop.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em");
+        knop.setStyle("-fx-background-color: #8DFC79;" 
+        		+ "-fx-border-color: #000000;" 
+        		+ "-fx-border-width: 2px;"
+                + "-fx-font-size: 1em;" 
+        		+ "-fx-border-radius: 30px;" 
+                + "-fx-background-radius: 30px;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
     }
 
     /**
