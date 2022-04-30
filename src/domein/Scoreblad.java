@@ -130,6 +130,6 @@ public class Scoreblad {
     public String toString() {
         return regels.stream()
                 .map(ScorebladRegel::toString)
-                .collect(Collectors.joining("/n"));
+                .collect(Collectors.joining("\n"));
     }
 }

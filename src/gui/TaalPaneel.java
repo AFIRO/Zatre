@@ -39,7 +39,7 @@ public class TaalPaneel extends VBox {
         Button btnEngels = new Button("English");
         Text txtHeader = new Text("Kies uw taal / Choose your language:");
 
-        //eventhandlers
+        //eventlisteners
         btnNederlands.setOnAction(this::setTaalNederlands);
         btnEngels.setOnAction(this::setTaalEngels);
 

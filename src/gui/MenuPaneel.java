@@ -53,7 +53,7 @@ public class MenuPaneel extends VBox {
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
         lblLoggedOn = new Label();
 
-        //eventhandlers
+        //eventlisteners
         btnRegistreerAanmelden.setOnAction(this::registreerAanmelden);
         btnSpelStarten.setOnAction(this::starten);
         btnKiesTaal.setOnAction(this::kiesTaal);
@@ -110,7 +110,7 @@ public class MenuPaneel extends VBox {
             stage.setWidth(1750);
             stage.setHeight(1070);
 
-            this.spelPaneel.getSpelScorebladPaneel().updateInfo(0);
+            this.spelPaneel.getSpelScorebladPaneel().updateInfo();
             hoofdPaneel.setCenter(spelPaneel);
         } catch (IllegalArgumentException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

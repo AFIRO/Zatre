@@ -10,6 +10,8 @@ public class Spel {
     private final List<Speler> spelers;
     private final Spelbord spelbord;
     private final List<Steen> stenen;
+    private int indexVanSpelerAanBeurt;
+    private Speler huidigeActieveSpeler;
 
     /**
      * UC3: constructor van Spel
@@ -27,6 +29,7 @@ public class Spel {
         this.spelStaat = SpelStaat.IN_VOORBEREIDING;
         this.spelbord = new Spelbord();
         this.stenen = genereerStenen();
+        indexVanSpelerAanBeurt = 0;
     }
 
     /**
@@ -67,6 +70,7 @@ public class Spel {
         checkOfVoldoendeSpelersOmSpelTeStarten();
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() - 1));
         bepaalVolgordeSpelers();
+        huidigeActieveSpeler = spelers.get(0);
         this.spelStaat = SpelStaat.GESTART;
     }
 
@@ -88,8 +92,25 @@ public class Spel {
         Collections.shuffle(spelers);
     }
 
+    /**
+     * UC4: gaat volgorde van spelers af op basis van index en past de huidige speler aan
+     */
+
     public void volgendeSpeler() {
-        Collections.rotate(spelers, 1);
+        if (indexVanSpelerAanBeurt == spelers.size() - 1) {
+            indexVanSpelerAanBeurt = 0;
+        } else {
+            indexVanSpelerAanBeurt++;
+        }
+        huidigeActieveSpeler = spelers.get(indexVanSpelerAanBeurt);
+    }
+
+    /**
+     * UC4: geeft actieve speler terug
+     */
+
+    public Speler getHuidigeActieveSpeler() {
+        return huidigeActieveSpeler;
     }
 
     /**
@@ -123,9 +144,9 @@ public class Spel {
         //itereer door alle doorgegeven zetten
         for (String zet : zetten) {
             //haal het correct vakje uit het spelbord op basis van eerste 3 tekens in string zijde kolomVak.rijVak.
-            Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(0, 3));
+            Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(2));
             //leg het correct steentje op het doorgegeven vak op basis van 5de teken. 4de teken is een spatie.
-            vakWaaropSteenWerdGelegd.setSteen(new Steen(Integer.parseInt(zet.substring(4))));
+            vakWaaropSteenWerdGelegd.setSteen(new Steen(Integer.parseInt(zet.substring(0,1))));
             //update punten array met de berekening van de zet. Dit zal twee of drie keer updaten afhankelijk van aantal zetten.
             puntenArraysVoorAlleZetten.add(berekenScoreVoorGelegdeSteen(vakWaaropSteenWerdGelegd));
         }
@@ -503,8 +524,8 @@ public class Spel {
      */
 
     private void haalVakkenEnStenenUitDeZet(List<Vak> vakkenPerZet, List<Steen> stenenPerZet, String zet) {
-        Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(0, 3));
-        stenenPerZet.add(new Steen(Integer.parseInt(zet.substring(4))));
+        Vak vakWaaropSteenWerdGelegd = spelbord.getVakjes().get(zet.substring(2));
+        stenenPerZet.add(new Steen(Integer.parseInt(zet.substring(0,1))));
         vakkenPerZet.add(vakWaaropSteenWerdGelegd);
     }
 

@@ -1,6 +1,8 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -34,6 +36,9 @@ public class SpelScorebladPaneel extends VBox {
         lblActieveSpeler = new Label();
         txfScoreblad = new TextField();
 
+        //eventlisteners
+        txfScoreblad.textProperty().addListener((ChangeListener<String>) (observable, oldValue, newValue) -> txfScoreblad.setPrefWidth(txfScoreblad.getText().length() * 7));
+
         //styling
         lblTitel.setStyle("-fx-font-size: 2em");
         lblActieveSpeler.setStyle("-fx-font-size: 1.5em");
@@ -52,12 +57,10 @@ public class SpelScorebladPaneel extends VBox {
     /**
      *UC4: eventhandler voor update van info in dit scherm
      *
-     * @param spelerAanBeurt de actieve speler
      */
 
-    public void updateInfo(int spelerAanBeurt) {
-        this.lblActieveSpeler.setText("Speler: " + domeinController.geefSpelers().get(spelerAanBeurt).substring(10));
-        this.txfScoreblad.setText(domeinController.geefScorebladen().get(spelerAanBeurt));
-
+    public void updateInfo() {
+        this.lblActieveSpeler.setText("Speler: " + domeinController.geefActieveSpeler().get(0));
+        this.txfScoreblad.setText(domeinController.geefScoreBladVanActieveSpeler());
     }
 }

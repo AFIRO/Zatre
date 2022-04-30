@@ -212,14 +212,8 @@ public class DomeinController {
      *
      * @return een lijst aan strings met de string representatie van de scorebladen van elke speler.
      */
-    public List<String> geefScorebladen() {
-        List<String> alleScorebladen = new ArrayList<>();
-
-        for (Speler speler : spelerRepository.geefSpelers()) {
-            String scoreblad = String.format("%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal") + speler.getScoreblad().toString();
-            alleScorebladen.add(scoreblad);
-        }
-        return alleScorebladen;
+    public String geefScoreBladVanActieveSpeler() {
+        return String.format("%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal") + spel.getHuidigeActieveSpeler().getScoreblad().toString();
     }
 
     /**
@@ -266,9 +260,9 @@ public class DomeinController {
 
     public List<String> geefActieveSpeler() {
         List<String> actieveSpelerGegevens = new ArrayList<>();
-        actieveSpelerGegevens.add(spel.getSpelers().get(0).getGebruikersnaam());
-        actieveSpelerGegevens.add(String.valueOf(spel.getSpelers().get(0).getGeboortejaar()));
-        actieveSpelerGegevens.add(String.valueOf(spel.getSpelers().get(0).getSpeelkansen()));
+        actieveSpelerGegevens.add(spel.getHuidigeActieveSpeler().getGebruikersnaam());
+        actieveSpelerGegevens.add(String.valueOf(spel.getHuidigeActieveSpeler().getGeboortejaar()));
+        actieveSpelerGegevens.add(String.valueOf(spel.getHuidigeActieveSpeler().getSpeelkansen()));
         return actieveSpelerGegevens;
 
     }

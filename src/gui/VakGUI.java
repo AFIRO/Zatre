@@ -117,7 +117,7 @@ public class VakGUI extends Rectangle {
 
 
     public String getCoordinaten() {
-        return String.format("%d.%d", getKolom(), getRij());
+        return String.format("%s.%s", String.valueOf(getKolom()).trim(), String.valueOf(getRij()).trim());
     }
 
 }
