@@ -41,11 +41,13 @@ public class SpelSpelerPaneel extends VBox {
     private List<String> zetten;
 
     /**
-     * @param hoofdPaneel
-     * @param menuPaneel
-     * @param spelScorebladPaneel
-     * @param domeinController
-     * @param spelPaneel
+     * UC3: constructor voor paneel
+     *
+     * @param hoofdPaneel om hoofdscherm aan te passen
+     * @param menuPaneel voor terug naar menu na einde spel
+     * @param spelScorebladPaneel voor aanpassing scoreblad viwe
+     * @param domeinController voor bevraging domein
+     * @param spelPaneel voor methodes na einde spel
      */
     public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, SpelScorebladPaneel spelScorebladPaneel, DomeinController domeinController, SpelPaneel spelPaneel) {
         this.hoofdPaneel = hoofdPaneel;
@@ -61,38 +63,40 @@ public class SpelSpelerPaneel extends VBox {
      *UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen op de juiste plaats.
      */
     private void voegComponentenToe() {
-
-        this.setAlignment(Pos.TOP_CENTER);
-        this.setMinWidth(300);
-        this.setMinHeight(1000);
+        //instantie elementen
         VBox knoppenBox = new VBox();
         steentjesBox = new VBox();
         btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
         Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
         btnZetSteenOpVakje = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
         btnGeefSteentjeTerug = new Button(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
-        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
-        this.setSpacing(150);
-        knoppenBox.setSpacing(20);
-        steentjesBox.setSpacing(20);
-        knoppenBox.setAlignment(Pos.TOP_CENTER);
-        steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
 
-        btnZetSteenOpVakje.setDisable(true);
-        btnGeefSteentjeTerug.setDisable(true);
-
+        //eventhandlers
         btnVraagSteentjes.setOnAction(this::vraagSteentjes);
         btnCancelSpel.setOnAction(this::cancelSpel);
         btnZetSteenOpVakje.setOnAction(this::zetSteenOpVakje);
         btnGeefSteentjeTerug.setOnAction(this::geefSteenTerug);
+
+        //styling
         zetCSSVanKnopGoed(btnVraagSteentjes);
         zetCSSVanKnopGoed(btnCancelSpel);
         zetCSSVanKnopGoed(btnZetSteenOpVakje);
         zetCSSVanKnopGoed(btnGeefSteentjeTerug);
+        this.setAlignment(Pos.TOP_CENTER);
+        this.setMinWidth(300);
+        this.setMinHeight(1000);
+        this.setSpacing(150);
+        btnZetSteenOpVakje.setDisable(true);
+        btnGeefSteentjeTerug.setDisable(true);
+        knoppenBox.setSpacing(20);
+        knoppenBox.setAlignment(Pos.TOP_CENTER);
+        steentjesBox.setSpacing(20);
+        steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
 
+        //insert in GUI
         knoppenBox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
-
         this.getChildren().addAll(knoppenBox, steentjesBox);
+        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
     }
 
     /**
@@ -144,7 +148,6 @@ public class SpelSpelerPaneel extends VBox {
         alert.setContentText(domeinController.getTaal().getLocalisatie("BEVESTIGING_SPEL_STOPPEN"));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-
             domeinController.cancelSpel();
             resetSchermenVoorVolgendSpel();
         }
@@ -219,17 +222,17 @@ public class SpelSpelerPaneel extends VBox {
         lblFeedbackVoorSpelers.setVisible(true);
     }
 
-    	/**
-         * UC4: eventhandler voor een beurt te spelen
- 	    * @param actionEvent
-    	 */
-		private void zetSteenOpVakje(ActionEvent actionEvent) {
-			lblFeedbackVoorSpelers.setVisible(false);
+    /**
+     *UC4: eventhandler voor een beurt te spelen
+     * @param actionEvent
+     */
+    private void zetSteenOpVakje(ActionEvent actionEvent) {
+        lblFeedbackVoorSpelers.setVisible(false);
         if (Objects.isNull(gekliktVak) || Objects.isNull(geklikteSteen)) {
             lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("SELECTEER_STEEN_EN_VAK"));
             lblFeedbackVoorSpelers.setVisible(true);
         } else {
-			if (domeinController.checkOfZetLegaalIsTussenTijdseValidatie(eersteSteen, ((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten(),  String.valueOf(geklikteSteen.getWaarde()))){
+            if (domeinController.checkOfZetLegaalIsTussenTijdseValidatie(eersteSteen, ((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten(),  String.valueOf(geklikteSteen.getWaarde()))){
                 ((Text) gekliktVak.getChildren().get(1)).setText(String.valueOf(geklikteSteen.getWaarde()));
                 ((ImageView) gekliktVak.getChildren().get(2)).setImage(geklikteSteen.getImage());
                 steentjesBox.getChildren().remove(geklikteSteen);
@@ -237,16 +240,16 @@ public class SpelSpelerPaneel extends VBox {
                 btnZetSteenOpVakje.setDisable(true);
                 btnGeefSteentjeTerug.setDisable(true);
                 eersteSteen = false;
-				geklikteSteen = null;
-				gekliktVak = null;
-				updateFeedbackLabel();
+                geklikteSteen = null;
+                gekliktVak = null;
+                updateFeedbackLabel();
             } else {
                 lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("ONGELDIGE_ZET"));
                 lblFeedbackVoorSpelers.setVisible(true);
                 geklikteSteen = null;
-				gekliktVak = null;
+                gekliktVak = null;
                 btnGeefSteentjeTerug.setDisable(true);
-				updateFeedbackLabel();
+                updateFeedbackLabel();
             }
 
             if (steentjesBox.getChildren().isEmpty()) {

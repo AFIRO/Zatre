@@ -6,6 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class StartUp extends Application {
+
+    /**
+     *UC3: startup voor GUI
+     *
+     * @param stage stage voor app
+     */
+
     @Override
     public void start(Stage stage) {
         DomeinController domeinController = new DomeinController();
@@ -13,8 +20,11 @@ public class StartUp extends Application {
         stage.setScene(scene);
         stage.setTitle("Zatre");
         stage.show();
-
     }
+
+    /**
+     *UC3: main entrypoint
+     */
 
     public static void main(String... args) {
         Application.launch(StartUp.class, args);

@@ -16,14 +16,17 @@ public class SpelBordPaneel extends GridPane {
     private static final int BOARD_SIZE = 16;
     private static final int VAK_SIZE = 50;
 
+    /**
+     *UC3: constructor voor paneel
+     *
+     * @param domeinController de dc voor gebruik
+     * @param spelSpelerPaneel voor aanpassing scherm
+     */
+
     public SpelBordPaneel(DomeinController domeinController, SpelSpelerPaneel spelSpelerPaneel) {
         this.domeinController = domeinController;
         this.spelSpelerPaneel = spelSpelerPaneel;
-        this.setAlignment(Pos.CENTER);
-        this.setWidth(1000);
-        this.setHeight(1000);
         voegComponentenToe();
-
     }
 
     /**
@@ -31,7 +34,13 @@ public class SpelBordPaneel extends GridPane {
      */
 
     private void voegComponentenToe() {
+        //instantie elementen
         genereerBord();
+
+        //styling
+        this.setAlignment(Pos.CENTER);
+        this.setWidth(1000);
+        this.setHeight(1000);
     }
 
     /**
@@ -68,6 +77,7 @@ public class SpelBordPaneel extends GridPane {
 
                 //maak vakje met correcte grootte en coordinates
                 VakGUI vak = new VakGUI(VAK_SIZE, rij, kolom);
+
                 //default waarden
                 vak.setFill(Color.BLACK);
                 vak.setStroke(Color.WHITE);
@@ -79,17 +89,23 @@ public class SpelBordPaneel extends GridPane {
                     vak.setFill(Color.WHITE);
                 if (witteLijst.contains(String.format("%d.%d", rij, kolom)))
                     vak.setFill(Color.WHITE);
+
                 //maak startvakje 8.8 rood
                 if (rij == 8 && kolom == 8)
                     vak.setFill(Color.RED);
-                //voeg eventhandler toe voor extractie van coordinaten
                 //maak stackpane voor vak en tekst erop
                 StackPane vakStack = new StackPane();
+                //voeg eventhandler toe voor extractie van coordinaten
                 vakStack.setOnMousePressed(event -> clickVak(vakStack));
+                //verdere nuttige elementen in stackpane
+                //tekst als fallback voor foto
                 Text ietsDatOpHetVakGeschrevenZalWorden = new Text("");
+                //foto van steen
                 ImageView fotoVoorOpVakje = new ImageView();
+                //styling foto
                 fotoVoorOpVakje.setFitHeight(40);
                 fotoVoorOpVakje.setFitWidth(40);
+                //insert elementen in stackpane
                 vakStack.getChildren().addAll(vak, ietsDatOpHetVakGeschrevenZalWorden, fotoVoorOpVakje);
                 //plaats vakje op correcte plaats in gridpane
                 setRowIndex(vakStack, rij);

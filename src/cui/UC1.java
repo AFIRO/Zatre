@@ -9,10 +9,21 @@ public class UC1 {
     private final Scanner scanner = new Scanner(System.in);
     private final DomeinController domeinController;
 
+    /**
+     *UC1: constructor voor eerste UC CLI
+     *
+     * @param domeinController voor bevraging domein
+     */
+
     public UC1(DomeinController domeinController) {
         this.domeinController = domeinController;
         registreerSpelerInputMenu();
     }
+
+    /**
+     *UC1: input menu voor speler registratie
+     *
+     */
 
     private void registreerSpelerInputMenu() {
         boolean loopflag = true;

@@ -11,11 +11,21 @@ import java.util.Scanner;
 public class StartUp {
     private final static Scanner scanner = new Scanner(System.in);
 
+    /**
+     *UC1: entry point CLI applicatie.
+     *
+     */
+
     public static void main(String[] args) {
         DomeinController domeinController = new DomeinController();
         domeinController.setTaal(geefKeuzeMenuTaal());
         geefKeuzeMenu(domeinController);
     }
+
+    /**
+     *UC1: taalmenu die speler in staat stelt om zijn taal in te stellen
+     *
+     */
 
     private static Taal geefKeuzeMenuTaal() {
         boolean loopflag = true;
@@ -50,6 +60,11 @@ public class StartUp {
 
     }
 
+    /**
+     *UC2: menu die speler in staat stelt om doorheen de applicatie te navigeren
+     *
+     */
+
     private static void geefKeuzeMenu(DomeinController domeinController) {
 
         boolean loopflag = true;
@@ -76,8 +91,12 @@ public class StartUp {
                 scanner.next();
             }
         }
-
     }
+
+    /**
+     *UC2: print het keuzemenu
+     *
+     */
 
     public static void printMenu(DomeinController domeinController) {
 

@@ -22,6 +22,14 @@ public class RegistratieEnLoginPaneel extends VBox {
     private Label lblFeedback;
     private Button btnSpelStarten;
 
+    /**
+     *UC3: constructor voor paneel
+     *
+     * @param domeinController de dc voor gebruik
+     * @param hoofdPaneel voor aanpassing scherm
+     * @param menuPaneel voor terugkeer naar menu
+     */
+
     public RegistratieEnLoginPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.hoofdPaneel = hoofdPaneel;
         this.menuPaneel = menuPaneel;
@@ -34,27 +42,13 @@ public class RegistratieEnLoginPaneel extends VBox {
      */
 
     private void voegComponentenToe() {
-        this.setStyle("-fx-background-color: #566454");
-        this.setSpacing(5);
-        this.setAlignment(Pos.TOP_CENTER);
+        //instantie objecten
         final Text header = new Text(domeinController.getTaal().getLocalisatie("REGISTRATIE") + " / " + domeinController.getTaal().getLocalisatie("LOGIN"));
-        header.setStyle("-fx-font-size: 2em;");
-
-
         final Label naam = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_NAAM"));
-        naam.setStyle("-fx-font-size: 2em;");
-        txtNaam = new TextField();
-        txtNaam.setMaxWidth(250);
-        txtNaam.setMaxHeight(100);
-        txtNaam.setStyle("-fx-font-size: 1.5em; -fx-alignment: center");
-
-
         final Label jaar = new Label(domeinController.getTaal().getLocalisatie("GEWENSTE_GEBOORTEDATUM"));
-        jaar.setStyle("-fx-font-size: 2em;");
+        txtNaam = new TextField();
         txtGeboortejaar = new TextField();
-        txtGeboortejaar.setMaxWidth(250);
-        txtGeboortejaar.setMaxHeight(100);
-        txtGeboortejaar.setStyle("-fx-font-size: 1.5em; -fx-alignment: center");
+        lblFeedback = new Label();
         HBox alignmentBoxEersteRij = new HBox();
         HBox alignmentBoxTweedeRij = new HBox();
         Button btnRegistreer = new Button(domeinController.getTaal().getLocalisatie("REGISTREER_KNOP"));
@@ -62,70 +56,96 @@ public class RegistratieEnLoginPaneel extends VBox {
         Button btnBack = new Button(domeinController.getTaal().getLocalisatie("TERUG"));
         btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
+
+        //eventhandlers
+        btnRegistreer.setOnAction(this::registreer);
+        btnLogin.setOnAction(this::login);
+        btnSpelStarten.setOnAction(this::starten);
+        btnBack.setOnAction(this::back);
+        btnQuit.setOnAction(this::quit);
+
+        //styling
+        zetCSSTekstveldenGoed(txtNaam);
+        zetCSSTekstveldenGoed(txtGeboortejaar);
+        zetAlignmentBoxenGoed(alignmentBoxEersteRij);
+        zetAlignmentBoxenGoed(alignmentBoxTweedeRij);
+        zetCSSVanKnopGoed(btnQuit);
+        zetCSSVanKnopGoed(btnBack);
+        zetCSSVanKnopGoed(btnSpelStarten);
+        zetCSSVanKnopGoed(btnLogin);
+        zetCSSVanKnopGoed(btnRegistreer);
+        zetCSSLabelsGoed(jaar);
+        zetCSSLabelsGoed(naam);
+        this.setStyle("-fx-background-color: #566454");
+        this.setSpacing(5);
+        this.setAlignment(Pos.TOP_CENTER);
+        header.setStyle("-fx-font-size: 2em;");
+        lblFeedback.setVisible(false);
+        lblFeedback.setVisible(false);
+        btnSpelStarten.setVisible(false);
+
+        //insert in GUI
+        this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar, alignmentBoxEersteRij, alignmentBoxTweedeRij, lblFeedback);
         alignmentBoxEersteRij.getChildren().addAll(btnRegistreer, btnSpelStarten, btnLogin);
         alignmentBoxTweedeRij.getChildren().addAll(btnBack, btnQuit);
-        alignmentBoxEersteRij.setAlignment(Pos.CENTER);
-        alignmentBoxEersteRij.setSpacing(20.0);
-        alignmentBoxTweedeRij.setAlignment(Pos.CENTER);
-        alignmentBoxTweedeRij.setSpacing(20.0);
-
-        btnRegistreer.setOnAction(this::registreer);
-        btnRegistreer.setPadding(new Insets(5, 5, 5, 5));
-        btnRegistreer.setLineSpacing(100);
-        btnRegistreer.setMaxWidth(1500);
-        btnRegistreer.setAlignment(Pos.CENTER_LEFT);
-        btnRegistreer.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em");
-
-        btnLogin.setOnAction(this::login);
-        btnLogin.setPadding(new Insets(5, 5, 5, 5));
-        btnLogin.setLineSpacing(100);
-        btnLogin.setMaxWidth(1500);
-        btnLogin.setAlignment(Pos.CENTER);
-        btnLogin.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em");
-
-        btnSpelStarten.setOnAction(this::starten);
-        btnSpelStarten.setPadding(new Insets(5, 5, 5, 5));
-        btnSpelStarten.setLineSpacing(100);
-        btnSpelStarten.setMaxWidth(1500);
-        btnSpelStarten.setAlignment(Pos.CENTER_RIGHT);
-        btnSpelStarten.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em");
-
-        btnBack.setOnAction(this::back);
-        btnBack.setPadding(new Insets(5, 5, 5, 5));
-        btnBack.setLineSpacing(100);
-        btnBack.setMaxWidth(1500);
-        btnBack.setAlignment(Pos.CENTER);
-        btnBack.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em");
-
-        btnQuit.setOnAction(this::quit);
-        btnQuit.setPadding(new Insets(5, 5, 5, 5));
-        btnQuit.setLineSpacing(100);
-        btnQuit.setMaxWidth(1500);
-        btnQuit.setAlignment(Pos.CENTER);
-        btnQuit.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em");
-
-        lblFeedback = new Label();
-        lblFeedback.setVisible(false);
-
-
-        this.getChildren().addAll(header, naam, txtNaam, jaar, txtGeboortejaar, alignmentBoxEersteRij, alignmentBoxTweedeRij, lblFeedback);
-        btnSpelStarten.setVisible(false);
     }
+
+    /**
+     *UC3: zet CSS van labels goed
+     * @param label de label
+     */
+
+    private void zetCSSLabelsGoed(Label label) {
+        label.setStyle("-fx-font-size: 2em;");
+    }
+
+    /**
+     *UC3: zet CSS van boxen goed
+     *
+     * @param box de box
+     */
+
+    private void zetAlignmentBoxenGoed(HBox box) {
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(20.0);
+    }
+
+    /**
+     *UC3: zet CSS van tekstvelden goed
+     *
+     * @param txt het tekstveld
+     */
+
+
+    private void zetCSSTekstveldenGoed(TextField txt) {
+        txt.setMaxWidth(250);
+        txt.setMaxHeight(100);
+        txt.setStyle("-fx-font-size: 1.5em; -fx-alignment: center");
+    }
+
+    /**
+     *UC3: zet CSS van knoppen goed
+     *
+     * @param knop de knop
+     */
+
+
+    private void zetCSSVanKnopGoed(Button knop) {
+        knop.setPadding(new Insets(5, 5, 5, 5));
+        knop.setLineSpacing(100);
+        knop.setMaxWidth(1500);
+        knop.setAlignment(Pos.CENTER);
+        knop.setStyle("-fx-background-color: #8DFC79;"
+                + "-fx-border-color: #000000;"
+                + "-fx-border-width: 2px;"
+                + "-fx-font-size: 1em");
+    }
+
+    /**
+     *UC3: eventhandler voor registratie van nieuwe speler
+     *
+     */
+
 
     private void registreer(ActionEvent actionEvent) {
 
@@ -146,6 +166,11 @@ public class RegistratieEnLoginPaneel extends VBox {
             lblFeedback.setVisible(true);
         }
     }
+
+    /**
+     *UC3: eventhandler voor login van speler
+     *
+     */
 
     private void login(ActionEvent actionEvent) {
 
@@ -177,18 +202,38 @@ public class RegistratieEnLoginPaneel extends VBox {
         }
     }
 
+    /**
+     *UC3: eventhandler voor terugkeer naar menu
+     *
+     */
+
     private void back(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(menuPaneel);
     }
+
+    /**
+     *UC3: eventhandler voor uit spel te gaan
+     *
+     */
 
     private void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
 
+    /**
+     *UC3: eventhandler voor spel starten
+     *
+     */
+
     private void starten(ActionEvent actionEvent) {
         menuPaneel.starten(actionEvent);
         btnSpelStarten.setVisible(false);
     }
+
+    /**
+     *UC3: hulpmethode voor input sanering
+     *
+     */
 
     private void controleerOfInputNietBlancoIs(String input) {
         if (Objects.isNull(input) || input.isBlank()) {

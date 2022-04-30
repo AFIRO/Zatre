@@ -8,6 +8,12 @@ public class HoofdPaneel extends BorderPane {
     private DomeinController domeinController;
     private final TaalPaneel taalPaneel;
 
+    /**
+     *UC3: constructor voor paneel
+     *
+     * @param domeinController de dc voor gebruik
+     */
+
 
     public HoofdPaneel(DomeinController domeinController) {
         this.domeinController = domeinController;
@@ -24,10 +30,22 @@ public class HoofdPaneel extends BorderPane {
 
     }
 
+    /**
+     *UC3: methode die verder spel aanmaakt op basis van gekozen taal
+     *
+     */
+
     public void taalGekozen() {
         MenuPaneel menuPaneel = new MenuPaneel(this, domeinController, new TaalPaneel(domeinController, this));
         setCenter(menuPaneel);
     }
+
+    /**
+     *UC3: setter van domeincontroller. Kan niet anders omdat hoofdpaneel wordt gemaakt voordat taal gekozen wordt.
+     * Hoofdpaneel maakt immers taalpaneel voor die keuze
+     *
+     * @param domeinController dc (wordt maar eenmalig gedaan om singleton te garanderen)
+     */
 
     public void setDomeincontroller(DomeinController domeinController) {
         this.domeinController = domeinController;

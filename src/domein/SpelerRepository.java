@@ -70,15 +70,23 @@ public class SpelerRepository {
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelerMapper.checkOfSpelerAlBestaatInDatabase(gekozenSpeler))) {
-            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");  //exception wordt ook gesmeten wanneer speler geregistreerd wordt
+            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");
         } else
             return spelerMapper.geefSpeler(gebruikersnaam, geboortejaar);
     }
 
+    /**
+     * UC2: geeft een speler terug uit databasis
+     *
+     * @param gebruikersnaam Gebruikersnaam van de speler
+     * @param geboortejaar   Geboortejaar van de speler
+     * @return de opgevraagde speler
+     */
+
     public Speler geefAangemeldeSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelers.contains(gekozenSpeler))) {
-            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");  //exception wordt ook gesmeten wanneer speler geregistreerd wordt
+            throw new IllegalArgumentException("SPELER_BESTAAT_NIET");
         } else
             return spelers.get(spelers.indexOf(gekozenSpeler));
     }

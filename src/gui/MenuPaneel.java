@@ -19,6 +19,15 @@ public class MenuPaneel extends VBox {
     private final TaalPaneel taalPaneel;
     private Label lblLoggedOn;
 
+    /**
+     *UC3: constructor voor paneel
+     *
+     * @param domeinController de dc voor gebruik
+     * @param hoofdPaneel voor aanpassing scherm
+     * @param taalPaneel voor terugkeer naar taalkeuze
+     */
+
+
     public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController, TaalPaneel taalPaneel) {
         this.hoofdPaneel = hoofdPaneel;
         this.domeinController = domeinController;
@@ -34,75 +43,61 @@ public class MenuPaneel extends VBox {
      */
 
     private void voegComponentenToe() {
-
-        this.setStyle("-fx-background-color: #566454");
-        this.setAlignment(Pos.TOP_CENTER);
-
+        //instantie elementen
         Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
-        header.setStyle("-fx-font-size: 3em;");
-
         Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
-        subheader.setStyle("-fx-font-size: 2em");
-
         VBox alignmentBoxButtons = new VBox();
-
         Button btnRegistreerAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3") + "/" + domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
         Button btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
         Button btnKiesTaal = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_8"));
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
-        alignmentBoxButtons.getChildren().addAll(btnRegistreerAanmelden, btnSpelStarten, btnKiesTaal, btnQuit);
+        lblLoggedOn = new Label();
 
+        //eventhandlers
+        btnRegistreerAanmelden.setOnAction(this::registreerAanmelden);
+        btnSpelStarten.setOnAction(this::starten);
+        btnKiesTaal.setOnAction(this::kiesTaal);
+        btnQuit.setOnAction(this::quit);
+
+        //styling
+        zetCssVanKnopGoed(btnQuit);
+        zetCssVanKnopGoed(btnKiesTaal);
+        zetCssVanKnopGoed(btnSpelStarten);
+        zetCssVanKnopGoed(btnRegistreerAanmelden);
+        this.setStyle("-fx-background-color: #566454");
+        this.setAlignment(Pos.TOP_CENTER);
+        lblLoggedOn.setVisible(false);
+        header.setStyle("-fx-font-size: 3em;");
+        subheader.setStyle("-fx-font-size: 2em");
         alignmentBoxButtons.setAlignment(Pos.CENTER);
         alignmentBoxButtons.setSpacing(20.0);
 
-        lblLoggedOn = new Label();
-        btnRegistreerAanmelden.setOnAction(this::registreerAanmelden);
-        btnRegistreerAanmelden.setPadding(new Insets(10, 10, 10, 10));
-        btnRegistreerAanmelden.setLineSpacing(100);
-        btnRegistreerAanmelden.setMaxWidth(250);
-        btnRegistreerAanmelden.setAlignment(Pos.CENTER);
-        btnRegistreerAanmelden.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;");
-
-        btnSpelStarten.setOnAction(this::starten);
-        btnSpelStarten.setPadding(new Insets(10, 10, 10, 10));
-        btnSpelStarten.setLineSpacing(100);
-        btnSpelStarten.setMaxWidth(250);
-        btnSpelStarten.setAlignment(Pos.CENTER);
-        btnSpelStarten.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;");
-
-        btnKiesTaal.setOnAction(this::kiesTaal);
-        btnKiesTaal.setPadding(new Insets(10, 10, 10, 10));
-        btnKiesTaal.setLineSpacing(100);
-        btnKiesTaal.setMaxWidth(250);
-        btnKiesTaal.setAlignment(Pos.CENTER);
-        btnKiesTaal.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;");
-
-
-        btnQuit.setOnAction(this::quit);
-        btnQuit.setPadding(new Insets(10, 10, 10, 10));
-        btnQuit.setLineSpacing(100);
-        btnQuit.setMaxWidth(250);
-        btnQuit.setAlignment(Pos.CENTER);
-        btnQuit.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;");
-
-        lblLoggedOn.setVisible(false);
-
+        //insert in GUI
         this.getChildren().addAll(header, subheader, alignmentBoxButtons,
                 lblLoggedOn);
+        alignmentBoxButtons.getChildren().addAll(btnRegistreerAanmelden, btnSpelStarten, btnKiesTaal, btnQuit);
 
     }
+
+    /**
+     *UC3: zet styling van knoppen goed
+     */
+
+    private void zetCssVanKnopGoed(Button knop) {
+        knop.setPadding(new Insets(10, 10, 10, 10));
+        knop.setLineSpacing(100);
+        knop.setMaxWidth(250);
+        knop.setAlignment(Pos.CENTER);
+        knop.setStyle("-fx-background-color: #8DFC79;"
+                + "-fx-border-color: #000000;"
+                + "-fx-border-width: 2px;"
+                + "-fx-font-size: 2em;");
+    }
+
+    /**
+     *UC3: eventhandler voor overgang naar de spelschermen
+     *
+     */
 
     public void starten(ActionEvent actionEvent) {
         try {
@@ -122,9 +117,19 @@ public class MenuPaneel extends VBox {
 
     }
 
+    /**
+     *UC3: eventhandler voor overgang naar de registratie en aanmelden
+     *
+     */
+
     private void registreerAanmelden(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(registratieEnLoginPaneel);
     }
+
+    /**
+     *UC3: eventhandler voor overgang naar kies taal scherm
+     *
+     */
 
     private void kiesTaal(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(taalPaneel);
@@ -138,13 +143,30 @@ public class MenuPaneel extends VBox {
         }
     }
 
+    /**
+     *UC3: eventhandler om spel te sluiten
+     *
+     */
+
     private void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
 
+    /**
+     *UC3: getter voor aanpassing van label door andere schermen
+     *
+     */
+
+
     public Label getLblLoggedOn() {
         return lblLoggedOn;
     }
+
+    /**
+     *UC3: setter voor spelpaneel. Nodig indien een spel wordt opgestart na cancelatie of na een geslaagd spel
+     *
+     */
+
 
     public void setSpelPaneel(SpelPaneel spelPaneel) {
         this.spelPaneel = spelPaneel;

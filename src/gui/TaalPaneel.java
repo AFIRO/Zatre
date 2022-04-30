@@ -16,6 +16,13 @@ public class TaalPaneel extends VBox {
     private final HoofdPaneel hoofdPaneel;
     private final DomeinController domeinController;
 
+    /**
+     *UC3: constructor voor paneel
+     *
+     * @param domeinController de dc voor gebruik
+     * @param hoofdPaneel voor aanpassing actief paneel
+     */
+
     public TaalPaneel(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
         this.domeinController = domeinController;
         this.hoofdPaneel = hoofdPaneel;
@@ -27,35 +34,43 @@ public class TaalPaneel extends VBox {
      */
 
     private void voegComponentenToe() {
-
-        this.setStyle("-fx-background-color: #566454");
-        Text txtHeader = new Text("Kies uw taal / Choose your language:");
-        GridPane.setHalignment(txtHeader, HPos.CENTER);
-        this.setAlignment(Pos.TOP_CENTER);
-        txtHeader.setStyle("-fx-font-size: 2em;");
+        //instantie elementen
         Button btnNederlands = new Button("Nederlands");
         Button btnEngels = new Button("English");
+        Text txtHeader = new Text("Kies uw taal / Choose your language:");
+
+        //eventhandlers
         btnNederlands.setOnAction(this::setTaalNederlands);
-        btnNederlands.setPadding(new Insets(10, 10, 10, 10));
-        btnNederlands.setLineSpacing(100);
-        btnNederlands.setMaxWidth(200);
-        btnNederlands.setAlignment(Pos.CENTER);
-        btnNederlands.setStyle("-fx-background-color: #8DFC79;"
-                + "-fx-border-color: #000000;"
-                + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;");
         btnEngels.setOnAction(this::setTaalEngels);
-        btnEngels.setPadding(new Insets(10, 10, 10, 10));
-        btnEngels.setLineSpacing(100);
-        btnEngels.setMaxWidth(200);
-        btnEngels.setAlignment(Pos.CENTER);
-        btnEngels.setStyle("-fx-background-color: #8DFC79;"
+
+        //styling
+        zetCSSVanKnopGoed(btnEngels);
+        zetCSSVanKnopGoed(btnNederlands);
+        GridPane.setHalignment(txtHeader, HPos.CENTER);
+        txtHeader.setStyle("-fx-font-size: 2em;");
+        this.setSpacing(20.0);
+        this.setStyle("-fx-background-color: #566454");
+        this.setAlignment(Pos.TOP_CENTER);
+
+        //insert in GUI
+        this.getChildren().addAll(txtHeader, btnNederlands, btnEngels);
+
+    }
+
+    /**
+     *UC3: zet CSS van knop goed
+     * @param knop de knop
+     */
+
+    private void zetCSSVanKnopGoed(Button knop) {
+        knop.setPadding(new Insets(10, 10, 10, 10));
+        knop.setLineSpacing(100);
+        knop.setMaxWidth(200);
+        knop.setAlignment(Pos.CENTER);
+        knop.setStyle("-fx-background-color: #8DFC79;"
                 + "-fx-border-color: #000000;"
                 + "-fx-border-width: 2px;"
                 + "-fx-font-size: 2em");
-        this.setSpacing(20.0);
-        this.getChildren().addAll(txtHeader, btnNederlands, btnEngels);
-
     }
 
     /**

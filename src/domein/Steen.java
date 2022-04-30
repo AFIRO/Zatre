@@ -20,11 +20,16 @@ public class Steen {
     /**
      * UC3: methode om waarde steen op te vragen.
      *
-     * @return waarde van seten
+     * @return waarde van steen
      */
     public int getWaarde() {
         return waarde;
     }
+
+    /**
+     * UC3: override gelijkheid met als basis de waarde van de steen
+     *
+     */
 
     @Override
     public boolean equals(Object o) {

@@ -11,6 +11,12 @@ public class SpelLogoPaneel extends StackPane {
     private static final String LOGO_LOCATIE = "file:src/assets/logo/logo.jpg";
     private final ImageView imLogo = new ImageView();
 
+    /**
+     *UC3: constructor voor paneel
+     *
+     * @param domeinController de dc voor gebruik
+     */
+
     public SpelLogoPaneel(DomeinController domeinController) {
         this.domeinController = domeinController;
         voegComponentenToe();
@@ -21,13 +27,16 @@ public class SpelLogoPaneel extends StackPane {
      */
 
     private void voegComponentenToe() {
+        //instantie elementen
         Image logo = new Image(LOGO_LOCATIE);
+
+        //styling
         imLogo.setImage(logo);
         imLogo.setFitWidth(400);
         imLogo.setFitHeight(100);
         StackPane.setAlignment(imLogo, Pos.CENTER);
+
+        //insert in GUI
         this.getChildren().add(imLogo);
-
-
     }
 }

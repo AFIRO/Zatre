@@ -9,11 +9,22 @@ public class UC2 {
     private final Scanner scanner;
     private final DomeinController domeinController;
 
+    /**
+     *UC2: constructor voor eerste UC CLI
+     *
+     * @param domeinController voor bevraging domein
+     */
+
     public UC2(DomeinController domeinController) {
         scanner = new Scanner(System.in);
         this.domeinController = domeinController;
         meldAanInputMenu();
     }
+
+    /**
+     *UC2: input menu voor speler aanmelding
+     *
+     */
 
     private void meldAanInputMenu() {
         boolean loopflag = true;

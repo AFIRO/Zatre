@@ -64,29 +64,6 @@ public class Vak {
         }
     }
 
-    public int getKolom() {
-        return kolom;
-    }
-
-    public int getRij() {
-        return rij;
-    }
-
-    public Kleur getKleur() {
-        return kleur;
-    }
-
-    public Steen getSteen() {
-        return steen;
-    }
-
-    public void setKleur(Kleur kleur) {
-        this.kleur = kleur;
-    }
-
-    public void setSteen(Steen steen) {
-        this.steen = steen;
-    }
 
     /**
      * UC4 geeft de vakjes rond het vakje terug als een map. De map heeft volgende structuur:
@@ -151,11 +128,90 @@ public class Vak {
         return omringendeVakjes;
     }
 
+    /**
+     * UC3: geeft terug of er een steen op vak staat
+     *
+     * @return of er een steen op vak staat
+     */
+
+
     public boolean bevatSteen() {
         return Objects.nonNull(steen);
     }
 
+    /**
+     * UC3: geeft coordinaten van vak terug als string
+     *
+     * @return coordinaten
+     */
+
+
     public String getCoordinatenVanVak() {
         return String.format("%d.%d", kolom, rij);
+    }
+
+    /**
+     * UC3: getter voor kolom
+     *
+     * @return kolom
+     */
+
+    public int getKolom() {
+        return kolom;
+    }
+
+    /**
+     * UC3: getter voor rij
+     *
+     * @return rij
+     */
+
+
+    public int getRij() {
+        return rij;
+    }
+
+    /**
+     * UC3: getter voor kleur
+     *
+     * @return kleur
+     */
+
+
+    public Kleur getKleur() {
+        return kleur;
+    }
+
+    /**
+     * UC3: getter voor kleur
+     *
+     * @return kleur
+     */
+
+
+    public Steen getSteen() {
+        return steen;
+    }
+
+    /**
+     * UC3: setter voor steen
+     *
+     * @param kleur nieuwe kleur
+     */
+
+
+    public void setKleur(Kleur kleur) {
+        this.kleur = kleur;
+    }
+
+    /**
+     * UC3: setter voor kolom
+     *
+     * @param steen nieuwe steen
+     */
+
+
+    public void setSteen(Steen steen) {
+        this.steen = steen;
     }
 }

@@ -16,30 +16,44 @@ public class SpelPaneel extends BorderPane {
         this.domeinController = domeinController;
         this.hoofdPaneel = hoofdPaneel;
         this.menuPaneel = menuPaneel;
-        setSpelSchermen();
+        voegComponentenToe();
     }
 
     /**
      * UC4: creert de nodige elementen die deel zullen uitmaken van het spelpaneel en zet ze op de juiste plaatsen.
      */
 
-    private void setSpelSchermen() {
+    private void voegComponentenToe() {
+        //instantie elementen
         SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel(domeinController);
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
         SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, spelScorebladPaneel, domeinController, this);
         spelBordPaneel = new SpelBordPaneel(domeinController, spelSpelerPaneel);
-        this.setTop(spelLogoPaneel);
-        this.setCenter(spelBordPaneel);
-        this.setLeft(spelSpelerPaneel);
-        this.setRight(spelScorebladPaneel);
+
+        //styling
         setAlignment(spelScorebladPaneel, Pos.BASELINE_LEFT);
         setAlignment(spelBordPaneel, Pos.CENTER);
         this.setStyle("-fx-background-color: #566454");
+
+        //insert in GUI
+        this.setTop(spelLogoPaneel);
+        this.setCenter(spelBordPaneel);
+        this.setLeft(spelSpelerPaneel);
+        this.setRight(spelScorebladPaneel);;
     }
+
+    /**
+     * UC4: getter voor SpelScoreBladPaneel voor dataflow.
+     */
+
 
     public SpelScorebladPaneel getSpelScorebladPaneel() {
         return spelScorebladPaneel;
     }
+
+    /**
+     * UC4: setter voor nieuw spelbord indien spel gecanceled wordt.
+     */
 
     public SpelBordPaneel getSpelBordPaneel() {
         return spelBordPaneel;
