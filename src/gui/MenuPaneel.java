@@ -167,7 +167,6 @@ public class MenuPaneel extends VBox {
      *
      */
 
-
     public void setSpelPaneel(SpelPaneel spelPaneel) {
         this.spelPaneel = spelPaneel;
     }

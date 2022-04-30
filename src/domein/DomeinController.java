@@ -169,12 +169,14 @@ public class DomeinController {
      * @return laatste scoreblad
      */
     public List<String> eindigSpel() {
-        List<String> laatsteScorebladOmTeTonen = new ArrayList<>();
-        laatsteScorebladOmTeTonen.add(geefWinnaar());
-        laatsteScorebladOmTeTonen.addAll(spel.geefWinnaar().getScoreblad().getRegels());
+        List<String> laatsteScorebladenOmTeTonen = new ArrayList<>();
+        laatsteScorebladenOmTeTonen.add(geefWinnaar());
+        for (Speler speler :spel.getSpelers()) {
+            laatsteScorebladenOmTeTonen.addAll(speler.getScoreblad().getRegels());
+        }
         updateSpelersInDatabaseNaSpel();
         resetRepositoryVoorNieuwSpel();
-        return laatsteScorebladOmTeTonen;
+        return laatsteScorebladenOmTeTonen;
     }
 
     /**
