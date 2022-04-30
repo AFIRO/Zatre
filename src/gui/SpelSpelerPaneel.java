@@ -104,7 +104,7 @@ public class SpelSpelerPaneel extends VBox {
 
         //insert in GUI
         labelbox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
-        this.getChildren().addAll(knoppenBox, steentjesBox);
+        this.getChildren().addAll(knoppenBox, labelbox, steentjesBox);
         knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
     }
 
