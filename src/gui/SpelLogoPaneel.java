@@ -16,6 +16,10 @@ public class SpelLogoPaneel extends StackPane {
         voegComponentenToe();
     }
 
+    /**
+     *UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen op de juiste plaats.
+     */
+
     private void voegComponentenToe() {
         Image logo = new Image(LOGO_LOCATIE);
         imLogo.setImage(logo);

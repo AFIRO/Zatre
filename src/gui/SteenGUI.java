@@ -41,6 +41,10 @@ public class SteenGUI extends ImageView {
         }
     }
 
+    /**
+     *UC3: getter voor de waarde van een steen
+     */
+
     public int getWaarde() {
         return waarde;
     }

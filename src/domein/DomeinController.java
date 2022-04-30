@@ -11,6 +11,10 @@ public class DomeinController {
     private Taal taal;
     private Spel spel;
 
+    /**
+     * Alle UC's: constructor DC
+     */
+
     public DomeinController() {
         this.spelerRepository = new SpelerRepository(new SpelerMapper()); //Andreeas: Dependency injection nodig voor Mockito
 
@@ -23,6 +27,10 @@ public class DomeinController {
     public Taal getTaal() {
         return taal;
     }
+
+    /**
+     * Alle UC's: setter voor localisatie
+     */
 
     public void setTaal(Taal taal) {
         this.taal = taal;
@@ -70,14 +78,6 @@ public class DomeinController {
                 taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
     }
 
-    public String geefAangemeldeSpeler(String gebruikersnaam, int geboortejaar) { // opmaak string in UC
-        Speler speler = spelerRepository.geefAangemeldeSpeler(gebruikersnaam, geboortejaar);
-
-        return String.format("%n%s %s%n%s %d%n%s %d%n%n", taal.getLocalisatie("GEBRUIKERSNAAM"), speler.getGebruikersnaam(),
-                taal.getLocalisatie("GEBOORTEJAAR"), speler.getGeboortejaar(),
-                taal.getLocalisatie("SPEELKANSEN"), speler.getSpeelkansen());
-    }
-
     /**
      * UC2 en UC3: String representatie van alle aangemelde spelers een specifieke speler
      * exception kan gegooid worden door Speler als Repository (zie hun JavaDoc)
@@ -119,13 +119,17 @@ public class DomeinController {
 
     }
 
+    /**
+     * UC3: Geeft string respresentatie van winnende speler
+     */
+
     private String geefWinnaar() {
         return String.format("%s%n%s", taal.getLocalisatie("WINNAAR"),
                 spel.geefWinnaar());
     }
 
     /**
-     * UC4: nog nader te bepalen na ontwerp UC3
+     * UC4: laat speler toe om een beurt te spelen
      *
      * @param gebruikersnaam gebruikersnaam van de gebruiker
      * @param geboortejaar   geboortejaar van de gebruiker
@@ -223,22 +227,46 @@ public class DomeinController {
         return spel.isEindeSpel();
     }
 
+    /**
+     * UC4: tussentijdse evaluatie van zet in domein
+     * @param vak gespeeld vak
+     * @param eersteSteen boolean die representeert of dit de eerste steen is (die enkel maar op 8.8 mag)
+     * @param steen gespeelde steen
+     * @return of de zet legaal was niet.
+     */
+
     public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteSteen, String vak, String steen) {
         return spel.checkOfZetLegaalIsTussenTijdseValidatie(eersteSteen,vak, steen);
     }
+
+    /**
+     * UC4: finale evaluatie van zet in domein
+     * @param zetten string representatie van de zetten
+     * @return of de zetten legaal waren
+     */
 
     public boolean checkOfZettenLegaalZijnEindValidatie(List<String> zetten) {
         return spel.checkOfZettenLegaalZijnEindValidatie(zetten);
     }
 
+    /**
+     * UC4: advanceert spel naar volgende beurt.
+     */
+
     public void volgendeSpeler() {
         spel.volgendeSpeler();
     }
+
+    /**
+     * UC4: geeft nuttige string representatie van de speler die aan de beurt is
+     * @return lijst string met op zeroth de naam, op 1 geboortejaar en op 2 de speelkansen
+     */
 
     public List<String> geefActieveSpeler() {
         List<String> actieveSpelerGegevens = new ArrayList<>();
         actieveSpelerGegevens.add(spel.getSpelers().get(0).getGebruikersnaam());
         actieveSpelerGegevens.add(String.valueOf(spel.getSpelers().get(0).getGeboortejaar()));
+        actieveSpelerGegevens.add(String.valueOf(spel.getSpelers().get(0).getSpeelkansen()));
         return actieveSpelerGegevens;
 
     }

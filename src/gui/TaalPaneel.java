@@ -22,6 +22,10 @@ public class TaalPaneel extends VBox {
         voegComponentenToe();
     }
 
+    /**
+     *UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen op de juiste plaats.
+     */
+
     private void voegComponentenToe() {
 
         this.setStyle("-fx-background-color: #566454");
@@ -54,11 +58,18 @@ public class TaalPaneel extends VBox {
 
     }
 
+    /**
+     *UC3: set de applicatie naar Nederlands
+     */
 
     private void setTaalNederlands(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.NEDERLANDS));
         hoofdPaneel.taalGekozen();
     }
+
+    /**
+     *UC3: set de applicatie naar Nederlands
+     */
 
     private void setTaalEngels(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.ENGELS));

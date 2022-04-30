@@ -32,6 +32,7 @@ public class SpelSpelerPaneel extends VBox {
     private VBox steentjesBox;
     private Button btnVraagSteentjes;
     private Button btnZetSteenOpVakje;
+    private Button btnGeefSteentjeTerug;
     private SteenGUI geklikteSteen;
     private StackPane gekliktVak;
     private final Label lblGeselecteerdVak = new Label();
@@ -57,7 +58,7 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     *
+     *UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen op de juiste plaats.
      */
     private void voegComponentenToe() {
 
@@ -69,7 +70,8 @@ public class SpelSpelerPaneel extends VBox {
         btnVraagSteentjes = new Button(domeinController.getTaal().getLocalisatie("VRAAG_STEENTJES"));
         Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
         btnZetSteenOpVakje = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
-        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnCancelSpel);
+        btnGeefSteentjeTerug = new Button(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
+        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
         this.setSpacing(150);
         knoppenBox.setSpacing(20);
         steentjesBox.setSpacing(20);
@@ -77,13 +79,16 @@ public class SpelSpelerPaneel extends VBox {
         steentjesBox.setAlignment(Pos.BOTTOM_CENTER);
 
         btnZetSteenOpVakje.setDisable(true);
+        btnGeefSteentjeTerug.setDisable(true);
 
         btnVraagSteentjes.setOnAction(this::vraagSteentjes);
         btnCancelSpel.setOnAction(this::cancelSpel);
         btnZetSteenOpVakje.setOnAction(this::zetSteenOpVakje);
+        btnGeefSteentjeTerug.setOnAction(this::geefSteenTerug);
         zetCSSVanKnopGoed(btnVraagSteentjes);
         zetCSSVanKnopGoed(btnCancelSpel);
         zetCSSVanKnopGoed(btnZetSteenOpVakje);
+        zetCSSVanKnopGoed(btnGeefSteentjeTerug);
 
         knoppenBox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
 
@@ -141,24 +146,38 @@ public class SpelSpelerPaneel extends VBox {
         if (result.get() == ButtonType.OK) {
 
             domeinController.cancelSpel();
-            menuPaneel.getLblLoggedOn().setVisible(false);
-            Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
-            stage.setWidth(500);
-            stage.setHeight(500);
-            this.menuPaneel.setSpelPaneel(new SpelPaneel(this.hoofdPaneel, this.menuPaneel, this.domeinController));
-            hoofdPaneel.setCenter(menuPaneel);
+            resetSchermenVoorVolgendSpel();
         }
 
     }
 
+    private void geefSteenTerug(ActionEvent actionEvent) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
+        alert.setHeaderText(domeinController.getTaal().getLocalisatie("STEEN_TERUG_PROMPT"));
+        alert.setContentText(domeinController.getTaal().getLocalisatie("STEEN_TERUG_BVESTIGING"));
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            steentjesBox.getChildren().remove(geklikteSteen);
+            domeinController.steekSteentjeTerugInZak(geklikteSteen.getWaarde());
+            geklikteSteen = null;
+            updateFeedbackLabel();
+            btnGeefSteentjeTerug.setDisable(true);
+        }
+    }
+
+
     /**
      * UC4: eventHandler die identiteit van steen opslaat voor gebruik in zet.
+     * Het activeert ook de knop om een steen terug te geven bij de eerste beurt.
      *
      * @param steen de betrokken steen
      */
 
     private void steenClicked(SteenGUI steen) {
         this.geklikteSteen = steen;
+        if (!eersteBeurt){
+            btnGeefSteentjeTerug.setDisable(false);}
         updateFeedbackLabel();
 
     }
@@ -201,6 +220,7 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     	/**
+         * UC4: eventhandler voor een beurt te spelen
  	    * @param actionEvent
     	 */
 		private void zetSteenOpVakje(ActionEvent actionEvent) {
@@ -215,6 +235,7 @@ public class SpelSpelerPaneel extends VBox {
                 steentjesBox.getChildren().remove(geklikteSteen);
                 zetten.add(((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten() + " " + geklikteSteen.getWaarde());
                 btnZetSteenOpVakje.setDisable(true);
+                btnGeefSteentjeTerug.setDisable(true);
                 eersteSteen = false;
 				geklikteSteen = null;
 				gekliktVak = null;
@@ -224,6 +245,7 @@ public class SpelSpelerPaneel extends VBox {
                 lblFeedbackVoorSpelers.setVisible(true);
                 geklikteSteen = null;
 				gekliktVak = null;
+                btnGeefSteentjeTerug.setDisable(true);
 				updateFeedbackLabel();
             }
 
@@ -250,6 +272,11 @@ public class SpelSpelerPaneel extends VBox {
 
     }
 
+    /**
+     * UC4: zet het bord en de steendoos terug naar zijn status van op start van de beurt op basis van de
+     * doorgeven zetten die gebruikt werden voor validatie (en ongeldig werden verklaard door het domein)
+     * @param zetten de ongeldige zetten
+     */
 
     private void resetSpelBordNaOngeldigeZet(List<String> zetten) {
         for (String zet : zetten) {
@@ -264,21 +291,45 @@ public class SpelSpelerPaneel extends VBox {
         }
     }
 
+    /**
+     * UC3: methode die bij detectie van het einde van het spel de procedure start.
+     * Haalt de scoreblad per speler en de winnaar op. Domein regelt verdere afhandeling achter de schermen.
+     * Het roept ook een methode op die de schermen reset voor het volgend spel.
+     *
+     */
+
     private void eindigSpel() {
         List<String> laatsteScorebladOmTeTonen = domeinController.eindigSpel();
         Alert alert = new Alert(AlertType.INFORMATION, laatsteScorebladOmTeTonen.get(0));
         laatsteScorebladOmTeTonen.remove(0);
         alert.setContentText(laatsteScorebladOmTeTonen.stream().collect(Collectors.joining("/n")));
+        resetSchermenVoorVolgendSpel();
+    }
+
+    /**
+     * UC3: methode die de schermen reset voor volgend spel na eindigen spel of cancel.
+     *
+     */
+
+    private void resetSchermenVoorVolgendSpel() {
+        menuPaneel.getLblLoggedOn().setVisible(false);
+        Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();
+        stage.setWidth(500);
+        stage.setHeight(500);
+        this.menuPaneel.setSpelPaneel(new SpelPaneel(this.hoofdPaneel, this.menuPaneel, this.domeinController));
+        hoofdPaneel.setCenter(menuPaneel);
     }
 
 
     /**
-     * Gui:
+     * UC3: advanceert spelstaat naar volgende beurt. Reset de huidige zetten array, zegt tegen DC om volgende speler
+     * te selecteren en update de info op scorebladscherm.
+     *
      */
     private void volgendeSpeler() {
         zetten = new ArrayList<>();
+        this.btnVraagSteentjes.setDisable(false);
         domeinController.volgendeSpeler();
         spelScorebladPaneel.updateInfo(0);
-        this.btnVraagSteentjes.setDisable(false);
     }
 }

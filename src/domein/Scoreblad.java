@@ -122,6 +122,10 @@ public class Scoreblad {
 
     }
 
+    /**
+     * UC3: String override voor scoreblad
+     */
+
     @Override
     public String toString() {
         return regels.stream()

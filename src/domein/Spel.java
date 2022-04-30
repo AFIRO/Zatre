@@ -536,9 +536,22 @@ public class Spel {
         }
     }
 
+    /**
+     * UC4: zet een steen op domein bord voor verder onderzoek in legaliteit
+     *
+     * @param vak gespeeld vak
+     * @param steen gespeelde steen
+     */
+
     private void zetSteenOpVak(String vak, String steen) {
         spelbord.getVakjes().get(vak).setSteen(new Steen(Integer.parseInt(steen)));
     }
+
+    /**
+     * UC4: getter voor spelers in spel
+     *
+     * @return lijst met speler objecten
+     */
 
     public List<Speler> getSpelers() {
         return spelers;

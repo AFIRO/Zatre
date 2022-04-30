@@ -22,6 +22,10 @@ public class SpelScorebladPaneel extends VBox {
         voegComponentenToe();
     }
 
+    /**
+     *UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen op de juiste plaats.
+     */
+
     private void voegComponentenToe() {
         lblTitel.setStyle("-fx-font-size: 2em");
         lblActieveSpeler.setStyle("-fx-font-size: 1.5em");

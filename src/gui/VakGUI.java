@@ -30,14 +30,6 @@ public class VakGUI extends Rectangle {
     }
 
     /**
-     * UC3 verandert kleur van vakje naar wit
-     */
-
-    public void veranderKleurNaarWit() {
-        this.setFill(Color.WHITE);
-    }
-
-    /**
      * UC3 genereert de coordinaten van alle vakjes rond dit vakje.
      */
     public Map<String, String> geefVakjesNaastVak() {
@@ -96,42 +88,34 @@ public class VakGUI extends Rectangle {
     }
 
     /**
-     * UC3 controleert of vakje een steen bevat.
-     * By default bevat elk vakje een "doorzichtig" steentje met score 0.
-     *
-     * @return of het vakje een steen bevat.
+     * UC3 setter voor steen op vak
      */
-
-    public boolean bevatVakEenSteen() {
-        return !(this.steen.getWaarde() == 0);
-    }
-
-    /**
-     * UC3 Bij start van spel mag er enkel een tegeltje worden gezet op vakje 8.8.
-     * Deze methode controleert dit.
-     *
-     * @return of het vakje effectief het start vakje is.
-     */
-
-    public boolean isEersteVakVanSpel() {
-        return rij == 8 && kolom == 8;
-    }
 
     public void setSteen(SteenGUI steen) {
         this.steen = steen;
     }
 
-    public int getWaardeVanSteen() {
-        return this.steen.getWaarde();
-    }
+    /**
+     * UC3 getter voor rij
+     */
 
     public int getRij() {
         return rij;
     }
 
+    /**
+     * UC3 getter voor kolom
+     */
+
+
     public int getKolom() {
         return kolom;
     }
+
+    /**
+     * UC3 genereert de coordinaten van de steen voor gebruik in domein
+     */
+
 
     public String getCoordinaten() {
         return String.format("%d.%d", getKolom(), getRij());
