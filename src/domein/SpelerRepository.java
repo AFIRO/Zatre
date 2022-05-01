@@ -15,7 +15,7 @@ public class SpelerRepository {
     }
 
     /**
-     * UC1: een instantie van speler creï¿½ren en doorgeven aan de Mapper om zo in de
+     * UC1: een instantie van speler creëeren en doorgeven aan de Mapper om zo in de
      * database te plaatsen
      *
      * @param gebruikersnaam Gebruikersnaam van de speler

@@ -25,7 +25,7 @@ public class Vak {
     }
 
     /**
-     * UC3 controleert of het vakje wel degelijk kan bestaan.
+     * UC3 controleert of het vakje weldegelijk kan bestaan.
      *
      * @param kolom kolom van vakje
      * @param rij   rij van vakje

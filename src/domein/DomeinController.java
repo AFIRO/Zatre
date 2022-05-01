@@ -266,7 +266,7 @@ public class DomeinController {
     /**
      * UC4: geeft nuttige string representatie van de speler die aan de beurt is
      *
-     * @return lijst string met op zeroth de naam, op 1 geboortejaar en op 2 de
+     * @return lijst string op van de actieve speler met de naam, op 1 geboortejaar en op 2 de
      * speelkansen
      */
 

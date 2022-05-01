@@ -13,7 +13,7 @@ public class ScorebladRegel {
 
     /**
      * UC3: constructor ScorebladRegel, om aan te geven welke punten er gehaald zijn
-     * gebruiken we een boolean per puntencategorie, Bij creatie wordt score
+     * gebruiken we een boolean per puntencategorie, bij creatie wordt score
      * berekend.
      *
      * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet
@@ -121,7 +121,7 @@ public class ScorebladRegel {
     }
 
     /**
-     * UC4: Getter om te checken of dit een bonus regel is of niet.
+     * UC4: Getter om te checken of dit een bonusregel is of niet.
      *
      * @return of dit een bonusregel is
      */
@@ -142,7 +142,6 @@ public class ScorebladRegel {
             case 12 -> this.twaalfPunten.add(true);
         }
         this.scoreVoorRegel = berekenScore();
-
     }
 
 }

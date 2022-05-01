@@ -18,7 +18,7 @@ public class Scoreblad {
      * UC3: geeft een lijst van String weergaves van de individuele regels terug
      * voor gebruik in GUI.
      *
-     * @return de lijst aan string weergaves.
+     * @return de lijst van String weergaves.
      */
 
     public List<String> getRegels() {
@@ -27,7 +27,7 @@ public class Scoreblad {
 
     /**
      * UC3: Voegt een ScorebladRegel object toe aan de lijst regels. Genereert
-     * bonuspunten op basis van aantal regel op scoreblad.
+     * bonuspunten op basis van aantal regels op scoreblad.
      *
      * @param dubbeleScore boolean die bijhoudt of in die beurt de score moet
      *                     verdubbeld worden omdat de steen op een wit vak stond.
@@ -69,8 +69,8 @@ public class Scoreblad {
 
     public void voegRegelsToeAanScoreblad(ArrayList<String> puntenArraysVoorAlleZetten) {
         int dubbleScoreCounter = 0;
-        // controleer of de laatse regel in de scoreblad een dubbele score regel die
-        // werd genereerd vanuit een vorige dubbele score regel.
+        // controleer of de laatse regel in het scoreblad een dubbele score regel is die
+        // werd gegenereerd vanuit een vorige dubbele scoreregel.
         if (!regels.isEmpty() && regels.get(regels.size() - 1).isDubbeleScore()
                 && regels.get(regels.size() - 1).getScoreVoorRegel() == 0) {
             // Deze wordt dan gebruikt voor deze ronde
@@ -107,7 +107,7 @@ public class Scoreblad {
      * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
      *
      * @param aanTePassenRegel de aan te passen regel
-     * @param zet              string die de resultaten van de zet bevat
+     * @param zet string die de resultaten van de zet bevat
      */
 
     private void VoegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, String zet) {

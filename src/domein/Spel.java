@@ -12,7 +12,7 @@ public class Spel {
     /**
      * UC3: constructor van Spel lijst van spelers wordt hieraan doorgegeven. In de
      * domeincontroller wordt hiervoor de lijst van aangemelde spelers uit de
-     * repository gehaald. De spelstaat wordt op .IN_VOORBEREIDING ingesteld een
+     * repository gehaald. De spelstaat wordt op IN_VOORBEREIDING ingesteld een
      * nieuw spelbord wordt gegenereerd de stenen worden gegenereerd door middel van
      * methode in deze klasse. er wordt een arraylist ingesteld voor de scorebladen.
      *
@@ -27,8 +27,8 @@ public class Spel {
     }
 
     /**
-     * UC3: methode genereerSteen Lijst van stenen wordt aangemaakt: eerst 20 stenen
-     * van elk (1-6), vervolgens nog een extra 1 steen Dit maakt een lijst van 121
+     * UC3: methode genereerSteen lijst van stenen wordt aangemaakt: eerst 20 stenen
+     * van elk (1-6), vervolgens nog een extra steen Dit maakt een lijst van 121
      * stenen. Vervolgens worden deze door elkaar gegooid. De methode geeft de
      * geshuffelde lijst stenen terug.
      *
@@ -68,7 +68,7 @@ public class Spel {
     }
 
     /**
-     * UC3: Checked of er voldoende spelers in spel zitten
+     * UC3: Checkt of er voldoende spelers in spel zitten
      *
      * @throws IllegalArgumentException indien onvoldoende spelers
      */
@@ -119,7 +119,7 @@ public class Spel {
     /**
      * UC4: regelt de logica van een beurt. De string[] zetten bevat 2 of 3 strings
      * met de zet in de vorm "kolomVak.rijVak waardeSteen". Deze worden
-     * geï¿½nterpreteerd en omzet naar de correcte info voor punt berekening. We gaan
+     * geïnterpreteerd en omgezet naar de correcte info voor punt berekening. We gaan
      * ervan uit dat de info correct moet zijn dankzij validatie in de GUI qua
      * zetten Methode genereert een arraylist aan strings. Deze strings bevatten de
      * scores per zet. Op index 0, 1 en 2 komen respectievelijk de scores van beurt
@@ -180,7 +180,7 @@ public class Spel {
 
     /**
      * UC4: roept hulpfuncties om links en rechts te kijken op het bord voor de
-     * horizontale score te berekenen. het past de doorgegeven String aan met de
+     * horizontale score te berekenen. Het past de doorgegeven String aan met de
      * dubbele punten modifier en het gevonden horizontaal punt.
      *
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
@@ -192,9 +192,9 @@ public class Spel {
     private String berekenScoreHorizontaal(Vak vakWaaropSteenWerdGelegd, String punten) {
         int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
         // kijk links
-        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "links");
+        score += telSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "links");
         // kijk rechts
-        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "rechts");
+        score += telSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "rechts");
         // indien 10+ en startvakje wit, zet dubbele score boolean als 1
         if (score >= 10 && vakWaaropSteenWerdGelegd.getKleur().equals(Vak.Kleur.WIT)) {
             punten = punten.concat("1,");
@@ -220,9 +220,9 @@ public class Spel {
     private String berekenScoreVerticaal(Vak vakWaaropSteenWerdGelegd, String punten) {
         int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
         // kijk boven
-        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "boven");
+        score += telSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "boven");
         // kijk onder
-        score += tellSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "onder");
+        score += telSteentjesInSpecifiekeRichtingOp(vakWaaropSteenWerdGelegd, "onder");
         // indien 10+ en startvakje wit en dubbele score boolean nog niet 1, zet dubbele
         // score boolean als 1
         if (score >= 10 && vakWaaropSteenWerdGelegd.getKleur().equals(Vak.Kleur.WIT) && punten.charAt(0) == '0') {
@@ -232,7 +232,7 @@ public class Spel {
     }
 
     /**
-     * UC4: genereert een map met de coordinaten van de naburige vakken en loopt
+     * UC4: genereert een map met de coördinaten van de naburige vakken en loopt
      * deze af in een specifieke richting als een linked list. Deze telt alle
      * gevonden stenen op tot het oftewel botst tegen rand van het spelbord of een
      * vak ontdekt zonder steen erop.
@@ -242,7 +242,7 @@ public class Spel {
      * @return de berekende score voor die richting.
      */
 
-    private int tellSteentjesInSpecifiekeRichtingOp(Vak vakWaaropSteenWerdGelegd, String richting) {
+    private int telSteentjesInSpecifiekeRichtingOp(Vak vakWaaropSteenWerdGelegd, String richting) {
         // genereer map
         Map<String, String> naburigeVakken = vakWaaropSteenWerdGelegd.geefVakjesNaastVak();
         int scoreOmTerugTeGeven = 0;
@@ -263,7 +263,7 @@ public class Spel {
     }
 
     /**
-     * UC4: Checked of het speler in het spel zit of niet.
+     * UC4: Checkt of het speler in het spel zit of niet.
      *
      * @throws IllegalArgumentException indien speler niet in spel.
      */
@@ -369,8 +369,7 @@ public class Spel {
     }
 
     /**
-     * UC3: toont de score per Speler TESS: opnieuw graag toelichting in kader van
-     * bovenstaande methode
+     * UC3: toont de score per Speler 
      *
      * @param speler speler wiens score moet teruggeven worden
      * @return score van speler
@@ -443,7 +442,7 @@ public class Spel {
         // eerste beurt
         if (zetten.size() == 3) {
             // case aangrenzende stenen binnen eerste beurt
-            return CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(vakkenPerZet);
+            return checkOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(vakkenPerZet);
         }
         // alle andere beurten
         else {
@@ -514,7 +513,7 @@ public class Spel {
      * @return of de zet legaal is
      */
 
-    private boolean CheckOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(List<Vak> vakkenPerZet) {
+    private boolean checkOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(List<Vak> vakkenPerZet) {
         boolean steenEenEnTweeAangrenzend = vakkenPerZet.get(0).geefVakjesNaastVak()
                 .containsValue(vakkenPerZet.get(1).getCoordinatenVanVak())
                 || vakkenPerZet.get(0).geefVakjesNaastVak().containsValue(vakkenPerZet.get(1).getCoordinatenVanVak());
@@ -525,7 +524,7 @@ public class Spel {
     }
 
     /**
-     * UC4: parsed de zetten om zo bruikbare objecten te maken voor onderzoek
+     * UC4: parset de zetten om zo bruikbare objecten te maken voor onderzoek
      *
      * @param vakkenPerZet de lijst die de vakken zal bevatten na parsing
      * @param stenenPerZet de lijst die de stenen zal bevatten na parsing
