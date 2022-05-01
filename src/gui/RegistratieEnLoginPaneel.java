@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -160,12 +161,14 @@ public class RegistratieEnLoginPaneel extends VBox {
             txtNaam.setText("");
             txtGeboortejaar.setText("");
             lblFeedback.setVisible(true);
+            txtNaam.requestFocus();
 
         } catch (IllegalArgumentException e) {
             lblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
             txtNaam.setText("");
             txtGeboortejaar.setText("");
             lblFeedback.setVisible(true);
+            txtNaam.requestFocus();
         }
     }
 
@@ -195,11 +198,13 @@ public class RegistratieEnLoginPaneel extends VBox {
                 menuPaneel.updateLoggedOnPlayerLabel();
                 txtNaam.setText("");
                 txtGeboortejaar.setText("");
+                txtNaam.requestFocus();
             }
 
         } catch (IllegalArgumentException e) {
             lblFeedback.setText(domeinController.getTaal().getLocalisatie(e.getMessage()));
             lblFeedback.setVisible(true);
+            txtNaam.requestFocus();
         }
     }
 

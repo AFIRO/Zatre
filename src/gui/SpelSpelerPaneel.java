@@ -39,7 +39,6 @@ public class SpelSpelerPaneel extends VBox {
     private Button btnGeefSteentjeTerug;
     private SteenGUI geklikteSteen;
     private StackPane gekliktVak;
-    private BorderPane randSteen;
     private List<String> zetten;
 
     /**
@@ -136,13 +135,8 @@ public class SpelSpelerPaneel extends VBox {
         var stenen = domeinController.vraagSteentjes(eersteBeurt);
         for (int waarde : stenen) {
             SteenGUI steen = new SteenGUI(waarde);
-            randSteen = new BorderPane(steen);
-            randSteen.setPrefHeight(steen.getImage().getHeight() * 0.5);
-            randSteen.setPrefWidth(randSteen.getHeight());
-            randSteen.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;" + "-fx-border-radius: 50px;");
-
-            randSteen.setOnMousePressed(event -> steenClicked(steen));
-            steentjesBox.getChildren().addAll(randSteen);
+            steen.setOnMousePressed(event -> steenClicked(steen));
+            steentjesBox.getChildren().addAll(steen);
         }
         this.btnVraagSteentjes.setDisable(true);
     }
@@ -198,10 +192,8 @@ public class SpelSpelerPaneel extends VBox {
      */
 
     private void steenClicked(SteenGUI steen) {
-        if (this.geklikteSteen != null)
-            zetCSSSteenNormaal();
         this.geklikteSteen = steen;
-        zetCSSGeklikteSteen();
+  
         if (!eersteBeurt) {
             btnGeefSteentjeTerug.setDisable(false);
         }
@@ -220,17 +212,9 @@ public class SpelSpelerPaneel extends VBox {
 
     }
 
-    private void zetCSSSteenNormaal() {
-        randSteen.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;" + "-fx-border-radius: 50px;");
-    }
-
     private void zetCSSGekliktVak() {
         this.gekliktVak.setStyle("-fx-border-color: #E80C58;" + "-fx-border-width: 2px;");
 
-    }
-
-    private void zetCSSGeklikteSteen() {
-        randSteen.setStyle("-fx-border-color:  #E80C58;" + "-fx-border-width: 2px;" + "-fx-border-radius: 50px;");
     }
 
     public void setGekliktVak(StackPane gekliktVak) {
