@@ -180,6 +180,7 @@ public class SpelSpelerPaneel extends VBox {
             btnGeefSteentjeTerug.setDisable(true);
             if (steentjesBox.getChildren().isEmpty()) {
                 volgendeSpeler();
+                lblFeedbackVoorSpelers.setText("");
             }
         }
     }
@@ -298,6 +299,7 @@ public class SpelSpelerPaneel extends VBox {
                         eindigSpel();
                     } else {
                         volgendeSpeler();
+                        lblFeedbackVoorSpelers.setText("");
                     }
                 } else {
                     lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("ONGELDIGE_ZET"));
