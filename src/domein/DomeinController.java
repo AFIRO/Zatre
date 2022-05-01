@@ -113,7 +113,7 @@ public class DomeinController {
 
     /**
      * UC3: Spel starten. exception kan gegooid worden door Speler als Repository
-     * (zie hun JavaDoc) TESS: toch graag extra toelichting
+     * (zie hun JavaDoc) 
      */
     public void startSpel() {
         this.spel = new Spel(spelerRepository.geefSpelers());
@@ -205,7 +205,7 @@ public class DomeinController {
     }
 
     /**
-     * UC3: wiped de repository gewiped als voorbereiding op een nieuw spel.
+     * UC3: wiped de repository als voorbereiding op een nieuw spel.
      */
 
     private void resetRepositoryVoorNieuwSpel() {
@@ -224,7 +224,7 @@ public class DomeinController {
     }
 
     /**
-     * UC3: bepaalt wanneer het spel beï¿½indigd is of wordt
+     * UC3: bepaalt wanneer het spel beëindigd is of wordt
      */
     public boolean isEindeSpel() {
         return spel.isEindeSpel();
@@ -256,7 +256,7 @@ public class DomeinController {
     }
 
     /**
-     * UC4: advanceert spel naar volgende beurt.
+     * UC4: het spel gaat naar volgende beurt.
      */
 
     public void volgendeSpeler() {
