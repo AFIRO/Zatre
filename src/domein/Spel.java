@@ -255,7 +255,7 @@ public class Spel {
                 scoreOmTerugTeGeven += teCheckenVak.getSteen().getWaarde();
                 naburigeVakken = teCheckenVak.geefVakjesNaastVak();
             }
-            // indien geen steentje erop staat, breek uit de loop.
+            // indien geen steentje erop staat, stopt de loop
             else
                 break;
         }
