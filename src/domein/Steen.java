@@ -40,6 +40,10 @@ public class Steen {
         return getWaarde() == steen.getWaarde();
     }
 
+    /**
+     * UC3: override de hascode omdat we stenen met hun waarde identificeren
+     */
+    
     @Override
     public int hashCode() {
         return Objects.hash(getWaarde());
