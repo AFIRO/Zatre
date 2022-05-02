@@ -130,7 +130,11 @@ public class MenuPaneel extends VBox {
     private void kiesTaal(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(taalPaneel);
     }
-
+    
+    /**
+     * UC3: updated het logged on player label die de ingelogde spelers op het menupaneel laat zien
+     */
+    
     public void updateLoggedOnPlayerLabel() {
         if (!domeinController.geefSpelers().isEmpty()) {
             this.lblLoggedOn.setVisible(true);

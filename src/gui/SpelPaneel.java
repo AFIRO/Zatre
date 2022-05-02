@@ -11,6 +11,13 @@ public class SpelPaneel extends BorderPane {
     private SpelBordPaneel spelBordPaneel;
     private SpelScorebladPaneel spelScorebladPaneel;
 
+    /**
+     * UC3: constructor voor het spelpaneel
+     * @param hoofdPaneel om hoofdscherm aan te passen
+     * @param menuPaneel voor terugkeer naar menupaneel
+     * @param domeinController de dc voor gebruik
+     */
+    
     public SpelPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.hoofdPaneel = hoofdPaneel;

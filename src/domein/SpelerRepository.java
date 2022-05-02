@@ -9,6 +9,11 @@ public class SpelerRepository {
     private final List<Speler> spelers;
     private final SpelerMapper spelerMapper;
 
+    /**
+     * UC2: constructor voor spelerrepository
+     * @param spelerMapper
+     */
+    
     public SpelerRepository(SpelerMapper spelerMapper) { // Andreeas: Dependency injection nodig voor Mockito
         this.spelerMapper = spelerMapper;
         spelers = new ArrayList<>();

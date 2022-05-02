@@ -83,7 +83,7 @@ public class TaalPaneel extends VBox {
     }
 
     /**
-     * UC3: set de applicatie naar Nederlands
+     * UC3: set de applicatie naar Engels
      */
 
     private void setTaalEngels(ActionEvent actionEvent) {

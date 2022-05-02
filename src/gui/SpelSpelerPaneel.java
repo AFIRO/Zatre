@@ -46,7 +46,7 @@ public class SpelSpelerPaneel extends VBox {
      *
      * @param hoofdPaneel         om hoofdscherm aan te passen
      * @param menuPaneel          voor terug naar menu na einde spel
-     * @param spelScorebladPaneel voor aanpassing scoreblad viwe
+     * @param spelScorebladPaneel voor aanpassing scoreblad view
      * @param domeinController    voor bevraging domein
      * @param spelPaneel          voor methodes na einde spel
      */
@@ -166,6 +166,10 @@ public class SpelSpelerPaneel extends VBox {
 
     }
 
+    /**
+     *UC4: Methode om een steentje terug in het zakje te plaatsen
+     */
+    
     private void geefSteenTerug(ActionEvent actionEvent) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
@@ -201,23 +205,31 @@ public class SpelSpelerPaneel extends VBox {
         updateFeedbackLabel();
 
     }
+    
+    /**
+     * UC4: zet de styling van een vakje terug naar de normale styling
+     */
+    
+    private void zetCSSVakNormaal() {
+        this.gekliktVak.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;");
+
+    }
+
+    /**
+     * UC4: zet de styling van een vakje naar een andere kleur border om aan te geven als het geselecteerd is 
+     */
+    
+    private void zetCSSGekliktVak() {
+        this.gekliktVak.setStyle("-fx-border-color: #E80C58;" + "-fx-border-width: 2px;");
+
+    }
 
     /**
      * UC4: eventHandler die identiteit van vak opslaat voor gebruik in zet.
      *
      * @param gekliktVak de betrokken vak
      */
-
-    private void zetCSSVakNormaal() {
-        this.gekliktVak.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;");
-
-    }
-
-    private void zetCSSGekliktVak() {
-        this.gekliktVak.setStyle("-fx-border-color: #E80C58;" + "-fx-border-width: 2px;");
-
-    }
-
+    
     public void setGekliktVak(StackPane gekliktVak) {
         if (this.gekliktVak != null)
             zetCSSVakNormaal();
