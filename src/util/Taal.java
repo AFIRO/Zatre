@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 public class Taal {
     private final Taalkeuze taalkeuze;
     private ResourceBundle dictionary;
+
     /**
      * UC1: constructor.
      *

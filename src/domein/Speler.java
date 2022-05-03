@@ -12,21 +12,23 @@ public class Speler {
 
     /**
      * UC1: constructor voor een nieuwe speler
+     *
      * @param gebruikersnaam gebruikersnaam van de speler
-     * @param geboortejaar geboortejaar van de speler
+     * @param geboortejaar   geboortejaar van de speler
      */
-    
+
     public Speler(String gebruikersnaam, int geboortejaar) {
         this(gebruikersnaam, geboortejaar, 5);
     }
 
     /**
      * UC2: constructor voor een bestaande speler
+     *
      * @param gebruikersnaam gebruikersnaam van de speler
-     * @param geboortejaar geboortejaar van de speler
-     * @param speelkansen aantal speelkansen van de speler
+     * @param geboortejaar   geboortejaar van de speler
+     * @param speelkansen    aantal speelkansen van de speler
      */
-    
+
     public Speler(String gebruikersnaam, int geboortejaar, int speelkansen) {
         controleerGebruikersnaam(gebruikersnaam);
         this.gebruikersnaam = gebruikersnaam;
@@ -72,9 +74,10 @@ public class Speler {
 
     /**
      * getter voor het aantal speelkansen van de speler
+     *
      * @return
      */
-    
+
     public int getSpeelkansen() {
         return speelkansen;
     }
@@ -96,33 +99,37 @@ public class Speler {
 
     /**
      * getter voor het scoreblad van de speler
+     *
      * @return
      */
-    
+
     public Scoreblad getScoreblad() {
         return scoreblad;
     }
 
     /**
      * getter voor de gebruikersnaam van de speler
+     *
      * @return
      */
-    
+
     public String getGebruikersnaam() {
         return this.gebruikersnaam;
     }
 
-   /**
-    * getter voor geboortejaar van de speler
-    * @return
-    */
-    
+    /**
+     * getter voor geboortejaar van de speler
+     *
+     * @return
+     */
+
     public int getGeboortejaar() {
         return this.geboortejaar;
     }
 
     /**
      * getter voor de huidige score van de speler binnen het spel
+     *
      * @return
      */
 

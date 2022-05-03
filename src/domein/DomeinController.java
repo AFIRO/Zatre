@@ -113,7 +113,7 @@ public class DomeinController {
 
     /**
      * UC3: Spel starten. exception kan gegooid worden door Speler als Repository
-     * (zie hun JavaDoc) 
+     * (zie hun JavaDoc)
      */
     public void startSpel() {
         this.spel = new Spel(spelerRepository.geefSpelers());

@@ -9,6 +9,7 @@ public class Spel {
     private SpelStaat spelStaat;
     private int indexVanSpelerAanBeurt;
     private Speler huidigeActieveSpeler;
+
     /**
      * UC3: constructor van Spel lijst van spelers wordt hieraan doorgegeven. In de
      * domeincontroller wordt hiervoor de lijst van aangemelde spelers uit de
@@ -372,7 +373,7 @@ public class Spel {
     }
 
     /**
-     * UC3: toont de score per Speler 
+     * UC3: toont de score per Speler
      *
      * @param speler speler wiens score moet teruggeven worden
      * @return score van speler

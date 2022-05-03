@@ -11,16 +11,17 @@ public class SpelerRepository {
 
     /**
      * UC2: constructor voor spelerrepository
+     *
      * @param spelerMapper
      */
-    
+
     public SpelerRepository(SpelerMapper spelerMapper) { // Andreeas: Dependency injection nodig voor Mockito
         this.spelerMapper = spelerMapper;
         spelers = new ArrayList<>();
     }
 
     /**
-     * UC1: een instantie van speler creëeren en doorgeven aan de Mapper om zo in de
+     * UC1: een instantie van speler creï¿½eren en doorgeven aan de Mapper om zo in de
      * database te plaatsen
      *
      * @param gebruikersnaam Gebruikersnaam van de speler

@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -170,9 +169,9 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     *UC4: Methode om een steentje terug in het zakje te plaatsen
+     * UC4: Methode om een steentje terug in het zakje te plaatsen
      */
-    
+
     private void geefSteenTerug(ActionEvent actionEvent) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
@@ -201,27 +200,27 @@ public class SpelSpelerPaneel extends VBox {
 
     private void steenClicked(SteenGUI steen) {
         this.geklikteSteen = steen;
-  
+
         if (!eersteBeurt) {
             btnGeefSteentjeTerug.setDisable(false);
         }
         updateFeedbackLabel();
 
     }
-    
+
     /**
      * UC4: zet de styling van een vakje terug naar de normale styling
      */
-    
+
     private void zetCSSVakNormaal() {
         this.gekliktVak.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;");
 
     }
 
     /**
-     * UC4: zet de styling van een vakje naar een andere kleur border om aan te geven als het geselecteerd is 
+     * UC4: zet de styling van een vakje naar een andere kleur border om aan te geven als het geselecteerd is
      */
-    
+
     private void zetCSSGekliktVak() {
         this.gekliktVak.setStyle("-fx-border-color: #E80C58;" + "-fx-border-width: 2px;");
 
@@ -232,7 +231,7 @@ public class SpelSpelerPaneel extends VBox {
      *
      * @param gekliktVak de betrokken vak
      */
-    
+
     public void setGekliktVak(StackPane gekliktVak) {
         if (this.gekliktVak != null)
             zetCSSVakNormaal();
@@ -269,7 +268,6 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC4: eventhandler voor een beurt te spelen
-     *
      */
     private void zetSteenOpVakje(ActionEvent actionEvent) {
         if (this.gekliktVak != null)
@@ -329,14 +327,14 @@ public class SpelSpelerPaneel extends VBox {
                     if (domeinController.isEindeSpel()) {
                         //start eind spel flow
                         eindigSpel();
-                    //indien dit niet zo is
+                        //indien dit niet zo is
                     } else {
                         //ga naar volgende beurt
                         volgendeSpeler();
                         //reset feedback label
                         lblFeedbackVoorSpelers.setText("");
                     }
-                //indien finale check legaliteit zetten faalt
+                    //indien finale check legaliteit zetten faalt
                 } else {
                     //geef feedback aan speler
                     lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("ONGELDIGE_ZET"));
@@ -406,10 +404,9 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * Demo: eventHandler die het spel onmiddellijk eindigt. Moest een aparte methode zijn voor knop gezien eindigSpel()
      * enkel en alleen zal activeren als er aangegeven wordt dat er geen steentjes meer zijn in het zak in de domeinlaag.
-     *
      */
 
-    private void eindigSpelVoorDemo(ActionEvent actionEvent){
+    private void eindigSpelVoorDemo(ActionEvent actionEvent) {
         eindigSpel();
     }
 
