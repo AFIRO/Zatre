@@ -363,6 +363,7 @@ public class SpelSpelerPaneel extends VBox {
         Alert alert = new Alert(AlertType.INFORMATION, laatsteScorebladOmTeTonen.get(0));
         laatsteScorebladOmTeTonen.remove(0);
         alert.setContentText(laatsteScorebladOmTeTonen.stream().collect(Collectors.joining("\n")));
+        alert.showAndWait();
         resetSchermenVoorVolgendSpel();
     }
 
