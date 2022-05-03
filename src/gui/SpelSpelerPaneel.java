@@ -75,18 +75,21 @@ public class SpelSpelerPaneel extends VBox {
         Button btnCancelSpel = new Button(domeinController.getTaal().getLocalisatie("CANCEL_SPEL"));
         btnZetSteenOpVakje = new Button(domeinController.getTaal().getLocalisatie("SUBMIT"));
         btnGeefSteentjeTerug = new Button(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
+        Button btnEindigSpelVoorDemo = new Button(domeinController.getTaal().getLocalisatie("EINDIG_SPEL_VOOR_DEMO"));
 
         // eventhandlers
         btnVraagSteentjes.setOnAction(this::vraagSteentjes);
         btnCancelSpel.setOnAction(this::cancelSpel);
         btnZetSteenOpVakje.setOnAction(this::zetSteenOpVakje);
         btnGeefSteentjeTerug.setOnAction(this::geefSteenTerug);
+        btnEindigSpelVoorDemo.setOnAction(this::eindigSpelVoorDemo);
 
         // styling
         zetCSSVanKnopGoed(btnVraagSteentjes);
         zetCSSVanKnopGoed(btnCancelSpel);
         zetCSSVanKnopGoed(btnZetSteenOpVakje);
         zetCSSVanKnopGoed(btnGeefSteentjeTerug);
+        zetCSSVanKnopGoed(btnEindigSpelVoorDemo);
         btnCancelSpel
                 .setStyle("-fx-background-color: #E80C58;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
                         + "-fx-font-size: 1em;" + "-fx-border-radius: 30px;" + "-fx-background-radius: 30px;"
@@ -106,7 +109,7 @@ public class SpelSpelerPaneel extends VBox {
         //insert in GUI
         labelbox.getChildren().addAll(lblGeselecteerdVak, lblGeselecteerdeSteen, lblFeedbackVoorSpelers);
         this.getChildren().addAll(knoppenBox, labelbox, steentjesBox);
-        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel);
+        knoppenBox.getChildren().addAll(btnVraagSteentjes, btnZetSteenOpVakje, btnGeefSteentjeTerug, btnCancelSpel, btnEindigSpelVoorDemo);
     }
 
 
@@ -361,6 +364,16 @@ public class SpelSpelerPaneel extends VBox {
         laatsteScorebladOmTeTonen.remove(0);
         alert.setContentText(laatsteScorebladOmTeTonen.stream().collect(Collectors.joining("\n")));
         resetSchermenVoorVolgendSpel();
+    }
+
+    /**
+     * Demo: eventHandler die het spel onmiddellijk eindigt. Moest een aparte methode zijn voor knop gezien eindigSpel()
+     * enkel en alleen zal activeren als er aangegeven wordt dat er geen steentjes meer zijn in het zak in de domeinlaag.
+     *
+     */
+
+    private void eindigSpelVoorDemo(ActionEvent actionEvent){
+        eindigSpel();
     }
 
     /**
