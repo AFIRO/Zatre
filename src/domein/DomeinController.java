@@ -177,7 +177,9 @@ public class DomeinController {
         List<String> laatsteScorebladenOmTeTonen = new ArrayList<>();
         laatsteScorebladenOmTeTonen.add(geefWinnaar());
         for (Speler speler : spel.getSpelers()) {
+            laatsteScorebladenOmTeTonen.add("Scoreblad van " + speler.getGebruikersnaam());
             laatsteScorebladenOmTeTonen.addAll(speler.getScoreblad().getRegels());
+            laatsteScorebladenOmTeTonen.add("\n");
         }
         updateSpelersInDatabaseNaSpel();
         resetRepositoryVoorNieuwSpel();

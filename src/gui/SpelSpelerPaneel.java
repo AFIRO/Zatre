@@ -275,52 +275,78 @@ public class SpelSpelerPaneel extends VBox {
     private void zetSteenOpVakje(ActionEvent actionEvent) {
         if (this.gekliktVak != null)
             zetCSSVakNormaal();
-
         lblFeedbackVoorSpelers.setVisible(false);
+        //indien geklikt vak of steen null, toon gepaste feedback
         if (Objects.isNull(gekliktVak) || Objects.isNull(geklikteSteen)) {
             lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("SELECTEER_STEEN_EN_VAK"));
             lblFeedbackVoorSpelers.setVisible(true);
         } else {
+            //indien de zet langs de tussentijdse validatie geraakt (geeft zet door naar domein)
             if (domeinController.checkOfZetLegaalIsTussenTijdseValidatie(eersteSteen,
                     ((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten(),
                     String.valueOf(geklikteSteen.getWaarde()))) {
+                //zet representatie van steen op het vakje
                 ((Text) gekliktVak.getChildren().get(1)).setText(String.valueOf(geklikteSteen.getWaarde()));
                 ((ImageView) gekliktVak.getChildren().get(2)).setImage(geklikteSteen.getImage());
+                //haal gebruikte steen uit GUI
                 steentjesBox.getChildren().remove(geklikteSteen);
+                //voeg zet toe aan array van zetten voor verdere validatie in correcte vorm
                 zetten.add(
                         geklikteSteen.getWaarde() + " " + ((VakGUI) gekliktVak.getChildren().get(0)).getCoordinaten());
+                //disable de zet knop gezien zet net gebeurd is
                 btnZetSteenOpVakje.setDisable(true);
+                //disable geef steen terug knop gezien steen net gebruikt werd
                 btnGeefSteentjeTerug.setDisable(true);
+                //zet boolean voor speciale validatie regels voor eerste steen moet op 8.8 uit
                 eersteSteen = false;
+                //zet waarden van steen en vakje weer op null
                 geklikteSteen = null;
                 gekliktVak = null;
+                //update feedback label met info om nieuwe staat te reflecteren
                 updateFeedbackLabel();
+                //indien zet niet langs tussentijdse validate geraakte
             } else {
+                //geef correcte feedback
                 lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("ONGELDIGE_ZET"));
                 lblFeedbackVoorSpelers.setVisible(true);
+                //zet waarden van steen en vakje weer op null
                 geklikteSteen = null;
                 gekliktVak = null;
+                //disable knop gezien steen nu null is
                 btnGeefSteentjeTerug.setDisable(true);
+                //update feedback label met info om nieuwe staat te reflecteren
                 updateFeedbackLabel();
             }
-
+            //check of alle stenen van deze beurt gebruikt zijn
             if (steentjesBox.getChildren().isEmpty()) {
+                //finale check voor legaliteit van de zetten van deze beurt op basis van zet array in domein
                 if (domeinController.checkOfZettenLegaalZijnEindValidatie(zetten)) {
+                    //info wordt doorgegeven aan domein om beurt te spelen
                     domeinController.speelBeurt(domeinController.geefActieveSpeler().get(0),
                             domeinController.geefActieveSpeler().get(1), zetten);
+                    //zet boolean voor eerste beurt (met speciale regels) op false.
                     eersteBeurt = false;
-
+                    //indien domein aangeeft dat er geen steentjes meer in zakje zijn na beurt
                     if (domeinController.isEindeSpel()) {
+                        //start eind spel flow
                         eindigSpel();
+                    //indien dit niet zo is
                     } else {
+                        //ga naar volgende beurt
                         volgendeSpeler();
+                        //reset feedback label
                         lblFeedbackVoorSpelers.setText("");
                     }
+                //indien finale check legaliteit zetten faalt
                 } else {
+                    //geef feedback aan speler
                     lblFeedbackVoorSpelers.setText(domeinController.getTaal().getLocalisatie("ONGELDIGE_ZET"));
                     lblFeedbackVoorSpelers.setVisible(true);
+                    //gebruik de zetten lijst om spel terug te zetten naar start van beurt
                     resetSpelBordNaOngeldigeZet(zetten);
+                    //reset zetten lijst
                     zetten = new ArrayList<>();
+                    //reset eerste steen boolean bij gefaalde eerste beurt
                     if (eersteBeurt)
                         eersteSteen = true;
                 }
@@ -338,14 +364,19 @@ public class SpelSpelerPaneel extends VBox {
      */
 
     private void resetSpelBordNaOngeldigeZet(List<String> zetten) {
+        //voor elke zet
         for (String zet : zetten) {
+            //maak steen op basis van info in zet met nodige event handler
             SteenGUI gespeeldeSteen = new SteenGUI(Integer.parseInt(zet.substring(0, 1)));
             gespeeldeSteen.setOnMousePressed(event -> steenClicked(gespeeldeSteen));
+            //haal uit het spelbord het vak gebruikt in de zet
             StackPane gespeeldeVak = (StackPane) spelPaneel.getSpelBordPaneel().getChildren().stream()
                     .filter(((vak) -> ((VakGUI) ((StackPane) vak).getChildren().get(0)).getCoordinaten()
                             .equals(zet.substring(2))))
                     .findFirst().get(); // optional check onnodig. We weten dat vak moet bestaan als spelbord bestaat.
+            //voeg gemaakte steen terug toe aan GUI
             steentjesBox.getChildren().add(gespeeldeSteen);
+            //reset het vakje
             ((ImageView) gespeeldeVak.getChildren().get(2)).setImage(null);
             ((Text) gespeeldeVak.getChildren().get(1)).setText("");
         }
@@ -359,6 +390,7 @@ public class SpelSpelerPaneel extends VBox {
      */
 
     private void eindigSpel() {
+        //haal winnaar en scorebladen uit GUI
         List<String> laatsteScorebladOmTeTonen = domeinController.eindigSpel();
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(laatsteScorebladOmTeTonen.get(0));
