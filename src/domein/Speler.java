@@ -122,6 +122,15 @@ public class Speler {
     }
 
     /**
+     * getter voor de huidige score van de speler binnen het spel
+     * @return
+     */
+
+    public int getScoreBinnenHuidigSpel() {
+        return this.scoreblad.berekenScoreVanScoreblad();
+    }
+
+    /**
      * UC1: overschrijft de equality regels voor spelers. Nieuwe regels checken op
      * Gebruikersnaam en geboortejaar
      */

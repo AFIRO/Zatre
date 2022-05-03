@@ -338,7 +338,8 @@ public class Spel {
      * @return de winnaar van het spel
      */
     private Speler bepaalWinnaar() {
-        Speler winnaar = spelers.stream().sorted(Comparator.comparingInt((e) -> e.getScoreblad().berekenScoreVanScoreblad()))
+        Speler winnaar = spelers.stream()
+                .sorted(Comparator.comparing(Speler::getScoreBinnenHuidigSpel))
                 .reduce((first, second) -> second).get();
         // isPresent check irrelevant. Spel gaat nooit starten met minder dan twee
         // spelers.
