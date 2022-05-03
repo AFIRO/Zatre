@@ -416,12 +416,14 @@ public class Spel {
      * @return of de zet op eerste zicht zou mogen
      */
 
-    public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteBeurt, String vak, String steen) {
-        if (eersteBeurt && vak.equals("8.8")) {
+    public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteSteen, String vak, String steen) {
+        //indien het de eerste steen is en vak is 8.8 = OK
+        if (eersteSteen && vak.equals("8.8")) {
             zetSteenOpVak(vak, steen);
             return true;
         }
-        if (!eersteBeurt && !spelbord.getVakjes().get(vak).bevatSteen()) {
+        //indien niet eerste steen en steen op leeg vakje = OK
+        if (!eersteSteen && !spelbord.getVakjes().get(vak).bevatSteen()) {
             zetSteenOpVak(vak, steen);
             return true;
         }
@@ -437,8 +439,10 @@ public class Spel {
      */
 
     public boolean checkOfZettenLegaalZijnEindValidatie(List<String> zetten) {
+        //lijsten voor vakken en stenen voor validatie
         List<Vak> vakkenPerZet = new ArrayList<>();
         List<Steen> stenenPerZet = new ArrayList<>();
+        //vul deze lijsten met info uit de doorgegeven zetten
         for (String zet : zetten) {
             haalVakkenEnStenenUitDeZet(vakkenPerZet, stenenPerZet, zet);
         }
@@ -449,25 +453,34 @@ public class Spel {
         }
         // alle andere beurten
         else {
-            // alle stenen op vakken voor simulatie
+            // nodig om steen aan vak lijst te koppelen
             int steenCounter = 0;
+            //check per vak
             for (Vak vak : vakkenPerZet) {
-                // een steen raakt altijd een andere steen
+                //zet steen op vak voor simulatie
                 vak.setSteen(stenenPerZet.get(steenCounter));
+                //check of een steen altijd een andere steen niet raakt
                 if (!raaktVakMinstensEenAndereSteen(vak)) {
+                    //haal alle stenen uit domein bord want zet ongeldig
                     verwijderStenenVanVakkenNaValidatie(vakkenPerZet);
+                    //boolean false want zet illegaal
                     return false;
                 }
-                // legaliteit rond score
+                // check de legaliteit rond score en ligging
                 if (checkOfDeGevormdePuntenStrokenMetDeLiggingVanHetSteentje(vak)) {
+                    //haal alle stenen uit domein bord want zet ongeldig
                     verwijderStenenVanVakkenNaValidatie(vakkenPerZet);
+                    //boolean false want zet illegaal
                     return false;
                 }
+                //haal steen van vak want einde simulatie
                 vak.setSteen(null);
                 steenCounter++;
             }
         }
+        //haal alle stenen uit domein bord want einde simulatie (voor de zekerheid)
         verwijderStenenVanVakkenNaValidatie(vakkenPerZet);
+        //zet is geldig
         return true;
     }
 
@@ -479,19 +492,24 @@ public class Spel {
      */
 
     private boolean checkOfDeGevormdePuntenStrokenMetDeLiggingVanHetSteentje(Vak vak) {
+        //Gebruik de echte methodes voor scoreberekening om de score te berekenen
         List<Integer> puntenLijst = Arrays
                 .stream(berekenScoreVerticaal(vak, berekenScoreHorizontaal(vak, "")).split(",")).map(Integer::parseInt)
                 .toList();
+        //ga alle scores af
         for (Integer punt : puntenLijst) {
-            // gevormde score is hoger dan 12
+            // case gevormde score is hoger dan 12
             if (punt > 12) {
+                //zet illegaal
                 return true;
             }
             // case vakje wit maar gevormde score < 10;
             if (checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(vak, punt)) {
+                //zet illegaal
                 return true;
             }
         }
+        //zet legaal
         return false;
     }
 
@@ -505,7 +523,7 @@ public class Spel {
      */
 
     private boolean checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(Vak vak, Integer punt) {
-        // de 1 is de dubbele score multiplier
+        // de 1 of 0 is de dubbele score multiplier en moet genegeerd worden.
         return vak.getKleur().equals(Vak.Kleur.WIT) && punt > 1 && punt < 10;
     }
 

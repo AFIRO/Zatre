@@ -270,7 +270,6 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * UC4: eventhandler voor een beurt te spelen
      *
-     * @param actionEvent
      */
     private void zetSteenOpVakje(ActionEvent actionEvent) {
         if (this.gekliktVak != null)
@@ -392,9 +391,13 @@ public class SpelSpelerPaneel extends VBox {
     private void eindigSpel() {
         //haal winnaar en scorebladen uit GUI
         List<String> laatsteScorebladOmTeTonen = domeinController.eindigSpel();
+        //maak alert
         Alert alert = new Alert(AlertType.INFORMATION);
+        //zet winnaar info als header
         alert.setHeaderText(laatsteScorebladOmTeTonen.get(0));
+        //haal uit array want onnodig
         laatsteScorebladOmTeTonen.remove(0);
+        //join de strings van alle scorebladen samen
         alert.setContentText(laatsteScorebladOmTeTonen.stream().collect(Collectors.joining("\n")));
         alert.showAndWait();
         resetSchermenVoorVolgendSpel();
