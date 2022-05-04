@@ -222,6 +222,7 @@ public class DomeinController {
      */
     public String geefScoreBladVanActieveSpeler() {
         return String.format("%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal")
+                + "\n"
                 + spel.getHuidigeActieveSpeler().getScoreblad().toString();
     }
 
