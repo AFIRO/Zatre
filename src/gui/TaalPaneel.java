@@ -6,7 +6,10 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import util.Taal;
@@ -14,6 +17,8 @@ import util.Taal;
 public class TaalPaneel extends VBox {
     private final HoofdPaneel hoofdPaneel;
     private final DomeinController domeinController;
+    private static final String LOGO_LOCATIE = "file:src/assets/logo/ZatreLogo4.png";
+    private final ImageView imLogo = new ImageView();
 
     /**
      * UC3: constructor voor paneel
@@ -35,8 +40,10 @@ public class TaalPaneel extends VBox {
 
     private void voegComponentenToe() {
         // instantie elementen
+    	 Image logo = new Image(LOGO_LOCATIE);
         Button btnNederlands = new Button("Nederlands");
         Button btnEngels = new Button("English");
+        Text logoHeader = new Text("");
         Text txtHeader = new Text("Kies uw taal / Choose your language:");
 
         // eventlisteners
@@ -44,16 +51,22 @@ public class TaalPaneel extends VBox {
         btnEngels.setOnAction(this::setTaalEngels);
 
         // styling
+        imLogo.setImage(logo);
+        imLogo.setFitWidth(400);
+        imLogo.setFitHeight(100);
+        StackPane.setAlignment(imLogo, Pos.CENTER);
+        
+        
         zetCSSVanKnopGoed(btnEngels);
         zetCSSVanKnopGoed(btnNederlands);
         GridPane.setHalignment(txtHeader, HPos.CENTER);
         txtHeader.setStyle("-fx-font-size: 2em;");
         this.setSpacing(20.0);
-        this.setStyle("-fx-background-color: #566454");
+        this.setStyle("-fx-background-color: #59981A");
         this.setAlignment(Pos.TOP_CENTER);
 
         // insert in GUI
-        this.getChildren().addAll(txtHeader, btnNederlands, btnEngels);
+        this.getChildren().addAll(logoHeader, imLogo, txtHeader, btnNederlands, btnEngels);
 
     }
 
@@ -68,8 +81,8 @@ public class TaalPaneel extends VBox {
         knop.setLineSpacing(100);
         knop.setMaxWidth(200);
         knop.setAlignment(Pos.CENTER);
-        knop.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;" + "-fx-border-radius: 50px;" + "-fx-background-radius: 50px;"
+        knop.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
+                + "-fx-font-size: 2em;" + "-fx-text-fill: #ffffff;" + "-fx-border-radius: 50px;" + "-fx-background-radius: 50px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
     }
 

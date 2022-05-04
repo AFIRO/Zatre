@@ -78,7 +78,7 @@ public class RegistratieEnLoginPaneel extends VBox {
         zetCSSVanKnopGoed(btnRegistreer);
         zetCSSLabelsGoed(jaar);
         zetCSSLabelsGoed(naam);
-        this.setStyle("-fx-background-color: #566454");
+        this.setStyle("-fx-background-color: #59981A");
         this.setSpacing(5);
         this.setAlignment(Pos.TOP_CENTER);
         header.setStyle("-fx-font-size: 2em;");
@@ -138,8 +138,8 @@ public class RegistratieEnLoginPaneel extends VBox {
         knop.setLineSpacing(100);
         knop.setMaxWidth(1500);
         knop.setAlignment(Pos.CENTER);
-        knop.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em;" + "-fx-border-radius: 25px;" + "-fx-background-radius: 25px;"
+        knop.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
+                + "-fx-font-size: 1em;"  + "-fx-text-fill: #ffffff;" +  "-fx-border-radius: 25px;" + "-fx-background-radius: 25px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
     }
 

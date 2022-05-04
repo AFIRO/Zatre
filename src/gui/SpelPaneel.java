@@ -42,7 +42,7 @@ public class SpelPaneel extends BorderPane {
         // styling
         setAlignment(spelScorebladPaneel, Pos.BASELINE_LEFT);
         setAlignment(spelBordPaneel, Pos.CENTER);
-        this.setStyle("-fx-background-color: #566454");
+        this.setStyle("-fx-background-color: #59981A");
 
         // insert in GUI
         this.setTop(spelLogoPaneel);

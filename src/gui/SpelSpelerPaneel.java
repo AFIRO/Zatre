@@ -91,7 +91,7 @@ public class SpelSpelerPaneel extends VBox {
         zetCSSVanKnopGoed(btnEindigSpelVoorDemo);
         btnCancelSpel
                 .setStyle("-fx-background-color: #E80C58;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                        + "-fx-font-size: 1em;" + "-fx-border-radius: 30px;" + "-fx-background-radius: 30px;"
+                        + "-fx-font-size: 1em;"  + "-fx-text-fill: #ffffff;" +  "-fx-border-radius: 30px;" + "-fx-background-radius: 30px;"
                         + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
         this.setAlignment(Pos.TOP_CENTER);
         this.setMinWidth(300);
@@ -122,8 +122,8 @@ public class SpelSpelerPaneel extends VBox {
         knop.setLineSpacing(100);
         knop.setMaxWidth(175);
         knop.setAlignment(Pos.CENTER);
-        knop.setStyle("-fx-background-color: #8DFC79;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em;" + "-fx-border-radius: 30px;" + "-fx-background-radius: 30px;"
+        knop.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
+                + "-fx-font-size: 1em;" + "-fx-text-fill: #ffffff;" +  "-fx-border-radius: 30px;" + "-fx-background-radius: 30px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
     }
 
