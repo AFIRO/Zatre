@@ -5,6 +5,7 @@ import util.Taal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DomeinController {
     private final SpelerRepository spelerRepository;
@@ -223,7 +224,7 @@ public class DomeinController {
      * van elke speler.
      */
     public String geefScoreBladVanActieveSpeler() {
-        return String.format("%s%n%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal",spel.getHuidigeActieveSpeler().getScoreblad().toString());
+        return String.format("%s%n%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal", spel.getHuidigeActieveSpeler().getScoreblad().getRegels().stream().collect(Collectors.joining("\n")));
          //       + "\n"
            //     + spel.getHuidigeActieveSpeler().getScoreblad().toString();
     }
