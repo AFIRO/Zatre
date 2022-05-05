@@ -126,7 +126,9 @@ public class DomeinController {
      */
 
     private String geefWinnaar() {
-        return String.format("%s%n%s", taal.getLocalisatie("WINNAAR"), spel.geefWinnaar());
+        return String.format("%s%n%s %s%n%s %s%n%s %d%n%n", taal.getLocalisatie("WINNAAR"), taal.getLocalisatie("GEBRUIKERSNAAM"),
+                spel.geefWinnaar().getGebruikersnaam(), taal.getLocalisatie("GEBOORTEJAAR"), spel.geefWinnaar().getGeboortejaar(),
+                taal.getLocalisatie("SPEELKANSEN"), spel.geefWinnaar().getSpeelkansen());
     }
 
     /**
@@ -177,7 +179,7 @@ public class DomeinController {
         List<String> laatsteScorebladenOmTeTonen = new ArrayList<>();
         laatsteScorebladenOmTeTonen.add(geefWinnaar());
         for (Speler speler : spel.getSpelers()) {
-            laatsteScorebladenOmTeTonen.add("Scoreblad van " + speler.getGebruikersnaam());
+            laatsteScorebladenOmTeTonen.add(taal.getLocalisatie("SCOREBLAD_VAN") + speler.getGebruikersnaam());
             laatsteScorebladenOmTeTonen.addAll(speler.getScoreblad().getRegels());
             laatsteScorebladenOmTeTonen.add("\n");
         }
@@ -221,13 +223,13 @@ public class DomeinController {
      * van elke speler.
      */
     public String geefScoreBladVanActieveSpeler() {
-        return String.format("%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal")
-                + "\n"
-                + spel.getHuidigeActieveSpeler().getScoreblad().toString();
+        return String.format("%s%n%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal",spel.getHuidigeActieveSpeler().getScoreblad().toString());
+         //       + "\n"
+           //     + spel.getHuidigeActieveSpeler().getScoreblad().toString();
     }
 
     /**
-     * UC3: bepaalt wanneer het spel beëindigd is of wordt
+     * UC3: bepaalt wanneer het spel beï¿½indigd is of wordt
      */
     public boolean isEindeSpel() {
         return spel.isEindeSpel();

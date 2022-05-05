@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class SpelScorebladPaneel extends VBox {
@@ -32,9 +33,14 @@ public class SpelScorebladPaneel extends VBox {
 
     private void voegComponentenToe() {
         // instantie elementen
-        lblTitel = new Label("Huidige actieve speler: ");
+        lblTitel = new Label(domeinController.getTaal().getLocalisatie("HUIDIGE_SPELER"));
         lblActieveSpeler = new Label();
         txfScoreblad = new TextField();
+           
+        
+        //mogelijks werkt dit om de textfield automatisch te laten groeien
+     //  txfScoreblad.prefColumnCountProperty().bind(txfScoreblad.textProperty().length());
+       //setVgrow(txfScoreblad, Priority.ALWAYS);
 
         // eventlisteners
         txfScoreblad.textProperty().addListener((ChangeListener<String>) (observable, oldValue,
@@ -43,8 +49,9 @@ public class SpelScorebladPaneel extends VBox {
         // styling
         lblTitel.setStyle("-fx-font-size: 2em");
         lblActieveSpeler.setStyle("-fx-font-size: 1.5em");
-        txfScoreblad.setAlignment(Pos.CENTER);
+       txfScoreblad.setAlignment(Pos.CENTER);
         txfScoreblad.setMaxWidth(300);
+      //  txfScoreblad.setMinHeight(500);
         this.txfScoreblad.setEditable(false);
         this.setPrefHeight(1000);
         this.setPrefWidth(350);
@@ -60,7 +67,7 @@ public class SpelScorebladPaneel extends VBox {
      */
 
     public void updateInfo() {
-        this.lblActieveSpeler.setText("Speler: " + domeinController.geefActieveSpeler().get(0));
+        this.lblActieveSpeler.setText(domeinController.geefActieveSpeler().get(0));
         this.txfScoreblad.setText(domeinController.geefScoreBladVanActieveSpeler());
     }
 }
