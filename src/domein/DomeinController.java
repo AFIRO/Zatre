@@ -181,6 +181,7 @@ public class DomeinController {
         laatsteScorebladenOmTeTonen.add(geefWinnaar());
         for (Speler speler : spel.getSpelers()) {
             laatsteScorebladenOmTeTonen.add(taal.getLocalisatie("SCOREBLAD_VAN") + speler.getGebruikersnaam());
+            laatsteScorebladenOmTeTonen.add("DT  /  10  /  11  /  12  /  Bonus  /  Totaal");
             laatsteScorebladenOmTeTonen.addAll(speler.getScoreblad().getRegels());
             laatsteScorebladenOmTeTonen.add("\n");
         }
@@ -225,8 +226,6 @@ public class DomeinController {
      */
     public String geefScoreBladVanActieveSpeler() {
         return String.format("%s%n%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal", spel.getHuidigeActieveSpeler().getScoreblad().getRegels().stream().collect(Collectors.joining("\n")));
-         //       + "\n"
-           //     + spel.getHuidigeActieveSpeler().getScoreblad().toString();
     }
 
     /**
