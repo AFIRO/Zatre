@@ -224,8 +224,8 @@ public class DomeinController {
      * @return een lijst aan strings met de string representatie van de scorebladen
      * van elke speler.
      */
-    public String geefScoreBladVanActieveSpeler() {
-        return String.format("%s%n%s%n", "DT  /  10  /  11  /  12  /  Bonus  /  Totaal", spel.getHuidigeActieveSpeler().getScoreblad().getRegels().stream().collect(Collectors.joining("\n")));
+    public List<String> geefScoreBladVanActieveSpeler() {
+        return spel.getHuidigeActieveSpeler().getScoreblad().getRegels().stream().toList();
     }
 
     /**

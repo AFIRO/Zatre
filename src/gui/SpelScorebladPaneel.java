@@ -35,6 +35,7 @@ public class SpelScorebladPaneel extends VBox {
         lblTitel = new Label(domeinController.getTaal().getLocalisatie("HUIDIGE_SPELER"));
         lblActieveSpeler = new Label();
         txfScoreblad = new Text();
+        //maak hier een TableView
 
 
         // styling
@@ -55,6 +56,15 @@ public class SpelScorebladPaneel extends VBox {
 
     public void updateInfo() {
         this.lblActieveSpeler.setText(domeinController.geefActieveSpeler().get(0));
+
+        for (String Regel : domeinController.geefScoreBladVanActieveSpeler()){
+            String[] score  = Regel.split(" ");
+            //new row
+            //voeg row aan table toe
+            for (String item : score){
+                //voeg toe aan row
+            }
+        }
         this.txfScoreblad.setText(domeinController.geefScoreBladVanActieveSpeler());
     }
 }
