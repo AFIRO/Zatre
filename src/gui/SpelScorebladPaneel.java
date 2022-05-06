@@ -1,7 +1,6 @@
 package gui;
 
 import domein.DomeinController;
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

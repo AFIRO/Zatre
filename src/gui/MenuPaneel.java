@@ -89,7 +89,7 @@ public class MenuPaneel extends VBox {
         knop.setMaxWidth(250);
         knop.setAlignment(Pos.CENTER);
         knop.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                + "-fx-font-size: 2em;"  + "-fx-text-fill: #ffffff;" +  "-fx-border-radius: 50px;" + "-fx-background-radius: 50px;"
+                + "-fx-font-size: 2em;" + "-fx-text-fill: #ffffff;" + "-fx-border-radius: 50px;" + "-fx-background-radius: 50px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
     }
 

@@ -33,7 +33,7 @@ public class SpelPaneel extends BorderPane {
 
     private void voegComponentenToe() {
         // instantie elementen
-        SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel(domeinController);
+        SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel();
         this.spelScorebladPaneel = new SpelScorebladPaneel(domeinController);
         SpelSpelerPaneel spelSpelerPaneel = new SpelSpelerPaneel(hoofdPaneel, menuPaneel, spelScorebladPaneel,
                 domeinController, this);
@@ -49,7 +49,6 @@ public class SpelPaneel extends BorderPane {
         this.setCenter(spelBordPaneel);
         this.setLeft(spelSpelerPaneel);
         this.setRight(spelScorebladPaneel);
-        ;
     }
 
     /**

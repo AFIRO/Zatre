@@ -139,7 +139,7 @@ public class RegistratieEnLoginPaneel extends VBox {
         knop.setMaxWidth(1500);
         knop.setAlignment(Pos.CENTER);
         knop.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
-                + "-fx-font-size: 1em;"  + "-fx-text-fill: #ffffff;" +  "-fx-border-radius: 25px;" + "-fx-background-radius: 25px;"
+                + "-fx-font-size: 1em;" + "-fx-text-fill: #ffffff;" + "-fx-border-radius: 25px;" + "-fx-background-radius: 25px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
     }
 

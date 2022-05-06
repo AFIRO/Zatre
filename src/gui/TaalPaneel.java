@@ -15,9 +15,9 @@ import javafx.scene.text.Text;
 import util.Taal;
 
 public class TaalPaneel extends VBox {
+    private static final String LOGO_LOCATIE = "file:src/assets/logo/ZatreLogo.png";
     private final HoofdPaneel hoofdPaneel;
     private final DomeinController domeinController;
-    private static final String LOGO_LOCATIE = "file:src/assets/logo/ZatreLogo4.png";
     private final ImageView imLogo = new ImageView();
 
     /**
@@ -40,7 +40,7 @@ public class TaalPaneel extends VBox {
 
     private void voegComponentenToe() {
         // instantie elementen
-    	 Image logo = new Image(LOGO_LOCATIE);
+        Image logo = new Image(LOGO_LOCATIE);
         Button btnNederlands = new Button("Nederlands");
         Button btnEngels = new Button("English");
         Text logoHeader = new Text("");
@@ -55,8 +55,8 @@ public class TaalPaneel extends VBox {
         imLogo.setFitWidth(400);
         imLogo.setFitHeight(100);
         StackPane.setAlignment(imLogo, Pos.CENTER);
-        
-        
+
+
         zetCSSVanKnopGoed(btnEngels);
         zetCSSVanKnopGoed(btnNederlands);
         GridPane.setHalignment(txtHeader, HPos.CENTER);
