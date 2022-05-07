@@ -77,7 +77,7 @@ public class Scoreblad {
             ScorebladRegel vorigeRegelMetDubbeleBonus = regels.get(regels.size() - 1);
             // ga door alle scores uit deze ronde en pas die regel aan
             for (String zet : puntenArraysVoorAlleZetten) {
-                VoegExtraKruisjesToeAanRegel(vorigeRegelMetDubbeleBonus, zet);
+                voegExtraKruisjesToeAanRegel(vorigeRegelMetDubbeleBonus, zet);
             }
         } else {
             // controleer in de huidige zetten of we een dubbele score ronde hebben
@@ -94,7 +94,7 @@ public class Scoreblad {
             ScorebladRegel actieveRegel = regels.get(regels.size() - 1);
             // pas deze nieuwe regel aan met de gevonden scores
             for (String zet : puntenArraysVoorAlleZetten) {
-                VoegExtraKruisjesToeAanRegel(actieveRegel, zet);
+                voegExtraKruisjesToeAanRegel(actieveRegel, zet);
             }
         }
         // genereer een extra dubbele score regel als bonus
@@ -110,7 +110,7 @@ public class Scoreblad {
      * @param zet              string die de resultaten van de zet bevat
      */
 
-    private void VoegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, String zet) {
+    private void voegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, String zet) {
         // eerste twee tekens die de dubbele score boolean symboliseren worden eruit
         // gehaald
         String zetMetEnkelScores = zet.substring(2);
