@@ -414,7 +414,7 @@ public class SpelSpelerPaneel extends VBox {
         //haal uit array want onnodig
         laatsteScorebladOmTeTonen.remove(0);
         //join de strings van alle scorebladen samen
-        alert.setContentText(laatsteScorebladOmTeTonen.stream().collect(Collectors.joining("\n")));
+        alert.setContentText((laatsteScorebladOmTeTonen.stream().collect(Collectors.joining("\n"))).replace(",", "\t\t").replace(" ", "  "));
         alert.showAndWait();
         resetSchermenVoorVolgendSpel();
     }

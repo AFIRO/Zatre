@@ -15,6 +15,7 @@ module zatre.g101 {
     requires org.apiguardian.api;
     requires org.junit.jupiter.engine;
     requires org.junit.platform.launcher;
+	requires java.desktop;
 
     opens gui;
     opens testen;

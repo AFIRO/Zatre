@@ -3,10 +3,12 @@ package gui;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -43,6 +45,7 @@ public class MenuPaneel extends VBox {
      */
 
     private void voegComponentenToe() {
+    	
         // instantie elementen
         Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
         Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));

@@ -1,8 +1,5 @@
 package gui;
 
-
-
-
 import domein.DomeinController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,24 +59,22 @@ public class SpelScorebladPaneel extends VBox {
 
 	}
 
-	private void zetTabelGoed(){
+	private void zetTabelGoed() {
 		TableColumn bonusScoreModifierKolom = maakKolomMetDoorgegevenNaamEnBinding("DT", "dubbeleScore");
 		TableColumn tienPuntenKolom = maakKolomMetDoorgegevenNaamEnBinding("10", "tienPunten");
 		TableColumn elfpuntenKolom = maakKolomMetDoorgegevenNaamEnBinding("11", "elfPunten");
 		TableColumn twaalfpuntenKolom = maakKolomMetDoorgegevenNaamEnBinding("12", "twaalfPunten");
 		TableColumn bonusPuntenKolom = maakKolomMetDoorgegevenNaamEnBinding("Bonus", "bonusPunten");
-		TableColumn totaalKolom = maakKolomMetDoorgegevenNaamEnBinding("Total", "scoreVoorRegel");
-		scoreTable.getColumns().addAll(bonusScoreModifierKolom, tienPuntenKolom, elfpuntenKolom, twaalfpuntenKolom, bonusPuntenKolom, totaalKolom);
-		scoreTable.setItems(
-				FXCollections.observableArrayList(
-						new ArrayList<>(
-								List.of(
-										new ScorebladRegelDataModel("","","","","", "")))));
+		TableColumn totaalKolom = maakKolomMetDoorgegevenNaamEnBinding(domeinController.getTaal().getLocalisatie("TOTAAL"), "scoreVoorRegel");
+		scoreTable.getColumns().addAll(bonusScoreModifierKolom, tienPuntenKolom, elfpuntenKolom, twaalfpuntenKolom,
+				bonusPuntenKolom, totaalKolom);
+		scoreTable.setItems(FXCollections
+				.observableArrayList(new ArrayList<>(List.of(new ScorebladRegelDataModel("", "", "", "", "", "")))));
 	}
 
-	private TableColumn maakKolomMetDoorgegevenNaamEnBinding(String tabelNaam, String tabelBinding){
+	private TableColumn maakKolomMetDoorgegevenNaamEnBinding(String tabelNaam, String tabelBinding) {
 		TableColumn kolom = new TableColumn(tabelNaam);
-		kolom.setCellValueFactory(new PropertyValueFactory<ScorebladRegelDataModel,String>(tabelBinding));
+		kolom.setCellValueFactory(new PropertyValueFactory<ScorebladRegelDataModel, String>(tabelBinding));
 		kolom.prefWidthProperty().bind(scoreTable.widthProperty().multiply(0.16));
 		kolom.setResizable(false);
 		return kolom;
@@ -91,21 +86,25 @@ public class SpelScorebladPaneel extends VBox {
 
 	public void updateInfo() {
 		this.lblActieveSpeler.setText(domeinController.geefActieveSpeler().get(0));
+		vulTabel();
+	}
+
+	private void vulTabel() {
 		ArrayList<ScorebladRegelDataModel> data = new ArrayList<>();
 
-		if (domeinController.geefScoreBladVanActieveSpeler().isEmpty()){
-			data = new ArrayList<>(
-					List.of(
-							new ScorebladRegelDataModel("","","","","", "")));
+		if (domeinController.geefScoreBladVanActieveSpeler().isEmpty()) {
+			data = new ArrayList<>(List.of(new ScorebladRegelDataModel("", "", "", "", "", "")));
 		}
 
 		for (String scorebladRegelString : domeinController.geefScoreBladVanActieveSpeler()) {
 			String[] score = scorebladRegelString.split(",");
-			ScorebladRegelDataModel scorebladRegel = new ScorebladRegelDataModel(score[0],score[1],score[2],score[3],score[4],score[5]);
+			ScorebladRegelDataModel scorebladRegel = new ScorebladRegelDataModel(score[0], score[1], score[2], score[3],
+					score[4], score[5]);
 			data.add(scorebladRegel);
 		}
 
 		scorebladRegels = FXCollections.observableArrayList(data);
 		scoreTable.setItems(scorebladRegels);
+		
 	}
 }
