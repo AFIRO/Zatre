@@ -107,8 +107,8 @@ public class ScorebladRegel {
                 twaalfPuntenString = twaalfPuntenString.trim().concat("X");
             }
 
-        return dubbeleScore + " " + tienPuntenString + " " + elfPuntenString + " " + twaalfPuntenString + " "
-                + bonusPunten + " " + scoreVoorRegel;
+        return dubbeleScore + "," + tienPuntenString + "," + elfPuntenString + "," + twaalfPuntenString + ","
+                + bonusPunten + "," + scoreVoorRegel;
     }
 
     /**

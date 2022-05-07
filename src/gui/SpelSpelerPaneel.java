@@ -184,9 +184,27 @@ public class SpelSpelerPaneel extends VBox {
             geklikteSteen = null;
             updateFeedbackLabel();
             btnGeefSteentjeTerug.setDisable(true);
+            //flow einde beurt
             if (steentjesBox.getChildren().isEmpty()) {
-                volgendeSpeler();
-                lblFeedbackVoorSpelers.setText("");
+                //finale check voor legaliteit van de zetten van deze beurt op basis van zet array in domein
+                if (domeinController.checkOfZettenLegaalZijnEindValidatie(zetten)) {
+                    //info wordt doorgegeven aan domein om beurt te spelen
+                    domeinController.speelBeurt(domeinController.geefActieveSpeler().get(0),
+                            domeinController.geefActieveSpeler().get(1), zetten);
+                    //zet boolean voor eerste beurt (met speciale regels) op false.
+                    eersteBeurt = false;
+                    //indien domein aangeeft dat er geen steentjes meer in zakje zijn na beurt
+                    if (domeinController.isEindeSpel()) {
+                        //start eind spel flow
+                        eindigSpel();
+                        //indien dit niet zo is
+                    } else {
+                        //ga naar volgende beurt
+                        volgendeSpeler();
+                        //reset feedback label
+                        lblFeedbackVoorSpelers.setText("");
+                    }
+                }
             }
         }
     }
