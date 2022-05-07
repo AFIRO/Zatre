@@ -48,7 +48,7 @@ public class SpelTest {
         Spel testSpel = new Spel(spelers);
         List<String> zetten = new ArrayList<>(List.of("6 8.8", "6 9.8"));
         List<String> scoreBlad = testSpel.speelBeurt("Andreeas", "1990", zetten);
-        assertEquals("      X 3 4", scoreBlad.get(0));
+        assertEquals(" , , ,X,3,4", scoreBlad.get(0));
 
     }
 }

@@ -15,7 +15,7 @@ public class ScorebladTest {
     void create_alsScorebladRegelBestaat_CorrecteString() {
         Scoreblad testBlad = new Scoreblad();
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11")));//3
-        assertEquals("  X X   3 3", testBlad.getRegels().get(0));
+        assertEquals(" ,X,X, ,3,3", testBlad.getRegels().get(0));
     }
 
     @Test
@@ -37,19 +37,19 @@ public class ScorebladTest {
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,12,12", "1,12,12"))); //13
 
         List<String> verwachteStrings = List.of(
-                "        3 0",
-                "  X X   3 3",
-                "X X X X 3 20",
-                "  X X   3 3",
-                "        4 0",
-                "  X X X 4 11",
-                "  X X X 4 11",
-                "  XX XX XX 4 18",
-                "  X X X 5 12",
-                "X XXXX     5 8",
-                "  X X X 5 12",
-                "  X X X 5 12",
-                "X     XXXX 6 32");
+                " , , , ,3,0",
+                " ,X,X, ,3,3",
+                "X,X,X,X,3,20",
+                " ,X,X, ,3,3",
+                " , , , ,4,0",
+                " ,X,X,X,4,11",
+                " ,X,X,X,4,11",
+                " ,XX,XX,XX,4,18",
+                " ,X,X,X,5,12",
+                "X,XXXX, , ,5,8",
+                " ,X,X,X,5,12",
+                " ,X,X,X,5,12",
+                "X, , ,XXXX,6,32");
 
         assertIterableEquals(verwachteStrings, testBlad.getRegels());
     }
@@ -75,6 +75,6 @@ public class ScorebladTest {
     void create_alsScorebladRegelsBestaan_correcteString() {
         Scoreblad testBlad = new Scoreblad();
         testBlad.voegRegelsToeAanScoreblad(new ArrayList<>(List.of("0,10,11", "1,10,11,12"))); //3+10
-        assertEquals("X XX XX X 3 26", testBlad.getRegels().get(0));
+        assertEquals("X,XX,XX,X,3,26", testBlad.getRegels().get(0));
     }
 }
