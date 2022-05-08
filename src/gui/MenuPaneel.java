@@ -50,6 +50,7 @@ public class MenuPaneel extends VBox {
      */
 
     private void voegComponentenToe() {
+    	
     	//aanmaak scrollbar voor lblLoggedOn
     	 sc = new ScrollBar();
          sc.setMin(0);
