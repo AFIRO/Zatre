@@ -174,7 +174,7 @@ public class MenuPaneel extends VBox {
                 public void changed(ObservableValue<? extends Number> ov,
                     Number old_val, Number new_val) {
                         aangemeldeSpelersBox.setLayoutY(-new_val.doubleValue());
-                }
+                } 
             });
      
         }
