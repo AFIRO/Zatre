@@ -1,6 +1,8 @@
 package gui;
 
 import domein.DomeinController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -22,6 +24,7 @@ public class MenuPaneel extends VBox {
     private SpelPaneel spelPaneel;
     private Label lblLoggedOn;
     private HBox aangemeldeSpelersBox;
+    private ScrollBar sc;
 
     /**
      * UC3: constructor voor paneel
@@ -48,17 +51,16 @@ public class MenuPaneel extends VBox {
 
     private void voegComponentenToe() {
     	//aanmaak scrollbar voor lblLoggedOn
-    	 ScrollBar sc = new ScrollBar();
+    	 sc = new ScrollBar();
          sc.setMin(0);
          sc.setMax(200);
          sc.setValue(0);
          sc.setOrientation(Orientation.VERTICAL);
-         sc.setUnitIncrement(12);  
-         sc.setBlockIncrement(10); 
          sc.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
                 + "-fx-border-radius: 5px;" + "-fx-background-radius: 5px;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
          lblLoggedOn = new Label();
+         Label gap = new Label("");
 
         // instantie elementen
         Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
@@ -99,7 +101,7 @@ public class MenuPaneel extends VBox {
         
 
         // insert in GUI
-        this.getChildren().addAll(header, subheader, alignmentBoxButtons, aangemeldeSpelersBox);
+        this.getChildren().addAll(header, subheader, alignmentBoxButtons, gap, aangemeldeSpelersBox);
        // aangemeldeSpelersBox.getChildren().add(lblLoggedOn);
         alignmentBoxButtons.getChildren().addAll(btnRegistreerAanmelden, btnSpelStarten, btnKiesTaal, btnQuit);
 
@@ -167,6 +169,14 @@ public class MenuPaneel extends VBox {
             this.lblLoggedOn.setVisible(true);
             this.lblLoggedOn.setText(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_6")
                     + String.format("%n%n") + String.join("", domeinController.geefSpelers()));
+            
+            sc.valueProperty().addListener(new ChangeListener<Number>() {
+                public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val) {
+                        aangemeldeSpelersBox.setLayoutY(-new_val.doubleValue());
+                }
+            });
+     
         }
     }
 
