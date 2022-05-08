@@ -49,5 +49,4 @@ public class SteenGUI extends ImageView {
         return waarde;
     }
 
-
 }

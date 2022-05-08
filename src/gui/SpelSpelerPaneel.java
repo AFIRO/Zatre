@@ -52,7 +52,6 @@ public class SpelSpelerPaneel extends VBox {
     public SpelSpelerPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, SpelScorebladPaneel spelScorebladPaneel,
                             DomeinController domeinController, SpelPaneel spelPaneel) {
         this.hoofdPaneel = hoofdPaneel;
-
         this.domeinController = domeinController;
         this.menuPaneel = menuPaneel;
         this.spelScorebladPaneel = spelScorebladPaneel;
@@ -62,7 +61,7 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     * UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen
+     * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
      */
     private void voegComponentenToe() {
@@ -443,7 +442,7 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     * UC3: advanceert spelstaat naar volgende beurt. Reset de huidige zetten array,
+     * UC3: avanceert spelstaat naar volgende beurt. Reset de huidige zetten array,
      * zegt tegen DC om volgende speler te selecteren en update de info op
      * scorebladscherm.
      */

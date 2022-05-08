@@ -42,7 +42,7 @@ public class MenuPaneel extends VBox {
     }
 
     /**
-     * UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen
+     * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
      */
 
@@ -188,7 +188,7 @@ public class MenuPaneel extends VBox {
 
     /**
      * UC3: setter voor spelpaneel. Nodig indien een spel wordt opgestart na
-     * cancelatie of na een geslaagd spel
+     * cancel of na een geslaagd spel
      */
 
     public void setSpelPaneel(SpelPaneel spelPaneel) {

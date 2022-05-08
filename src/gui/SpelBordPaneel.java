@@ -122,7 +122,7 @@ public class SpelBordPaneel extends GridPane {
     }
 
     /**
-     * UC3: eventhandler die indentiteit van vak doorstuurd naar correct paneel.
+     * UC3: eventhandler die identiteit van vak doorstuurt naar correct paneel.
      */
 
     private void clickVak(StackPane vak) {

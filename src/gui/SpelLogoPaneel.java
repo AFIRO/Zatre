@@ -16,7 +16,7 @@ public class SpelLogoPaneel extends StackPane {
     }
 
     /**
-     * UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen
+     * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
      */
 
