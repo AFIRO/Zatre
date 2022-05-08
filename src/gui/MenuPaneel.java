@@ -55,6 +55,9 @@ public class MenuPaneel extends VBox {
          sc.setOrientation(Orientation.VERTICAL);
          sc.setUnitIncrement(12);  
          sc.setBlockIncrement(10); 
+         sc.setStyle("-fx-background-color: #020470;" + "-fx-border-color: #000000;" + "-fx-border-width: 2px;"
+                + "-fx-border-radius: 5px;" + "-fx-background-radius: 5px;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);");
          lblLoggedOn = new Label();
 
         // instantie elementen
