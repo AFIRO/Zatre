@@ -40,7 +40,6 @@ public class ScorebladRegel {
      *
      * @throws IllegalArgumentException indien de waarde niet toegelaten is.
      */
-
     private void controleerOfBonusPuntenEenToegelatenWaardeHebben(int bonusPunten) {
         if (!List.of(3, 4, 5, 6).contains(bonusPunten))
             throw new IllegalArgumentException("ONGELDIGE_BONUSPUNTEN");
@@ -85,7 +84,6 @@ public class ScorebladRegel {
      *
      * @return string weergave van de regel
      */
-
     @Override
     public String toString() {
 
@@ -123,7 +121,7 @@ public class ScorebladRegel {
     }
 
     /**
-     * UC4: Getter om te checken of dit een bonusregel is of niet.
+     * UC4, normaal verloop: Getter om te checken of dit een bonusregel is of niet.
      *
      * @return of dit een bonusregel is
      */
@@ -132,7 +130,7 @@ public class ScorebladRegel {
     }
 
     /**
-     * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet. De
+     * UC4, normaal verloop: Pas de actieve ronde regel aan met kruisjes uit een volgende zet. De
      * score wordt op het einde herberekend.
      *
      * @param score de toe te voegen score
@@ -145,5 +143,4 @@ public class ScorebladRegel {
         }
         this.scoreVoorRegel = berekenScore();
     }
-
 }

@@ -72,7 +72,6 @@ public class Spel {
      *
      * @throws IllegalArgumentException indien onvoldoende spelers
      */
-
     private void checkOfVoldoendeSpelersOmSpelTeStarten() {
         if (spelers.size() < 2)
             throw new IllegalArgumentException("TE_WEINIG_SPELERS");
@@ -87,10 +86,9 @@ public class Spel {
     }
 
     /**
-     * UC4: gaat volgorde van spelers af op basis van index en past de huidige
+     * UC4, normaal verloop: gaat volgorde van spelers af op basis van index en past de huidige
      * speler aan
      */
-
     public void volgendeSpeler() {
         if (indexVanSpelerAanBeurt == spelers.size() - 1) {
             indexVanSpelerAanBeurt = 0;
@@ -101,9 +99,8 @@ public class Spel {
     }
 
     /**
-     * UC4: geeft actieve speler terug
+     * UC4, normaal verloop: geeft actieve speler terug
      */
-
     public Speler getHuidigeActieveSpeler() {
         return huidigeActieveSpeler;
     }
@@ -119,7 +116,7 @@ public class Spel {
     }
 
     /**
-     * UC4: regelt de logica van een beurt. De string[] zetten bevat 2 of 3 strings
+     * UC4, normaal verloop: regelt de logica van een beurt. De string[] zetten bevat 2 of 3 strings
      * met de zet in de vorm "kolomVak.rijVak waardeSteen". Deze worden
      * geïnterpreteerd en omgezet naar de correcte info voor punt berekening. We gaan
      * ervan uit dat de info correct moet zijn dankzij validatie in de GUI qua
@@ -157,11 +154,10 @@ public class Spel {
 
         // geef een String representatie van de geupdatet scoreblad voor de GUI.
         return actieveSpeler.getScoreblad().getRegels();
-
     }
 
     /**
-     * UC4: roept hulpfuncties op om een string representatie te maken van de score
+     * UC4, normaal verloop: roept hulpfuncties op om een string representatie te maken van de score
      * van de zet
      * Hulpfunctie voor beurt te spelen en scoreberekening
      *
@@ -170,7 +166,6 @@ public class Spel {
      * van of het een dubbele score is, gevolgd door de horizontale en
      * verticale score.
      */
-
     private String berekenScoreVoorGelegdeSteen(Vak vakWaaropSteenWerdGelegd) {
         String punten = "";
         // bereken horizontale punten
@@ -182,7 +177,7 @@ public class Spel {
     }
 
     /**
-     * UC4: roept hulpfuncties om links en rechts te kijken op het bord voor de
+     * UC4, normaal verloop: roept hulpfuncties om links en rechts te kijken op het bord voor de
      * horizontale score te berekenen. Het past de doorgegeven String aan met de
      * dubbele punten modifier en het gevonden horizontaal punt.
      * Hulpfunctie voor scoreberekening
@@ -192,7 +187,6 @@ public class Spel {
      * @return punten string representatie van score eerste getal 0/1 is afhankelijk
      * van of het een dubbele score is, gevolgd door de horizontale.
      */
-
     private String berekenScoreHorizontaal(Vak vakWaaropSteenWerdGelegd, String punten) {
         int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
         // kijk links
@@ -210,7 +204,7 @@ public class Spel {
     }
 
     /**
-     * UC4: roept hulpfuncties om boven en onder te kijken op het bord voor de
+     * UC4, normaal verloop: roept hulpfuncties om boven en onder te kijken op het bord voor de
      * verticale score te berekenen. het past de doorgegeven String aan met de
      * dubbele punten modifier en het gevonden verticale punt.
      * Hulpfunctie voor scoreberekening
@@ -221,7 +215,6 @@ public class Spel {
      * van of het een dubbele score is, gevolgd door de horizontale en
      * verticale score
      */
-
     private String berekenScoreVerticaal(Vak vakWaaropSteenWerdGelegd, String punten) {
         int score = vakWaaropSteenWerdGelegd.getSteen().getWaarde();
         // kijk boven
@@ -237,18 +230,17 @@ public class Spel {
     }
 
     /**
-     * UC4: genereert een map met de coördinaten van de naburige vakken en loopt
+     * UC4, normaal en alternatief verloop: genereert een map met de coördinaten van de naburige vakken en loopt
      * deze af in een specifieke richting als een linked list. Deze telt alle
      * gevonden stenen op tot het oftewel botst tegen rand van het spelbord of een
      * vak ontdekt zonder steen erop.
-     * <p>
+     * 
      * Hulpfunctie voor scoreberekening
      *
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
      * @param richting                 waarin het algoritme moet zoeken.
      * @return de berekende score voor die richting.
      */
-
     private int telSteentjesInSpecifiekeRichtingOp(Vak vakWaaropSteenWerdGelegd, String richting) {
         // genereer map
         Map<String, String> naburigeVakken = vakWaaropSteenWerdGelegd.geefVakjesNaastVak();
@@ -270,12 +262,11 @@ public class Spel {
     }
 
     /**
-     * UC4: Checkt of het speler in het spel zit of niet.
+     * UC4, alternatie verloop: Checkt of het speler in het spel zit of niet.
      * Hulpfunctie voor beurt spelen
      *
      * @throws IllegalArgumentException indien speler niet in spel.
      */
-
     private void checkOfSpelerInHetSpelZit(String gebruikersnaam, String geboortejaar) {
         if (!spelers.contains(new Speler(gebruikersnaam, Integer.parseInt(geboortejaar)))) {
             throw new IllegalArgumentException("SPELER_ZIT_NIET_IN_SPEL");
@@ -283,7 +274,7 @@ public class Spel {
     }
 
     /**
-     * UC4: sorteert de stenen in de zak, haalt er twee uit, verwijdert deze uit het
+     * UC4, normaal verloop: sorteert de stenen in de zak, haalt er twee uit, verwijdert deze uit het
      * zakje en geeft hun waarden terug.
      *
      * @return int[] met daarin de waarden van de twee stenen op index 0 en 1.
@@ -311,7 +302,7 @@ public class Spel {
     }
 
     /**
-     * UC4: sorteert de stenen in de zak, haalt er drie uit, verwijdert deze uit het
+     * UC4, normaal verloop: sorteert de stenen in de zak, haalt er drie uit, verwijdert deze uit het
      * zakje en geeft hun waarden terug. Deze methode wordt opgeroepen bij start van
      * spel.
      *
@@ -330,12 +321,11 @@ public class Spel {
     }
 
     /**
-     * UC4: steekt steen terug in zakje indien speler deze niet kan leggen.
+     * UC4, alternatief verloop: steekt steen terug in zakje indien speler deze niet kan leggen.
      * Hulpfunctie voor stenen uit zakje halen
      *
      * @param waardeVanSteen waarde van het steentje dat terug in zak moet
      */
-
     public void steekSteentjeTerugInZak(int waardeVanSteen) {
         stenen.add(new Steen(waardeVanSteen));
     }
@@ -388,30 +378,27 @@ public class Spel {
     }
 
     /**
-     * UC3/4: wordt aangeroepen wanneer speler spel wil stoppen SpelStaat word
+     * UC3/4, alternatief verloop: wordt aangeroepen wanneer speler spel wil stoppen SpelStaat word
      * ingesteld op gecanceled we kiezen ervoor om de spelers in dit geval hun
      * speelkansen terug te geven.
      */
-
     public void cancelSpel() {
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
     }
 
     /**
-     * UC3: bepaalt wanneer het spel beï¿½indigd is of wordt
+     * UC3: bepaalt wanneer het spel beëindigd is of wordt
      */
-
     public boolean isEindeSpel() {
         return !checkOfErNogStenenInHetZakjeZijn();
     }
 
     /**
-     * UC4: tussentijdse evaluatie op legaliteit van zet
+     * UC4, normaal verloop: tussentijdse evaluatie op legaliteit van zet
      *
      * @param vak het vakje waar steen op komt
      * @return of de zet op eerste zicht zou mogen
      */
-
     public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteSteen, String vak, String steen) {
         //indien het de eerste steen is en vak is 8.8 = OK
         if (eersteSteen && vak.equals("8.8")) {
@@ -427,13 +414,12 @@ public class Spel {
     }
 
     /**
-     * UC4: eind evaluatie op legaliteit van zet op basis van een simulatie. Na
+     * UC4, alternatief verloop: eind evaluatie op legaliteit van zet op basis van een simulatie. Na
      * methode wordt bord staat gereset.
      *
      * @param zetten de geplande zetten in String formaat
      * @return of de zet legaal is
      */
-
     public boolean checkOfZettenLegaalZijnEindValidatie(List<String> zetten) {
         //lijsten voor vakken en stenen voor validatie
         List<Vak> vakkenPerZet = new ArrayList<>();
@@ -481,13 +467,12 @@ public class Spel {
     }
 
     /**
-     * UC4: controleer of de zet of dit legaal is qua score en ligging
+     * UC4, alternatief en normaal verloop: controleer of de zet of dit legaal is qua score en ligging
      * Hulpfunctie voor beurt spelen
      *
      * @param vak het vak dat onderzocht gaat worden
      * @return of de zet legaal is
      */
-
     private boolean checkOfDeGevormdePuntenStrokenMetDeLiggingVanHetSteentje(Vak vak) {
         //Gebruik de echte methodes voor scoreberekening om de score te berekenen
         List<Integer> puntenLijst = Arrays
@@ -511,7 +496,7 @@ public class Spel {
     }
 
     /**
-     * UC4: controleer of de zet op een witte steen mag liggen op basis van gevormde
+     * UC4, normaal verloop: controleer of de zet op een witte steen mag liggen op basis van gevormde
      * score
      * Hulpfunctie voor beurt spelen
      *
@@ -519,20 +504,18 @@ public class Spel {
      * @param punt de score
      * @return of de zet legaal is
      */
-
     private boolean checkOfSteenOpWitVakLigtEnScoreHeeftOnder10(Vak vak, Integer punt) {
         // de 1 of 0 is de dubbele score multiplier en moet genegeerd worden.
         return vak.getKleur().equals(Vak.Kleur.WIT) && punt > 1 && punt < 10;
     }
 
     /**
-     * UC4: controleer of voor de eerste zet de drie zetten aangrenzen
+     * UC4, normaal verloop: controleer of voor de eerste zet de drie zetten aangrenzen
      * Hulpfunctie voor beurt spelen
      *
      * @param vakkenPerZet de vakken die worden onderzocht
      * @return of de zet legaal is
      */
-
     private boolean checkOfDeDrieVakkenVanDeEersteZetElkaarBegrenzen(List<Vak> vakkenPerZet) {
         boolean steenEenEnTweeAangrenzend = vakkenPerZet.get(0).geefVakjesNaastVak()
                 .containsValue(vakkenPerZet.get(1).getCoordinatenVanVak())
@@ -544,7 +527,7 @@ public class Spel {
     }
 
     /**
-     * UC4: parset de zetten om zo bruikbare objecten te maken voor onderzoek
+     * UC4, normaalverloop: parset de zetten om zo bruikbare objecten te maken voor onderzoek
      * Hulpfunctie voor beurt spelen
      *
      * @param vakkenPerZet de lijst die de vakken zal bevatten na parsing
@@ -559,25 +542,23 @@ public class Spel {
     }
 
     /**
-     * UC4: kijkt of het gespeelde vak minstens een andere steen raakt
+     * UC4, normaal verloop: kijkt of het gespeelde vak minstens een andere steen raakt
      * Hulpfunctie voor beurt spelen
      *
      * @param vak de lijst die de vakken zal bevatten na parsing
      * @return of deze een steen raakt
      */
-
     private boolean raaktVakMinstensEenAndereSteen(Vak vak) {
         return vak.geefVakjesNaastVak().values().stream().filter(coordinaat -> !coordinaat.equals("bestaat niet"))
                 .map((coordinaat) -> spelbord.getVakjes().get(coordinaat)).map(Vak::bevatSteen).toList().contains(true);
     }
 
     /**
-     * UC4: reset methode voor staat na validatie
+     * UC4, normaal verloop: reset methode voor staat na validatie
      * Hulpfunctie voor beurt spelen
      *
      * @param vakkenPerZet de vakken die gereset moeten worden
      */
-
     private void verwijderStenenVanVakkenNaValidatie(List<Vak> vakkenPerZet) {
         for (Vak vak : vakkenPerZet) {
             vak.setSteen(null);
@@ -585,23 +566,21 @@ public class Spel {
     }
 
     /**
-     * UC4: zet een steen op domein bord voor verder onderzoek in legaliteit
+     * UC4, normaal verloop: zet een steen op domein bord voor verder onderzoek in legaliteit
      * Hulpfunctie voor beurt spelen
      *
      * @param vak   gespeeld vak
      * @param steen gespeelde steen
      */
-
     private void zetSteenOpVak(String vak, String steen) {
         spelbord.getVakjes().get(vak).setSteen(new Steen(Integer.parseInt(steen)));
     }
 
     /**
-     * UC4: getter voor spelers in spel
+     * UC4, normaal verloop: getter voor spelers in spel
      *
      * @return lijst met speler objecten
      */
-
     public List<Speler> getSpelers() {
         return spelers;
     }

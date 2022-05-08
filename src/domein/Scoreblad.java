@@ -20,7 +20,6 @@ public class Scoreblad {
      *
      * @return de lijst van String weergaves.
      */
-
     public List<String> getRegels() {
         return regels.stream().map(ScorebladRegel::toString).collect(Collectors.toList());
     }
@@ -62,11 +61,10 @@ public class Scoreblad {
     }
 
     /**
-     * UC4: Genereer een regel met de scores voor deze ronde.
+     * UC4, normaal verloop: Genereer een regel met de scores voor deze ronde.
      *
      * @param puntenArraysVoorAlleZetten array list die de scores bevat van de ronde
      */
-
     public void voegRegelsToeAanScoreblad(ArrayList<String> puntenArraysVoorAlleZetten) {
         int dubbleScoreCounter = 0;
         // controleer of de laatse regel in het scoreblad een dubbele score regel is die
@@ -100,17 +98,14 @@ public class Scoreblad {
         // genereer een extra dubbele score regel als bonus
         if (dubbleScoreCounter > 1)
             voegLegeRegelToeAanScoreblad(true);
-
     }
 
     /**
-     * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
-     * Hulpfunctie voor functie "voegRegelsToeAanScoreblad()"
+     * UC4, normaal verloop: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
      *
      * @param aanTePassenRegel de aan te passen regel
      * @param zet              string die de resultaten van de zet bevat
      */
-
     private void voegExtraKruisjesToeAanRegel(ScorebladRegel aanTePassenRegel, String zet) {
         // eerste twee tekens die de dubbele score boolean symboliseren worden eruit
         // gehaald
@@ -122,13 +117,11 @@ public class Scoreblad {
         for (String score : scores) {
             aanTePassenRegel.pasRegelAanMetVerdereScores(Integer.parseInt(score));
         }
-
     }
 
     /**
      * UC3: String override voor scoreblad
      */
-
     @Override
     public String toString() {
         return regels.stream().map(ScorebladRegel::toString).collect(Collectors.joining("\n"));

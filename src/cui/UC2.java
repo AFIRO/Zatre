@@ -14,7 +14,6 @@ public class UC2 {
      *
      * @param domeinController voor bevraging domein
      */
-
     public UC2(DomeinController domeinController) {
         scanner = new Scanner(System.in);
         this.domeinController = domeinController;
@@ -24,7 +23,6 @@ public class UC2 {
     /**
      * UC2: input menu voor speler aanmelding
      */
-
     private void meldAanInputMenu() {
         boolean loopflag = true;
         boolean inputLoopflag = true;

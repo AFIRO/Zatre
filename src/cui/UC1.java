@@ -14,7 +14,6 @@ public class UC1 {
      *
      * @param domeinController voor bevraging domein
      */
-
     public UC1(DomeinController domeinController) {
         this.domeinController = domeinController;
         registreerSpelerInputMenu();
@@ -23,7 +22,6 @@ public class UC1 {
     /**
      * UC1: input menu voor speler registratie
      */
-
     private void registreerSpelerInputMenu() {
         boolean loopflag = true;
         boolean inputLoopflag = true;

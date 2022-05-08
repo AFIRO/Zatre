@@ -14,17 +14,14 @@ public class DomeinController {
     /**
      * Alle UC's: constructor DC
      */
-
     public DomeinController() {
         this.spelerRepository = new SpelerRepository(new SpelerMapper()); // Andreeas: Dependency injection nodig voor
         // Mockito
-
     }
 
     /**
      * Alle UC's: getter voor localisatie
      */
-
     public Taal getTaal() {
         return taal;
     }
@@ -32,7 +29,6 @@ public class DomeinController {
     /**
      * Alle UC's: setter voor localisatie
      */
-
     public void setTaal(Taal taal) {
         this.taal = taal;
     }
@@ -44,7 +40,6 @@ public class DomeinController {
      * @param gebruikersnaam Gebruikersnaam van speler
      * @param geboortejaar   Geboortejaar van speler
      */
-
     public void registreer(String gebruikersnaam, int geboortejaar) {
         spelerRepository.voegSpelerToe(gebruikersnaam, geboortejaar);
     }
@@ -56,7 +51,6 @@ public class DomeinController {
      * @param gebruikersnaam Gebruikersnaam van speler
      * @param geboortejaar   Geboortejaar van speler
      */
-
     public void meldAan(String gebruikersnaam, int geboortejaar) {
         spelerRepository.vraagSpelerOp(gebruikersnaam, geboortejaar);
     }
@@ -69,7 +63,6 @@ public class DomeinController {
      * @param geboortejaar   Geboortejaar van speler
      * @throws IllegalArgumentException indien gebruikersnaam te kort
      */
-
     public String geefSpeler(String gebruikersnaam, int geboortejaar) { // opmaak string in UC
         Speler speler = spelerRepository.geefSpeler(gebruikersnaam, geboortejaar);
 
@@ -108,14 +101,12 @@ public class DomeinController {
     public void startSpel() {
         this.spel = new Spel(spelerRepository.geefSpelers());
         spel.startSpel();
-
     }
 
     /**
      * UC3: Geeft string respresentatie van winnende speler
      * Hulpfunctie voor functie "eindigSpel()"
      */
-
     private String geefWinnaar() {
         return String.format("%s%n%s %s%n%s %s%n%s %d%n%n", taal.getLocalisatie("WINNAAR"),
                 taal.getLocalisatie("GEBRUIKERSNAAM"), spel.geefWinnaar().getGebruikersnaam(),
@@ -208,7 +199,6 @@ public class DomeinController {
      * UC3: wiped de repository als voorbereiding op een nieuw spel.
      * Hulpfunctie voor functie "eindigSpel()" en "cancelSpel()"
      */
-
     private void resetRepositoryVoorNieuwSpel() {
         spelerRepository.geefSpelers().removeAll(spelerRepository.geefSpelers());
     }
@@ -231,7 +221,7 @@ public class DomeinController {
     }
 
     /**
-     * UC4: tussentijdse evaluatie van zet in domein
+     * UC4, normaal verloop: tussentijdse evaluatie van zet in domein
      *
      * @param vak         gespeeld vak
      * @param eersteSteen boolean die representeert of dit de eerste steen is (die
@@ -239,43 +229,38 @@ public class DomeinController {
      * @param steen       gespeelde steen
      * @return of de zet legaal was niet.
      */
-
     public boolean checkOfZetLegaalIsTussenTijdseValidatie(boolean eersteSteen, String vak, String steen) {
         return spel.checkOfZetLegaalIsTussenTijdseValidatie(eersteSteen, vak, steen);
     }
 
     /**
-     * UC4: finale evaluatie van zet in domein
+     * UC4, normaal & alternatief verloop: finale evaluatie van zet in domein
      *
      * @param zetten string representatie van de zetten
      * @return of de zetten legaal waren
      */
-
     public boolean checkOfZettenLegaalZijnEindValidatie(List<String> zetten) {
         return spel.checkOfZettenLegaalZijnEindValidatie(zetten);
     }
 
     /**
-     * UC4: het spel gaat naar volgende beurt.
+     * UC4, normaal verloop: het spel gaat naar volgende beurt.
      */
-
     public void volgendeSpeler() {
         spel.volgendeSpeler();
     }
 
     /**
-     * UC4: geeft nuttige string representatie van de speler die aan de beurt is
+     * UC4, normaal verloop: geeft nuttige string representatie van de speler die aan de beurt is
      *
      * @return lijst string op van de actieve speler met de naam, op 1 geboortejaar
      * en op 2 de speelkansen
      */
-
     public List<String> geefActieveSpeler() {
         List<String> actieveSpelerGegevens = new ArrayList<>();
         actieveSpelerGegevens.add(spel.getHuidigeActieveSpeler().getGebruikersnaam());
         actieveSpelerGegevens.add(String.valueOf(spel.getHuidigeActieveSpeler().getGeboortejaar()));
         actieveSpelerGegevens.add(String.valueOf(spel.getHuidigeActieveSpeler().getSpeelkansen()));
         return actieveSpelerGegevens;
-
     }
 }
