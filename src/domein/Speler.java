@@ -41,6 +41,7 @@ public class Speler {
     /**
      * UC1: controleren of gebruikersnaam niet leeg is of kleiner is dan 5 karakters
      * exception gooien indien ze niet voldoende lang is
+     * Hulpfunctie voor constructor
      *
      * @param gebruikersnaam Gebruikersnaam van speler
      * @throws IllegalArgumentException indien gebruikersnaam te kort
@@ -55,6 +56,7 @@ public class Speler {
      * UC1: controleren of geboortejaar kleiner is dan het huidige jaar, groter dan
      * nul en speler dus minstens 6 jaar is exception gooien indien dit niet het
      * geval is
+     * Hulpfunctie voor constructor
      *
      * @param geboortejaar Geboortejaar van speler
      * @throws IllegalArgumentException indien geboortejaar hoger is an huidig jaar

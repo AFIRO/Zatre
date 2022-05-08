@@ -22,6 +22,8 @@ public class HoofdPaneel extends BorderPane {
     /**
      * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
+     * <p>
+     * Hulpmethode voor constructor
      */
 
     private void voegComponentenToe() {

@@ -36,6 +36,7 @@ public class ScorebladRegel {
     /**
      * UC3: methode die controleert of de bonuspunten een toegelaten waarde hebben
      * van 3, 4, 5 of 6.
+     * Hulpfunctie voor constructor.
      *
      * @throws IllegalArgumentException indien de waarde niet toegelaten is.
      */
@@ -47,6 +48,7 @@ public class ScorebladRegel {
 
     /**
      * UC3: methode berekent de Score op basis van de booleans
+     * Hulpfunctie voor pasRegelAanMetVerdereScores()
      *
      * @return de berekende score op basis van interne gegevens van de regel.
      */

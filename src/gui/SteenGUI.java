@@ -27,6 +27,7 @@ public class SteenGUI extends ImageView {
      * UC3 haal de foto van de juiste steen uit assets op basis van de waarde van de
      * steen en koppelt deze aan de steen. Bij waarde 0 is de foto blanco en dus
      * doorzichtig.
+     * Hulpmethode voor constructor
      *
      * @param waarde: waarde van de steen
      */

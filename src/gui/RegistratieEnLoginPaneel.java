@@ -40,6 +40,8 @@ public class RegistratieEnLoginPaneel extends VBox {
     /**
      * UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
+     * <p>
+     * Hulpmethode voor constructor
      */
 
     private void voegComponentenToe() {
@@ -95,6 +97,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: zet CSS van labels goed
+     * <p>
+     * Hulpmethode voor constructor
      *
      * @param label de label
      */
@@ -105,6 +109,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: zet CSS van boxen goed
+     * <p>
+     * Hulpmethode voor constructor
      *
      * @param box de box
      */
@@ -116,6 +122,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: zet CSS van tekstvelden goed
+     * <p>
+     * Hulpmethode voor constructor
      *
      * @param txt het tekstveld
      */
@@ -129,6 +137,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: zet CSS van knoppen goed
+     * <p>
+     * Hulpmethode voor constructor
      *
      * @param knop de knop
      */
@@ -145,6 +155,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: eventhandler voor registratie van nieuwe speler
+     * <p>
+     * Hulpmethode voor speler registratie
      */
 
     private void registreer(ActionEvent actionEvent) {
@@ -173,6 +185,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: eventhandler voor login van speler
+     * <p>
+     * Hulpmethode voor speler login
      */
 
     private void login(ActionEvent actionEvent) {
@@ -209,6 +223,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: eventhandler voor terugkeer naar menu
+     * <p>
+     * Hulpmethode voor navigatie
      */
 
     private void back(ActionEvent actionEvent) {
@@ -217,6 +233,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: eventhandler voor uit spel te gaan
+     * <p>
+     * Hulpmethode voor spel eindigen
      */
 
     private void quit(ActionEvent actionEvent) {
@@ -225,6 +243,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: eventhandler voor spel starten
+     * <p>
+     * Hulpmethode voor spel starten
      */
 
     private void starten(ActionEvent actionEvent) {
@@ -234,6 +254,8 @@ public class RegistratieEnLoginPaneel extends VBox {
 
     /**
      * UC3: hulpmethode voor input sanering
+     * <p>
+     * Hulpmethode voor input
      */
 
     private void controleerOfInputNietBlancoIs(String input) {

@@ -63,6 +63,8 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
+     * <p>
+     * Hulpmethode voor constructor
      */
     private void voegComponentenToe() {
         // instantie elementen
@@ -113,6 +115,7 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC3: zet de CSS van de doorgegeven knop goed.
+     * Hulpmethode voor constructor
      *
      * @param knop de knop
      */
@@ -129,6 +132,7 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * UC3: vraag steentjes op uit domein, bouwt deze als GUI element, voegt
      * eventhandler toe en plaatst deze in GUI
+     * Hulpmethode voor steentjes vragen
      */
 
     private void vraagSteentjes(ActionEvent actionEvent) {
@@ -144,6 +148,8 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC3: verwijdert de stenen uit de GUI. Hulpmethode voor andere methodes.
+     * <p>
+     * Hulpmethode voor steentjes verwijderen
      */
     private void verwijderStenenUitComponent() {
         this.getChildren().removeIf(node -> node instanceof SteenGUI);
@@ -152,6 +158,8 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * UC3: Doet een alert verschijnen voor bevestiging. Indien bevestigd, geeft
      * info door aan domein voor verwerking.
+     * <p>
+     * Hulpmethode voor spel cancelen
      */
     private void cancelSpel(ActionEvent actionEvent) {
 
@@ -169,6 +177,8 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC4: Methode om een steentje terug in het zakje te plaatsen
+     * <p>
+     * Hulpmethode voor steen terug geven
      */
 
     private void geefSteenTerug(ActionEvent actionEvent) {
@@ -211,6 +221,8 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * UC4: eventHandler die identiteit van steen opslaat voor gebruik in zet. Het
      * activeert ook de knop om een steen terug te geven bij de eerste beurt.
+     * <p>
+     * Hulpmethode voor UI manipulatie
      *
      * @param steen de betrokken steen
      */
@@ -227,6 +239,8 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC4: zet de styling van een vakje terug naar de normale styling
+     * <p>
+     * Hulpmethode voor vakken klikken
      */
 
     private void zetCSSVakNormaal() {
@@ -236,6 +250,8 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC4: zet de styling van een vakje naar een andere kleur border om aan te geven als het geselecteerd is
+     * <p>
+     * Hulpmethode voor vakken klikken
      */
 
     private void zetCSSGekliktVak() {
@@ -259,6 +275,8 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC4: update feedback labels zodat speler weet wat hij geklikt heeft.
+     * <p>
+     * Hulpmethode voor UI navigatie
      */
 
     private void updateFeedbackLabel() {
@@ -285,6 +303,8 @@ public class SpelSpelerPaneel extends VBox {
 
     /**
      * UC4: eventhandler voor een beurt te spelen
+     * <p>
+     * Hulpmethode voor beurt spelen
      */
     private void zetSteenOpVakje(ActionEvent actionEvent) {
         if (this.gekliktVak != null)
@@ -373,6 +393,8 @@ public class SpelSpelerPaneel extends VBox {
      * UC4: zet het bord en de steendoos terug naar zijn status van op start van de
      * beurt op basis van de doorgeven zetten die gebruikt werden voor validatie (en
      * ongeldig werden verklaard door het domein)
+     * <p>
+     * Hulpmethode voor beurt spelen
      *
      * @param zetten de ongeldige zetten
      */
@@ -401,6 +423,8 @@ public class SpelSpelerPaneel extends VBox {
      * Haalt de scoreblad per speler en de winnaar op. Domein regelt verdere
      * afhandeling achter de schermen. Het roept ook een methode op die de schermen
      * reset voor het volgend spel.
+     * <p>
+     * Hulpmethode voor spel eindigen
      */
 
     private void eindigSpel() {
@@ -430,6 +454,8 @@ public class SpelSpelerPaneel extends VBox {
     /**
      * UC3: methode die de schermen reset voor volgend spel na eindigen spel of
      * cancel.
+     * <p>
+     * Hulpmethode voor spel eindigen
      */
 
     private void resetSchermenVoorVolgendSpel() {
@@ -445,6 +471,8 @@ public class SpelSpelerPaneel extends VBox {
      * UC3: avanceert spelstaat naar volgende beurt. Reset de huidige zetten array,
      * zegt tegen DC om volgende speler te selecteren en update de info op
      * scorebladscherm.
+     * <p>
+     * Hulpmethode voor beurt spelen
      */
     private void volgendeSpeler() {
         zetten = new ArrayList<>();

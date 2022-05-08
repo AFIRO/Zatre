@@ -17,6 +17,7 @@ public class Spelbord {
      * UC3: spelbord wordt aangemaakt Eerst maken we het kleinere vierkant
      * vervolgens stellen we de kleur van de diagonalen in op wit dan voegen we de
      * buitenste vakjes toe en hiervan stellen we ook de correcte vakjes in op wit
+     * Hulpfunctie voor constructor
      *
      * @return het spelbord
      */

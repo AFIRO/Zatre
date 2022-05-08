@@ -6,7 +6,6 @@ public class Spel {
     private final List<Speler> spelers;
     private final Spelbord spelbord;
     private final List<Steen> stenen;
-    private SpelStaat spelStaat;
     private int indexVanSpelerAanBeurt;
     private Speler huidigeActieveSpeler;
 
@@ -21,7 +20,6 @@ public class Spel {
      */
     public Spel(List<Speler> spelers) {
         this.spelers = spelers;
-        this.spelStaat = SpelStaat.IN_VOORBEREIDING;
         this.spelbord = new Spelbord();
         this.stenen = genereerStenen();
         indexVanSpelerAanBeurt = 0;
@@ -32,6 +30,7 @@ public class Spel {
      * van elk (1-6), vervolgens nog een extra steen Dit maakt een lijst van 121
      * stenen. Vervolgens worden deze door elkaar gegooid. De methode geeft de
      * geshuffelde lijst stenen terug.
+     * Hulpfunctie voor constructor
      *
      * @return de lijst gegenereerde stenen
      */
@@ -65,11 +64,11 @@ public class Spel {
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() - 1));
         bepaalVolgordeSpelers();
         huidigeActieveSpeler = spelers.get(0);
-        this.spelStaat = SpelStaat.GESTART;
     }
 
     /**
      * UC3: Checkt of er voldoende spelers in spel zitten
+     * Hulpfunctie voor spel starten
      *
      * @throws IllegalArgumentException indien onvoldoende spelers
      */
@@ -81,6 +80,7 @@ public class Spel {
 
     /**
      * UC3: methode om volgorde spelers willekeurig te zetten
+     * Hulpfunctie voor spel starten
      */
     private void bepaalVolgordeSpelers() {
         Collections.shuffle(spelers);
@@ -110,6 +110,7 @@ public class Spel {
 
     /**
      * UC3: speelkansen van winnende speler worden +2 toegevoegd
+     * Hulpfunctie voor spel eindigen
      *
      * @param speler de winnaar van het spel
      */
@@ -162,6 +163,7 @@ public class Spel {
     /**
      * UC4: roept hulpfuncties op om een string representatie te maken van de score
      * van de zet
+     * Hulpfunctie voor beurt te spelen en scoreberekening
      *
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
      * @return punten string representatie van score eerste getal 0/1 is afhankelijk
@@ -183,6 +185,7 @@ public class Spel {
      * UC4: roept hulpfuncties om links en rechts te kijken op het bord voor de
      * horizontale score te berekenen. Het past de doorgegeven String aan met de
      * dubbele punten modifier en het gevonden horizontaal punt.
+     * Hulpfunctie voor scoreberekening
      *
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
      * @param punten                   de aan te passen string representatie
@@ -210,6 +213,7 @@ public class Spel {
      * UC4: roept hulpfuncties om boven en onder te kijken op het bord voor de
      * verticale score te berekenen. het past de doorgegeven String aan met de
      * dubbele punten modifier en het gevonden verticale punt.
+     * Hulpfunctie voor scoreberekening
      *
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
      * @param punten                   de aan te passen string representatie
@@ -237,6 +241,8 @@ public class Spel {
      * deze af in een specifieke richting als een linked list. Deze telt alle
      * gevonden stenen op tot het oftewel botst tegen rand van het spelbord of een
      * vak ontdekt zonder steen erop.
+     * <p>
+     * Hulpfunctie voor scoreberekening
      *
      * @param vakWaaropSteenWerdGelegd het vak waarop een steen wordt gelegd.
      * @param richting                 waarin het algoritme moet zoeken.
@@ -265,6 +271,7 @@ public class Spel {
 
     /**
      * UC4: Checkt of het speler in het spel zit of niet.
+     * Hulpfunctie voor beurt spelen
      *
      * @throws IllegalArgumentException indien speler niet in spel.
      */
@@ -324,6 +331,7 @@ public class Spel {
 
     /**
      * UC4: steekt steen terug in zakje indien speler deze niet kan leggen.
+     * Hulpfunctie voor stenen uit zakje halen
      *
      * @param waardeVanSteen waarde van het steentje dat terug in zak moet
      */
@@ -335,6 +343,7 @@ public class Spel {
     /**
      * UC3: de lijst van scorebladen wordt overlopen met een stream TESS: graag rest
      * van de methode toelichten
+     * Hulpfunctie voor spel eindigen
      *
      * @return de winnaar van het spel
      */
@@ -351,15 +360,12 @@ public class Spel {
     /**
      * UC3: Controleert of er nog stenen zijn indien niet wordt SpelStaat op gedaan
      * gezet boolean wordt teruggegeven
+     * Hulpfunctie voor spel eindigen
      *
      * @return boolean die voorstelt of er nog stenen speelbaar zijn
      */
     private boolean checkOfErNogStenenInHetZakjeZijn() {
-        if (stenen.isEmpty()) {
-            this.spelStaat = SpelStaat.GEDAAN;
-            return false;
-        }
-        return true;
+        return !stenen.isEmpty();
     }
 
     /**
@@ -370,16 +376,6 @@ public class Spel {
      */
     public Scoreblad geefScoreblad(Speler speler) {
         return speler.getScoreblad();
-    }
-
-    /**
-     * UC3: toont de score per Speler
-     *
-     * @param speler speler wiens score moet teruggeven worden
-     * @return score van speler
-     */
-    public int toonScore(Speler speler) {
-        return geefScoreblad(speler).berekenScoreVanScoreblad();
     }
 
     /**
@@ -398,7 +394,6 @@ public class Spel {
      */
 
     public void cancelSpel() {
-        this.spelStaat = SpelStaat.GECANCELED;
         spelers.forEach((e) -> e.setSpeelkansen(e.getSpeelkansen() + 1));
     }
 
@@ -487,6 +482,7 @@ public class Spel {
 
     /**
      * UC4: controleer of de zet of dit legaal is qua score en ligging
+     * Hulpfunctie voor beurt spelen
      *
      * @param vak het vak dat onderzocht gaat worden
      * @return of de zet legaal is
@@ -517,6 +513,7 @@ public class Spel {
     /**
      * UC4: controleer of de zet op een witte steen mag liggen op basis van gevormde
      * score
+     * Hulpfunctie voor beurt spelen
      *
      * @param vak  het vak dat onderzocht gaat worden
      * @param punt de score
@@ -530,6 +527,7 @@ public class Spel {
 
     /**
      * UC4: controleer of voor de eerste zet de drie zetten aangrenzen
+     * Hulpfunctie voor beurt spelen
      *
      * @param vakkenPerZet de vakken die worden onderzocht
      * @return of de zet legaal is
@@ -547,6 +545,7 @@ public class Spel {
 
     /**
      * UC4: parset de zetten om zo bruikbare objecten te maken voor onderzoek
+     * Hulpfunctie voor beurt spelen
      *
      * @param vakkenPerZet de lijst die de vakken zal bevatten na parsing
      * @param stenenPerZet de lijst die de stenen zal bevatten na parsing
@@ -561,6 +560,7 @@ public class Spel {
 
     /**
      * UC4: kijkt of het gespeelde vak minstens een andere steen raakt
+     * Hulpfunctie voor beurt spelen
      *
      * @param vak de lijst die de vakken zal bevatten na parsing
      * @return of deze een steen raakt
@@ -573,6 +573,7 @@ public class Spel {
 
     /**
      * UC4: reset methode voor staat na validatie
+     * Hulpfunctie voor beurt spelen
      *
      * @param vakkenPerZet de vakken die gereset moeten worden
      */
@@ -585,6 +586,7 @@ public class Spel {
 
     /**
      * UC4: zet een steen op domein bord voor verder onderzoek in legaliteit
+     * Hulpfunctie voor beurt spelen
      *
      * @param vak   gespeeld vak
      * @param steen gespeelde steen
@@ -602,9 +604,5 @@ public class Spel {
 
     public List<Speler> getSpelers() {
         return spelers;
-    }
-
-    private enum SpelStaat {
-        IN_VOORBEREIDING, GESTART, GEDAAN, GECANCELED
     }
 }

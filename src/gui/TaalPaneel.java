@@ -36,6 +36,8 @@ public class TaalPaneel extends VBox {
     /**
      * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
+     * <p>
+     * Hulpmethode voor constructor
      */
 
     private void voegComponentenToe() {
@@ -72,6 +74,7 @@ public class TaalPaneel extends VBox {
 
     /**
      * UC3: zet CSS van knop goed
+     * Hulpmethode voor constructor
      *
      * @param knop de knop
      */
@@ -88,6 +91,7 @@ public class TaalPaneel extends VBox {
 
     /**
      * UC3: set de applicatie naar Nederlands
+     * Hulpmethode voor taal correct instellen
      */
 
     private void setTaalNederlands(ActionEvent actionEvent) {
@@ -97,6 +101,7 @@ public class TaalPaneel extends VBox {
 
     /**
      * UC3: set de applicatie naar Engels
+     * Hulpmethode voor taal correct instellen
      */
 
     private void setTaalEngels(ActionEvent actionEvent) {

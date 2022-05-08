@@ -27,8 +27,10 @@ public class SpelPaneel extends BorderPane {
     }
 
     /**
-     * UC4: creëert de nodige elementen die deel zullen uitmaken van het spelpaneel
+     * UC4: creï¿½ert de nodige elementen die deel zullen uitmaken van het spelpaneel
      * en zet ze op de juiste plaatsen.
+     * <p>
+     * Hulpmethode voor constructor
      */
 
     private void voegComponentenToe() {

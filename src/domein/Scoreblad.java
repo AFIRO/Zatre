@@ -105,6 +105,7 @@ public class Scoreblad {
 
     /**
      * UC4: Pas de actieve ronde regel aan met kruisjes uit een volgende zet.
+     * Hulpfunctie voor functie "voegRegelsToeAanScoreblad()"
      *
      * @param aanTePassenRegel de aan te passen regel
      * @param zet              string die de resultaten van de zet bevat

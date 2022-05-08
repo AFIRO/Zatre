@@ -20,6 +20,7 @@ public class Taal {
 
     /**
      * UC1: setter voor resourcebundel. Laat ons toe om nadien de taal aan te passen
+     * Hulpmethode voor taal veranderen
      *
      * @param taalkeuze de taalkeuze van de speler
      */
