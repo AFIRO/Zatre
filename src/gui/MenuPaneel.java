@@ -48,24 +48,28 @@ public class MenuPaneel extends VBox {
 
     private void voegComponentenToe() {
     	
+    	 ScrollBar sc = new ScrollBar();
+         sc.setMin(0);
+         sc.setMax(200);
+         sc.setValue(0);
+         sc.setOrientation(Orientation.VERTICAL);
+         sc.setUnitIncrement(12);  
+         sc.setBlockIncrement(10); 
+         lblLoggedOn = new Label();
+
         // instantie elementen
         Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
         Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
         VBox alignmentBoxButtons = new VBox();
-        aangemeldeSpelersBox = new HBox();
+        aangemeldeSpelersBox = new HBox(lblLoggedOn, sc);
+        
         Button btnRegistreerAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3") + "/"
                 + domeinController.getTaal().getLocalisatie("GUI_STARTMENU_4"));
         Button btnSpelStarten = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_7"));
         Button btnKiesTaal = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_8"));
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
       
-        ScrollBar sc = new ScrollBar();
-        sc.setMin(0);
-        sc.setMax(200);
-        sc.setValue(0);
-        sc.setOrientation(Orientation.VERTICAL);
-        lblLoggedOn = new Label();
-
+       
         // eventlisteners
         btnRegistreerAanmelden.setOnAction(this::registreerAanmelden);
         btnSpelStarten.setOnAction(this::starten);
@@ -79,17 +83,21 @@ public class MenuPaneel extends VBox {
         zetCssVanKnopGoed(btnRegistreerAanmelden);
         this.setStyle("-fx-background-color: #59981A");
         this.setAlignment(Pos.TOP_CENTER);
-        aangemeldeSpelersBox.setVisible(false);
+      
         header.setStyle("-fx-font-size: 3em;");
         subheader.setStyle("-fx-font-size: 2em");
         alignmentBoxButtons.setAlignment(Pos.CENTER);
         alignmentBoxButtons.setSpacing(20.0);
+        aangemeldeSpelersBox.setSpacing(15);
+        aangemeldeSpelersBox.setVisible(false);
         aangemeldeSpelersBox.setAlignment(Pos.CENTER);
+        aangemeldeSpelersBox.setPrefHeight(lblLoggedOn.getHeight());
+       
         
 
         // insert in GUI
         this.getChildren().addAll(header, subheader, alignmentBoxButtons, aangemeldeSpelersBox);
-        aangemeldeSpelersBox.getChildren().addAll(lblLoggedOn, sc);
+       // aangemeldeSpelersBox.getChildren().add(lblLoggedOn);
         alignmentBoxButtons.getChildren().addAll(btnRegistreerAanmelden, btnSpelStarten, btnKiesTaal, btnQuit);
 
     }
@@ -153,6 +161,7 @@ public class MenuPaneel extends VBox {
     public void updateLoggedOnPlayerLabel() {
         if (!domeinController.geefSpelers().isEmpty()) {
         	this.aangemeldeSpelersBox.setVisible(true);
+            aangemeldeSpelersBox.setPrefHeight(lblLoggedOn.getHeight());
             this.lblLoggedOn.setVisible(true);
             this.lblLoggedOn.setText(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_6")
                     + String.format("%n%n") + String.join("", domeinController.geefSpelers()));
