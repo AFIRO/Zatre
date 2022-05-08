@@ -13,7 +13,6 @@ public class SteenGUI extends ImageView {
      *
      * @param waarde: waarde van de steen
      */
-
     public SteenGUI(int waarde) {
         this.waarde = waarde;
         Image image = koppelJuisteFotoAanWaarde(waarde);
@@ -31,7 +30,6 @@ public class SteenGUI extends ImageView {
      *
      * @param waarde: waarde van de steen
      */
-
     private Image koppelJuisteFotoAanWaarde(int waarde) {
         if (waarde == 0)
             return null;
@@ -45,9 +43,7 @@ public class SteenGUI extends ImageView {
     /**
      * UC3: getter voor de waarde van een steen
      */
-
     public int getWaarde() {
         return waarde;
     }
-
 }

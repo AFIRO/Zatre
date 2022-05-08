@@ -22,7 +22,6 @@ public class SpelBordPaneel extends GridPane {
      * @param domeinController de dc voor gebruik
      * @param spelSpelerPaneel voor aanpassing scherm
      */
-
     public SpelBordPaneel(DomeinController domeinController, SpelSpelerPaneel spelSpelerPaneel) {
         this.domeinController = domeinController;
         this.spelSpelerPaneel = spelSpelerPaneel;
@@ -35,7 +34,6 @@ public class SpelBordPaneel extends GridPane {
      * <p>
      * Hulpmethode voor constructor
      */
-
     private void voegComponentenToe() {
         // instantie elementen
         genereerBord();
@@ -50,7 +48,6 @@ public class SpelBordPaneel extends GridPane {
      * UC3: genereert de vakken voor het spelbord, zet ze op de juiste plaatsen in
      * GUI en koppelt de juiste eventhandler eraan.
      */
-
     private void genereerBord() {
         // zelfde lijst als uit domein voor invalide vakjes
         List<Integer> controleLijst = List.of(1, 2, 3, 4, 8, 12, 13, 14, 15);
@@ -120,15 +117,12 @@ public class SpelBordPaneel extends GridPane {
                 this.getChildren().add(vakStack);
             }
         }
-
     }
 
     /**
      * UC3: eventhandler die identiteit van vak doorstuurt naar correct paneel.
      */
-
     private void clickVak(StackPane vak) {
         this.spelSpelerPaneel.setGekliktVak(vak);
     }
-
 }

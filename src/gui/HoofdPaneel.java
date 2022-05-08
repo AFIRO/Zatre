@@ -12,7 +12,6 @@ public class HoofdPaneel extends BorderPane {
      *
      * @param domeinController de dc voor gebruik
      */
-
     public HoofdPaneel(DomeinController domeinController) {
         this.domeinController = domeinController;
         taalPaneel = new TaalPaneel(domeinController, this);
@@ -22,19 +21,16 @@ public class HoofdPaneel extends BorderPane {
     /**
      * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
-     * <p>
+     * 
      * Hulpmethode voor constructor
      */
-
     private void voegComponentenToe() {
         setCenter(taalPaneel);
-
     }
 
     /**
      * UC3: methode die verder spel aanmaakt op basis van gekozen taal
      */
-
     public void taalGekozen() {
         MenuPaneel menuPaneel = new MenuPaneel(this, domeinController, new TaalPaneel(domeinController, this));
         setCenter(menuPaneel);
@@ -48,7 +44,6 @@ public class HoofdPaneel extends BorderPane {
      * @param domeinController dc (wordt maar eenmalig gedaan om singleton te
      *                         garanderen)
      */
-
     public void setDomeincontroller(DomeinController domeinController) {
         this.domeinController = domeinController;
     }

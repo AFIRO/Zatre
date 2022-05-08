@@ -18,7 +18,6 @@ public class SpelPaneel extends BorderPane {
      * @param menuPaneel       voor terugkeer naar menupaneel
      * @param domeinController de dc voor gebruik
      */
-
     public SpelPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.domeinController = domeinController;
         this.hoofdPaneel = hoofdPaneel;
@@ -27,12 +26,11 @@ public class SpelPaneel extends BorderPane {
     }
 
     /**
-     * UC4: creï¿½ert de nodige elementen die deel zullen uitmaken van het spelpaneel
+     * UC4, normaal verloop: creëert de nodige elementen die deel zullen uitmaken van het spelpaneel
      * en zet ze op de juiste plaatsen.
-     * <p>
+     * 
      * Hulpmethode voor constructor
      */
-
     private void voegComponentenToe() {
         // instantie elementen
         SpelLogoPaneel spelLogoPaneel = new SpelLogoPaneel();
@@ -54,17 +52,15 @@ public class SpelPaneel extends BorderPane {
     }
 
     /**
-     * UC4: getter voor SpelScoreBladPaneel voor dataflow.
+     * UC4, normaal verloop: getter voor SpelScoreBladPaneel voor dataflow.
      */
-
     public SpelScorebladPaneel getSpelScorebladPaneel() {
         return spelScorebladPaneel;
     }
 
     /**
-     * UC4: setter voor nieuw spelbord indien spel gecanceled wordt.
+     * UC4, normaal verloop: setter voor nieuw spelbord indien spel gecanceled wordt.
      */
-
     public SpelBordPaneel getSpelBordPaneel() {
         return spelBordPaneel;
     }

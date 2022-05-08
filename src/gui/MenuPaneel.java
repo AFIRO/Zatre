@@ -33,7 +33,6 @@ public class MenuPaneel extends VBox {
      * @param hoofdPaneel      voor aanpassing scherm
      * @param taalPaneel       voor terugkeer naar taalkeuze
      */
-
     public MenuPaneel(HoofdPaneel hoofdPaneel, DomeinController domeinController, TaalPaneel taalPaneel) {
         this.hoofdPaneel = hoofdPaneel;
         this.domeinController = domeinController;
@@ -47,10 +46,9 @@ public class MenuPaneel extends VBox {
     /**
      * UC3: initialiseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
-     * <p>
+     * 
      * Hulpmethode voor constructor
      */
-
     private void voegComponentenToe() {
         //aanmaak scrollbar voor lblLoggedOn
         sc = new ScrollBar();
@@ -77,7 +75,6 @@ public class MenuPaneel extends VBox {
         Button btnKiesTaal = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_8"));
         Button btnQuit = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_5"));
 
-
         // eventlisteners
         btnRegistreerAanmelden.setOnAction(this::registreerAanmelden);
         btnSpelStarten.setOnAction(this::starten);
@@ -100,20 +97,17 @@ public class MenuPaneel extends VBox {
         aangemeldeSpelersBox.setVisible(false);
         aangemeldeSpelersBox.setAlignment(Pos.CENTER);
 
-
         // insert in GUI
         this.getChildren().addAll(header, subheader, alignmentBoxButtons, gap, aangemeldeSpelersBox);
         // aangemeldeSpelersBox.getChildren().add(lblLoggedOn);
         alignmentBoxButtons.getChildren().addAll(btnRegistreerAanmelden, btnSpelStarten, btnKiesTaal, btnQuit);
-
     }
 
     /**
      * UC3: zet styling van knoppen goed
-     * <p>
+     * 
      * Hulpmethode voor constructor
      */
-
     private void zetCssVanKnopGoed(Button knop) {
         knop.setPadding(new Insets(10, 10, 10, 10));
         knop.setLineSpacing(100);
@@ -126,10 +120,9 @@ public class MenuPaneel extends VBox {
 
     /**
      * UC3: eventhandler voor overgang naar de spelschermen
-     * <p>
+     * 
      * Hulpmethode voor spel starten
      */
-
     public void starten(ActionEvent actionEvent) {
         try {
             domeinController.startSpel();
@@ -145,25 +138,22 @@ public class MenuPaneel extends VBox {
             alert.setContentText(domeinController.getTaal().getLocalisatie(e.getMessage()));
             alert.showAndWait();
         }
-
     }
 
     /**
      * UC3: eventhandler voor overgang naar de registratie en aanmelden
-     * <p>
+     * 
      * Hulpmethode voor registreren en aanmelden
      */
-
     private void registreerAanmelden(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(registratieEnLoginPaneel);
     }
 
     /**
      * UC3: eventhandler voor overgang naar kies taal scherm
-     * <p>
+     * 
      * Hulpmethode voor taal kiezen
      */
-
     private void kiesTaal(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(taalPaneel);
     }
@@ -171,7 +161,6 @@ public class MenuPaneel extends VBox {
     /**
      * UC3: updated het logged on player label die de ingelogde spelers op het menupaneel laat zien
      */
-
     public void updateLoggedOnPlayerLabel() {
         if (!domeinController.geefSpelers().isEmpty()) {
             this.aangemeldeSpelersBox.setVisible(true);
@@ -185,14 +174,12 @@ public class MenuPaneel extends VBox {
                     aangemeldeSpelersBox.setLayoutY(-new_val.doubleValue());
                 }
             });
-
         }
     }
 
     /**
      * UC3: eventhandler om spel te sluiten
      */
-
     private void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
@@ -200,7 +187,6 @@ public class MenuPaneel extends VBox {
     /**
      * UC3: getter voor aanpassing van label door andere schermen
      */
-
     public Label getLblLoggedOn() {
         return lblLoggedOn;
     }
@@ -209,7 +195,6 @@ public class MenuPaneel extends VBox {
      * UC3: setter voor spelpaneel. Nodig indien een spel wordt opgestart na
      * cancel of na een geslaagd spel
      */
-
     public void setSpelPaneel(SpelPaneel spelPaneel) {
         this.spelPaneel = spelPaneel;
     }

@@ -26,7 +26,6 @@ public class TaalPaneel extends VBox {
      * @param domeinController de dc voor gebruik
      * @param hoofdPaneel      voor aanpassing actief paneel
      */
-
     public TaalPaneel(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
         this.domeinController = domeinController;
         this.hoofdPaneel = hoofdPaneel;
@@ -39,7 +38,6 @@ public class TaalPaneel extends VBox {
      * <p>
      * Hulpmethode voor constructor
      */
-
     private void voegComponentenToe() {
         // instantie elementen
         Image logo = new Image(LOGO_LOCATIE);
@@ -57,7 +55,6 @@ public class TaalPaneel extends VBox {
         imLogo.setFitWidth(400);
         imLogo.setFitHeight(100);
         StackPane.setAlignment(imLogo, Pos.CENTER);
-
 
         zetCSSVanKnopGoed(btnEngels);
         zetCSSVanKnopGoed(btnNederlands);
@@ -78,7 +75,6 @@ public class TaalPaneel extends VBox {
      *
      * @param knop de knop
      */
-
     private void zetCSSVanKnopGoed(Button knop) {
         knop.setPadding(new Insets(10, 10, 10, 10));
         knop.setLineSpacing(100);
@@ -93,7 +89,6 @@ public class TaalPaneel extends VBox {
      * UC3: set de applicatie naar Nederlands
      * Hulpmethode voor taal correct instellen
      */
-
     private void setTaalNederlands(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.NEDERLANDS));
         hoofdPaneel.taalGekozen();
@@ -103,7 +98,6 @@ public class TaalPaneel extends VBox {
      * UC3: set de applicatie naar Engels
      * Hulpmethode voor taal correct instellen
      */
-
     private void setTaalEngels(ActionEvent actionEvent) {
         domeinController.setTaal(new Taal(Taal.Taalkeuze.ENGELS));
         hoofdPaneel.taalGekozen();

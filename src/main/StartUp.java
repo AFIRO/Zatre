@@ -14,7 +14,6 @@ public class StartUp {
     /**
      * UC1: entry point CLI applicatie.
      */
-
     public static void main(String[] args) {
         DomeinController domeinController = new DomeinController();
         domeinController.setTaal(geefKeuzeMenuTaal());
@@ -24,7 +23,6 @@ public class StartUp {
     /**
      * UC1: taalmenu die speler in staat stelt om zijn taal in te stellen
      */
-
     private static Taal geefKeuzeMenuTaal() {
         boolean loopflag = true;
         int taalKeuze = 0;
@@ -55,15 +53,12 @@ public class StartUp {
             }
         }
         return taal;
-
     }
 
     /**
      * UC2: menu die speler in staat stelt om doorheen de applicatie te navigeren
      */
-
     private static void geefKeuzeMenu(DomeinController domeinController) {
-
         boolean loopflag = true;
         while (loopflag) {
             try {
@@ -93,7 +88,6 @@ public class StartUp {
     /**
      * UC2: print het keuzemenu
      */
-
     public static void printMenu(DomeinController domeinController) {
 
         System.out.println(domeinController.getTaal().getLocalisatie("STARTMENU_1"));

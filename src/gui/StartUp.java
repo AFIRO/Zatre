@@ -10,7 +10,6 @@ public class StartUp extends Application {
     /**
      * UC3: main entrypoint
      */
-
     public static void main(String... args) {
         Application.launch(StartUp.class, args);
     }
@@ -20,7 +19,6 @@ public class StartUp extends Application {
      *
      * @param stage stage voor app
      */
-
     @Override
     public void start(Stage stage) {
         DomeinController domeinController = new DomeinController();

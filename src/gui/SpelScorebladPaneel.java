@@ -26,7 +26,6 @@ public class SpelScorebladPaneel extends VBox {
      *
      * @param domeinController de dc voor gebruik
      */
-
     public SpelScorebladPaneel(DomeinController domeinController) {
         this.domeinController = domeinController;
         voegComponentenToe();
@@ -38,7 +37,6 @@ public class SpelScorebladPaneel extends VBox {
      * <p>
      * Hulpmethode voor constructor
      */
-
     private void voegComponentenToe() {
         // instantie elementen
         lblTitel = new Label(domeinController.getTaal().getLocalisatie("HUIDIGE_SPELER"));
@@ -58,7 +56,6 @@ public class SpelScorebladPaneel extends VBox {
 
         // insert in GUI
         this.getChildren().addAll(lblTitel, lblActieveSpeler, scoreTable);
-
     }
 
     /**
@@ -66,7 +63,6 @@ public class SpelScorebladPaneel extends VBox {
      * <p>
      * Hulpmethode voor constructor
      */
-
     private void zetTabelGoed() {
         TableColumn bonusScoreModifierKolom = maakKolomMetDoorgegevenNaamEnBinding("DT", "dubbeleScore");
         TableColumn tienPuntenKolom = maakKolomMetDoorgegevenNaamEnBinding("10", "tienPunten");
@@ -85,7 +81,6 @@ public class SpelScorebladPaneel extends VBox {
      * <p>
      * Hulpmethode voor constructor
      */
-
     private TableColumn maakKolomMetDoorgegevenNaamEnBinding(String tabelNaam, String tabelBinding) {
         TableColumn kolom = new TableColumn(tabelNaam);
         kolom.setCellValueFactory(new PropertyValueFactory<ScorebladRegelDataModel, String>(tabelBinding));
@@ -95,20 +90,18 @@ public class SpelScorebladPaneel extends VBox {
     }
 
     /**
-     * UC4: eventhandler voor update van info in dit scherm
+     * UC4, normaal verloop: eventhandler voor update van info in dit scherm
      */
-
     public void updateInfo() {
         this.lblActieveSpeler.setText(domeinController.geefActieveSpeler().get(0));
         vulTabel();
     }
 
     /**
-     * UC4: vul tabel met data na elke beurt
+     * UC4, normaal verloop: vul tabel met data na elke beurt
      * <p>
      * Hulpmethode info updaten
      */
-
     private void vulTabel() {
         ArrayList<ScorebladRegelDataModel> data = new ArrayList<>();
 
@@ -125,6 +118,5 @@ public class SpelScorebladPaneel extends VBox {
 
         scorebladRegels = FXCollections.observableArrayList(data);
         scoreTable.setItems(scorebladRegels);
-
     }
 }

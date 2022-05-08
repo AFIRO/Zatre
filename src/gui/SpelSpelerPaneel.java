@@ -134,7 +134,6 @@ public class SpelSpelerPaneel extends VBox {
      * eventhandler toe en plaatst deze in GUI
      * Hulpmethode voor steentjes vragen
      */
-
     private void vraagSteentjes(ActionEvent actionEvent) {
         verwijderStenenUitComponent();
         var stenen = domeinController.vraagSteentjes(eersteBeurt);
@@ -172,15 +171,13 @@ public class SpelSpelerPaneel extends VBox {
             domeinController.cancelSpel();
             resetSchermenVoorVolgendSpel();
         }
-
     }
 
     /**
-     * UC4: Methode om een steentje terug in het zakje te plaatsen
+     * UC4, alternatief verloop: Methode om een steentje terug in het zakje te plaatsen
      * <p>
      * Hulpmethode voor steen terug geven
      */
-
     private void geefSteenTerug(ActionEvent actionEvent) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(domeinController.getTaal().getLocalisatie("STEEN_TERUG"));
@@ -219,14 +216,13 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     * UC4: eventHandler die identiteit van steen opslaat voor gebruik in zet. Het
+     * UC4, normaal verloop: eventHandler die identiteit van steen opslaat voor gebruik in zet. Het
      * activeert ook de knop om een steen terug te geven bij de eerste beurt.
      * <p>
      * Hulpmethode voor UI manipulatie
      *
      * @param steen de betrokken steen
      */
-
     private void steenClicked(SteenGUI steen) {
         this.geklikteSteen = steen;
 
@@ -238,33 +234,29 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     * UC4: zet de styling van een vakje terug naar de normale styling
+     * UC4, normaal verloop: zet de styling van een vakje terug naar de normale styling
      * <p>
      * Hulpmethode voor vakken klikken
      */
-
     private void zetCSSVakNormaal() {
         this.gekliktVak.setStyle("-fx-border-color: #000000;" + "-fx-border-width: 2px;");
-
     }
 
     /**
-     * UC4: zet de styling van een vakje naar een andere kleur border om aan te geven als het geselecteerd is
+     * UC4, normaal verloop: zet de styling van een vakje naar een andere kleur border om aan te geven als het geselecteerd is
      * <p>
      * Hulpmethode voor vakken klikken
      */
-
     private void zetCSSGekliktVak() {
         this.gekliktVak.setStyle("-fx-border-color: #E80C58;" + "-fx-border-width: 2px;");
 
     }
 
     /**
-     * UC4: eventHandler die identiteit van vak opslaat voor gebruik in zet.
+     * UC4, normaal verloop: eventHandler die identiteit van vak opslaat voor gebruik in zet.
      *
      * @param gekliktVak de betrokken vak
      */
-
     public void setGekliktVak(StackPane gekliktVak) {
         if (this.gekliktVak != null)
             zetCSSVakNormaal();
@@ -274,11 +266,10 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     * UC4: update feedback labels zodat speler weet wat hij geklikt heeft.
+     * UC4, normaal verloop: update feedback labels zodat speler weet wat hij geklikt heeft.
      * <p>
      * Hulpmethode voor UI navigatie
      */
-
     private void updateFeedbackLabel() {
         String vakTekst = "";
         String steenTekst = "";
@@ -302,7 +293,7 @@ public class SpelSpelerPaneel extends VBox {
     }
 
     /**
-     * UC4: eventhandler voor een beurt te spelen
+     * UC4, normaal verloop: eventhandler voor een beurt te spelen
      * <p>
      * Hulpmethode voor beurt spelen
      */
@@ -386,11 +377,10 @@ public class SpelSpelerPaneel extends VBox {
                 }
             }
         }
-
     }
 
     /**
-     * UC4: zet het bord en de steendoos terug naar zijn status van op start van de
+     * UC4, alternatief verloop: zet het bord en de steendoos terug naar zijn status van op start van de
      * beurt op basis van de doorgeven zetten die gebruikt werden voor validatie (en
      * ongeldig werden verklaard door het domein)
      * <p>
@@ -398,7 +388,6 @@ public class SpelSpelerPaneel extends VBox {
      *
      * @param zetten de ongeldige zetten
      */
-
     private void resetSpelBordNaOngeldigeZet(List<String> zetten) {
         //voor elke zet
         for (String zet : zetten) {
@@ -426,7 +415,6 @@ public class SpelSpelerPaneel extends VBox {
      * <p>
      * Hulpmethode voor spel eindigen
      */
-
     private void eindigSpel() {
         //haal winnaar en scorebladen uit GUI
         List<String> laatsteScorebladOmTeTonen = domeinController.eindigSpel();
@@ -446,7 +434,6 @@ public class SpelSpelerPaneel extends VBox {
      * Demo: eventHandler die het spel onmiddellijk eindigt. Moest een aparte methode zijn voor knop gezien eindigSpel()
      * enkel en alleen zal activeren als er aangegeven wordt dat er geen steentjes meer zijn in het zak in de domeinlaag.
      */
-
     private void eindigSpelVoorDemo(ActionEvent actionEvent) {
         eindigSpel();
     }
@@ -457,7 +444,6 @@ public class SpelSpelerPaneel extends VBox {
      * <p>
      * Hulpmethode voor spel eindigen
      */
-
     private void resetSchermenVoorVolgendSpel() {
         menuPaneel.getLblLoggedOn().setVisible(false);
         Stage stage = (Stage) this.hoofdPaneel.getScene().getWindow();

@@ -11,7 +11,7 @@ public class ScorebladRegelDataModel {
     private final SimpleStringProperty scoreVoorRegel;
 
     /**
-     * UC4: constructor voor datamodel van TableView in SpelScoreBladPaneel
+     * UC4, normaal verloop: constructor voor datamodel van TableView in SpelScoreBladPaneel
      *
      * @param dubbeleScore   dubbele score modifier
      * @param tienPunten     Aantal tien punten in regel
@@ -20,7 +20,6 @@ public class ScorebladRegelDataModel {
      * @param bonusPunten    Aantal bonus punten in regel
      * @param scoreVoorRegel Totaal punten in regel
      */
-
     public ScorebladRegelDataModel(String dubbeleScore, String tienPunten, String elfPunten, String twaalfPunten, String bonusPunten, String scoreVoorRegel) {
         this.dubbeleScore = new SimpleStringProperty(dubbeleScore);
         this.tienPunten = new SimpleStringProperty(tienPunten);
@@ -31,9 +30,8 @@ public class ScorebladRegelDataModel {
     }
 
     /**
-     * UC4: onderstaande methodes worden impliciet gebruikt door de TableView als hulpmethodes.
+     * UC4, normaal verloop: onderstaande methodes worden impliciet gebruikt door de TableView als hulpmethodes.
      */
-
     public String getDubbeleScore() {
         return dubbeleScore.get();
     }

@@ -19,7 +19,6 @@ public class VakGUI extends Rectangle {
      * @param kolom:   kolom van vakje
      * @param rij:     rij van vakje
      */
-
     public VakGUI(int zijkant, int rij, int kolom) {
         this.rij = rij;
         this.kolom = kolom;
@@ -89,7 +88,6 @@ public class VakGUI extends Rectangle {
     /**
      * UC3 setter voor steen op vak
      */
-
     public void setSteen(SteenGUI steen) {
         this.steen = steen;
     }
@@ -97,7 +95,6 @@ public class VakGUI extends Rectangle {
     /**
      * UC3 getter voor rij
      */
-
     public int getRij() {
         return rij;
     }
@@ -105,7 +102,6 @@ public class VakGUI extends Rectangle {
     /**
      * UC3 getter voor kolom
      */
-
     public int getKolom() {
         return kolom;
     }
@@ -113,9 +109,7 @@ public class VakGUI extends Rectangle {
     /**
      * UC3 genereert de coordinaten van de steen voor gebruik in domein
      */
-
     public String getCoordinaten() {
         return String.format("%s.%s", String.valueOf(getKolom()).trim(), String.valueOf(getRij()).trim());
     }
-
 }

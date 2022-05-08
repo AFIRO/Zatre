@@ -19,12 +19,8 @@ public class SpelerMapper {
      * @param speler Speler om toe te voegen.
      * @throws IllegalArgumentException indien de speler al bestaat.
      */
-
-
     public void voegSpelerToe(Speler speler) {
-
         if (!checkOfSpelerAlBestaatInDatabase(speler)) {
-
             try (
                     Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
                     PreparedStatement query = connection.prepareStatement(INSERT_SPELER)) {
@@ -46,10 +42,8 @@ public class SpelerMapper {
      *
      * @return Alle spelers uit database
      */
-
     public List<Speler> geefSpelers() {
         List<Speler> spelers = new ArrayList<>();
-
         try (
                 Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
                 PreparedStatement query = connection.prepareStatement(GET_SPELERS);
@@ -66,7 +60,6 @@ public class SpelerMapper {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
         return spelers;
     }
 
@@ -78,11 +71,8 @@ public class SpelerMapper {
      * @return de gevonden speler
      * @throws IllegalArgumentException indien de speler niet bestaat.
      */
-
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
-
         Speler speler;
-
         try (
                 Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
                 PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
@@ -112,7 +102,6 @@ public class SpelerMapper {
      *
      * @param speler de te updaten speler
      */
-
     public void updateSpeler(Speler speler) {
         try (
                 Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
@@ -132,9 +121,7 @@ public class SpelerMapper {
      *
      * @param speler Speler die moet nagekeken worden.
      */
-
     public boolean checkOfSpelerAlBestaatInDatabase(Speler speler) {
-
         try (
                 Connection connection = DriverManager.getConnection(Connectie.JDBC_URL, Connectie.userName, Connectie.password);
                 PreparedStatement query = connection.prepareStatement(GET_SPELER)) {
@@ -147,7 +134,5 @@ public class SpelerMapper {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
     }
-
 }

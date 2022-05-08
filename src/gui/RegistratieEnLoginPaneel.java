@@ -29,7 +29,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      * @param hoofdPaneel      voor aanpassing scherm
      * @param menuPaneel       voor terugkeer naar menu
      */
-
     public RegistratieEnLoginPaneel(HoofdPaneel hoofdPaneel, MenuPaneel menuPaneel, DomeinController domeinController) {
         this.hoofdPaneel = hoofdPaneel;
         this.menuPaneel = menuPaneel;
@@ -40,7 +39,7 @@ public class RegistratieEnLoginPaneel extends VBox {
     /**
      * UC3: initaliseert de elementen, geeft hen de correcte styling en plaatst hen
      * op de juiste plaats.
-     * <p>
+     *
      * Hulpmethode voor constructor
      */
 
@@ -102,7 +101,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      *
      * @param label de label
      */
-
     private void zetCSSLabelsGoed(Label label) {
         label.setStyle("-fx-font-size: 2em;");
     }
@@ -114,7 +112,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      *
      * @param box de box
      */
-
     private void zetAlignmentBoxenGoed(HBox box) {
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20.0);
@@ -142,7 +139,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      *
      * @param knop de knop
      */
-
     private void zetCSSVanKnopGoed(Button knop) {
         knop.setPadding(new Insets(5, 5, 5, 5));
         knop.setLineSpacing(100);
@@ -158,9 +154,7 @@ public class RegistratieEnLoginPaneel extends VBox {
      * <p>
      * Hulpmethode voor speler registratie
      */
-
     private void registreer(ActionEvent actionEvent) {
-
         try {
             controleerOfInputNietBlancoIs(this.txtNaam.getText());
             controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
@@ -188,9 +182,7 @@ public class RegistratieEnLoginPaneel extends VBox {
      * <p>
      * Hulpmethode voor speler login
      */
-
     private void login(ActionEvent actionEvent) {
-
         try {
             controleerOfInputNietBlancoIs(this.txtNaam.getText());
             controleerOfInputNietBlancoIs(this.txtGeboortejaar.getText());
@@ -226,7 +218,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      * <p>
      * Hulpmethode voor navigatie
      */
-
     private void back(ActionEvent actionEvent) {
         hoofdPaneel.setCenter(menuPaneel);
     }
@@ -236,7 +227,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      * <p>
      * Hulpmethode voor spel eindigen
      */
-
     private void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
@@ -246,7 +236,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      * <p>
      * Hulpmethode voor spel starten
      */
-
     private void starten(ActionEvent actionEvent) {
         menuPaneel.starten(actionEvent);
         btnSpelStarten.setVisible(false);
@@ -257,7 +246,6 @@ public class RegistratieEnLoginPaneel extends VBox {
      * <p>
      * Hulpmethode voor input
      */
-
     private void controleerOfInputNietBlancoIs(String input) {
         if (Objects.isNull(input) || input.isBlank()) {
             throw new IllegalArgumentException("BLANCO_INPUT");
