@@ -47,7 +47,7 @@ public class MenuPaneel extends VBox {
      */
 
     private void voegComponentenToe() {
-    	
+    	//aanmaak scrollbar voor lblLoggedOn
     	 ScrollBar sc = new ScrollBar();
          sc.setMin(0);
          sc.setMax(200);
@@ -61,6 +61,7 @@ public class MenuPaneel extends VBox {
         Text header = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_1"));
         Text subheader = new Text(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_2"));
         VBox alignmentBoxButtons = new VBox();
+        //Lbl en scrollbar toegevoegd aan HBox
         aangemeldeSpelersBox = new HBox(lblLoggedOn, sc);
         
         Button btnRegistreerAanmelden = new Button(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_3") + "/"
@@ -91,7 +92,6 @@ public class MenuPaneel extends VBox {
         aangemeldeSpelersBox.setSpacing(15);
         aangemeldeSpelersBox.setVisible(false);
         aangemeldeSpelersBox.setAlignment(Pos.CENTER);
-        aangemeldeSpelersBox.setPrefHeight(lblLoggedOn.getHeight());
        
         
 
@@ -161,7 +161,6 @@ public class MenuPaneel extends VBox {
     public void updateLoggedOnPlayerLabel() {
         if (!domeinController.geefSpelers().isEmpty()) {
         	this.aangemeldeSpelersBox.setVisible(true);
-            aangemeldeSpelersBox.setPrefHeight(lblLoggedOn.getHeight());
             this.lblLoggedOn.setVisible(true);
             this.lblLoggedOn.setText(domeinController.getTaal().getLocalisatie("GUI_STARTMENU_6")
                     + String.format("%n%n") + String.join("", domeinController.geefSpelers()));
