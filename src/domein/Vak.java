@@ -33,7 +33,6 @@ public class Vak {
      * @param rij   rij van vakje
      * @throws IllegalArgumentException indien vakje onmogelijk kan bestaan op bord.
      */
-
     private void controleerOfVakjeKanBestaan(int kolom, int rij) {
         List<Integer> controleLijst = List.of(2, 3, 4, 8, 12, 13, 14);
 
@@ -64,14 +63,13 @@ public class Vak {
     }
 
     /**
-     * UC4 geeft de vakjes rond het vakje terug als een map. De map heeft volgende
+     * UC4, normaal en alternatief verloop: geeft de vakjes rond het vakje terug als een map. De map heeft volgende
      * structuur: key: boven, onder, links, rechts => de positie tegenover het vakje
      * waarop deze methode is aangeroepen value: de coordinaten van dit vakje in
      * kolom.rij vorm. Indien vakje niet bestaat, bevat het de value "bestaat niet"
      *
      * @return Map met daarin de omringende steentjes en hun coordinaten.
      */
-
     public Map<String, String> geefVakjesNaastVak() {
         List<Integer> controleLijst = List.of(2, 3, 4, 8, 12, 13, 14);
         Map<String, String> omringendeVakjes = new HashMap<>();
@@ -132,7 +130,6 @@ public class Vak {
      *
      * @return of er een steen op vak staat
      */
-
     public boolean bevatSteen() {
         return Objects.nonNull(steen);
     }
@@ -142,7 +139,6 @@ public class Vak {
      *
      * @return coordinaten
      */
-
     public String getCoordinatenVanVak() {
         return String.format("%d.%d", kolom, rij);
     }
@@ -152,7 +148,6 @@ public class Vak {
      *
      * @return kolom
      */
-
     public int getKolom() {
         return kolom;
     }
@@ -162,7 +157,6 @@ public class Vak {
      *
      * @return rij
      */
-
     public int getRij() {
         return rij;
     }
@@ -172,7 +166,6 @@ public class Vak {
      *
      * @return kleur
      */
-
     public Kleur getKleur() {
         return kleur;
     }
@@ -182,7 +175,6 @@ public class Vak {
      *
      * @param kleur nieuwe kleur
      */
-
     public void setKleur(Kleur kleur) {
         this.kleur = kleur;
     }
@@ -192,7 +184,6 @@ public class Vak {
      *
      * @return kleur
      */
-
     public Steen getSteen() {
         return steen;
     }
@@ -202,7 +193,6 @@ public class Vak {
      *
      * @param steen nieuwe steen
      */
-
     public void setSteen(Steen steen) {
         this.steen = steen;
     }

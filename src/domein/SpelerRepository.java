@@ -14,7 +14,6 @@ public class SpelerRepository {
      *
      * @param spelerMapper
      */
-
     public SpelerRepository(SpelerMapper spelerMapper) { // Andreeas: Dependency injection nodig voor Mockito
         this.spelerMapper = spelerMapper;
         spelers = new ArrayList<>();
@@ -27,7 +26,6 @@ public class SpelerRepository {
      * @param gebruikersnaam Gebruikersnaam van de speler
      * @param geboortejaar   Geboortejaar van de speler
      */
-
     public void voegSpelerToe(String gebruikersnaam, int geboortejaar) {
         Speler speler = new Speler(gebruikersnaam, geboortejaar);
         spelerMapper.voegSpelerToe(speler);
@@ -41,7 +39,6 @@ public class SpelerRepository {
      * @param gebruikersnaam Gebruikersnaam van de speler
      * @param geboortejaar   Geboortejaar van de speler
      */
-
     public void vraagSpelerOp(String gebruikersnaam, int geboortejaar) {
         Speler opgevraagdeSpeler = spelerMapper.geefSpeler(gebruikersnaam, geboortejaar);
 
@@ -62,7 +59,6 @@ public class SpelerRepository {
      *
      * @return de lijst van aangemeldde spelers
      */
-
     public List<Speler> geefSpelers() {
         return spelers;
     }
@@ -75,7 +71,6 @@ public class SpelerRepository {
      * @param geboortejaar   Geboortejaar van de speler
      * @return de opgevraagde speler
      */
-
     public Speler geefSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelerMapper.checkOfSpelerAlBestaatInDatabase(gekozenSpeler))) {
@@ -91,7 +86,6 @@ public class SpelerRepository {
      * @param geboortejaar   Geboortejaar van de speler
      * @return de opgevraagde speler
      */
-
     public Speler geefAangemeldeSpeler(String gebruikersnaam, int geboortejaar) {
         Speler gekozenSpeler = new Speler(gebruikersnaam, geboortejaar);
         if (!(spelers.contains(gekozenSpeler))) {
@@ -106,7 +100,6 @@ public class SpelerRepository {
      *
      * @param speler Speler die moet worden geupdate
      */
-
     public void updateSpeler(Speler speler) {
         if (spelers.contains(speler)) {
             spelers.get(spelers.indexOf(speler)).setSpeelkansen(speler.getSpeelkansen());
@@ -114,5 +107,4 @@ public class SpelerRepository {
         } else
             throw new IllegalArgumentException(("SPELER_BESTAAT_NIET"));
     }
-
 }

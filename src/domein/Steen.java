@@ -29,7 +29,6 @@ public class Steen {
     /**
      * UC3: override gelijkheid met als basis de waarde van de steen
      */
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -43,7 +42,6 @@ public class Steen {
     /**
      * UC3: override de hascode omdat we stenen met hun waarde identificeren
      */
-
     @Override
     public int hashCode() {
         return Objects.hash(getWaarde());

@@ -29,7 +29,6 @@ public class Spelbord {
             for (int j = 0; j < 13; j++) {
                 vakjes.put(String.format("%d.%d", i + 2, j + 2), new Vak(i + 2, j + 2));
             }
-
         }
 
         // set de correctie vakjes in vierkant naar wit
