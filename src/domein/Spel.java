@@ -118,7 +118,7 @@ public class Spel {
     /**
      * UC4, normaal verloop: regelt de logica van een beurt. De string[] zetten bevat 2 of 3 strings
      * met de zet in de vorm "kolomVak.rijVak waardeSteen". Deze worden
-     * geïnterpreteerd en omgezet naar de correcte info voor punt berekening. We gaan
+     * geinterpreteerd en omgezet naar de correcte info voor punt berekening. We gaan
      * ervan uit dat de info correct moet zijn dankzij validatie in de GUI qua
      * zetten Methode genereert een arraylist aan strings. Deze strings bevatten de
      * scores per zet. Op index 0, 1 en 2 komen respectievelijk de scores van beurt
@@ -230,7 +230,7 @@ public class Spel {
     }
 
     /**
-     * UC4, normaal en alternatief verloop: genereert een map met de coördinaten van de naburige vakken en loopt
+     * UC4, normaal en alternatief verloop: genereert een map met de coordinaten van de naburige vakken en loopt
      * deze af in een specifieke richting als een linked list. Deze telt alle
      * gevonden stenen op tot het oftewel botst tegen rand van het spelbord of een
      * vak ontdekt zonder steen erop.
@@ -387,7 +387,7 @@ public class Spel {
     }
 
     /**
-     * UC3: bepaalt wanneer het spel beëindigd is of wordt
+     * UC3: bepaalt wanneer het spel beeindigd is of wordt
      */
     public boolean isEindeSpel() {
         return !checkOfErNogStenenInHetZakjeZijn();

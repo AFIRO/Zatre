@@ -26,7 +26,7 @@ public class SpelPaneel extends BorderPane {
     }
 
     /**
-     * UC4, normaal verloop: creëert de nodige elementen die deel zullen uitmaken van het spelpaneel
+     * UC4, normaal verloop: creeert de nodige elementen die deel zullen uitmaken van het spelpaneel
      * en zet ze op de juiste plaatsen.
      * 
      * Hulpmethode voor constructor
