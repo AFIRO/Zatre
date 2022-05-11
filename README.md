@@ -1,1 +1,1 @@
-# Zatre - Software Development Project I (2022)
+# Zatre - Board game project voor school
